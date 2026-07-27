@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star, Sparkles, Award } from 'lucide-react';
+import { Quote, Star, Sparkles, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Divider } from '../ui/Divider';
 
 export const MediaAndTestimonials: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(1);
+
   const reviews = [
     {
       quote: "Nihar's Pheta tying added a royal touch to our wedding. Every single guest was mesmerized by the precision of folds!",
@@ -28,10 +31,35 @@ export const MediaAndTestimonials: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsPerView(3);
+      } else if (window.innerWidth >= 768) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(1);
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, reviews.length - itemsPerView);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
   return (
     <div>
       <section className="w-full my-2 mx-auto max-w-[1200px]">
-
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -60,9 +88,6 @@ export const MediaAndTestimonials: React.FC = () => {
               transition={{ duration: 0.5, delay: num * 0.1 }}
               className="group relative flex items-center justify-center h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden px-8 shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)]"
             >
-              {/* Gold Highlight Line on Hover */}
-              {/* <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
-
               <img
                 src={`/news1 (${num}).png`}
                 alt={`Press Feature ${num}`}
@@ -72,15 +97,13 @@ export const MediaAndTestimonials: React.FC = () => {
           ))}
         </div>
       </section>
+
       <section className="relative w-full py-12 md:py-16 lg:py-20 overflow-hidden bg-[#6E1E18]">
         {/* Royal Background Effects & Subtle Motifs */}
         <div className="absolute inset-0 opacity-10 bg-[url('/aboutsideiamge.png')] bg-cover bg-center mix-blend-luminosity pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#800020]/20 rounded-full blur-[150px] pointer-events-none"></div>
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-
-          {/* ================= MEDIA RECOGNITION SECTION ================= */}
-
 
           {/* ================= TESTIMONIALS SECTION ================= */}
           <section className="w-full">
@@ -100,67 +123,104 @@ export const MediaAndTestimonials: React.FC = () => {
                 Royal Words <span className="italic font-light text-[#E5C158]">of Appreciation</span>
               </h2>
 
-              <Divider />          </motion.div>
+              <Divider />          
+            </motion.div>
 
-            {/* Review Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-              {reviews.map((review, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#2A0D0F]/70 backdrop-blur-md p-6 md:p-8 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transform hover:-translate-y-2"
+            {/* Testimonials Slider */}
+            <div className="relative max-w-7xl mx-auto">
+              <div className="overflow-hidden rounded-[24px]">
+                <motion.div 
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
                 >
-                  {/* Subtle Decorative Background Quote Icon */}
-                  <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
+                  {reviews.map((review, index) => (
+                    <div key={index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                      <div className="group h-full relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+                        
+                        {/* Subtle Decorative Background Quote Icon */}
+                        <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
 
-                  <div>
-                    {/* Rating Stars */}
-                    <div className="flex items-center gap-1 mb-6">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#E5C158] text-[#E5C158]" />
-                      ))}
-                    </div>
+                        <div>
+                          {/* Rating Stars */}
+                          <div className="flex items-center gap-1 mb-6">
+                            {[...Array(review.rating)].map((_, i) => (
+                              <Star key={i} className="w-5 h-5 fill-[#E5C158] text-[#E5C158]" />
+                            ))}
+                          </div>
 
-                    {/* Review Quote */}
-                    <p className="font-serif text-[#F8F3EC]/90 text-sm md:text-base italic font-light leading-relaxed mb-6 relative z-10">
-                      "{review.quote}"
-                    </p>
-                  </div>
+                          {/* Review Quote */}
+                          <p className="font-serif text-[#F8F3EC]/90 text-lg md:text-xl lg:text-2xl italic font-light leading-relaxed mb-8 relative z-10">
+                            "{review.quote}"
+                          </p>
+                        </div>
 
-                  {/* Author Info */}
-                  <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
-                    <div className="relative">
-                      <img
-                        src={review.image}
-                        alt={review.name}
-                        className="w-13 h-13 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
-                      />
+                        {/* Author Info */}
+                        <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
+                          <div className="relative">
+                            <img
+                              src={review.image}
+                              alt={review.name}
+                              className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
+                            />
+                          </div>
+                          <div>
+                            <h4 className="font-serif text-[#F8F3EC] font-semibold text-lg group-hover:text-[#E5C158] transition-colors">
+                              {review.name}
+                            </h4>
+                            <p className="font-sans text-[#D4AF37]/70 text-sm tracking-wider uppercase mt-1">
+                              {review.location}
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-serif text-[#F8F3EC] font-semibold text-base group-hover:text-[#E5C158] transition-colors">
-                        {review.name}
-                      </h4>
-                      <p className="font-sans text-[#D4AF37]/70 text-xs tracking-wider uppercase mt-0.5">
-                        {review.location}
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </motion.div>
-              ))}
+              </div>
+
+              {/* Navigation Controls */}
+              {maxIndex > 0 && (
+                <div className="flex items-center justify-between mt-8 px-4">
+                {/* Prev Button */}
+                <button 
+                  onClick={prevSlide}
+                  className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+
+                {/* Dots */}
+                <div className="flex items-center gap-3">
+                  {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`transition-all duration-300 rounded-full ${
+                        currentIndex === idx 
+                          ? 'w-10 h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
+                          : 'w-2.5 h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                      }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Next Button */}
+                <button 
+                  onClick={nextSlide}
+                  className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+              )}
             </div>
 
-            {/* Artistic Custom Pagination / Indicator */}
-            <div className="flex justify-center items-center gap-3 mt-16">
-              <span className="w-12 h-[2px] bg-[#E5C158]"></span>
-              <span className="w-3 h-[2px] bg-[#D4AF37]/30"></span>
-              <span className="w-3 h-[2px] bg-[#D4AF37]/30"></span>
-            </div>
           </section>
 
         </div>
-      </section></div>
+      </section>
+    </div>
   );
 };

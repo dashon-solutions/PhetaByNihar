@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Crown } from 'lucide-react';
+import { ArrowUpRight, Crown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Divider } from '../ui/Divider';
 
 export const ProductsPreview: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(1);
+
   const products = [
     {
       id: '01',
@@ -28,11 +31,37 @@ export const ProductsPreview: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsPerView(3);
+      } else if (window.innerWidth >= 768) {
+        setItemsPerView(2);
+      } else {
+        setItemsPerView(1);
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, products.length - itemsPerView);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
   return (
     <section id="products" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto bg-[#6E1E18] relative overflow-hidden">
-
+      
       {/* Background Royal Atmosphere */}
-      <div className="absolute inset-0 bg-[#6E1E18]  overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
+      <div className="absolute inset-0 bg-[#6E1E18] overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
         <div className="absolute inset-0 opacity-15 bg-[url('/pattern.png')] bg-repeat mix-blend-overlay"></div>
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#6E1E18]/20 rounded-full blur-[120px]"></div>
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#6E1E18]/40 rounded-full blur-[120px]"></div>
@@ -57,96 +86,117 @@ export const ProductsPreview: React.FC = () => {
           <Divider />
         </motion.div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative z-10">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] transform hover:-translate-y-2"
+        {/* Slider Container */}
+        <div className="relative max-w-7xl mx-auto">
+          <div className="overflow-hidden rounded-[24px]">
+            <motion.div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
-              {/* Card Corner Ornament */}
-              <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#D4AF37]/40 rounded-tr-[24px] group-hover:border-[#D4AF37] transition-colors duration-500 pointer-events-none"></div>
+              {products.map((product) => (
+                <div key={product.id} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                  <div className="group h-full relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+                    
+                    {/* Number Badge */}
+                    <div className="absolute top-4 left-4 z-20">
+                      <span className="font-serif text-xs text-[#E5C158]/80 border border-[#E5C158]/30 bg-[#2A0D0F]/90 px-2.5 py-1 rounded-full tracking-widest">
+                        {product.id}
+                      </span>
+                    </div>
 
-              {/* Number Badge */}
-              <div className="absolute top-4 left-4 z-20">
-                <span className="font-serif text-xs text-[#E5C158]/80 border border-[#E5C158]/30 bg-[#2A0D0F]/90 px-2.5 py-1 rounded-full tracking-widest">
-                  {product.id}
-                </span>
-              </div>
+                    {/* Product Frame & Showcase Image */}
+                    <div className="relative w-full h-48 md:h-80 overflow-hidden flex items-center justify-center p-4 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#2A0D0F] via-transparent to-transparent opacity-80"></div>
+                    </div>
 
-              {/* Product Frame & Showcase Image */}
-              <div className="relative h-64 md:h-72 overflow-hidden flex items-center justify-center p-8 bg-radial from-[#4D1217] to-[#1A0507]">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2A0D0F] via-transparent to-transparent opacity-80"></div>
-              </div>
+                    {/* Product Info */}
+                    <div className="w-full p-4 md:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
+                      <div className="mb-6">
+                        <span className="text-xs md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-2">
+                          {product.subtitle}
+                        </span>
+                        <h3 className="font-serif text-2xl md:text-3xl text-[#F8F3EC] font-bold mb-3 md:mb-4 group-hover:text-[#E5C158] transition-colors">
+                          {product.name}
+                        </h3>
+                        <p className="text-[#C2B2A3] text-sm leading-relaxed font-light line-clamp-3">
+                          {product.description}
+                        </p>
+                      </div>
 
-              {/* Product Info */}
-              <div className="p-6 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
-                <div>
-                  <span className="text-[10px] md:text-[11px] font-sans text-[#E5C158] uppercase tracking-wider block mb-1">
-                    {product.subtitle}
-                  </span>
-                  <h3 className="font-serif text-xl md:text-2xl text-[#F8F3EC] font-bold mb-2 md:mb-3 group-hover:text-[#E5C158] transition-colors">
-                    {product.name}
-                  </h3>
-                  <p className="text-[#C2B2A3] text-xs leading-relaxed line-clamp-2 font-light">
-                    {product.description}
-                  </p>
+                      <div className="mt-auto pt-6 border-t border-[#D4AF37]/15">
+                        <button className="w-full py-3 px-6 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-xs md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
+                          <span>Reserve / Rent</span>
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-
-                {/* Interactive Action Button */}
-                <div className="mt-4 pt-4 border-t border-[#D4AF37]/15">
-                  <button className="w-full py-2.5 px-4 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-xs tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
-                    <span>Reserve / Rent</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </button>
-                </div>
-              </div>
+              ))}
             </motion.div>
-          ))}
+          </div>
 
-          {/* Dedicated Gallery CTA Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.45 }}
-            className="group relative flex flex-col justify-between p-8 bg-gradient-to-br from-[#4D1217] via-[#2A0D0F] to-[#1A0507] rounded-[24px] border border-[#D4AF37]/40 hover:border-[#D4AF37] transition-all duration-500 overflow-hidden cursor-pointer hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transform hover:-translate-y-2 min-h-[380px]"
-          >
-            {/* Glowing Accent */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#D4AF37]/10 rounded-full blur-[50px] group-hover:bg-[#D4AF37]/20 transition-all duration-500"></div>
+          {/* Navigation Controls */}
+          {maxIndex > 0 && (
+            <div className="flex items-center justify-between mt-8 px-4">
+              {/* Prev Button */}
+              <button 
+                onClick={prevSlide}
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
 
-            <div className="relative z-10">
-              <div className="w-12 h-12 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#D4AF37] transition-all duration-500">
-                <ArrowUpRight className="w-6 h-6 text-[#E5C158] group-hover:text-[#1A0507] transition-colors" />
+              {/* Dots */}
+              <div className="flex items-center gap-3">
+                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`transition-all duration-300 rounded-full ${
+                      currentIndex === idx 
+                        ? 'w-10 h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
+                        : 'w-2.5 h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </div>
-              <span className="text-xs font-sans text-[#E5C158] uppercase tracking-[0.2em] block mb-2">
-                Full Catalogue
-              </span>
-              <h3 className="font-serif text-3xl text-[#F8F3EC] font-bold leading-tight">
-                Explore The Complete Collection
-              </h3>
-            </div>
 
-            <div className="relative z-10 mt-auto pt-6 border-t border-[#D4AF37]/20">
-              <p className="text-xs text-[#C2B2A3] font-light mb-4">
-                Discover over 50+ authentic Maratha royal props, attire, and decor items available for events.
-              </p>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#E5C158] uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                <span>View Full Gallery</span>
-                <span>→</span>
-              </div>
+              {/* Next Button */}
+              <button 
+                onClick={nextSlide}
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
             </div>
-          </motion.div>
+          )}
         </div>
+
+        {/* Global CTA */}
+        <div className="mt-16 flex flex-col items-center text-center max-w-2xl mx-auto">
+          <span className="text-xs font-sans text-[#E5C158] uppercase tracking-[0.2em] block mb-3">
+            Full Catalogue
+          </span>
+          <h3 className="font-serif text-2xl md:text-3xl text-[#F8F3EC] font-bold leading-tight mb-4">
+            Explore The Complete Collection
+          </h3>
+          <p className="text-sm text-[#C2B2A3] font-light mb-8">
+            Discover over 50+ authentic Maratha royal props, attire, and decor items available for events.
+          </p>
+          <button className="flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-[#D4AF37]/40 rounded-full text-[#E5C158] font-sans font-semibold text-sm tracking-wider uppercase hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-lg group">
+            View Full Gallery
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
+
       </div>
     </section>
   );

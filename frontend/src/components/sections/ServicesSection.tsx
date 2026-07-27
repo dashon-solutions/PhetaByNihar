@@ -48,7 +48,7 @@ export const ServicesSection: React.FC = () => {
       </motion.div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
         {services.map((service, index) => (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -59,7 +59,7 @@ export const ServicesSection: React.FC = () => {
             className="bg-[#FFFDFB] rounded-[24px] overflow-hidden shadow-soft border border-[#E8D8C5] hover:border-[#D7A65B] group hover:shadow-2xl transition-all duration-500 flex flex-col h-full md:h-[380px] relative cursor-pointer transform hover:-translate-y-2"
           >
             {/* Card Image */}
-            <div className="relative h-48 md:h-[50%] overflow-hidden shrink-0">
+            <div className="relative h-28 sm:h-36 md:h-[50%] overflow-hidden shrink-0">
               <div className="absolute inset-0 bg-[#4D2D22]/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none"></div>
               <img
                 src={service.image}
@@ -69,19 +69,19 @@ export const ServicesSection: React.FC = () => {
             </div>
 
             {/* Card Content */}
-            <div className="px-5 pb-6 pt-8 md:px-6 flex flex-col items-center text-center flex-grow relative bg-[#FFFDFB]">
+            <div className="px-2 pb-4 pt-6 md:px-6 md:pb-6 md:pt-8 flex flex-col items-center text-center flex-grow relative bg-[#FFFDFB]">
               {/* Floating Centered Icon */}
-              <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#FFFDFB] w-16 h-16 flex items-center justify-center rounded-full shadow-md border border-[#E8D8C5] group-hover:bg-[#6E1E18] group-hover:border-[#6E1E18] transition-colors duration-500 z-20">
-                <div className="transform group-hover:scale-110 group-hover:brightness-125 transition-all duration-300">
+              <div className="absolute -top-5 md:-top-8 left-1/2 -translate-x-1/2 bg-[#FFFDFB] w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-full shadow-md border border-[#E8D8C5] group-hover:bg-[#6E1E18] group-hover:border-[#6E1E18] transition-colors duration-500 z-20">
+                <div className="transform group-hover:scale-110 group-hover:brightness-125 transition-all duration-300 scale-[0.65] md:scale-100 flex items-center justify-center">
                   {service.icon}
                 </div>
               </div>
 
-              <h3 className="font-serif text-[#4D2D22] text-lg md:text-xl font-bold mb-2 md:mb-3 group-hover:text-[#6E1E18] transition-colors duration-300">
+              <h3 className="font-serif text-[#4D2D22] text-[12px] md:text-xl font-bold mb-2 md:mb-3 group-hover:text-[#6E1E18] transition-colors duration-300">
                 {service.title}
               </h3>
 
-              <p className="font-sans text-[#666666] text-xs md:text-sm leading-relaxed mb-4">
+              <p className="font-sans text-[#666666] text-[10px] md:text-sm leading-relaxed mb-4">
                 {service.description}
               </p>
 
