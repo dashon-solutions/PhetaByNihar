@@ -29,8 +29,8 @@ export const Navbar: React.FC = () => {
       <div className={`absolute inset-0 transition-colors duration-300 -z-10 ${isScrolled ? 'bg-[#6E1E18]' : 'bg-transparent'}`}></div>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20 flex justify-between items-center h-16">
-        {/* Logo - Set to -z-20 to go behind the background (-z-10) */}
-        <div className="flex items-center gap-2 cursor-pointer relative -z-20 h-full">
+        {/* Logo */}
+        <div className="flex items-center gap-2 cursor-pointer relative z-10 h-full">
           <img
             src="/logo.png"
             alt="Pheta By Nihar"
