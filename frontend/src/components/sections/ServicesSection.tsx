@@ -6,7 +6,7 @@ import { Crown, Tent, Briefcase, GraduationCap } from 'lucide-react';
 export const ServicesSection: React.FC = () => {
   const services = [
     {
-      title: 'Wedding Pheta Ceremony',
+      title: 'Wedding Pheta',
       description: 'Traditional & royal pheta ceremony for weddings that becomes a memory for life.',
       image: '/hero_bride_groom.png',
       icon: <Crown className="text-[#C48B3C] w-6 h-6" />

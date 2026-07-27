@@ -18,7 +18,7 @@ function App() {
         <HeroBanner />
 
         {/* Decorative Divider & Overlapping Statistics */}
-        <div className="flex justify-center mt-20 sm:-mt-20 relative z-20 max-w-[1400px] mx-auto px-5">
+        <div className="flex justify-center -mt-5 sm:-mt-20 relative z-20 max-w-[1400px] mx-auto px-5">
           <div className="w-full">
             <Statistics />
           </div>

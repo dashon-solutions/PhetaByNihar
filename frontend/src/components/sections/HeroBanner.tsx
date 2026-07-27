@@ -6,7 +6,7 @@ import { Button } from '../ui/Button';
 export const HeroBanner: React.FC = () => {
   return (
     <>
-      <section className="relative w-full h-[80vh] min-h-[500px] md:min-h-[600px] lg:min-h-[700px] overflow-hidden">
+      <section className="relative w-full h-[50vh] min-h-[500px] md:min-h-[600px] lg:min-h-[700px] overflow-hidden">
         {/* Background Image */}
         <img
           src="/footerimg.png"
@@ -24,46 +24,46 @@ export const HeroBanner: React.FC = () => {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              className="w-full lg:w-1/2"
+              className="w-full lg:w-1/2 mt-16 md:mt-0"
             >
               {/* Tag */}
-              <div className="inline-block mb-6">
-                <span className="inline-flex items-center gap-2 bg-[#4D2D22]/90 backdrop-blur-md px-6 py-2 rounded-full text-[#FFFDFB] uppercase tracking-[0.2em] text-sm font-bold">
-                  <span className="w-2 h-2 rounded-full bg-[#D7A65B]"></span>
+              <div className="inline-block mb-4 md:mb-6">
+                <span className="inline-flex items-center gap-2 bg-[#4D2D22]/90 backdrop-blur-md px-4 py-1.5 md:px-6 md:py-2 rounded-full text-[#FFFDFB] uppercase tracking-[0.2em] text-[10px] md:text-sm font-bold">
+                  <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#D7A65B]"></span>
                   Preserving Heritage
                 </span>
               </div>
 
               {/* Heading */}
               <h1 className="font-serif leading-[1.05]">
-                <span className="block italic font-light text-3xl md:text-4xl lg:text-5xl text-[#D7A65B]">
+                <span className="block italic font-light text-2xl md:text-4xl lg:text-5xl text-[#D7A65B]">
                   The Art of
                 </span>
 
-                <span className="block text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-2">
+                <span className="block text-3xl md:text-5xl lg:text-6xl font-bold text-white mt-1 md:mt-2">
                   Maharashtrian
                 </span>
 
-                <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-white mt-3">
+                <span className="block text-2xl md:text-4xl lg:text-5xl font-semibold text-white mt-2 md:mt-3">
                   Pheta Ceremony
                 </span>
               </h1>
 
               {/* Description */}
-              <p className="mt-6 md:mt-8 text-white/90 text-base md:text-lg max-w-xl">
+              <p className="mt-4 md:mt-8 text-white/90 text-sm md:text-lg max-w-xl">
                 Honoring traditions with elegance, respect & pride. From royal
                 weddings to cultural celebrations, we bring the timeless art of
                 Pheta tying to life.
               </p>
 
               {/* Buttons */}
-              <div className="my-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
-                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-sm px-8 py-4 border-none rounded-full bg-[#4D2D22] text-[#D7A65B] hover:bg-[#3A2219]">
-                  <Calendar className="w-5 h-5 mr-2 text-[#D7A65B] group-hover:text-white transition-colors" />
-                  Book Now <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              <div className="my-4 md:my-3 flex flex-row sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-5">
+                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 border-none rounded-full bg-[#4D2D22] text-[#D7A65B] hover:bg-[#3A2219]">
+                  {/* <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2 text-[#D7A65B] group-hover:text-white transition-colors" /> */}
+                  Book Now <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="secondary" className="w-full sm:w-auto flex items-center justify-center shadow-lg border-2 border-[#4D2D22] bg-transparent text-[#4D2D22] hover:bg-[#4D2D22] hover:text-[#D7A65B] text-sm px-8 py-4 rounded-full transition-all duration-300 group hover:-translate-y-1">
-                  Explore Work <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Button variant="secondary" className="w-full sm:w-auto flex items-center justify-center shadow-lg border-2 border-[#4D2D22] bg-transparent text-[#4D2D22] hover:bg-[#4D2D22] hover:text-[#D7A65B] text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 group hover:-translate-y-1">
+                  Explore Work <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </motion.div>

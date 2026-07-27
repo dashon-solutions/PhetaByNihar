@@ -70,17 +70,11 @@ export const AboutSection: React.FC = () => {
             With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.
           </p>
 
-          <div className="mb-8">
-            <img
-              src="/signature.png"
-              alt="Signature"
-              className="h-12 opacity-80"
-            />
-          </div>
+
 
           <div>
             <Button variant="secondary" className="flex items-center text-sm px-6 py-2.5">
-              Know More About Nihar <ArrowRight className="ml-2 w-4 h-4" />
+              Know More <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </div>
         </motion.div>

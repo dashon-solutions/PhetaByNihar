@@ -105,7 +105,7 @@ export const ProductsPreview: React.FC = () => {
                     </div>
 
                     {/* Product Frame & Showcase Image */}
-                    <div className="relative w-full h-48 md:h-80 overflow-hidden flex items-center justify-center p-4 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
+                    <div className="relative w-full h-36 md:h-80 overflow-hidden flex items-center justify-center p-3 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
                       <img
                         src={product.image}
                         alt={product.name}
@@ -116,22 +116,22 @@ export const ProductsPreview: React.FC = () => {
 
                     {/* Product Info */}
                     <div className="w-full p-4 md:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
-                      <div className="mb-6">
-                        <span className="text-xs md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-2">
+                      <div className="mb-3 md:mb-6">
+                        <span className="text-[10px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
                           {product.subtitle}
                         </span>
-                        <h3 className="font-serif text-2xl md:text-3xl text-[#F8F3EC] font-bold mb-3 md:mb-4 group-hover:text-[#E5C158] transition-colors">
+                        <h3 className="font-serif text-xl md:text-3xl text-[#F8F3EC] font-bold mb-2 md:mb-4 group-hover:text-[#E5C158] transition-colors">
                           {product.name}
                         </h3>
-                        <p className="text-[#C2B2A3] text-sm leading-relaxed font-light line-clamp-3">
+                        <p className="text-[#C2B2A3] text-xs md:text-sm leading-snug md:leading-relaxed font-light line-clamp-2 md:line-clamp-3">
                           {product.description}
                         </p>
                       </div>
 
-                      <div className="mt-auto pt-6 border-t border-[#D4AF37]/15">
-                        <button className="w-full py-3 px-6 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-xs md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
+                      <div className="mt-auto pt-3 md:pt-6 border-t border-[#D4AF37]/15">
+                        <button className="w-full py-2.5 md:py-3 px-4 md:px-6 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[10px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
                           <span>Reserve / Rent</span>
-                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
                       </div>
                     </div>
@@ -148,21 +148,21 @@ export const ProductsPreview: React.FC = () => {
               {/* Prev Button */}
               <button 
                 onClick={prevSlide}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
               </button>
 
               {/* Dots */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
                     className={`transition-all duration-300 rounded-full ${
                       currentIndex === idx 
-                        ? 'w-10 h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
-                        : 'w-2.5 h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                        ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
+                        : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -172,9 +172,9 @@ export const ProductsPreview: React.FC = () => {
               {/* Next Button */}
               <button 
                 onClick={nextSlide}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
               </button>
             </div>
           )}
