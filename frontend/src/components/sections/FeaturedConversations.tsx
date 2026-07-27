@@ -43,7 +43,7 @@ export const FeaturedConversations: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:col-span-2 bg-white rounded-[16px] overflow-hidden shadow-soft border border-[#E8D8C5] group flex flex-col"
         >
-          <div className="relative h-[200px] md:h-[300px] overflow-hidden bg-black">
+          <div className="relative h-[160px] sm:h-[200px] md:h-[300px] overflow-hidden bg-black">
             <iframe
               className="w-full h-full"
               src={videos[0].url}
@@ -54,19 +54,19 @@ export const FeaturedConversations: React.FC = () => {
               allowFullScreen>
             </iframe>
           </div>
-          <div className="p-4 flex-grow flex flex-col justify-between">
-             <h4 className="font-serif text-[#4D2D22] font-bold text-base md:text-lg leading-snug mb-2">{videos[0].title}</h4>
-             <div className="text-xs text-[#999999] font-sans flex items-center gap-2 mt-2">
-               <div className="w-6 h-6 bg-gray-200 rounded-full overflow-hidden flex-shrink-0 border border-gray-300">
-                 <img src={`https://ui-avatars.com/api/?name=${videos[0].channel.charAt(0)}&background=random`} alt="" className="w-full h-full" />
-               </div>
-               {videos[0].channel}
-             </div>
+          <div className="p-2.5 md:p-4 flex-grow flex flex-col justify-between">
+            <h4 className="font-serif text-[#4D2D22] font-bold text-sm md:text-lg leading-snug mb-1 md:mb-2 line-clamp-2">{videos[0].title}</h4>
+            <div className="text-[10px] md:text-xs text-[#999999] font-sans flex items-center gap-1.5 md:gap-2 mt-1 md:mt-2">
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-gray-200 rounded-full overflow-hidden flex-shrink-0 border border-gray-300">
+                <img src={`https://ui-avatars.com/api/?name=${videos[0].channel.charAt(0)}&background=random`} alt="" className="w-full h-full" />
+              </div>
+              {videos[0].channel}
+            </div>
           </div>
         </motion.div>
 
         {/* Small Video Cards */}
-        <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-6">
           {videos.slice(1).map((video, idx) => (
             <motion.div
               key={idx}
@@ -74,9 +74,9 @@ export const FeaturedConversations: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
-              className="bg-white rounded-[16px] overflow-hidden shadow-soft border border-[#E8D8C5] group flex flex-col"
+              className="bg-white rounded-[12px] md:rounded-[16px] overflow-hidden shadow-soft border border-[#E8D8C5] group flex flex-col"
             >
-              <div className="relative h-32 md:h-40 overflow-hidden bg-black">
+              <div className="relative h-20 sm:h-24 md:h-40 overflow-hidden bg-black">
                 <iframe
                   className="w-full h-full"
                   src={video.url}
@@ -87,10 +87,10 @@ export const FeaturedConversations: React.FC = () => {
                   allowFullScreen>
                 </iframe>
               </div>
-              <div className="p-4 flex-grow flex flex-col justify-between">
-                <h4 className="font-serif text-[#4D2D22] font-bold text-sm leading-snug mb-3 line-clamp-2">{video.title}</h4>
-                <div className="text-xs text-[#999999] font-sans flex items-center gap-2">
-                  <div className="w-4 h-4 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
+              <div className="p-2 md:p-4 flex-grow flex flex-col justify-between">
+                <h4 className="font-serif text-[#4D2D22] font-bold text-[9px] sm:text-[10px] md:text-sm leading-tight md:leading-snug mb-1 md:mb-3 line-clamp-2 md:line-clamp-2">{video.title}</h4>
+                <div className="text-[8px] sm:text-[10px] md:text-xs text-[#999999] font-sans flex items-center gap-1 md:gap-2">
+                  <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
                     <img src={`https://ui-avatars.com/api/?name=${video.channel.charAt(0)}&background=random`} alt="" className="w-full h-full" />
                   </div>
                   {video.channel}

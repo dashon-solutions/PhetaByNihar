@@ -38,10 +38,10 @@ export const ProductsPreview: React.FC = () => {
       } else if (window.innerWidth >= 768) {
         setItemsPerView(2);
       } else {
-        setItemsPerView(1);
+        setItemsPerView(2);
       }
     };
-    
+
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -59,7 +59,7 @@ export const ProductsPreview: React.FC = () => {
 
   return (
     <section id="products" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto bg-[#6E1E18] relative overflow-hidden">
-      
+
       {/* Background Royal Atmosphere */}
       <div className="absolute inset-0 bg-[#6E1E18] overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
         <div className="absolute inset-0 opacity-15 bg-[url('/pattern.png')] bg-repeat mix-blend-overlay"></div>
@@ -89,14 +89,14 @@ export const ProductsPreview: React.FC = () => {
         {/* Slider Container */}
         <div className="relative max-w-7xl mx-auto">
           <div className="overflow-hidden rounded-[24px]">
-            <motion.div 
+            <motion.div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
               {products.map((product) => (
                 <div key={product.id} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
                   <div className="group h-full relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
-                    
+
                     {/* Number Badge */}
                     <div className="absolute top-4 left-4 z-20">
                       <span className="font-serif text-xs text-[#E5C158]/80 border border-[#E5C158]/30 bg-[#2A0D0F]/90 px-2.5 py-1 rounded-full tracking-widest">
@@ -115,23 +115,23 @@ export const ProductsPreview: React.FC = () => {
                     </div>
 
                     {/* Product Info */}
-                    <div className="w-full p-4 md:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
-                      <div className="mb-3 md:mb-6">
-                        <span className="text-[10px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
+                    <div className="w-full p-3 md:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
+                      <div className="mb-2 md:mb-6">
+                        <span className="text-[8px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
                           {product.subtitle}
                         </span>
-                        <h3 className="font-serif text-xl md:text-3xl text-[#F8F3EC] font-bold mb-2 md:mb-4 group-hover:text-[#E5C158] transition-colors">
+                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-4 group-hover:text-[#E5C158] transition-colors">
                           {product.name}
                         </h3>
-                        <p className="text-[#C2B2A3] text-xs md:text-sm leading-snug md:leading-relaxed font-light line-clamp-2 md:line-clamp-3">
+                        <p className="text-[#C2B2A3] text-[9px] md:text-sm leading-tight md:leading-relaxed font-light line-clamp-2 md:line-clamp-3">
                           {product.description}
                         </p>
                       </div>
 
-                      <div className="mt-auto pt-3 md:pt-6 border-t border-[#D4AF37]/15">
-                        <button className="w-full py-2.5 md:py-3 px-4 md:px-6 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[10px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
+                      <div className="mt-auto pt-2 md:pt-6 border-t border-[#D4AF37]/15">
+                        <button className="w-full py-1.5 md:py-3 px-2 md:px-6 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
                           <span>Reserve / Rent</span>
-                          <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
                       </div>
                     </div>
@@ -146,7 +146,7 @@ export const ProductsPreview: React.FC = () => {
           {maxIndex > 0 && (
             <div className="flex items-center justify-between mt-8 px-4">
               {/* Prev Button */}
-              <button 
+              <button
                 onClick={prevSlide}
                 className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
               >
@@ -159,18 +159,17 @@ export const ProductsPreview: React.FC = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
-                    className={`transition-all duration-300 rounded-full ${
-                      currentIndex === idx 
-                        ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
-                        : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
-                    }`}
+                    className={`transition-all duration-300 rounded-full ${currentIndex === idx
+                      ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]'
+                      : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                      }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
               </div>
 
               {/* Next Button */}
-              <button 
+              <button
                 onClick={nextSlide}
                 className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
               >
@@ -181,19 +180,19 @@ export const ProductsPreview: React.FC = () => {
         </div>
 
         {/* Global CTA */}
-        <div className="mt-16 flex flex-col items-center text-center max-w-2xl mx-auto">
-          <span className="text-xs font-sans text-[#E5C158] uppercase tracking-[0.2em] block mb-3">
+        <div className="mt-12 md:mt-16 flex flex-col items-center text-center max-w-2xl mx-auto px-4">
+          <span className="text-[10px] md:text-xs font-sans text-[#E5C158] uppercase tracking-[0.2em] block mb-2 md:mb-3">
             Full Catalogue
           </span>
-          <h3 className="font-serif text-2xl md:text-3xl text-[#F8F3EC] font-bold leading-tight mb-4">
+          <h3 className="font-serif text-xl md:text-3xl text-[#F8F3EC] font-bold leading-tight mb-3 md:mb-4">
             Explore The Complete Collection
           </h3>
-          <p className="text-sm text-[#C2B2A3] font-light mb-8">
+          <p className="text-xs md:text-sm text-[#C2B2A3] font-light mb-6 md:mb-8">
             Discover over 50+ authentic Maratha royal props, attire, and decor items available for events.
           </p>
-          <button className="flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-[#D4AF37]/40 rounded-full text-[#E5C158] font-sans font-semibold text-sm tracking-wider uppercase hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-lg group">
+          <button className="flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-transparent border-2 border-[#D4AF37]/40 rounded-full text-[#E5C158] font-sans font-semibold text-xs md:text-sm tracking-wider uppercase hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-lg group">
             View Full Gallery
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
 

@@ -23,19 +23,19 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'shadow-soft py-4' : 'py-6'
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'shadow-soft py-2' : 'py-6'
       }`}>
       {/* Separate Background Layer for Stacking Control */}
       <div className={`absolute inset-0 transition-colors duration-300 -z-10 ${isScrolled ? 'bg-[#6E1E18]' : 'bg-transparent'}`}></div>
 
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20 flex justify-between items-center h-16">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer relative z-10 h-full">
+        <div className="flex items-center gap-2 cursor-pointer relative z-10 h-full py-1">
           <img
             src="/logo.png"
             alt="Pheta By Nihar"
             className={`w-auto mix-blend-multiply object-contain transition-all duration-500 ease-in-out origin-top-left ${isScrolled
-              ? 'h-16 scale-[1.4] md:translate-y-6 '
+              ? 'h-16 scale-[1.4] translate-y-2 md:translate-y-6 '
               : 'h-16 scale-100 translate-y-0'
               }`}
           />
