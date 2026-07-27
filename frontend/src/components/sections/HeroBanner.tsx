@@ -58,11 +58,11 @@ export const HeroBanner: React.FC = () => {
 
               {/* Buttons */}
               <div className="my-4 md:my-3 flex flex-row sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-5">
-                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 border-none rounded-full bg-[#4D2D22] text-[#D7A65B] hover:bg-[#3A2219]">
+                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-[10px] md:text-sm px-6 py-3 md:px-8 md:py-4 border-none rounded-full bg-[#4D2D22] text-[#D7A65B] hover:bg-[#3A2219]">
                   {/* <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2 text-[#D7A65B] group-hover:text-white transition-colors" /> */}
                   Book Now <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="secondary" className="w-full sm:w-auto flex items-center justify-center shadow-lg border-2 border-[#4D2D22] bg-transparent text-[#4D2D22] hover:bg-[#4D2D22] hover:text-[#D7A65B] text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 group hover:-translate-y-1">
+                <Button variant="secondary" className="w-full sm:w-auto flex items-center justify-center shadow-lg border-2 border-[#4D2D22] bg-transparent text-[#4D2D22] hover:bg-[#4D2D22] hover:text-[#D7A65B] text-[10px] md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 group hover:-translate-y-1">
                   Explore Work <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
