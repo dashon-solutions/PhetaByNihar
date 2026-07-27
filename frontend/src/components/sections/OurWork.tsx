@@ -20,8 +20,8 @@ export const OurWork: React.FC = () => {
         <Divider />
       </motion.div>
 
-      {/* Gallery Grid - Complex Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-3 h-[400px] md:h-[500px]">
+      {/* Gallery Grid - Responsive Layout */}
+      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-[250px_150px_150px] md:grid-rows-2 gap-3 h-auto md:h-[500px]">
 
         {/* Large Main Image */}
         <motion.div
@@ -29,9 +29,9 @@ export const OurWork: React.FC = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="col-span-2 row-span-2 relative rounded-[16px] overflow-hidden shadow-soft group"
+          className="col-span-2 row-span-1 md:row-span-2 relative rounded-[16px] overflow-hidden shadow-soft group"
         >
-          <img src="/pheta_by_nihar_tambde_1645633815_2780100398651064414_2400202343.webp" alt="Gallery 1" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+          <img src="/pheta_by_nihar_tambde_1645633815_2780100398651064414_2400202343.webp" alt="Gallery 1" className="w-full h-full object-cover object-top md:object-center transform group-hover:scale-105 transition-transform duration-700" />
         </motion.div>
 
         {/* Top Right Images */}
@@ -71,11 +71,11 @@ export const OurWork: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-          className="col-span-1 row-span-1 bg-[#6E1E18] rounded-[16px] flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#7D201D] transition-colors shadow-soft"
+          className="col-span-1 row-span-1 bg-[#6E1E18] rounded-[16px] flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#7D201D] transition-colors shadow-soft text-center p-2"
         >
-          <ImageIcon className="w-10 h-10 mb-4 text-[#D7A65B]" />
-          <span className="font-serif text-lg font-medium">View Full Gallery</span>
-          <ArrowRight className="w-5 h-5 mt-2" />
+          <ImageIcon className="w-6 h-6 md:w-10 md:h-10 mb-2 md:mb-4 text-[#D7A65B]" />
+          <span className="font-serif text-sm md:text-lg font-medium">View Full Gallery</span>
+          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 mt-1 md:mt-2" />
         </motion.div>
 
       </div>
