@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       {/* Background Decorative Image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[#4D2D22]/90 opacity-10 z-10"></div>
-        <div className="absolute inset-0 bg-[url('/footerimg.png')] bg-cover bg-center bg-no-repeat z-0 opacity-100 mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-[url('/orangeFooter.png')] bg-cover bg-center bg-no-repeat z-0 opacity-100 mix-blend-luminosity"></div>
       </div>
 
       <div className="px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto relative z-20">
