@@ -6,7 +6,7 @@ import { Button } from '../ui/Button';
 export const HeroBanner: React.FC = () => {
   return (
     <>
-      <section className="relative w-full h-[90vh] min-h-[700px] overflow-hidden">
+      <section className="relative w-full h-[80vh] min-h-[500px] md:min-h-[600px] lg:min-h-[700px] overflow-hidden">
         {/* Background Image */}
         <img
           src="/footerimg.png"
@@ -36,28 +36,28 @@ export const HeroBanner: React.FC = () => {
 
               {/* Heading */}
               <h1 className="font-serif leading-[1.05]">
-                <span className="block italic font-light text-4xl lg:text-6xl text-[#D7A65B]">
+                <span className="block italic font-light text-3xl md:text-4xl lg:text-5xl text-[#D7A65B]">
                   The Art of
                 </span>
 
-                <span className="block text-5xl lg:text-8xl font-bold text-white mt-2">
+                <span className="block text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-2">
                   Maharashtrian
                 </span>
 
-                <span className="block text-4xl lg:text-6xl font-semibold text-white mt-3">
+                <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-white mt-3">
                   Pheta Ceremony
                 </span>
               </h1>
 
               {/* Description */}
-              <p className="mt-8 text-white/90 text-lg lg:text-xl leading-relaxed max-w-xl">
+              <p className="mt-6 md:mt-8 text-white/90 text-base md:text-lg max-w-xl">
                 Honoring traditions with elegance, respect & pride. From royal
                 weddings to cultural celebrations, we bring the timeless art of
                 Pheta tying to life.
               </p>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
+              <div className="my-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
                 <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-sm px-8 py-4 border-none rounded-full bg-[#4D2D22] text-[#D7A65B] hover:bg-[#3A2219]">
                   <Calendar className="w-5 h-5 mr-2 text-[#D7A65B] group-hover:text-white transition-colors" />
                   Book Now <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

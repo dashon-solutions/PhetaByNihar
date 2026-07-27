@@ -5,23 +5,23 @@ import { ImageIcon, ArrowRight } from 'lucide-react';
 
 export const OurWork: React.FC = () => {
   return (
-    <section id="work" className="py-10 md:py-14 px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto bg-[#FFFDFB]">
+    <section id="work" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto bg-[#FFFDFB]">
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full text-center mb-16 relative"
+        className="w-full text-center mb-8 md:mb-12 relative"
       >
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#000000] tracking-wide font-normal">
           Our <span className="italic font-light text-[#C48B3C]">Work</span>
         </h2>
         <Divider />
       </motion.div>
 
       {/* Gallery Grid - Complex Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
+      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-3 h-[400px] md:h-[500px]">
 
         {/* Large Main Image */}
         <motion.div

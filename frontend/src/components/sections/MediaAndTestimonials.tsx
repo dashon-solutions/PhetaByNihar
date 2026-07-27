@@ -38,13 +38,13 @@ export const MediaAndTestimonials: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full text-center mb-16 relative"
+          className="w-full text-center mb-8 md:mb-12 relative"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-xs font-sans tracking-[0.25em] uppercase mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-[10px] md:text-xs font-sans tracking-[0.2em] md:tracking-[0.25em] uppercase mb-3">
             <Award className="w-3.5 h-3.5" />
             <span>Press & Publications</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#000000] tracking-wide font-normal">
             As Featured In <span className="italic font-light text-[#C48B3C]">Leading Media</span>
           </h2>
           <Divider />
@@ -72,7 +72,7 @@ export const MediaAndTestimonials: React.FC = () => {
           ))}
         </div>
       </section>
-      <section className="relative w-full py-24 md:py-32 overflow-hidden bg-[#6E1E18]">
+      <section className="relative w-full py-12 md:py-16 lg:py-20 overflow-hidden bg-[#6E1E18]">
         {/* Royal Background Effects & Subtle Motifs */}
         <div className="absolute inset-0 opacity-10 bg-[url('/aboutsideiamge.png')] bg-cover bg-center mix-blend-luminosity pointer-events-none"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#800020]/20 rounded-full blur-[150px] pointer-events-none"></div>
@@ -90,13 +90,13 @@ export const MediaAndTestimonials: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="text-center mb-16 relative"
+              className="text-center mb-8 md:mb-12 relative"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-xs font-sans tracking-[0.25em] uppercase mb-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-[10px] md:text-xs font-sans tracking-[0.2em] md:tracking-[0.25em] uppercase mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Client Patronage</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-serif text-[#F8F3EC] tracking-wide">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#F8F3EC] tracking-wide">
                 Royal Words <span className="italic font-light text-[#E5C158]">of Appreciation</span>
               </h2>
 
@@ -111,7 +111,7 @@ export const MediaAndTestimonials: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[28px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transform hover:-translate-y-2"
+                  className="group relative bg-[#2A0D0F]/70 backdrop-blur-md p-6 md:p-8 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transform hover:-translate-y-2"
                 >
                   {/* Subtle Decorative Background Quote Icon */}
                   <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
@@ -125,7 +125,7 @@ export const MediaAndTestimonials: React.FC = () => {
                     </div>
 
                     {/* Review Quote */}
-                    <p className="font-serif text-[#F8F3EC]/90 text-base md:text-lg italic font-light leading-relaxed mb-8 relative z-10">
+                    <p className="font-serif text-[#F8F3EC]/90 text-sm md:text-base italic font-light leading-relaxed mb-6 relative z-10">
                       "{review.quote}"
                     </p>
                   </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Crown } from 'lucide-react';
 import { Divider } from '../ui/Divider';
 
 export const ProductsPreview: React.FC = () => {
@@ -29,7 +29,7 @@ export const ProductsPreview: React.FC = () => {
   ];
 
   return (
-    <section id="products" className="py-20 md:py-32 px-4 md:px-12 lg:px-24 max-w-[1440px] mx-auto relative overflow-hidden">
+    <section id="products" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto bg-[#6E1E18] relative overflow-hidden">
 
       {/* Background Royal Atmosphere */}
       <div className="absolute inset-0 bg-[#6E1E18]  overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
@@ -45,21 +45,20 @@ export const ProductsPreview: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full"
+          className="w-full text-center mb-8 md:mb-12 relative z-10 flex flex-col items-center"
         >
-          <div className="text-center ">
-
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#F8F3EC] tracking-wide font-normal">
-              The Heritage <span className="italic font-light text-[#E5C158]">Collection</span>
-            </h2>
-            <Divider />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-xs font-sans tracking-[0.25em] uppercase mb-3">
+            <Crown className="w-3.5 h-3.5" />
+            <span>The Heritage Collection</span>
           </div>
-
-
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#F8F3EC] tracking-wide font-normal">
+            Exclusive <span className="italic font-light text-[#E5C158]">Collection</span>
+          </h2>
+          <Divider />
         </motion.div>
 
-        {/* Artistic Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative z-10">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -92,10 +91,10 @@ export const ProductsPreview: React.FC = () => {
               {/* Product Info */}
               <div className="p-6 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
                 <div>
-                  <span className="text-[11px] font-sans text-[#E5C158] uppercase tracking-wider block mb-1">
+                  <span className="text-[10px] md:text-[11px] font-sans text-[#E5C158] uppercase tracking-wider block mb-1">
                     {product.subtitle}
                   </span>
-                  <h3 className="font-serif text-2xl text-[#F8F3EC] font-bold mb-3 group-hover:text-[#E5C158] transition-colors">
+                  <h3 className="font-serif text-xl md:text-2xl text-[#F8F3EC] font-bold mb-2 md:mb-3 group-hover:text-[#E5C158] transition-colors">
                     {product.name}
                   </h3>
                   <p className="text-[#C2B2A3] text-xs leading-relaxed line-clamp-2 font-light">
@@ -104,8 +103,8 @@ export const ProductsPreview: React.FC = () => {
                 </div>
 
                 {/* Interactive Action Button */}
-                <div className="mt-6 pt-4 border-t border-[#D4AF37]/15">
-                  <button className="w-full py-3 px-4 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-xs tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
+                <div className="mt-4 pt-4 border-t border-[#D4AF37]/15">
+                  <button className="w-full py-2.5 px-4 rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-xs tracking-wider uppercase font-semibold flex items-center justify-center gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
                     <span>Reserve / Rent</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </button>

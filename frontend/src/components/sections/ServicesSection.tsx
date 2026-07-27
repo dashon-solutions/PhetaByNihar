@@ -32,23 +32,23 @@ export const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-10 md:py-14 px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto">
+    <section id="services" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full text-center mb-16 relative"
+        className="w-full text-center mb-8 md:mb-12 relative"
       >
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#000000] tracking-wide font-normal">
           Pheta <span className="italic font-light text-[#C48B3C]">Services</span>
         </h2>
         <Divider />
       </motion.div>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
         {services.map((service, index) => (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -56,7 +56,7 @@ export const ServicesSection: React.FC = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
             key={index}
-            className="bg-[#FFFDFB] rounded-[24px] overflow-hidden shadow-soft border border-[#E8D8C5] hover:border-[#D7A65B] group hover:shadow-2xl transition-all duration-500 flex flex-col h-full md:h-[420px] relative cursor-pointer transform hover:-translate-y-2"
+            className="bg-[#FFFDFB] rounded-[24px] overflow-hidden shadow-soft border border-[#E8D8C5] hover:border-[#D7A65B] group hover:shadow-2xl transition-all duration-500 flex flex-col h-full md:h-[380px] relative cursor-pointer transform hover:-translate-y-2"
           >
             {/* Card Image */}
             <div className="relative h-48 md:h-[50%] overflow-hidden shrink-0">
@@ -69,7 +69,7 @@ export const ServicesSection: React.FC = () => {
             </div>
 
             {/* Card Content */}
-            <div className="px-6 pb-8 pt-10 md:px-8 flex flex-col items-center text-center flex-grow relative bg-[#FFFDFB]">
+            <div className="px-5 pb-6 pt-8 md:px-6 flex flex-col items-center text-center flex-grow relative bg-[#FFFDFB]">
               {/* Floating Centered Icon */}
               <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#FFFDFB] w-16 h-16 flex items-center justify-center rounded-full shadow-md border border-[#E8D8C5] group-hover:bg-[#6E1E18] group-hover:border-[#6E1E18] transition-colors duration-500 z-20">
                 <div className="transform group-hover:scale-110 group-hover:brightness-125 transition-all duration-300">
@@ -77,11 +77,11 @@ export const ServicesSection: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-serif text-[#4D2D22] text-xl font-bold mb-3 group-hover:text-[#6E1E18] transition-colors duration-300">
+              <h3 className="font-serif text-[#4D2D22] text-lg md:text-xl font-bold mb-2 md:mb-3 group-hover:text-[#6E1E18] transition-colors duration-300">
                 {service.title}
               </h3>
 
-              <p className="font-sans text-[#666666] text-sm leading-relaxed mb-4">
+              <p className="font-sans text-[#666666] text-xs md:text-sm leading-relaxed mb-4">
                 {service.description}
               </p>
 

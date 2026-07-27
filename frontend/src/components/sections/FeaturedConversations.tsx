@@ -14,7 +14,7 @@ export const FeaturedConversations: React.FC = () => {
   ];
 
   return (
-    <section className="py-8 md:py-16 px-4 md:px-10 lg:px-20 max-w-[1400px] mx-auto">
+    <section className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
       {/* Section Header */}
 
       <motion.div
@@ -22,9 +22,9 @@ export const FeaturedConversations: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full text-center mb-8 md:mb-16 relative"
+        className="w-full text-center mb-8 md:mb-12 relative"
       >
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#000000] tracking-wide font-normal">
           Featured <span className="italic font-light text-[#C48B3C]">Conversations</span>
         </h2>
         <Divider />
@@ -43,7 +43,7 @@ export const FeaturedConversations: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:col-span-2 bg-white rounded-[16px] overflow-hidden shadow-soft border border-[#E8D8C5] group flex flex-col"
         >
-          <div className="relative h-[250px] md:h-[350px] overflow-hidden bg-black">
+          <div className="relative h-[200px] md:h-[300px] overflow-hidden bg-black">
             <iframe
               className="w-full h-full"
               src={videos[0].url}
@@ -54,9 +54,9 @@ export const FeaturedConversations: React.FC = () => {
               allowFullScreen>
             </iframe>
           </div>
-          <div className="p-4 md:p-6 flex-grow flex flex-col justify-between">
-             <h4 className="font-serif text-[#4D2D22] font-bold text-lg md:text-xl leading-snug mb-3">{videos[0].title}</h4>
-             <div className="text-sm text-[#999999] font-sans flex items-center gap-2 mt-2">
+          <div className="p-4 flex-grow flex flex-col justify-between">
+             <h4 className="font-serif text-[#4D2D22] font-bold text-base md:text-lg leading-snug mb-2">{videos[0].title}</h4>
+             <div className="text-xs text-[#999999] font-sans flex items-center gap-2 mt-2">
                <div className="w-6 h-6 bg-gray-200 rounded-full overflow-hidden flex-shrink-0 border border-gray-300">
                  <img src={`https://ui-avatars.com/api/?name=${videos[0].channel.charAt(0)}&background=random`} alt="" className="w-full h-full" />
                </div>
@@ -76,7 +76,7 @@ export const FeaturedConversations: React.FC = () => {
               transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
               className="bg-white rounded-[16px] overflow-hidden shadow-soft border border-[#E8D8C5] group flex flex-col"
             >
-              <div className="relative h-40 overflow-hidden bg-black">
+              <div className="relative h-32 md:h-40 overflow-hidden bg-black">
                 <iframe
                   className="w-full h-full"
                   src={video.url}
