@@ -33,17 +33,16 @@ export const ServicesSection: React.FC = () => {
 
   return (
     <section id="services" className="py-10 md:py-14 px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto">
-
       {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-center mb-16 relative"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full text-center mb-16 relative"
       >
-        <h2 className="text-3xl lg:text-4xl font-serif text-[#4D2D22] font-bold">
-          PHETA SERVICES & WORKSHOPS
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+          Pheta <span className="italic font-light text-[#C48B3C]">Services</span>
         </h2>
         <Divider />
       </motion.div>

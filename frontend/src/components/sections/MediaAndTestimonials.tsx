@@ -1,104 +1,166 @@
 import React from 'react';
-import { Divider } from '../ui/Divider';
 import { motion } from 'framer-motion';
+import { Quote, Star, Sparkles, Award } from 'lucide-react';
+import { Divider } from '../ui/Divider';
 
 export const MediaAndTestimonials: React.FC = () => {
   const reviews = [
     {
-      quote: "Nihar's Pheta tying added a royal touch to our wedding. Every guest loved it!",
+      quote: "Nihar's Pheta tying added a royal touch to our wedding. Every single guest was mesmerized by the precision of folds!",
       name: "Radhika & Swapnil",
-      location: "Pune",
-      image: "https://ui-avatars.com/api/?name=Radhika&background=4D2D22&color=fff"
+      location: "Pune, India",
+      rating: 5,
+      image: "https://ui-avatars.com/api/?name=Radhika&background=4D1217&color=D4AF37"
     },
     {
-      quote: "Professional, punctual and passionate. Highly recommended for any cultural event.",
+      quote: "Professional, punctual, and profoundly passionate. They brought authentic Maratha regal elegance to our heritage event.",
       name: "Rohit Deshmukh",
-      location: "Mumbai",
-      image: "https://ui-avatars.com/api/?name=Rohit&background=6E1E18&color=fff"
+      location: "Mumbai, India",
+      rating: 5,
+      image: "https://ui-avatars.com/api/?name=Rohit&background=800020&color=D4AF37"
     },
     {
-      quote: "The workshop was amazing! We learned the true art behind every fold.",
+      quote: "The masterclass workshop was divine! We didn't just learn turban wrapping; we experienced the soul of royal Maharashtrian culture.",
       name: "Anagha Kulkarni",
-      location: "USA",
-      image: "https://ui-avatars.com/api/?name=Anagha&background=C48B3C&color=fff"
+      location: "California, USA",
+      rating: 5,
+      image: "https://ui-avatars.com/api/?name=Anagha&background=D4AF37&color=2A0D0F"
     }
   ];
 
-  const SectionHeader = ({ title }: { title: string }) => (
-    <div className="flex items-center justify-center mb-6 w-full max-w-3xl mx-auto">
-      <div className="h-[1px] flex-1 bg-[#E8D8C5]"></div>
-      <div className="px-6 flex flex-col items-center w-full">
-        <h2 className="text-xl md:text-2xl font-serif font-bold text-[#4D2D22] tracking-wider uppercase mb-1">
-          {title}
-        </h2>
-        <Divider />
-      </div>
-      <div className="h-[1px] flex-1 bg-[#E8D8C5]"></div>
-    </div>
-  );
-
   return (
-    <section className="relative w-full py-2">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-[url('/aboutsideiamge.png')] bg-cover bg-center opacity-30 pointer-events-none"></div>
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-[#F8F3EC] opacity-70 pointer-events-none"></div>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col items-center px-5 md:px-10 lg:px-16">
-        {/* Media Recognition Bar */}
-        <section className="w-full py-8">
-          <div className="max-w-[1400px] mx-auto flex flex-wrap xl:flex-nowrap items-center justify-between gap-6 relative z-10">
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16 flex-1">
-              {/* YouTube */}
+    <div>
+      <section className="w-full my-2 mx-auto max-w-[1200px]">
 
 
-              {/* Logos */}
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP08kDC-LuqPvGnwMw7Fmu6P-jUqjR0eZuyAwEWXv8FA&s=10" alt="Lokmat" className="h-8 md:h-10 mix-blend-multiply opacity-100 drop-shadow-sm" />
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH6ggYEp8r-2N3ozRrXKNXUcHU01H96iDGRdba8aMlBQ&s=10" alt="Sakal" className="h-10 md:h-12 mix-blend-multiply object-contain opacity-100 drop-shadow-sm" />
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE_t8c3FrUZqYATxNprGMxbhTy5fJClxDYAdUxF-yLng&s=10" alt="ABP Majha" className="h-8 md:h-10 mix-blend-multiply opacity-100 drop-shadow-sm" />
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHOyF2m1reWnBerMi1NZDc_r_dQQK3H46Y-m3yCMnydA&s=10" alt="Zee 24 Taas" className="h-10 md:h-12 mix-blend-multiply opacity-100 drop-shadow-sm" />
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full text-center mb-16 relative"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-xs font-sans tracking-[0.25em] uppercase mb-3">
+            <Award className="w-3.5 h-3.5" />
+            <span>Press & Publications</span>
           </div>
-        </section>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal">
+            As Featured In <span className="italic font-light text-[#C48B3C]">Leading Media</span>
+          </h2>
+          <Divider />
+        </motion.div>
 
-        {/* Testimonials */}
-        <section className="w-full py-12">
-          <SectionHeader title="CLIENT LOVE" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full mt-10">
-            {reviews.map((review, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-                className="bg-[#FFFDFB] p-8 rounded-[24px] shadow-sm border border-[#E8D8C5] flex flex-col hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <div className="flex flex-col gap-3 mb-8">
-                  <div className="text-6xl font-serif text-[#C48B3C] leading-none opacity-40 h-8">“</div>
-                  <p className="font-sans text-[#4D2D22] text-sm md:text-base font-medium leading-relaxed mt-2">
-                    {review.quote}
-                  </p>
-                </div>
-                <div className="mt-auto flex items-center gap-4">
-                  <img src={review.image} alt={review.name} className="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-white" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+          {[1, 2, 3, 4].map((num) => (
+            <motion.div
+              key={num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: num * 0.1 }}
+              className="group relative flex items-center justify-center h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden px-8 shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)]"
+            >
+              {/* Gold Highlight Line on Hover */}
+              {/* <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
+
+              <img
+                src={`/news1 (${num}).png`}
+                alt={`Press Feature ${num}`}
+                className="relative z-10 max-h-12 w-auto object-contain "
+              />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+      <section className="relative w-full py-24 md:py-32 overflow-hidden bg-[#6E1E18]">
+        {/* Royal Background Effects & Subtle Motifs */}
+        <div className="absolute inset-0 opacity-10 bg-[url('/aboutsideiamge.png')] bg-cover bg-center mix-blend-luminosity pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#800020]/20 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+
+          {/* ================= MEDIA RECOGNITION SECTION ================= */}
+
+
+          {/* ================= TESTIMONIALS SECTION ================= */}
+          <section className="w-full">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-center mb-16 relative"
+            >
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-xs font-sans tracking-[0.25em] uppercase mb-4">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Client Patronage</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif text-[#F8F3EC] tracking-wide">
+                Royal Words <span className="italic font-light text-[#E5C158]">of Appreciation</span>
+              </h2>
+
+              <Divider />          </motion.div>
+
+            {/* Review Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+              {reviews.map((review, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[28px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] transform hover:-translate-y-2"
+                >
+                  {/* Subtle Decorative Background Quote Icon */}
+                  <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
+
                   <div>
-                    <h4 className="font-sans text-[#4D2D22] font-bold text-sm">{review.name}</h4>
-                    <p className="font-sans text-[#999999] text-xs uppercase tracking-widest font-semibold mt-0.5">{review.location}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    {/* Rating Stars */}
+                    <div className="flex items-center gap-1 mb-6">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-[#E5C158] text-[#E5C158]" />
+                      ))}
+                    </div>
 
-          {/* Pagination Dots */}
-          <div className="flex justify-center items-center gap-2 mt-12">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#4D2D22] cursor-pointer"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-[#E8D8C5] cursor-pointer hover:bg-[#C48B3C] transition-colors"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-[#E8D8C5] cursor-pointer hover:bg-[#C48B3C] transition-colors"></div>
-          </div>
-        </section>
-      </div>
-    </section>
+                    {/* Review Quote */}
+                    <p className="font-serif text-[#F8F3EC]/90 text-base md:text-lg italic font-light leading-relaxed mb-8 relative z-10">
+                      "{review.quote}"
+                    </p>
+                  </div>
+
+                  {/* Author Info */}
+                  <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
+                    <div className="relative">
+                      <img
+                        src={review.image}
+                        alt={review.name}
+                        className="w-13 h-13 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-[#F8F3EC] font-semibold text-base group-hover:text-[#E5C158] transition-colors">
+                        {review.name}
+                      </h4>
+                      <p className="font-sans text-[#D4AF37]/70 text-xs tracking-wider uppercase mt-0.5">
+                        {review.location}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Artistic Custom Pagination / Indicator */}
+            <div className="flex justify-center items-center gap-3 mt-16">
+              <span className="w-12 h-[2px] bg-[#E5C158]"></span>
+              <span className="w-3 h-[2px] bg-[#D4AF37]/30"></span>
+              <span className="w-3 h-[2px] bg-[#D4AF37]/30"></span>
+            </div>
+          </section>
+
+        </div>
+      </section></div>
   );
 };

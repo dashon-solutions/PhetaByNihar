@@ -29,10 +29,10 @@ function App() {
 
 
         <ServicesSection />
-        <OurWork />
-        <FeaturedConversations />
         <ProductsPreview />
+        <FeaturedConversations />
         <MediaAndTestimonials />
+        <OurWork />
       </main>
 
       <Footer />

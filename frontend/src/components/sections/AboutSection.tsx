@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { Divider } from '../ui/Divider';
 
 export const AboutSection: React.FC = () => {
   // const features = [
@@ -30,7 +31,6 @@ export const AboutSection: React.FC = () => {
       <div className="absolute right-0 bottom-0 opacity-100 pointer-events-none z-0">
         <div className="relative">
           <img src="/aboutnewiamge.png" alt="" className="w-[400px] md:w-[600px] lg:w-[800px] mix-blend-multiply object-contain object-bottom" />
-          {/* Subtle Fog effects for blending */}
         </div>
       </div>
 
@@ -61,12 +61,10 @@ export const AboutSection: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="w-full lg:w-[48%] flex flex-col items-start justify-start py-4 shrink-0"
         >
-          <p className="text-[#C48B3C] font-sans font-bold tracking-[0.15em] text-sm uppercase mb-3">
-            About Nihar Tambde
-          </p>
-          <h2 className="text-4xl lg:text-5xl font-serif text-[#4D2D22] leading-tight">
-            A Tradition Passed <br /> Down with <span className="text-[#6E1E18]">Pride.</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#000000] tracking-wide font-normal mb-2">
+            A Tradition Passed <br /> Down with <span className="italic font-light text-[#C48B3C]">Pride</span>
           </h2>
+          <Divider className="ml-0 max-w-[400px] mb-4" />
           {/* Decorative Divider */}
           <p className="text-[#4D2D22] font-sans text-base leading-relaxed mb-6 font-medium">
             With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.
@@ -86,20 +84,6 @@ export const AboutSection: React.FC = () => {
             </Button>
           </div>
         </motion.div>
-
-        {/* Right Side: Feature Card */}
-        {/* <div className="w-full lg:w-[27%] bg-[#FCF8F2] border border-[#E8D8C5] rounded-[24px] p-8 flex flex-col justify-center gap-8 shadow-sm">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-center gap-5">
-              <div className="flex-shrink-0">
-                {feature.icon}
-              </div>
-              <p className="font-sans text-[#4D2D22] text-sm font-medium leading-snug">
-                {feature.text}
-              </p>
-            </div>
-          ))}
-        </div> */}
 
       </div>
     </section>

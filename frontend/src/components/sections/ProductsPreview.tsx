@@ -32,7 +32,7 @@ export const ProductsPreview: React.FC = () => {
     <section id="products" className="py-20 md:py-32 px-4 md:px-12 lg:px-24 max-w-[1440px] mx-auto relative overflow-hidden">
 
       {/* Background Royal Atmosphere */}
-      <div className="absolute inset-0 bg-[#6E1E18] rounded-[32px] md:rounded-[48px] overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
+      <div className="absolute inset-0 bg-[#6E1E18]  overflow-hidden border border-[#6E1E18]/30 shadow-2xl">
         <div className="absolute inset-0 opacity-15 bg-[url('/pattern.png')] bg-repeat mix-blend-overlay"></div>
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#6E1E18]/20 rounded-full blur-[120px]"></div>
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#6E1E18]/40 rounded-full blur-[120px]"></div>
