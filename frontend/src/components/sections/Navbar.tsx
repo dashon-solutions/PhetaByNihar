@@ -15,11 +15,11 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home Page', href: '#' },
+    { name: 'Home ', href: '#' },
     { name: 'About Nihar Tambde', href: '#about' },
     { name: 'Pheta Services & Workshops', href: '#services' },
     { name: 'Our Work', href: '#work' },
-    { name: 'Products & Rentals Page', href: '#products' },
+    { name: 'Products & Rentals ', href: '#products' },
   ];
 
   return (
