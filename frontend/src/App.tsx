@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/sections/Navbar';
 import { HeroBanner } from './components/sections/HeroBanner';
 import { Statistics } from './components/sections/Statistics';
@@ -9,9 +10,13 @@ import { ProductsPreview } from './components/sections/ProductsPreview';
 import { MediaAndTestimonials } from './components/sections/MediaAndTestimonials';
 import { Footer } from './components/sections/Footer';
 
-function App() {
+// Admin Imports
+import { AdminLogin } from './components/admin/AdminLogin';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+
+const HomePage = () => {
   return (
-    <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white">
+    <>
       <Navbar />
 
       <main>
@@ -25,9 +30,6 @@ function App() {
         </div>
 
         <AboutSection />
-
-
-
         <ServicesSection />
         <ProductsPreview />
         <FeaturedConversations />
@@ -36,8 +38,23 @@ function App() {
       </main>
 
       <Footer />
-    </div>
+    </>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

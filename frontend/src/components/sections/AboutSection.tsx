@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Divider } from '../ui/Divider';
+import { apiFetch, getApiImageUrl } from '../../utils/api';
+
+interface AboutData {
+  heading: string;
+  italicHeading: string;
+  text: string;
+  portraitImage: string;
+  backgroundImage: string;
+}
 
 export const AboutSection: React.FC = () => {
-  // const features = [
-  //   {
-  //     icon: <Landmark className="w-6 h-6 text-[#C48B3C]" strokeWidth={1.5} />,
-  //     text: "Traditional Maharashtrian Heritage"
-  //   },
-  //   {
-  //     icon: <Crown className="w-6 h-6 text-[#C48B3C]" strokeWidth={1.5} />,
-  //     text: "Elegant, Authentic & Royal Pheta Styles"
-  //   },
-  //   {
-  //     icon: <Users className="w-6 h-6 text-[#C48B3C]" strokeWidth={1.5} />,
-  //     text: "Personalized Ceremonies for Every Occasion"
-  //   },
-  //   {
-  //     icon: <Heart className="w-6 h-6 text-[#C48B3C]" strokeWidth={1.5} />,
-  //     text: "Passion, Perfection & Cultural Pride"
-  //   }
-  // ];
+  const [about, setAbout] = useState<AboutData>({
+    heading: 'A Tradition Passed Down with',
+    italicHeading: 'Pride',
+    text: "With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.",
+    portraitImage: '/about_portrait.webp',
+    backgroundImage: '/aboutnewiamge.png'
+  });
+
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const data = await apiFetch('/about');
+        if (data) {
+          setAbout(data);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic about data, using fallback:', err);
+      }
+    };
+    fetchAbout();
+  }, []);
 
   return (
     <section id="about" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto relative">
@@ -30,7 +42,7 @@ export const AboutSection: React.FC = () => {
       {/* Decorative Mandala on the right edge */}
       <div className="absolute right-0 bottom-0 opacity-100 pointer-events-none z-0">
         <div className="relative">
-          <img src="/aboutnewiamge.png" alt="" className="w-[400px] md:w-[600px] lg:w-[800px] mix-blend-multiply object-contain object-bottom" />
+          <img src={getApiImageUrl(about.backgroundImage)} alt="" className="w-[400px] md:w-[600px] lg:w-[800px] mix-blend-multiply object-contain object-bottom" />
         </div>
       </div>
 
@@ -46,7 +58,7 @@ export const AboutSection: React.FC = () => {
         >
           <div className="relative rounded-[24px] overflow-hidden shadow-soft h-full min-h-[350px] md:min-h-[450px]">
             <img
-              src="/about_portrait.webp"
+              src={getApiImageUrl(about.portraitImage)}
               alt="Nihar Tambde Portrait"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
@@ -62,15 +74,13 @@ export const AboutSection: React.FC = () => {
           className="w-full lg:w-[48%] flex flex-col items-start justify-start py-4 shrink-0"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#000000] tracking-wide font-normal mb-2">
-            A Tradition Passed <br /> Down with <span className="italic font-light text-[#C48B3C]">Pride</span>
+            {about.heading} <br /> <span className="italic font-light text-[#C48B3C]">{about.italicHeading}</span>
           </h2>
           <Divider className="ml-0 max-w-[400px] mb-4" />
           {/* Decorative Divider */}
           <p className="text-[#4D2D22] font-sans text-sm md:text-base leading-relaxed mb-6 font-medium">
-            With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.
+            {about.text}
           </p>
-
-
 
           <div>
             <Button variant="secondary" className="flex items-center text-sm px-6 py-2.5">
@@ -83,4 +93,5 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
+
 

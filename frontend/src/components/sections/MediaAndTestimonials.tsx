@@ -2,12 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star, Sparkles, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Divider } from '../ui/Divider';
+import { apiFetch, getApiImageUrl } from '../../utils/api';
+
+interface TestimonialData {
+  _id?: string;
+  quote: string;
+  name: string;
+  location: string;
+  rating: number;
+  image: string;
+}
+
+interface MediaLogoData {
+  _id?: string;
+  name: string;
+  image?: string;
+  color?: string;
+}
 
 export const MediaAndTestimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
-
-  const reviews = [
+  const [reviews, setReviews] = useState<TestimonialData[]>([
     {
       quote: "Nihar's Pheta tying added a royal touch to our wedding. Every single guest was mesmerized by the precision of folds!",
       name: "Radhika & Swapnil",
@@ -29,7 +45,38 @@ export const MediaAndTestimonials: React.FC = () => {
       rating: 5,
       image: "https://ui-avatars.com/api/?name=Anagha&background=D4AF37&color=2A0D0F"
     }
-  ];
+  ]);
+
+  const [mediaLogos, setMediaLogos] = useState<MediaLogoData[]>([
+    { name: 'Lokmat', image: '/news1 (1).png' },
+    { name: 'Sakal', image: '/news1 (2).png' },
+    { name: 'ABP', image: '/news1 (3).png' },
+    { name: 'TV9', image: '/news1 (4).png' }
+  ]);
+
+  useEffect(() => {
+    const fetchTestimonialsAndMedia = async () => {
+      try {
+        const testimonialsData = await apiFetch('/testimonials');
+        if (testimonialsData && testimonialsData.length > 0) {
+          setReviews(testimonialsData);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic testimonials, using fallback:', err);
+      }
+
+      try {
+        const logosData = await apiFetch('/media');
+        if (logosData && logosData.length > 0) {
+          // If the DB returned logo entries, map them. If they have image, use it. Otherwise, use text.
+          setMediaLogos(logosData);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic media logos, using fallback:', err);
+      }
+    };
+    fetchTestimonialsAndMedia();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,20 +126,29 @@ export const MediaAndTestimonials: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
-          {[1, 2, 3, 4].map((num) => (
+          {mediaLogos.map((logo, index) => (
             <motion.div
-              key={num}
+              key={logo._id || index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: num * 0.1 }}
-              className="group relative flex items-center justify-center h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden px-8 shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)]"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative flex items-center justify-center h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden px-8 shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] bg-white/50"
             >
-              <img
-                src={`/news1 (${num}).png`}
-                alt={`Press Feature ${num}`}
-                className="relative z-10 max-h-12 w-auto object-contain "
-              />
+              {logo.image ? (
+                <img
+                  src={getApiImageUrl(logo.image)}
+                  alt={logo.name}
+                  className="relative z-10 max-h-12 w-auto object-contain"
+                />
+              ) : (
+                <span 
+                  className="font-serif font-bold text-2xl relative z-10 transition-colors duration-300"
+                  style={{ color: logo.color || '#6E1E18' }}
+                >
+                  {logo.name}
+                </span>
+              )}
             </motion.div>
           ))}
         </div>
@@ -134,7 +190,7 @@ export const MediaAndTestimonials: React.FC = () => {
                   style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
                 >
                   {reviews.map((review, index) => (
-                    <div key={index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                    <div key={review._id || index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
                       <div className="group h-full relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
                         
                         {/* Subtle Decorative Background Quote Icon */}
@@ -158,7 +214,7 @@ export const MediaAndTestimonials: React.FC = () => {
                         <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
                           <div className="relative">
                             <img
-                              src={review.image}
+                              src={getApiImageUrl(review.image)}
                               alt={review.name}
                               className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
                             />
@@ -182,38 +238,38 @@ export const MediaAndTestimonials: React.FC = () => {
               {/* Navigation Controls */}
               {maxIndex > 0 && (
                 <div className="flex items-center justify-between mt-8 px-4">
-                {/* Prev Button */}
-                <button 
-                  onClick={prevSlide}
-                  className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
-                >
-                  <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-                </button>
+                  {/* Prev Button */}
+                  <button 
+                    onClick={prevSlide}
+                    className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                  >
+                    <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+                  </button>
 
-                {/* Dots */}
-                <div className="flex items-center gap-2 md:gap-3">
-                  {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentIndex(idx)}
-                      className={`transition-all duration-300 rounded-full ${
-                        currentIndex === idx 
-                          ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
-                          : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+                  {/* Dots */}
+                  <div className="flex items-center gap-2 md:gap-3">
+                    {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`transition-all duration-300 rounded-full ${
+                          currentIndex === idx 
+                            ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
+                            : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Next Button */}
+                  <button 
+                    onClick={nextSlide}
+                    className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                  >
+                    <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+                  </button>
                 </div>
-
-                {/* Next Button */}
-                <button 
-                  onClick={nextSlide}
-                  className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
-                >
-                  <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-                </button>
-              </div>
               )}
             </div>
 
@@ -223,4 +279,4 @@ export const MediaAndTestimonials: React.FC = () => {
       </section>
     </div>
   );
-};
+};

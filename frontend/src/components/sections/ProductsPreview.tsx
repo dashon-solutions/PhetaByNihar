@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Crown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Divider } from '../ui/Divider';
+import { apiFetch, getApiImageUrl } from '../../utils/api';
+
+interface ProductData {
+  _id?: string;
+  id: string;
+  name: string;
+  subtitle: string;
+  image: string;
+  description: string;
+}
 
 export const ProductsPreview: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
-
-  const products = [
+  const [products, setProducts] = useState<ProductData[]>([
     {
       id: '01',
       name: 'Miniature Pheta',
@@ -29,7 +38,21 @@ export const ProductsPreview: React.FC = () => {
       image: '/rajmudra.jpg',
       description: 'Precision-etched historic royal seal cast in traditional metallic tones.'
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await apiFetch('/products');
+        if (data && data.length > 0) {
+          setProducts(data);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic products, using fallback:', err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -93,8 +116,8 @@ export const ProductsPreview: React.FC = () => {
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
-              {products.map((product) => (
-                <div key={product.id} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+              {products.map((product, index) => (
+                <div key={product._id || product.id || index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
                   <div className="group h-full relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
 
                     {/* Number Badge */}
@@ -107,7 +130,7 @@ export const ProductsPreview: React.FC = () => {
                     {/* Product Frame & Showcase Image */}
                     <div className="relative w-full h-36 md:h-80 overflow-hidden flex items-center justify-center p-3 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
                       <img
-                        src={product.image}
+                        src={getApiImageUrl(product.image)}
                         alt={product.name}
                         className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
@@ -199,4 +222,4 @@ export const ProductsPreview: React.FC = () => {
       </div>
     </section>
   );
-};
+};

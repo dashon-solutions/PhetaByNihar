@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Divider } from '../ui/Divider';
+import { apiFetch } from '../../utils/api';
+
+interface VideoData {
+  _id?: string;
+  title: string;
+  channel: string;
+  url: string;
+}
 
 export const FeaturedConversations: React.FC = () => {
+  const [videos, setVideos] = useState<VideoData[]>([
+    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
+    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
+    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
+    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
+    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
+  ]);
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const data = await apiFetch('/videos');
+        if (data && data.length > 0) {
+          setVideos(data);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic videos, using fallback:', err);
+      }
+    };
+    fetchVideos();
+  }, []);
 
-  const videos = [
-    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
-    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
-    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
-    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
-    { title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar', channel: 'Zee Marathi', url: 'https://www.youtube.com/embed/OkjwpA-MdNc' },
-  ];
+  if (videos.length === 0) return null;
 
   return (
     <section className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto">
@@ -29,9 +51,6 @@ export const FeaturedConversations: React.FC = () => {
         </h2>
         <Divider />
       </motion.div>
-
-      {/* Tabs */}
-
 
       {/* Videos Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8 md:mb-12">
@@ -69,7 +88,7 @@ export const FeaturedConversations: React.FC = () => {
         <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-6">
           {videos.slice(1).map((video, idx) => (
             <motion.div
-              key={idx}
+              key={video._id || idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -104,3 +123,4 @@ export const FeaturedConversations: React.FC = () => {
     </section>
   );
 };
+
