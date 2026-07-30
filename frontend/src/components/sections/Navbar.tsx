@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
 
 export const Navbar: React.FC = () => {
@@ -15,11 +16,11 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home ', href: '#' },
-    { name: 'About Nihar Tambde', href: '#about' },
-    { name: 'Pheta Services & Workshops', href: '#services' },
-    { name: 'Our Work', href: '#work' },
-    { name: 'Products & Rentals ', href: '#products' },
+    { name: 'Home ', href: '/' },
+    { name: 'About Nihar Tambde', href: '/about' },
+    { name: 'Pheta Services & Workshops', href: '/services' },
+    { name: 'Products & Rentals ', href: '/products' },
+    { name: 'Contact Us', href: '/contact' },
   ];
 
   return (
@@ -44,19 +45,21 @@ export const Navbar: React.FC = () => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="text-white hover:text-[#6E1E18] font-sans text-sm font-medium transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* CTA */}
         <div className="hidden lg:block">
-          <Button variant="secondary" showArrow>Contact Us</Button>
+          <Link to="/contact">
+            <Button variant="secondary" showArrow>Contact Us</Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -72,16 +75,18 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-[#FFFDFB] shadow-soft-hover py-4 px-5 flex flex-col gap-4">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="text-[#666666] hover:text-[#6E1E18] font-sans text-base font-medium transition-colors py-2 border-b border-[#E8D8C5] last:border-0"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <Button showArrow className="w-full mt-4">Book Now Page</Button>
+          <Link to="/contact" className="w-full mt-4 block" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button showArrow className="w-full">Book Now</Button>
+          </Link>
         </div>
       )}
     </nav>

@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../utils/api';
 import { ImageUploadField } from './ImageUploadField';
-import { Save, Check } from 'lucide-react';
+import { Save, Check, Plus, Trash2 } from 'lucide-react';
+
+interface OfferedClass {
+  title: string;
+  description: string;
+  image: string;
+}
+
+interface ClassBatch {
+  batchName: string;
+  startDate: string;
+  duration: string;
+  status: string;
+  image: string;
+}
 
 export const AboutManager: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +28,13 @@ export const AboutManager: React.FC = () => {
     italicHeading: '',
     text: '',
     portraitImage: '',
-    backgroundImage: ''
+    backgroundImage: '',
+    journey: '',
+    passion: '',
+    experience: '',
+    brandStory: '',
+    offeredClasses: [] as OfferedClass[],
+    classBatches: [] as ClassBatch[]
   });
 
   useEffect(() => {
@@ -28,7 +48,13 @@ export const AboutManager: React.FC = () => {
             italicHeading: data.italicHeading || '',
             text: data.text || '',
             portraitImage: data.portraitImage || '',
-            backgroundImage: data.backgroundImage || ''
+            backgroundImage: data.backgroundImage || '',
+            journey: data.journey || '',
+            passion: data.passion || '',
+            experience: data.experience || '',
+            brandStory: data.brandStory || '',
+            offeredClasses: data.offeredClasses || [],
+            classBatches: data.classBatches || []
           });
         }
       } catch (err: any) {
@@ -43,6 +69,52 @@ export const AboutManager: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddClass = () => {
+    setForm(prev => ({
+      ...prev,
+      offeredClasses: [...prev.offeredClasses, { title: '', description: '', image: '' }]
+    }));
+  };
+
+  const handleRemoveClass = (index: number) => {
+    setForm(prev => {
+      const newClasses = [...prev.offeredClasses];
+      newClasses.splice(index, 1);
+      return { ...prev, offeredClasses: newClasses };
+    });
+  };
+
+  const handleClassChange = (index: number, field: keyof OfferedClass, value: string) => {
+    setForm(prev => {
+      const newClasses = [...prev.offeredClasses];
+      newClasses[index] = { ...newClasses[index], [field]: value };
+      return { ...prev, offeredClasses: newClasses };
+    });
+  };
+
+  const handleAddBatch = () => {
+    setForm(prev => ({
+      ...prev,
+      classBatches: [...prev.classBatches, { batchName: '', startDate: '', duration: '', status: 'Upcoming', image: '' }]
+    }));
+  };
+
+  const handleRemoveBatch = (index: number) => {
+    setForm(prev => {
+      const newBatches = [...prev.classBatches];
+      newBatches.splice(index, 1);
+      return { ...prev, classBatches: newBatches };
+    });
+  };
+
+  const handleBatchChange = (index: number, field: keyof ClassBatch, value: string) => {
+    setForm(prev => {
+      const newBatches = [...prev.classBatches];
+      newBatches[index] = { ...newBatches[index], [field]: value };
+      return { ...prev, classBatches: newBatches };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -148,6 +220,212 @@ export const AboutManager: React.FC = () => {
             value={form.backgroundImage}
             onChange={(url) => setForm(prev => ({ ...prev, backgroundImage: url }))}
           />
+        </div>
+
+        <div className="border-t border-[#E8D8C5] pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Journey</label>
+            <textarea
+              name="journey"
+              value={form.journey}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Our journey began..."
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Passion</label>
+            <textarea
+              name="passion"
+              value={form.passion}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Our passion is..."
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Experience</label>
+            <textarea
+              name="experience"
+              value={form.experience}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Over 10 years of experience..."
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Brand Story</label>
+            <textarea
+              name="brandStory"
+              value={form.brandStory}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Our brand is built on..."
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+        </div>
+
+        {/* Classes Section */}
+        <div className="pt-6 border-t border-[#E8D8C5]">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h4 className="font-serif text-xl font-bold text-[#4D2D22]">Offered Classes</h4>
+              <p className="font-sans text-xs text-[#666666] mt-1">Add classes to showcase on the About Us page.</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddClass}
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#F8F3EC] text-[#4D2D22] border border-[#E8D8C5] rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#E8D8C5] transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Add Class
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {form.offeredClasses.map((cls, index) => (
+              <div key={index} className="p-4 border border-[#E8D8C5] rounded-xl bg-white relative">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveClass(index)}
+                  className="absolute top-4 right-4 text-red-500 hover:text-red-700 bg-red-50 p-1.5 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Class Title</label>
+                      <input
+                        type="text"
+                        value={cls.title}
+                        onChange={(e) => handleClassChange(index, 'title', e.target.value)}
+                        placeholder="e.g. Masterclass in Pheta Tying"
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Class Description</label>
+                      <textarea
+                        value={cls.description}
+                        onChange={(e) => handleClassChange(index, 'description', e.target.value)}
+                        rows={3}
+                        placeholder="Description of the class..."
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <ImageUploadField
+                      label="Class Image"
+                      value={cls.image}
+                      onChange={(url) => handleClassChange(index, 'image', url)}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {form.offeredClasses.length === 0 && (
+              <div className="text-center py-6 text-sm text-[#666666] bg-[#F8F3EC] rounded-xl border border-dashed border-[#E8D8C5]">
+                No classes added yet. Click "Add Class" to start.
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {/* Class Batches Section */}
+        <div className="pt-6 border-t border-[#E8D8C5]">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h4 className="font-serif text-xl font-bold text-[#4D2D22]">Class Batches</h4>
+              <p className="font-sans text-xs text-[#666666] mt-1">Manage active or upcoming class batches.</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddBatch}
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#F8F3EC] text-[#4D2D22] border border-[#E8D8C5] rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#E8D8C5] transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Add Batch
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {form.classBatches.map((batch, index) => (
+              <div key={index} className="p-4 border border-[#E8D8C5] rounded-xl bg-white relative">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveBatch(index)}
+                  className="absolute top-4 right-4 text-red-500 hover:text-red-700 bg-red-50 p-1.5 rounded-lg transition-colors z-10"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Batch Name</label>
+                      <input
+                        type="text"
+                        value={batch.batchName}
+                        onChange={(e) => handleBatchChange(index, 'batchName', e.target.value)}
+                        placeholder="e.g. Summer Special Batch"
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Start Date</label>
+                        <input
+                          type="text"
+                          value={batch.startDate}
+                          onChange={(e) => handleBatchChange(index, 'startDate', e.target.value)}
+                          placeholder="e.g. 15th August 2024"
+                          className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Duration</label>
+                        <input
+                          type="text"
+                          value={batch.duration}
+                          onChange={(e) => handleBatchChange(index, 'duration', e.target.value)}
+                          placeholder="e.g. 4 Weeks"
+                          className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Status</label>
+                      <select
+                        value={batch.status}
+                        onChange={(e) => handleBatchChange(index, 'status', e.target.value)}
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      >
+                        <option value="Upcoming">Upcoming</option>
+                        <option value="Enrolling Now">Enrolling Now</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <ImageUploadField
+                      label="Batch Image"
+                      value={batch.image}
+                      onChange={(url) => handleBatchChange(index, 'image', url)}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {form.classBatches.length === 0 && (
+              <div className="text-center py-6 text-sm text-[#666666] bg-[#F8F3EC] rounded-xl border border-dashed border-[#E8D8C5]">
+                No class batches added yet. Click "Add Batch" to start.
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Save Button */}

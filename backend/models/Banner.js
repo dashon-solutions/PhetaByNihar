@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const bannerSchema = new mongoose.Schema({
+  pageName: { type: String, default: 'home' },
   tag: { type: String, default: 'Preserving Heritage' },
   titleItalic: { type: String, default: 'The Art of' },
   titleBold: { type: String, default: 'Maharashtrian' },

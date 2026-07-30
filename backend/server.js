@@ -15,6 +15,7 @@ import videosRoutes from './routes/videos.js';
 import mediaRoutes from './routes/media.js';
 import testimonialsRoutes from './routes/testimonials.js';
 import uploadRoutes from './routes/upload.js';
+import inquiryRoutes from './routes/inquiry.js';
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.use('/api/videos', videosRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/inquiry', inquiryRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

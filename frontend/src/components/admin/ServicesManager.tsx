@@ -9,6 +9,7 @@ interface ServiceItem {
   description: string;
   image: string;
   icon: string;
+  moreInfo?: string;
 }
 
 const AVAILABLE_ICONS = [
@@ -34,7 +35,8 @@ export const ServicesManager: React.FC = () => {
     title: '',
     description: '',
     image: '',
-    icon: 'Crown'
+    icon: 'Crown',
+    moreInfo: ''
   });
 
   const fetchServices = async () => {
@@ -60,7 +62,8 @@ export const ServicesManager: React.FC = () => {
       title: '',
       description: '',
       image: '',
-      icon: 'Crown'
+      icon: 'Crown',
+      moreInfo: ''
     });
     setEditingId(null);
     setError('');
@@ -72,7 +75,8 @@ export const ServicesManager: React.FC = () => {
       title: item.title,
       description: item.description,
       image: item.image,
-      icon: item.icon
+      icon: item.icon,
+      moreInfo: item.moreInfo || ''
     });
     setEditingId(item._id || null);
     setError('');
@@ -221,6 +225,20 @@ export const ServicesManager: React.FC = () => {
               onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
               rows={3}
               placeholder="Provide a brief summary of this service offering..."
+              className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+
+          {/* More Info */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+              Detailed Description (More Info)
+            </label>
+            <textarea
+              value={form.moreInfo || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, moreInfo: e.target.value }))}
+              rows={4}
+              placeholder="Provide a detailed description of this service offering..."
               className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
             />
           </div>

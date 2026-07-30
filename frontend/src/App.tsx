@@ -14,6 +14,12 @@ import { Footer } from './components/sections/Footer';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 
+// Page Imports
+import { ServicesPage } from './pages/ServicesPage';
+import { AboutUsPage } from './pages/AboutUsPage';
+import { RentalProductsPage } from './pages/RentalProductsPage';
+import { ContactUsPage } from './pages/ContactUsPage';
+
 const HomePage = () => {
   return (
     <>
@@ -48,6 +54,10 @@ function App() {
       <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/products" element={<RentalProductsPage />} />
+          <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>

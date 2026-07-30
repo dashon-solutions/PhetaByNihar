@@ -15,6 +15,7 @@
   
   --font-serif: "Epilogue", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-sans: "Roboto", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-marathi: "Yatra One", system-ui;
 }
 
 @layer base {
@@ -33,5 +34,8 @@
   }
   .shadow-soft-hover {
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  }
+  .font-marathi {
+    font-family: var(--font-marathi);
   }
 }

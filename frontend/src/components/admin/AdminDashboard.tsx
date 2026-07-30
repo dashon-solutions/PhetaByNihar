@@ -14,8 +14,9 @@ import { ProductsManager } from './ProductsManager';
 import { VideosManager } from './VideosManager';
 import { MediaManager } from './MediaManager';
 import { TestimonialsManager } from './TestimonialsManager';
+import { InquiryManager } from './InquiryManager';
 
-type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'videos' | 'media' | 'testimonials';
+type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'videos' | 'media' | 'testimonials' | 'inquiries';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('banner');
@@ -79,7 +80,8 @@ export const AdminDashboard: React.FC = () => {
     { id: 'products', label: 'Exclusive Collection', icon: <Package className="w-4 h-4" /> },
     { id: 'videos', label: 'Conversations / Videos', icon: <PlaySquare className="w-4 h-4" /> },
     { id: 'media', label: 'Media Features', icon: <Award className="w-4 h-4" /> },
-    { id: 'testimonials', label: 'Client Testimonials', icon: <Star className="w-4 h-4" /> }
+    { id: 'testimonials', label: 'Client Testimonials', icon: <Star className="w-4 h-4" /> },
+    { id: 'inquiries', label: 'Inquiries', icon: <UserCheck className="w-4 h-4" /> }
   ];
 
   const renderActiveManager = () => {
@@ -98,6 +100,8 @@ export const AdminDashboard: React.FC = () => {
         return <MediaManager />;
       case 'testimonials':
         return <TestimonialsManager />;
+      case 'inquiries':
+        return <InquiryManager />;
       default:
         return <BannerManager />;
     }

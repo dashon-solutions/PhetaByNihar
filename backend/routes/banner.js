@@ -7,10 +7,12 @@ const router = express.Router();
 // GET banner
 router.get('/', async (req, res) => {
   try {
-    let banner = await Banner.findOne();
+    const pageName = req.query.pageName || 'home';
+    let banner = await Banner.findOne({ pageName });
     if (!banner) {
       // Return default configuration
-      banner = new Banner();
+      banner = new Banner({ pageName });
+      await banner.save();
     }
     res.json(banner);
   } catch (error) {
@@ -21,7 +23,8 @@ router.get('/', async (req, res) => {
 // PUT (update) banner - Protected
 router.put('/', verifyToken, async (req, res) => {
   try {
-    let banner = await Banner.findOne();
+    const pageName = req.body.pageName || 'home';
+    let banner = await Banner.findOne({ pageName });
     if (!banner) {
       banner = new Banner(req.body);
     } else {

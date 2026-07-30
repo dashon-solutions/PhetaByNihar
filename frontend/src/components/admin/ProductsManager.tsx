@@ -7,6 +7,7 @@ interface ProductItem {
   _id?: string;
   id: string; // e.g. "01", "02"
   name: string;
+  marathiName?: string;
   subtitle: string;
   image: string;
   description: string;
@@ -23,6 +24,7 @@ export const ProductsManager: React.FC = () => {
   const [form, setForm] = useState<ProductItem>({
     id: '',
     name: '',
+    marathiName: '',
     subtitle: '',
     image: '',
     description: ''
@@ -52,6 +54,7 @@ export const ProductsManager: React.FC = () => {
     setForm({
       id: nextIdx,
       name: '',
+      marathiName: '',
       subtitle: '',
       image: '',
       description: ''
@@ -65,6 +68,7 @@ export const ProductsManager: React.FC = () => {
     setForm({
       id: item.id,
       name: item.name,
+      marathiName: item.marathiName || '',
       subtitle: item.subtitle,
       image: item.image,
       description: item.description
@@ -200,6 +204,20 @@ export const ProductsManager: React.FC = () => {
                 className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
               />
             </div>
+
+            {/* Marathi Name */}
+            <div className="flex flex-col gap-1.5 md:col-span-3">
+              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                Marathi Name (Optional)
+              </label>
+              <input
+                type="text"
+                value={form.marathiName}
+                onChange={(e) => setForm(prev => ({ ...prev, marathiName: e.target.value }))}
+                placeholder="e.g. वाघनख"
+                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm font-marathi focus:outline-none focus:border-[#D7A65B] text-text-gray"
+              />
+            </div>
           </div>
 
           {/* Subtitle */}
@@ -273,7 +291,7 @@ export const ProductsManager: React.FC = () => {
                 
                 <div>
                   <h4 className="font-serif font-bold text-[#4D2D22] text-base">
-                    {item.name} <span className="font-sans text-[10px] uppercase font-bold text-[#C48B3C] ml-2">({item.subtitle})</span>
+                    {item.name} {item.marathiName && <span className="font-marathi text-[#6E1E18]">({item.marathiName})</span>} <span className="font-sans text-[10px] uppercase font-bold text-[#C48B3C] ml-2">({item.subtitle})</span>
                   </h4>
                   <p className="font-sans text-xs text-[#666666] line-clamp-1 mt-0.5 leading-relaxed">
                     {item.description}
