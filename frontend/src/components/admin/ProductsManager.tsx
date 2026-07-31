@@ -10,7 +10,9 @@ interface ProductItem {
   marathiName?: string;
   subtitle: string;
   image: string;
+  galleryImages?: string[];
   description: string;
+  information?: string;
 }
 
 export const ProductsManager: React.FC = () => {
@@ -27,7 +29,9 @@ export const ProductsManager: React.FC = () => {
     marathiName: '',
     subtitle: '',
     image: '',
-    description: ''
+    galleryImages: [],
+    description: '',
+    information: ''
   });
 
   const fetchProducts = async () => {
@@ -57,7 +61,9 @@ export const ProductsManager: React.FC = () => {
       marathiName: '',
       subtitle: '',
       image: '',
-      description: ''
+      galleryImages: [],
+      description: '',
+      information: ''
     });
     setEditingId(null);
     setError('');
@@ -71,7 +77,9 @@ export const ProductsManager: React.FC = () => {
       marathiName: item.marathiName || '',
       subtitle: item.subtitle,
       image: item.image,
-      description: item.description
+      galleryImages: item.galleryImages || [],
+      description: item.description,
+      information: item.information || ''
     });
     setEditingId(item._id || null);
     setError('');
@@ -135,10 +143,10 @@ export const ProductsManager: React.FC = () => {
   }
 
   return (
-    <div className="bg-[#FFFDFB] rounded-2xl border border-[#E8D8C5] p-6 max-w-4xl">
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+    <div className="bg-[#FFFDFB] rounded-xl border border-[#E8D8C5] p-4 max-w-4xl">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-4">
         <div>
-          <h3 className="font-serif text-2xl font-bold text-[#4D2D22]">Manage Exclusive Collection</h3>
+          <h3 className="font-serif text-lg font-bold text-[#4D2D22]">Manage Exclusive Collection</h3>
           <p className="font-sans text-xs text-[#666666] mt-1">
             Add or edit product listings displayed in the Showcase carousel sections.
           </p>
@@ -162,7 +170,7 @@ export const ProductsManager: React.FC = () => {
 
       {/* Form or List */}
       {formOpen ? (
-        <form onSubmit={handleSubmit} className="border border-[#E8D8C5] rounded-xl p-5 bg-[#F8F3EC]/40 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="border border-[#E8D8C5] rounded-xl p-4 bg-[#F8F3EC]/40 flex flex-col gap-3">
           <div className="flex justify-between items-center pb-3 border-b border-[#E8D8C5]">
             <h4 className="font-serif text-lg font-bold text-[#4D2D22]">
               {editingId ? 'Edit Product' : 'Add New Product'}
@@ -176,7 +184,7 @@ export const ProductsManager: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* ID Badge */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
@@ -187,7 +195,7 @@ export const ProductsManager: React.FC = () => {
                 value={form.id}
                 onChange={(e) => setForm(prev => ({ ...prev, id: e.target.value }))}
                 placeholder="01"
-                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-1.5 bg-white border border-[#E8D8C5] rounded-lg font-sans text-xs focus:outline-none focus:border-[#D7A65B] text-text-gray"
               />
             </div>
 
@@ -201,7 +209,7 @@ export const ProductsManager: React.FC = () => {
                 value={form.name}
                 onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
                 placeholder="e.g. Miniature Pheta"
-                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-1.5 bg-white border border-[#E8D8C5] rounded-lg font-sans text-xs focus:outline-none focus:border-[#D7A65B] text-text-gray"
               />
             </div>
 
@@ -244,16 +252,62 @@ export const ProductsManager: React.FC = () => {
               onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
               rows={3}
               placeholder="Describe details of the prop, history, rental specs..."
-              className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+              className="px-3 py-1.5 bg-white border border-[#E8D8C5] rounded-lg font-sans text-xs focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+
+          {/* Information */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+              Extended Information (Single Page)
+            </label>
+            <textarea
+              value={form.information || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, information: e.target.value }))}
+              rows={5}
+              placeholder="Detailed information for the single product page..."
+              className="px-3 py-1.5 bg-white border border-[#E8D8C5] rounded-lg font-sans text-xs focus:outline-none focus:border-[#D7A65B] text-text-gray"
             />
           </div>
 
           {/* Image */}
           <ImageUploadField
-            label="Product Showcase Image"
+            label="Product Showcase Image (Cover)"
             value={form.image}
             onChange={(url) => setForm(prev => ({ ...prev, image: url }))}
           />
+
+          {/* Gallery Images */}
+          <div className="flex flex-col gap-1.5 border-t border-[#E8D8C5] pt-4 mt-2">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+              Gallery Images (Single Page)
+            </label>
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
+              {(form.galleryImages || []).map((imgUrl, idx) => (
+                <div key={idx} className="relative group rounded-lg overflow-hidden border border-[#E8D8C5] aspect-square">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={imgUrl.startsWith('http') ? imgUrl : `http://localhost:5000${imgUrl}`} alt="Gallery item" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                    <button
+                      type="button"
+                      onClick={() => setForm(prev => ({ ...prev, galleryImages: (prev.galleryImages || []).filter((_, i) => i !== idx) }))}
+                      className="bg-red-500 text-white p-2 rounded-full"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <div className="col-span-3 md:col-span-5">
+                <ImageUploadField
+                  label="Add Gallery Image"
+                  value=""
+                  onChange={(url) => setForm(prev => ({ ...prev, galleryImages: [...(prev.galleryImages || []), url] }))}
+                  multiple={true}
+                />
+              </div>
+            </div>
+          </div>
 
           <div className="flex justify-end gap-3 pt-3 border-t border-[#E8D8C5]">
             <button
@@ -282,15 +336,15 @@ export const ProductsManager: React.FC = () => {
           {products.map((item) => (
             <div
               key={item._id}
-              className="flex items-center justify-between p-4 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl group hover:border-[#D7A65B] transition-colors"
+              className="flex items-center justify-between p-3 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl group hover:border-[#D7A65B] transition-colors"
             >
-              <div className="flex items-center gap-4">
-                <span className="font-serif text-sm font-bold bg-[#6E1E18] text-[#FFFDFB] border border-[#D4AF37]/35 w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-center gap-3">
+                <span className="font-serif text-xs font-bold bg-[#6E1E18] text-[#FFFDFB] border border-[#D4AF37]/35 w-6 h-6 rounded-full flex items-center justify-center shrink-0">
                   {item.id}
                 </span>
                 
                 <div>
-                  <h4 className="font-serif font-bold text-[#4D2D22] text-base">
+                  <h4 className="font-serif font-bold text-[#4D2D22] text-sm">
                     {item.name} {item.marathiName && <span className="font-marathi text-[#6E1E18]">({item.marathiName})</span>} <span className="font-sans text-[10px] uppercase font-bold text-[#C48B3C] ml-2">({item.subtitle})</span>
                   </h4>
                   <p className="font-sans text-xs text-[#666666] line-clamp-1 mt-0.5 leading-relaxed">

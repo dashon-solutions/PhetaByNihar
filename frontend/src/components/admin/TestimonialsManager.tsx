@@ -5,11 +5,13 @@ import { Plus, Edit2, Trash2, Save, X, Star } from 'lucide-react';
 
 interface TestimonialItem {
   _id?: string;
-  quote: string;
-  name: string;
-  location: string;
-  rating: number;
-  image: string;
+  source?: 'manual' | 'google';
+  quote?: string;
+  name?: string;
+  location?: string;
+  rating?: number;
+  image?: string;
+  googleMapUrl?: string;
 }
 
 export const TestimonialsManager: React.FC = () => {
@@ -21,11 +23,13 @@ export const TestimonialsManager: React.FC = () => {
   const [saving, setSaving] = useState(false);
 
   const [form, setForm] = useState<TestimonialItem>({
+    source: 'manual',
     quote: '',
     name: '',
     location: '',
     rating: 5,
-    image: ''
+    image: '',
+    googleMapUrl: ''
   });
 
   const fetchTestimonials = async () => {
@@ -48,11 +52,13 @@ export const TestimonialsManager: React.FC = () => {
 
   const handleOpenAdd = () => {
     setForm({
+      source: 'manual',
       quote: '',
       name: '',
       location: '',
       rating: 5,
-      image: 'https://ui-avatars.com/api/?name=Guest&background=4D1217&color=D4AF37'
+      image: 'https://ui-avatars.com/api/?name=Guest&background=4D1217&color=D4AF37',
+      googleMapUrl: ''
     });
     setEditingId(null);
     setError('');
@@ -61,11 +67,13 @@ export const TestimonialsManager: React.FC = () => {
 
   const handleOpenEdit = (item: TestimonialItem) => {
     setForm({
-      quote: item.quote,
-      name: item.name,
-      location: item.location,
-      rating: item.rating,
-      image: item.image
+      source: item.source || 'manual',
+      quote: item.quote || '',
+      name: item.name || '',
+      location: item.location || '',
+      rating: item.rating || 5,
+      image: item.image || '',
+      googleMapUrl: item.googleMapUrl || ''
     });
     setEditingId(item._id || null);
     setError('');
@@ -88,9 +96,16 @@ export const TestimonialsManager: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.quote || !form.name || !form.location || !form.image) {
-      setError('Please fill in all fields');
-      return;
+    if (form.source === 'manual') {
+      if (!form.quote || !form.name || !form.location || !form.image) {
+        setError('Please fill in all fields for a manual testimonial');
+        return;
+      }
+    } else {
+      if (!form.googleMapUrl) {
+        setError('Please provide a Google Maps embed URL');
+        return;
+      }
     }
 
     setSaving(true);
@@ -127,10 +142,10 @@ export const TestimonialsManager: React.FC = () => {
   }
 
   return (
-    <div className="bg-[#FFFDFB] rounded-2xl border border-[#E8D8C5] p-6 max-w-4xl">
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6">
+    <div className="bg-[#FFFDFB] rounded-xl border border-[#E8D8C5] p-4 max-w-4xl">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-4">
         <div>
-          <h3 className="font-serif text-2xl font-bold text-[#4D2D22]">Manage Testimonials</h3>
+          <h3 className="font-serif text-lg font-bold text-[#4D2D22]">Manage Testimonials</h3>
           <p className="font-sans text-xs text-[#666666] mt-1">
             Add or update royal appreciation client reviews showcased on the landing page.
           </p>
@@ -152,9 +167,9 @@ export const TestimonialsManager: React.FC = () => {
         </div>
       )}
 
-      {/* Form or List */}
+      {/* Form */}
       {formOpen ? (
-        <form onSubmit={handleSubmit} className="border border-[#E8D8C5] rounded-xl p-5 bg-[#F8F3EC]/40 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="border border-[#E8D8C5] rounded-xl p-4 bg-[#F8F3EC]/40 flex flex-col gap-3">
           <div className="flex justify-between items-center pb-3 border-b border-[#E8D8C5]">
             <h4 className="font-serif text-lg font-bold text-[#4D2D22]">
               {editingId ? 'Edit Testimonial' : 'Add New Testimonial'}
@@ -168,83 +183,133 @@ export const TestimonialsManager: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Name */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
-                Client Name
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm(prev => {
-                  const val = e.target.value;
-                  // Auto generate avatar if profile pic is blank
-                  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(val || 'Guest')}&background=4D1217&color=D4AF37`;
-                  return {
-                    ...prev,
-                    name: val,
-                    image: prev.image.includes('ui-avatars.com') ? avatarUrl : prev.image
-                  };
-                })}
-                placeholder="e.g. Radhika Deshmukh"
-                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
-              />
-            </div>
-
-            {/* Location */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
-                Location
-              </label>
-              <input
-                type="text"
-                value={form.location}
-                onChange={(e) => setForm(prev => ({ ...prev, location: e.target.value }))}
-                placeholder="e.g. Pune, India"
-                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
-              />
-            </div>
-
-            {/* Rating */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
-                Appreciation Rating
-              </label>
-              <select
-                value={form.rating}
-                onChange={(e) => setForm(prev => ({ ...prev, rating: parseInt(e.target.value) }))}
-                className="px-4 py-2.5 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
-              >
-                {[5, 4, 3, 2, 1].map((r) => (
-                  <option key={r} value={r}>
-                    {r} Stars
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Quote */}
-          <div className="flex flex-col gap-1.5">
+          {/* Source Toggle */}
+          <div className="flex flex-col gap-1.5 mb-2">
             <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
-              Patron Words / Review Quote
+              Testimonial Source
             </label>
-            <textarea
-              value={form.quote}
-              onChange={(e) => setForm(prev => ({ ...prev, quote: e.target.value }))}
-              rows={4}
-              placeholder="Enter client review paragraph..."
-              className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
-            />
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="source"
+                  value="manual"
+                  checked={form.source === 'manual' || !form.source}
+                  onChange={() => setForm(prev => ({ ...prev, source: 'manual' }))}
+                  className="accent-[#D7A65B]"
+                />
+                <span className="font-sans text-sm text-[#4D2D22]">Manual Entry</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="source"
+                  value="google"
+                  checked={form.source === 'google'}
+                  onChange={() => setForm(prev => ({ ...prev, source: 'google' }))}
+                  className="accent-[#D7A65B]"
+                />
+                <span className="font-sans text-sm text-[#4D2D22]">Google Maps Embed</span>
+              </label>
+            </div>
           </div>
 
-          {/* Image */}
-          <ImageUploadField
-            label="Client Avatar Photo (Automatically generated if left blank)"
-            value={form.image}
-            onChange={(url) => setForm(prev => ({ ...prev, image: url }))}
-          />
+          {(form.source === 'manual' || !form.source) ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {/* Name */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                    Client Name
+                  </label>
+                  <input
+                    type="text"
+                    value={form.name || ''}
+                    onChange={(e) => setForm(prev => {
+                      const val = e.target.value;
+                      const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(val || 'Guest')}&background=4D1217&color=D4AF37`;
+                      return {
+                        ...prev,
+                        name: val,
+                        image: (prev.image || '').includes('ui-avatars.com') ? avatarUrl : prev.image
+                      };
+                    })}
+                    placeholder="e.g. Radhika Deshmukh"
+                    className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                  />
+                </div>
+
+                {/* Location */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                    Location
+                  </label>
+                  <input
+                    type="text"
+                    value={form.location || ''}
+                    onChange={(e) => setForm(prev => ({ ...prev, location: e.target.value }))}
+                    placeholder="e.g. Pune, India"
+                    className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                  />
+                </div>
+
+                {/* Rating */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                    Appreciation Rating
+                  </label>
+                  <select
+                    value={form.rating}
+                    onChange={(e) => setForm(prev => ({ ...prev, rating: parseInt(e.target.value) }))}
+                    className="px-4 py-2.5 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                  >
+                    {[5, 4, 3, 2, 1].map((r) => (
+                      <option key={r} value={r}>
+                        {r} Stars
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Quote */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                  Patron Words / Review Quote
+                </label>
+                <textarea
+                  value={form.quote || ''}
+                  onChange={(e) => setForm(prev => ({ ...prev, quote: e.target.value }))}
+                  rows={4}
+                  placeholder="Enter client review paragraph..."
+                  className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                />
+              </div>
+
+              {/* Image */}
+              <ImageUploadField
+                label="Client Avatar Photo (Automatically generated if left blank)"
+                value={form.image || ''}
+                onChange={(url) => setForm(prev => ({ ...prev, image: url }))}
+              />
+            </>
+          ) : (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                Google Maps Embed HTML / URL
+              </label>
+              <textarea
+                value={form.googleMapUrl || ''}
+                onChange={(e) => setForm(prev => ({ ...prev, googleMapUrl: e.target.value }))}
+                rows={4}
+                placeholder='<iframe src="https://www.google.com/maps/embed?pb=..." ...></iframe>'
+                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray font-mono"
+              />
+              <p className="text-[10px] text-[#666666]">
+                Paste the full iframe code from Google Maps here.
+              </p>
+            </div>
+          )}
 
           <div className="flex justify-end gap-3 pt-3 border-t border-[#E8D8C5]">
             <button
@@ -273,31 +338,42 @@ export const TestimonialsManager: React.FC = () => {
           {testimonials.map((item) => (
             <div
               key={item._id}
-              className="flex flex-col md:flex-row justify-between md:items-center p-4 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl group hover:border-[#D7A65B] gap-4 transition-colors"
+              className="flex items-center justify-between p-3 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl group hover:border-[#D7A65B] transition-colors"
             >
-              <div className="flex items-start gap-3">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-12 h-12 rounded-full object-cover border border-[#E8D8C5] shrink-0 bg-white"
-                />
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <h4 className="font-serif font-bold text-[#4D2D22] text-sm">{item.name}</h4>
-                    <span className="text-[10px] text-text-light font-sans">({item.location})</span>
-                  </div>
-                  
-                  {/* Stars list */}
-                  <div className="flex items-center gap-0.5 my-1">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-[#C48B3C] text-[#C48B3C]" />
-                    ))}
-                  </div>
+              <div className="flex items-center gap-3">
+                {(!item.source || item.source === 'manual') ? (
+                  <>
+                    <img
+                      src={item.image || ''}
+                      alt={item.name || 'Client'}
+                      className="w-10 h-10 rounded-full object-cover border border-[#E8D8C5] shrink-0 bg-white"
+                    />
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <h4 className="font-serif font-bold text-[#4D2D22] text-sm">{item.name}</h4>
+                        <span className="text-[10px] text-text-light font-sans">({item.location})</span>
+                      </div>
+                      
+                      {/* Stars list */}
+                      <div className="flex items-center gap-0.5 my-1">
+                        {[...Array(item.rating || 5)].map((_, i) => (
+                          <Star key={i} className="w-3.5 h-3.5 fill-[#C48B3C] text-[#C48B3C]" />
+                        ))}
+                      </div>
 
-                  <p className="font-sans italic text-xs text-[#666666] line-clamp-2 leading-relaxed">
-                    "{item.quote}"
-                  </p>
-                </div>
+                      <p className="font-sans italic text-xs text-[#666666] line-clamp-2 leading-relaxed">
+                        "{item.quote}"
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full">
+                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-[10px] font-bold uppercase rounded mb-2">Google Maps Embed</span>
+                    <p className="font-sans text-xs text-[#666666] line-clamp-2 font-mono bg-white p-2 border border-[#E8D8C5] rounded">
+                      {item.googleMapUrl}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="flex gap-2 shrink-0 md:self-center justify-end border-t md:border-t-0 border-[#E8D8C5]/60 pt-3 md:pt-0">

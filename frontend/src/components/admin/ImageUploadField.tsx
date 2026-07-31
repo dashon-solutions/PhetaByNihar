@@ -7,41 +7,60 @@ interface ImageUploadFieldProps {
   value: string;
   onChange: (url: string) => void;
   className?: string;
+  multiple?: boolean;
 }
 
 export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
   label,
   value,
   onChange,
-  className = ''
+  className = '',
+  multiple = false
 }) => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Basic type validation
-    if (!file.type.startsWith('image/')) {
-      setError('Please select an image file.');
-      return;
-    }
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
     setUploading(true);
     setError('');
 
     try {
-      const data = await apiUpload(file);
-      if (data && data.imageUrl) {
-        onChange(data.imageUrl);
+      if (multiple) {
+        let successCount = 0;
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file.type.startsWith('image/')) continue;
+          const data = await apiUpload(file);
+          if (data && data.imageUrl) {
+            onChange(data.imageUrl);
+            successCount++;
+          }
+        }
+        if (successCount === 0) {
+          setError('Failed to upload any images.');
+        }
       } else {
-        setError('Upload failed. No URL returned.');
+        const file = files[0];
+        if (!file.type.startsWith('image/')) {
+          setError('Please select an image file.');
+          setUploading(false);
+          return;
+        }
+        const data = await apiUpload(file);
+        if (data && data.imageUrl) {
+          onChange(data.imageUrl);
+        } else {
+          setError('Upload failed. No URL returned.');
+        }
       }
     } catch (err: any) {
       console.error(err);
       setError(err.message || 'Error uploading file.');
     } finally {
+      e.target.value = '';
       setUploading(false);
     }
   };
@@ -82,6 +101,7 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
               className="hidden"
               onChange={handleFileChange}
               disabled={uploading}
+              multiple={multiple}
             />
           </label>
           <p className="text-[10px] text-[#666666] font-sans mt-1">

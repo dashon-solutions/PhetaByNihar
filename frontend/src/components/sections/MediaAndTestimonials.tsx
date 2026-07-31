@@ -6,11 +6,13 @@ import { apiFetch, getApiImageUrl } from '../../utils/api';
 
 interface TestimonialData {
   _id?: string;
-  quote: string;
-  name: string;
-  location: string;
-  rating: number;
-  image: string;
+  source?: 'manual' | 'google';
+  quote?: string;
+  name?: string;
+  location?: string;
+  rating?: number;
+  image?: string;
+  googleMapUrl?: string;
 }
 
 interface MediaLogoData {
@@ -193,41 +195,60 @@ export const MediaAndTestimonials: React.FC = () => {
                     <div key={review._id || index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
                       <div className="group h-full relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
                         
-                        {/* Subtle Decorative Background Quote Icon */}
-                        <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
+                        {(!review.source || review.source === 'manual') ? (
+                          <>
+                            {/* Subtle Decorative Background Quote Icon */}
+                            <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
 
-                        <div>
-                          {/* Rating Stars */}
-                          <div className="flex items-center gap-1 mb-6">
-                            {[...Array(review.rating)].map((_, i) => (
-                              <Star key={i} className="w-5 h-5 fill-[#E5C158] text-[#E5C158]" />
-                            ))}
-                          </div>
+                            <div>
+                              {/* Rating Stars */}
+                              <div className="flex items-center gap-1 mb-6">
+                                {[...Array(review.rating || 5)].map((_, i) => (
+                                  <Star key={i} className="w-5 h-5 fill-[#E5C158] text-[#E5C158]" />
+                                ))}
+                              </div>
 
-                          {/* Review Quote */}
-                          <p className="font-serif text-[#F8F3EC]/90 text-lg md:text-xl lg:text-2xl italic font-light leading-relaxed mb-8 relative z-10">
-                            "{review.quote}"
-                          </p>
-                        </div>
+                              {/* Review Quote */}
+                              <p className="font-serif text-[#F8F3EC]/90 text-lg md:text-xl lg:text-2xl italic font-light leading-relaxed mb-8 relative z-10">
+                                "{review.quote}"
+                              </p>
+                            </div>
 
-                        {/* Author Info */}
-                        <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
-                          <div className="relative">
-                            <img
-                              src={getApiImageUrl(review.image)}
-                              alt={review.name}
-                              className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
+                            {/* Author Info */}
+                            <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
+                              <div className="relative">
+                                <img
+                                  src={getApiImageUrl(review.image || '')}
+                                  alt={review.name || 'Client'}
+                                  className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
+                                />
+                              </div>
+                              <div>
+                                <h4 className="font-serif text-[#F8F3EC] font-semibold text-lg group-hover:text-[#E5C158] transition-colors">
+                                  {review.name}
+                                </h4>
+                                <p className="font-sans text-[#D4AF37]/70 text-sm tracking-wider uppercase mt-1">
+                                  {review.location}
+                                </p>
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="w-full h-full flex flex-col min-h-[300px]">
+                            <div className="flex justify-between items-center mb-4">
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star key={i} className="w-4 h-4 fill-[#E5C158] text-[#E5C158]" />
+                                ))}
+                              </div>
+                              <span className="text-[10px] font-bold text-[#4285F4] bg-[#4285F4]/10 px-2 py-1 rounded uppercase tracking-wider">Google Review</span>
+                            </div>
+                            <div 
+                              className="w-full h-full flex-grow rounded-xl overflow-hidden [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:min-h-[250px]"
+                              dangerouslySetInnerHTML={{ __html: review.googleMapUrl || '' }}
                             />
                           </div>
-                          <div>
-                            <h4 className="font-serif text-[#F8F3EC] font-semibold text-lg group-hover:text-[#E5C158] transition-colors">
-                              {review.name}
-                            </h4>
-                            <p className="font-sans text-[#D4AF37]/70 text-sm tracking-wider uppercase mt-1">
-                              {review.location}
-                            </p>
-                          </div>
-                        </div>
+                        )}
 
                       </div>
                     </div>

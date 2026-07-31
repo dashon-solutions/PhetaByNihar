@@ -4,6 +4,7 @@ import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
 import { InquiryModal } from '../components/ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductItem {
   _id: string;
@@ -18,10 +19,11 @@ interface ProductItem {
 export const RentalProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,15 +43,14 @@ export const RentalProductsPage: React.FC = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar theme="light" />
       <main>
-        <HeroBanner />
-        
+
         <section className="py-20 md:py-32 bg-[#F8F3EC] relative overflow-hidden">
           {/* Background Decorative Pattern */}
-          <div className="absolute top-0 right-0 w-96 h-96 opacity-10 pointer-events-none" 
-               style={{ backgroundImage: 'radial-gradient(circle, #6E1E18 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
-          
+          <div className="absolute top-0 right-0 w-96 h-96 opacity-10 pointer-events-none"
+            style={{ backgroundImage: 'radial-gradient(circle, #6E1E18 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
+
           <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
               <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-4 block">
@@ -74,9 +75,9 @@ export const RentalProductsPage: React.FC = () => {
                   <div key={product._id} className="group cursor-pointer">
                     <div className="relative overflow-hidden rounded-[2rem] aspect-[4/5] shadow-lg mb-6 border-4 border-white">
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 duration-500"></div>
-                      <img 
-                        src={getApiImageUrl(product.image)} 
-                        alt={product.name} 
+                      <img
+                        src={getApiImageUrl(product.image)}
+                        alt={product.name}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute top-6 left-6 z-20">
@@ -85,7 +86,7 @@ export const RentalProductsPage: React.FC = () => {
                         </span>
                       </div>
                     </div>
-                    
+
                     <div className="text-center px-4 transform group-hover:-translate-y-2 transition-transform duration-500">
                       <h3 className="font-serif text-2xl font-bold text-[#4D2D22] mb-1">{product.name}</h3>
                       {product.marathiName && (
@@ -97,14 +98,11 @@ export const RentalProductsPage: React.FC = () => {
                       <p className="text-[#666666] font-sans text-sm leading-relaxed mb-6 line-clamp-3">
                         {product.description}
                       </p>
-                      <button 
-                        onClick={() => {
-                          setSelectedProduct(product.name);
-                          setIsModalOpen(true);
-                        }}
+                      <button
+                        onClick={() => navigate(`/products/${product._id}`)}
                         className="inline-block text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-wider hover:text-[#D7A65B] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#D7A65B] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform"
                       >
-                        Inquire Now &rarr;
+                        See More &rarr;
                       </button>
                     </div>
                   </div>
@@ -115,8 +113,8 @@ export const RentalProductsPage: React.FC = () => {
         </section>
       </main>
       <Footer />
-      
-      <InquiryModal 
+
+      <InquiryModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         type="rental"

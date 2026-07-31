@@ -84,15 +84,17 @@ export const BannerManager: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FFFDFB] rounded-2xl border border-[#E8D8C5] p-6 max-w-4xl">
-      <div className="mb-6">
-        <h3 className="font-serif text-2xl font-bold text-[#4D2D22]">Manage Banners</h3>
-        <p className="font-sans text-xs text-[#666666] mt-1">
-          Select a page to edit its banner text, buttons and background images.
-        </p>
+    <div className="bg-[#FFFDFB] rounded-xl border border-[#E8D8C5] p-4 max-w-3xl">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-4">
+        <div>
+          <h3 className="font-serif text-lg font-bold text-[#4D2D22]">Hero Banner Configuration</h3>
+          <p className="font-sans text-xs text-[#666666] mt-1">
+            Select a page to edit its banner text, buttons and background images.
+          </p>
+        </div>
       </div>
 
-      <div className="flex gap-4 mb-6 border-b border-[#E8D8C5] pb-2">
+      <div className="flex gap-4 mb-4 border-b border-[#E8D8C5] pb-2">
         <button
           onClick={() => handlePageChange('home')}
           className={`px-4 py-2 font-sans text-sm font-bold uppercase tracking-wider rounded-t-xl transition-colors ${
@@ -116,14 +118,14 @@ export const BannerManager: React.FC = () => {
           <div className="w-8 h-8 border-4 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           {error && (
             <div className="p-3 bg-red-50 text-red-700 text-xs rounded-xl font-sans font-medium border border-red-200">
               {error}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {/* Tag */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">

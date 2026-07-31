@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../utils/api';
 import { ImageUploadField } from './ImageUploadField';
-import { Plus, Edit2, Trash2, Save, X, Crown, Tent, Briefcase, GraduationCap, Star, Shield, Heart, Award } from 'lucide-react';
+import { Plus, Edit2, Trash2, Save, X, Crown, Tent, Briefcase, GraduationCap, Star, Shield, Heart, Award, Palette, Users, Landmark, Flag, Presentation, Mic, Video, Ticket, Sparkles, Plane, MapPin } from 'lucide-react';
 
 interface ServiceItem {
   _id?: string;
@@ -10,6 +10,7 @@ interface ServiceItem {
   image: string;
   icon: string;
   moreInfo?: string;
+  features?: { icon: string; label: string }[];
 }
 
 const AVAILABLE_ICONS = [
@@ -20,7 +21,18 @@ const AVAILABLE_ICONS = [
   { name: 'Star', icon: <Star className="w-4 h-4" /> },
   { name: 'Shield', icon: <Shield className="w-4 h-4" /> },
   { name: 'Heart', icon: <Heart className="w-4 h-4" /> },
-  { name: 'Award', icon: <Award className="w-4 h-4" /> }
+  { name: 'Award', icon: <Award className="w-4 h-4" /> },
+  { name: 'Palette', icon: <Palette className="w-4 h-4" /> },
+  { name: 'Users', icon: <Users className="w-4 h-4" /> },
+  { name: 'Landmark', icon: <Landmark className="w-4 h-4" /> },
+  { name: 'Flag', icon: <Flag className="w-4 h-4" /> },
+  { name: 'Presentation', icon: <Presentation className="w-4 h-4" /> },
+  { name: 'Mic', icon: <Mic className="w-4 h-4" /> },
+  { name: 'Video', icon: <Video className="w-4 h-4" /> },
+  { name: 'Ticket', icon: <Ticket className="w-4 h-4" /> },
+  { name: 'Sparkles', icon: <Sparkles className="w-4 h-4" /> },
+  { name: 'Plane', icon: <Plane className="w-4 h-4" /> },
+  { name: 'MapPin', icon: <MapPin className="w-4 h-4" /> }
 ];
 
 export const ServicesManager: React.FC = () => {
@@ -36,7 +48,8 @@ export const ServicesManager: React.FC = () => {
     description: '',
     image: '',
     icon: 'Crown',
-    moreInfo: ''
+    moreInfo: '',
+    features: []
   });
 
   const fetchServices = async () => {
@@ -63,7 +76,8 @@ export const ServicesManager: React.FC = () => {
       description: '',
       image: '',
       icon: 'Crown',
-      moreInfo: ''
+      moreInfo: '',
+      features: []
     });
     setEditingId(null);
     setError('');
@@ -76,7 +90,8 @@ export const ServicesManager: React.FC = () => {
       description: item.description,
       image: item.image,
       icon: item.icon,
-      moreInfo: item.moreInfo || ''
+      moreInfo: item.moreInfo || '',
+      features: item.features || []
     });
     setEditingId(item._id || null);
     setError('');
@@ -241,6 +256,63 @@ export const ServicesManager: React.FC = () => {
               placeholder="Provide a detailed description of this service offering..."
               className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
             />
+          </div>
+
+          {/* Features Array */}
+          <div className="flex flex-col gap-1.5 border-t border-[#E8D8C5] pt-4 mt-2">
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                Service Features (Max 4)
+              </label>
+              {(form.features?.length || 0) < 4 && (
+                <button
+                  type="button"
+                  onClick={() => setForm(prev => ({ ...prev, features: [...(prev.features || []), { icon: 'Star', label: '' }] }))}
+                  className="text-xs text-[#D7A65B] font-bold uppercase hover:text-[#C48B3C] flex items-center gap-1"
+                >
+                  <Plus className="w-3 h-3" /> Add Feature
+                </button>
+              )}
+            </div>
+            {form.features?.map((feat, idx) => (
+              <div key={idx} className="flex gap-2 items-center mb-2">
+                <select
+                  value={feat.icon}
+                  onChange={(e) => {
+                    const newFeat = [...(form.features || [])];
+                    newFeat[idx].icon = e.target.value;
+                    setForm(prev => ({ ...prev, features: newFeat }));
+                  }}
+                  className="px-3 py-2 bg-white border border-[#E8D8C5] rounded-lg font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray w-1/3"
+                >
+                  {AVAILABLE_ICONS.map((i) => (
+                    <option key={i.name} value={i.name}>{i.name}</option>
+                  ))}
+                </select>
+                <input
+                  type="text"
+                  value={feat.label}
+                  onChange={(e) => {
+                    const newFeat = [...(form.features || [])];
+                    newFeat[idx].label = e.target.value;
+                    setForm(prev => ({ ...prev, features: newFeat }));
+                  }}
+                  placeholder="Feature Label"
+                  className="px-3 py-2 bg-white border border-[#E8D8C5] rounded-lg font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray flex-grow"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newFeat = [...(form.features || [])];
+                    newFeat.splice(idx, 1);
+                    setForm(prev => ({ ...prev, features: newFeat }));
+                  }}
+                  className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
           </div>
 
           {/* Image */}

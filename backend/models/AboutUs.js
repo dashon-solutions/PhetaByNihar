@@ -7,6 +7,15 @@ const aboutUsSchema = new mongoose.Schema({
   portraitImage: { type: String, default: '/about_portrait.webp' },
   backgroundImage: { type: String, default: '/aboutnewiamge.png' },
   journey: { type: String, default: 'Our journey began...' },
+  journeyPoints: [
+    {
+      title: { type: String },
+      description: { type: String },
+      image: { type: String }
+    }
+  ],
+  quoteText: { type: String, default: "For me, it’s not just about tying a pheta, it’s about creating emotions and memories that last forever." },
+  quoteAuthor: { type: String, default: "Nihar Tambde" },
   passion: { type: String, default: 'Our passion is...' },
   experience: { type: String, default: 'Over 10 years of experience...' },
   brandStory: { type: String, default: 'Our brand is built on...' },

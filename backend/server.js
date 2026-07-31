@@ -1,7 +1,7 @@
+import 'dotenv/config.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,8 +16,7 @@ import mediaRoutes from './routes/media.js';
 import testimonialsRoutes from './routes/testimonials.js';
 import uploadRoutes from './routes/upload.js';
 import inquiryRoutes from './routes/inquiry.js';
-
-dotenv.config();
+import { router as ourWorkRoutes } from './routes/our-work.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -53,6 +52,7 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/inquiry', inquiryRoutes);
+app.use('/api/our-work', ourWorkRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

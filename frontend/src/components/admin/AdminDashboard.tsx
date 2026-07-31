@@ -15,8 +15,9 @@ import { VideosManager } from './VideosManager';
 import { MediaManager } from './MediaManager';
 import { TestimonialsManager } from './TestimonialsManager';
 import { InquiryManager } from './InquiryManager';
+import { OurWorkManager } from './OurWorkManager';
 
-type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'videos' | 'media' | 'testimonials' | 'inquiries';
+type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'videos' | 'media' | 'testimonials' | 'inquiries' | 'our-work';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('banner');
@@ -81,6 +82,7 @@ export const AdminDashboard: React.FC = () => {
     { id: 'videos', label: 'Conversations / Videos', icon: <PlaySquare className="w-4 h-4" /> },
     { id: 'media', label: 'Media Features', icon: <Award className="w-4 h-4" /> },
     { id: 'testimonials', label: 'Client Testimonials', icon: <Star className="w-4 h-4" /> },
+    { id: 'our-work', label: 'Our Work', icon: <LayoutGrid className="w-4 h-4" /> },
     { id: 'inquiries', label: 'Inquiries', icon: <UserCheck className="w-4 h-4" /> }
   ];
 
@@ -100,6 +102,8 @@ export const AdminDashboard: React.FC = () => {
         return <MediaManager />;
       case 'testimonials':
         return <TestimonialsManager />;
+      case 'our-work':
+        return <OurWorkManager />;
       case 'inquiries':
         return <InquiryManager />;
       default:
@@ -110,16 +114,16 @@ export const AdminDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F8F3EC] flex flex-col font-sans text-text-gray selection:bg-[#D7A65B] selection:text-white">
       {/* Top Header */}
-      <header className="bg-[#6E1E18] text-[#FFFDFB] px-6 py-4 flex items-center justify-between border-b-2 border-[#D7A65B] shadow-md z-30 sticky top-0">
+      <header className="bg-[#6E1E18] text-[#FFFDFB] px-4 py-2.5 flex items-center justify-between border-b-2 border-[#D7A65B] shadow-md z-30 sticky top-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#FFFDFB] rounded-full flex items-center justify-center border border-[#D7A65B] shadow-inner">
-            <Crown className="w-5 h-5 text-[#6E1E18]" />
+          <div className="w-8 h-8 bg-[#FFFDFB] rounded-full flex items-center justify-center border border-[#D7A65B] shadow-inner">
+            <Crown className="w-4 h-4 text-[#6E1E18]" />
           </div>
           <div>
-            <h1 className="font-serif text-lg md:text-xl font-bold tracking-wide leading-tight">
+            <h1 className="font-serif text-base md:text-lg font-bold tracking-wide leading-tight">
               Pheta By Nihar
             </h1>
-            <p className="text-[10px] text-[#D7A65B] tracking-widest uppercase font-bold">
+            <p className="text-[9px] text-[#D7A65B] tracking-widest uppercase font-bold">
               Administration Portal
             </p>
           </div>
@@ -133,7 +137,7 @@ export const AdminDashboard: React.FC = () => {
           
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-2 bg-[#2A0D0F] hover:bg-[#3b1215] text-[#D7A65B] hover:text-white rounded-lg text-xs font-semibold uppercase tracking-wider border border-[#D4AF37]/30 transition-all duration-300 active:scale-95"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#2A0D0F] hover:bg-[#3b1215] text-[#D7A65B] hover:text-white rounded text-[10px] font-semibold uppercase tracking-wider border border-[#D4AF37]/30 transition-all duration-300 active:scale-95"
             title="Log Out"
           >
             <LogOut className="w-4 h-4" />
@@ -145,19 +149,19 @@ export const AdminDashboard: React.FC = () => {
       {/* Main Area */}
       <div className="flex flex-1 flex-col md:flex-row relative">
         {/* Sidebar */}
-        <aside className="w-full md:w-64 bg-[#FFFDFB] border-r border-[#E8D8C5] p-4 flex flex-col gap-1 shrink-0 z-20">
-          <div className="mb-4 hidden md:block">
-            <span className="text-[10px] text-[#999999] font-bold uppercase tracking-wider px-3">
+        <aside className="w-full md:w-56 bg-[#FFFDFB] border-b md:border-b-0 md:border-r border-[#E8D8C5] p-2 md:p-3 flex flex-col gap-1 shrink-0 z-20">
+          <div className="mb-2 hidden md:block">
+            <span className="text-[9px] text-[#999999] font-bold uppercase tracking-wider px-2">
               Section Settings
             </span>
           </div>
 
-          <nav className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible gap-1 pb-3 md:pb-0 scrollbar-none">
+          <nav className="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible gap-1 pb-2 md:pb-0 scrollbar-none whitespace-nowrap">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id as ActiveTab)}
-                className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 ${
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 ${
                   activeTab === item.id
                     ? 'bg-[#6E1E18] text-[#FFFDFB] shadow-sm'
                     : 'text-[#4D2D22] hover:bg-[#F8F3EC]'
@@ -171,7 +175,7 @@ export const AdminDashboard: React.FC = () => {
             ))}
           </nav>
 
-          <div className="mt-auto pt-6 border-t border-[#E8D8C5]/60 hidden md:flex flex-col gap-2.5 text-[10px] text-[#666666] font-medium tracking-wider uppercase px-3">
+          <div className="mt-auto pt-4 border-t border-[#E8D8C5]/60 hidden md:flex flex-col gap-1.5 text-[9px] text-[#666666] font-medium tracking-wider uppercase px-2">
             <div className="flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5 text-[#C48B3C]" />
               <span>Status: Active Connection</span>
@@ -181,46 +185,46 @@ export const AdminDashboard: React.FC = () => {
         </aside>
 
         {/* Dashboard Content Container */}
-        <main className="flex-1 p-6 md:p-8 flex flex-col gap-6 overflow-y-auto max-h-[calc(100vh-74px)]">
+        <main className="flex-1 p-3 md:p-5 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-60px)]">
           {/* Header Stats Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-4 rounded-xl flex items-center justify-between shadow-soft">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-3 rounded-lg flex items-center justify-between shadow-soft">
               <div>
-                <span className="text-[10px] text-[#666666] uppercase font-bold tracking-wider">Services</span>
-                <span className="block font-serif text-2xl font-bold text-[#4D2D22] mt-0.5">{stats.services}</span>
+                <span className="text-[9px] text-[#666666] uppercase font-bold tracking-wider">Services</span>
+                <span className="block font-serif text-lg font-bold text-[#4D2D22] mt-0.5">{stats.services}</span>
               </div>
-              <div className="w-10 h-10 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
-                <LayoutGrid className="w-5 h-5" />
+              <div className="w-8 h-8 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
+                <LayoutGrid className="w-4 h-4" />
               </div>
             </div>
 
-            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-4 rounded-xl flex items-center justify-between shadow-soft">
+            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-3 rounded-lg flex items-center justify-between shadow-soft">
               <div>
-                <span className="text-[10px] text-[#666666] uppercase font-bold tracking-wider">Products</span>
-                <span className="block font-serif text-2xl font-bold text-[#4D2D22] mt-0.5">{stats.products}</span>
+                <span className="text-[9px] text-[#666666] uppercase font-bold tracking-wider">Products</span>
+                <span className="block font-serif text-lg font-bold text-[#4D2D22] mt-0.5">{stats.products}</span>
               </div>
-              <div className="w-10 h-10 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
-                <Package className="w-5 h-5" />
+              <div className="w-8 h-8 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
+                <Package className="w-4 h-4" />
               </div>
             </div>
 
-            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-4 rounded-xl flex items-center justify-between shadow-soft">
+            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-3 rounded-lg flex items-center justify-between shadow-soft">
               <div>
-                <span className="text-[10px] text-[#666666] uppercase font-bold tracking-wider">Videos</span>
-                <span className="block font-serif text-2xl font-bold text-[#4D2D22] mt-0.5">{stats.videos}</span>
+                <span className="text-[9px] text-[#666666] uppercase font-bold tracking-wider">Videos</span>
+                <span className="block font-serif text-lg font-bold text-[#4D2D22] mt-0.5">{stats.videos}</span>
               </div>
-              <div className="w-10 h-10 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
-                <PlaySquare className="w-5 h-5" />
+              <div className="w-8 h-8 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
+                <PlaySquare className="w-4 h-4" />
               </div>
             </div>
 
-            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-4 rounded-xl flex items-center justify-between shadow-soft">
+            <div className="bg-[#FFFDFB] border border-[#E8D8C5] p-3 rounded-lg flex items-center justify-between shadow-soft">
               <div>
-                <span className="text-[10px] text-[#666666] uppercase font-bold tracking-wider">Reviews</span>
-                <span className="block font-serif text-2xl font-bold text-[#4D2D22] mt-0.5">{stats.testimonials}</span>
+                <span className="text-[9px] text-[#666666] uppercase font-bold tracking-wider">Reviews</span>
+                <span className="block font-serif text-lg font-bold text-[#4D2D22] mt-0.5">{stats.testimonials}</span>
               </div>
-              <div className="w-10 h-10 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
-                <Star className="w-5 h-5" />
+              <div className="w-8 h-8 bg-[#F8F3EC] rounded-full flex items-center justify-center text-[#C48B3C]">
+                <Star className="w-4 h-4" />
               </div>
             </div>
           </div>

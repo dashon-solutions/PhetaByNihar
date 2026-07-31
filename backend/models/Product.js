@@ -6,7 +6,9 @@ const productSchema = new mongoose.Schema({
   marathiName: { type: String, required: false },
   subtitle: { type: String, required: true },
   image: { type: String, required: true },
-  description: { type: String, required: true }
+  galleryImages: { type: [String], default: [] },
+  description: { type: String, required: true },
+  information: { type: String, required: false }
 });
 
 export const Product = mongoose.model('Product', productSchema);

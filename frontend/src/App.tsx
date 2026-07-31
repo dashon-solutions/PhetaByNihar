@@ -18,7 +18,9 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ServicesPage } from './pages/ServicesPage';
 import { AboutUsPage } from './pages/AboutUsPage';
 import { RentalProductsPage } from './pages/RentalProductsPage';
+import { SingleProductPage } from './pages/SingleProductPage';
 import { ContactUsPage } from './pages/ContactUsPage';
+import { OurWorkPage } from './pages/OurWorkPage';
 
 const HomePage = () => {
   return (
@@ -56,7 +58,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/our-work" element={<OurWorkPage />} />
           <Route path="/products" element={<RentalProductsPage />} />
+          <Route path="/products/:id" element={<SingleProductPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />

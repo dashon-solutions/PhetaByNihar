@@ -9,6 +9,12 @@ interface OfferedClass {
   image: string;
 }
 
+interface JourneyPoint {
+  title: string;
+  description: string;
+  image: string;
+}
+
 interface ClassBatch {
   batchName: string;
   startDate: string;
@@ -33,6 +39,9 @@ export const AboutManager: React.FC = () => {
     passion: '',
     experience: '',
     brandStory: '',
+    quoteText: '',
+    quoteAuthor: '',
+    journeyPoints: [] as JourneyPoint[],
     offeredClasses: [] as OfferedClass[],
     classBatches: [] as ClassBatch[]
   });
@@ -53,6 +62,9 @@ export const AboutManager: React.FC = () => {
             passion: data.passion || '',
             experience: data.experience || '',
             brandStory: data.brandStory || '',
+            quoteText: data.quoteText || '',
+            quoteAuthor: data.quoteAuthor || '',
+            journeyPoints: data.journeyPoints || [],
             offeredClasses: data.offeredClasses || [],
             classBatches: data.classBatches || []
           });
@@ -91,6 +103,29 @@ export const AboutManager: React.FC = () => {
       const newClasses = [...prev.offeredClasses];
       newClasses[index] = { ...newClasses[index], [field]: value };
       return { ...prev, offeredClasses: newClasses };
+    });
+  };
+
+  const handleAddJourneyPoint = () => {
+    setForm(prev => ({
+      ...prev,
+      journeyPoints: [...prev.journeyPoints, { title: '', description: '', image: '' }]
+    }));
+  };
+
+  const handleRemoveJourneyPoint = (index: number) => {
+    setForm(prev => {
+      const newPoints = [...prev.journeyPoints];
+      newPoints.splice(index, 1);
+      return { ...prev, journeyPoints: newPoints };
+    });
+  };
+
+  const handleJourneyPointChange = (index: number, field: keyof JourneyPoint, value: string) => {
+    setForm(prev => {
+      const newPoints = [...prev.journeyPoints];
+      newPoints[index] = { ...newPoints[index], [field]: value };
+      return { ...prev, journeyPoints: newPoints };
     });
   };
 
@@ -266,6 +301,98 @@ export const AboutManager: React.FC = () => {
               placeholder="Our brand is built on..."
               className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
             />
+          </div>
+        </div>
+
+        <div className="border-t border-[#E8D8C5] pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5 md:col-span-2">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Quote Text</label>
+            <textarea
+              name="quoteText"
+              value={form.quoteText}
+              onChange={handleChange}
+              rows={3}
+              placeholder="For me, it’s not just about tying a pheta..."
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5 md:col-span-2">
+            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Quote Author</label>
+            <input
+              type="text"
+              name="quoteAuthor"
+              value={form.quoteAuthor}
+              onChange={handleChange}
+              placeholder="e.g. Nihar Tambde"
+              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray w-1/2"
+            />
+          </div>
+        </div>
+
+        {/* Journey Points Section */}
+        <div className="pt-6 border-t border-[#E8D8C5]">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h4 className="font-serif text-xl font-bold text-[#4D2D22]">Journey Milestones</h4>
+              <p className="font-sans text-xs text-[#666666] mt-1">Add key moments in your journey.</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddJourneyPoint}
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#F8F3EC] text-[#4D2D22] border border-[#E8D8C5] rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#E8D8C5] transition-colors"
+            >
+              <Plus className="w-4 h-4" /> Add Milestone
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {form.journeyPoints.map((point, index) => (
+              <div key={index} className="p-4 border border-[#E8D8C5] rounded-xl bg-white relative">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveJourneyPoint(index)}
+                  className="absolute top-4 right-4 text-red-500 hover:text-red-700 bg-red-50 p-1.5 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Milestone Title</label>
+                      <input
+                        type="text"
+                        value={point.title}
+                        onChange={(e) => handleJourneyPointChange(index, 'title', e.target.value)}
+                        placeholder="e.g. The Beginning"
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">Milestone Description</label>
+                      <textarea
+                        value={point.description}
+                        onChange={(e) => handleJourneyPointChange(index, 'description', e.target.value)}
+                        rows={3}
+                        placeholder="Description of the milestone..."
+                        className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <ImageUploadField
+                      label="Milestone Image"
+                      value={point.image}
+                      onChange={(url) => handleJourneyPointChange(index, 'image', url)}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {form.journeyPoints.length === 0 && (
+              <div className="text-center py-6 text-sm text-[#666666] bg-[#F8F3EC] rounded-xl border border-dashed border-[#E8D8C5]">
+                No journey milestones added yet. Click "Add Milestone" to start.
+              </div>
+            )}
           </div>
         </div>
 

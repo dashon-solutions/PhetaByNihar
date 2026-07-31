@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 
 const testimonialSchema = new mongoose.Schema({
-  quote: { type: String, required: true },
-  name: { type: String, required: true },
-  location: { type: String, required: true },
+  source: { type: String, enum: ['manual', 'google'], default: 'manual' },
+  quote: { type: String }, // Optional if google map
+  name: { type: String },
+  location: { type: String },
   rating: { type: Number, default: 5 },
-  image: { type: String, required: true }
+  image: { type: String },
+  googleMapUrl: { type: String }
 });
 
 export const Testimonial = mongoose.model('Testimonial', testimonialSchema);

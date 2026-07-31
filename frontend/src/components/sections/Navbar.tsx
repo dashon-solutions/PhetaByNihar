@@ -3,7 +3,11 @@ import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
 
-export const Navbar: React.FC = () => {
+export interface NavbarProps {
+  theme?: 'light' | 'dark';
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ theme = 'dark' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,7 +24,7 @@ export const Navbar: React.FC = () => {
     { name: 'About Nihar Tambde', href: '/about' },
     { name: 'Pheta Services & Workshops', href: '/services' },
     { name: 'Products & Rentals ', href: '/products' },
-    { name: 'Contact Us', href: '/contact' },
+    { name: 'Our Work', href: '/our-work' },
   ];
 
   return (
@@ -35,9 +39,9 @@ export const Navbar: React.FC = () => {
           <img
             src="/logo.png"
             alt="Pheta By Nihar"
-            className={`w-auto mix-blend-multiply object-contain transition-all duration-500 ease-in-out origin-top-left ${isScrolled
-              ? 'h-16 scale-[1.4] translate-y-2 md:translate-y-6 '
-              : 'h-16 scale-100 translate-y-0'
+            className={`w-auto object-contain transition-all duration-500 ease-in-out origin-top-left ${isScrolled
+              ? 'h-16 scale-[1.4] translate-y-2 md:translate-y-6 mix-blend-multiply'
+              : `h-16 scale-100 translate-y-0 ${theme === 'dark' ? 'mix-blend-multiply' : ''}`
               }`}
           />
         </div>
@@ -48,7 +52,11 @@ export const Navbar: React.FC = () => {
             <Link
               key={link.name}
               to={link.href}
-              className="text-white hover:text-[#6E1E18] font-sans text-sm font-medium transition-colors"
+              className={`font-sans text-sm font-bold transition-colors ${
+                isScrolled || theme === 'dark' 
+                  ? 'text-white hover:text-[#D7A65B]' 
+                  : 'text-[#4D2D22] hover:text-[#6E1E18]'
+              }`}
             >
               {link.name}
             </Link>
@@ -64,7 +72,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden text-white"
+          className={isScrolled || theme === 'dark' ? 'text-white' : 'text-[#4D2D22]'}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
