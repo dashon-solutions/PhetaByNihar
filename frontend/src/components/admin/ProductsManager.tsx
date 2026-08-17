@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { apiFetch } from '../../utils/api';
+import { apiFetch, getApiImageUrl } from '../../utils/api';
 import { ImageUploadField } from './ImageUploadField';
 import { Plus, Edit2, Trash2, Save, X } from 'lucide-react';
 
@@ -286,7 +286,7 @@ export const ProductsManager: React.FC = () => {
               {(form.galleryImages || []).map((imgUrl, idx) => (
                 <div key={idx} className="relative group rounded-lg overflow-hidden border border-[#E8D8C5] aspect-square">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={imgUrl.startsWith('http') ? imgUrl : `http://localhost:5000${imgUrl}`} alt="Gallery item" className="w-full h-full object-cover" />
+                  <img src={getApiImageUrl(imgUrl)} alt="Gallery item" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                     <button
                       type="button"

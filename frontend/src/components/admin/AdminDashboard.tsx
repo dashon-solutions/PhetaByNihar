@@ -3,8 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import {
   LogOut, LayoutGrid, Image, UserCheck,
   Award, Package, PlaySquare, Star,
-  Sparkles, ExternalLink, ShieldCheck,
-  Tag, PhoneCall, Layers, Globe
+  Sparkles, ExternalLink,
+  PhoneCall, Layers, Globe
 } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 

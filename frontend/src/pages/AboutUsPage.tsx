@@ -6,8 +6,7 @@ import { Divider } from '../components/ui/Divider';
 import { SEO } from '../components/common/SEO';
 import { ClassInquiryModal } from '../components/ui/ClassInquiryModal';
 import { motion } from 'framer-motion';
-import { Star, ShieldCheck, Heart, Crown, Clock, Quote, ChevronRight, Play, Calendar, Sparkles, GraduationCap } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Star, ShieldCheck, Heart, Crown, Clock, Quote, ChevronRight, Calendar, Sparkles, GraduationCap } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 
 const fadeInUp: any = {

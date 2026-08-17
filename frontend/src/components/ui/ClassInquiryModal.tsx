@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, GraduationCap, Phone, Mail, User, MapPin, MessageSquare, CheckCircle, Loader2, Sparkles, Send } from 'lucide-react';
+import { X, GraduationCap, Phone, Mail, User, MapPin, CheckCircle, Loader2, Sparkles, Send } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 
 interface ClassInquiryModalProps {

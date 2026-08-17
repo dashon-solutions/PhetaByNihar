@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Users, Tag, Search, Plus, Phone, Mail,
-  Calendar, CheckCircle, Clock, Send,
+  Calendar, CheckCircle, Send,
   Trash2, Edit, Copy, Sparkles,
   RefreshCw, Check, Gift,
   Layers, ExternalLink

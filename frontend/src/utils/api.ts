@@ -1,5 +1,5 @@
-const API_HOST = import.meta.env.VITE_API_URL || '';
-export const API_BASE_URL = API_HOST ? `${API_HOST}/api` : '/api';
+const API_HOST = (import.meta.env.VITE_API_URL || 'https://phetabynihar.onrender.com').replace(/\/$/, '');
+export const API_BASE_URL = `${API_HOST}/api`;
 
 export const getApiImageUrl = (path: string): string => {
   if (!path) return '';
