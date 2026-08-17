@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/sections/Navbar';
-import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
-import { InquiryModal } from '../components/ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +17,6 @@ interface ProductItem {
 export const RentalProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Modal state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -113,13 +107,6 @@ export const RentalProductsPage: React.FC = () => {
         </section>
       </main>
       <Footer />
-
-      <InquiryModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        type="rental"
-        subject={selectedProduct}
-      />
     </>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  LogOut, Crown, LayoutGrid, Image, UserCheck, 
-  Award, Package, PlaySquare, Star, Sparkles 
+import {
+  LogOut, LayoutGrid, Image, UserCheck,
+  Award, Package, PlaySquare, Star,
+  Sparkles
 } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 
@@ -33,7 +34,7 @@ export const AdminDashboard: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
     const userString = localStorage.getItem('adminUser');
-    
+
     if (!token) {
       navigate('/admin');
       return;
@@ -52,7 +53,7 @@ export const AdminDashboard: React.FC = () => {
         const products = await apiFetch('/products');
         const videos = await apiFetch('/videos');
         const testimonials = await apiFetch('/testimonials');
-        
+
         setStats({
           services: services?.length || 0,
           products: products?.length || 0,
@@ -60,8 +61,10 @@ export const AdminDashboard: React.FC = () => {
           testimonials: testimonials?.length || 0
         });
       } catch (err) {
-        console.error('Session verification failed, logging out:', err);
-        handleLogout();
+        // If invalid, clear and redirect to login
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminUser');
+        navigate('/admin');
       }
     };
 
@@ -116,8 +119,8 @@ export const AdminDashboard: React.FC = () => {
       {/* Top Header */}
       <header className="bg-[#6E1E18] text-[#FFFDFB] px-4 py-2.5 flex items-center justify-between border-b-2 border-[#D7A65B] shadow-md z-30 sticky top-0">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-[#FFFDFB] rounded-full flex items-center justify-center border border-[#D7A65B] shadow-inner">
-            <Crown className="w-4 h-4 text-[#6E1E18]" />
+          <div className="w-9 h-9 bg-white rounded-full p-1 flex items-center justify-center border border-[#D7A65B] shadow-inner shrink-0">
+            <img src="/logo.png" alt="Pheta By Nihar" className="w-full h-full object-contain mix-blend-multiply" />
           </div>
           <div>
             <h1 className="font-serif text-base md:text-lg font-bold tracking-wide leading-tight">
@@ -134,7 +137,7 @@ export const AdminDashboard: React.FC = () => {
             <span className="text-xs font-semibold text-white">Logged in as</span>
             <span className="text-[10px] text-[#D7A65B] font-bold uppercase tracking-wider">{adminUser?.username || 'Admin'}</span>
           </div>
-          
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#2A0D0F] hover:bg-[#3b1215] text-[#D7A65B] hover:text-white rounded text-[10px] font-semibold uppercase tracking-wider border border-[#D4AF37]/30 transition-all duration-300 active:scale-95"
@@ -161,11 +164,10 @@ export const AdminDashboard: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id as ActiveTab)}
-                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 ${
-                  activeTab === item.id
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 ${activeTab === item.id
                     ? 'bg-[#6E1E18] text-[#FFFDFB] shadow-sm'
                     : 'text-[#4D2D22] hover:bg-[#F8F3EC]'
-                }`}
+                  }`}
               >
                 <span className={activeTab === item.id ? 'text-[#D7A65B]' : 'text-[#C48B3C]'}>
                   {item.icon}

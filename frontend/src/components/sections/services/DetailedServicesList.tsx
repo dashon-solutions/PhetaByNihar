@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { 
   Heart, Crown, Palette, Users, 
   Tent, Award, Landmark, Star, 
-  Briefcase, CheckCircle, Presentation,
+  Briefcase, Presentation,
   Mic, Flag, Shield, Plane, MapPin, Sparkles, Video, Ticket
 } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../../../utils/api';

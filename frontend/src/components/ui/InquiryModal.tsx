@@ -60,7 +60,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
         
         setIsLocating(false);
       },
-      (err) => {
+      () => {
         setIsLocating(false);
         setError('Unable to retrieve your location. Please type your address manually.');
       }

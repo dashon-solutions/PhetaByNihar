@@ -1,5 +1,5 @@
-const API_HOST = import.meta.env.VITE_API_URL || 'http://localhost:5002';
-export const API_BASE_URL = `${API_HOST}/api`;
+const API_HOST = import.meta.env.VITE_API_URL || '';
+export const API_BASE_URL = API_HOST ? `${API_HOST}/api` : '/api';
 
 export const getApiImageUrl = (path: string): string => {
   if (!path) return '';

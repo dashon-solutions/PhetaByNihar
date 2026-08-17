@@ -3,11 +3,8 @@ import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 
 // New specialized components for the Services Page
-import { ServicesHero } from '../components/sections/services/ServicesHero';
-import { ServicesStatistics } from '../components/sections/services/ServicesStatistics';
 import { DetailedServicesList } from '../components/sections/services/DetailedServicesList';
 import { ProcessAndWhyChooseUs } from '../components/sections/services/ProcessAndWhyChooseUs';
-import { ServicesGallery } from '../components/sections/services/ServicesGallery';
 import { ServicesTestimonialsFAQ } from '../components/sections/services/ServicesTestimonialsFAQ';
 import { ServicesCTA } from '../components/sections/services/ServicesCTA';
 

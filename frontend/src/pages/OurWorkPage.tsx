@@ -16,7 +16,7 @@ interface OurWorkItem {
 export const OurWorkPage: React.FC = () => {
   const [works, setWorks] = useState<OurWorkItem[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
@@ -85,11 +85,8 @@ export const OurWorkPage: React.FC = () => {
     <>
       <Navbar />
       <main className="bg-[#F8F3EC] min-h-screen">
-        <PageBanner 
-          title="Our Gallery" 
-          subtitle="Explore our curated collections of Royal Pheta styling across premium events." 
-        />
-        
+        <PageBanner pageName="work" />
+
         <section className="py-12 md:py-20 max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20">
           {loading ? (
             <div className="flex justify-center items-center h-64">
@@ -103,18 +100,17 @@ export const OurWorkPage: React.FC = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-10">
-              
+
               {/* Tabs Section */}
               <div className="flex flex-wrap items-center justify-center gap-3 border-b border-[#E8D8C5] pb-6">
                 {works.map((work) => (
                   <button
                     key={work._id}
                     onClick={() => setActiveTabId(work._id)}
-                    className={`px-6 py-2.5 rounded-full font-sans text-sm font-semibold tracking-wider uppercase transition-all duration-300 ${
-                      activeTabId === work._id 
-                        ? 'bg-[#6E1E18] text-[#FFFDFB] shadow-md scale-105' 
+                    className={`px-6 py-2.5 rounded-full font-sans text-sm font-semibold tracking-wider uppercase transition-all duration-300 ${activeTabId === work._id
+                        ? 'bg-[#6E1E18] text-[#FFFDFB] shadow-md scale-105'
                         : 'bg-white border border-[#E8D8C5] text-[#666666] hover:border-[#D7A65B] hover:text-[#4D2D22]'
-                    }`}
+                      }`}
                   >
                     {work.title}
                   </button>
@@ -143,13 +139,13 @@ export const OurWorkPage: React.FC = () => {
                     {activeWork.images && activeWork.images.length > 0 ? (
                       <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
                         {activeWork.images.map((img, imgIndex) => (
-                          <div 
+                          <div
                             key={imgIndex}
                             onClick={() => openLightbox(imgIndex)}
                             className="relative rounded-2xl overflow-hidden cursor-pointer group/item shadow-soft hover:shadow-lg transition-all duration-500 break-inside-avoid"
                           >
-                            <img 
-                              src={getApiImageUrl(img)} 
+                            <img
+                              src={getApiImageUrl(img)}
                               alt={`${activeWork.title} - Image ${imgIndex + 1}`}
                               className="w-full h-auto object-cover transition-transform duration-700 group-hover/item:scale-110"
                             />
@@ -177,13 +173,13 @@ export const OurWorkPage: React.FC = () => {
       {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && works[currentWorkIndex] && works[currentWorkIndex].images.length > 0 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
           >
-            <button 
+            <button
               onClick={closeLightbox}
               className="absolute top-6 right-6 z-50 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-md"
             >
@@ -192,13 +188,13 @@ export const OurWorkPage: React.FC = () => {
 
             {works[currentWorkIndex].images.length > 1 && (
               <>
-                <button 
+                <button
                   onClick={(e) => { e.stopPropagation(); prevImage(); }}
                   className="absolute left-4 md:left-10 z-50 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-md"
                 >
                   <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                 </button>
-                <button 
+                <button
                   onClick={(e) => { e.stopPropagation(); nextImage(); }}
                   className="absolute right-4 md:right-10 z-50 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 p-3 rounded-full backdrop-blur-md"
                 >

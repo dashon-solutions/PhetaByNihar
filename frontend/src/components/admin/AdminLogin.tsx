@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, User, Crown, AlertCircle } from 'lucide-react';
+import { Lock, User, AlertCircle } from 'lucide-react';
 import { API_BASE_URL } from '../../utils/api';
 
 export const AdminLogin: React.FC = () => {
@@ -56,8 +56,8 @@ export const AdminLogin: React.FC = () => {
       
       {/* Decorative top header element */}
       <div className="flex flex-col items-center mb-8 relative z-10">
-        <div className="w-16 h-16 bg-[#6E1E18] rounded-full flex items-center justify-center border-2 border-[#D7A65B] shadow-lg mb-4">
-          <Crown className="w-8 h-8 text-[#D7A65B]" />
+        <div className="w-20 h-20 bg-white rounded-full p-2 flex items-center justify-center border-2 border-[#D7A65B] shadow-lg mb-3">
+          <img src="/logo.png" alt="Pheta By Nihar" className="w-full h-full object-contain mix-blend-multiply" />
         </div>
         <h1 className="font-serif text-3xl font-bold tracking-wide text-[#6E1E18] text-center">
           Pheta By Nihar

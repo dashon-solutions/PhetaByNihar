@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../utils/api';
-import { Loader2, Search, MapPin, Check, Phone, Filter } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Loader2, MapPin, Phone } from 'lucide-react';
 
 interface LocationDetails {
   lat: number;
