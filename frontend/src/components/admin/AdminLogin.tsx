@@ -52,35 +52,35 @@ export const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F3EC] flex flex-col items-center justify-center p-4 selection:bg-[#D7A65B] selection:text-white">
+    <div className="min-h-screen bg-[#F8F3EC] flex flex-col items-center justify-center p-4 font-['Roboto',sans-serif] selection:bg-[#D7A65B] selection:text-white">
       
       {/* Decorative top header element */}
       <div className="flex flex-col items-center mb-8 relative z-10">
         <div className="w-20 h-20 bg-white rounded-full p-2 flex items-center justify-center border-2 border-[#D7A65B] shadow-lg mb-3">
           <img src="/logo.png" alt="Pheta By Nihar" className="w-full h-full object-contain mix-blend-multiply" />
         </div>
-        <h1 className="font-serif text-3xl font-bold tracking-wide text-[#6E1E18] text-center">
+        <h1 className="text-3xl font-bold tracking-wide text-[#6E1E18] text-center">
           Pheta By Nihar
         </h1>
-        <p className="font-sans text-xs text-[#C48B3C] font-semibold tracking-[0.2em] uppercase mt-1">
+        <p className="text-xs text-[#C48B3C] font-semibold tracking-[0.2em] uppercase mt-1">
           Administration Portal
         </p>
       </div>
 
       {/* Login Card */}
-      <div className="w-full max-w-md bg-[#FFFDFB] rounded-[24px] border border-[#E8D8C5] shadow-2xl p-8 relative overflow-hidden">
+      <div className="w-full max-w-md bg-[#FFFDFB] rounded-[28px] border border-[#E8D8C5] shadow-2xl p-8 relative overflow-hidden">
         
-        {/* Subtle royal divider pattern top of card */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#6E1E18]"></div>
+        {/* Subtle royal top accent line */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#4A0D0D] via-[#D7A65B] to-[#4A0D0D]"></div>
         
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-1">
           <div className="text-center mb-2">
-            <h2 className="font-serif text-xl font-bold text-[#4D2D22]">Welcome Back</h2>
-            <p className="font-sans text-xs text-[#666666] mt-1">Sign in with client dashboard credentials</p>
+            <h2 className="text-2xl font-bold text-[#4D2D22]">Welcome Back</h2>
+            <p className="text-xs text-[#666666] mt-1">Sign in with your administrator credentials</p>
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl font-sans font-medium">
+            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl font-medium">
               <AlertCircle className="w-4 h-4 shrink-0 text-red-500" />
               <span>{error}</span>
             </div>
@@ -88,19 +88,19 @@ export const AdminLogin: React.FC = () => {
 
           {/* Username */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+            <label className="text-xs font-bold text-[#4D2D22] uppercase tracking-wider">
               Username
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#999999]">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#D7A65B]">
                 <User className="w-4 h-4" />
               </span>
               <input
                 type="text"
-                placeholder="Enter username"
+                placeholder="Enter admin username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] focus:ring-1 focus:ring-[#D7A65B] text-text-gray font-medium transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22] font-medium transition-colors"
                 disabled={loading}
               />
             </div>
@@ -108,11 +108,11 @@ export const AdminLogin: React.FC = () => {
 
           {/* Password */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+            <label className="text-xs font-bold text-[#4D2D22] uppercase tracking-wider">
               Password
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#999999]">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#D7A65B]">
                 <Lock className="w-4 h-4" />
               </span>
               <input
@@ -120,7 +120,7 @@ export const AdminLogin: React.FC = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] focus:ring-1 focus:ring-[#D7A65B] text-text-gray font-medium transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22] font-medium transition-colors"
                 disabled={loading}
               />
             </div>
@@ -129,20 +129,20 @@ export const AdminLogin: React.FC = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3.5 mt-2 bg-[#6E1E18] text-[#FFFDFB] font-sans font-bold text-sm uppercase tracking-wider rounded-xl shadow-md hover:bg-[#7D201D] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-4 mt-2 bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-bold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg hover:shadow-xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer border border-[#8A2B24]"
             disabled={loading}
           >
             {loading ? (
-              <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+              <span className="w-5 h-5 border-2 border-[#F3D18A]/30 border-t-[#F3D18A] rounded-full animate-spin"></span>
             ) : (
-              <span>Access Dashboard</span>
+              <span>Access Administration Portal</span>
             )}
           </button>
         </form>
       </div>
 
-      <div className="mt-8 text-center text-[10px] text-[#999999] font-sans font-medium uppercase tracking-widest">
-        &copy; {new Date().getFullYear()} Pheta By Nihar. All Rights Reserved.
+      <div className="mt-8 text-center text-[10px] text-[#999999] font-medium uppercase tracking-widest">
+        &copy; {new Date().getFullYear()} Pheta By Nihar &bull; All Rights Reserved
       </div>
     </div>
   );

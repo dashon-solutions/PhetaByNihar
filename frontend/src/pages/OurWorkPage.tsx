@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
-import { PageBanner } from '../components/sections/PageBanner';
+import { HeroBanner } from '../components/sections/HeroBanner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { Maximize2, X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
@@ -85,7 +85,7 @@ export const OurWorkPage: React.FC = () => {
     <>
       <Navbar />
       <main className="bg-[#F8F3EC] min-h-screen">
-        <PageBanner pageName="work" />
+        <HeroBanner pageName="our-work" />
 
         <section className="py-12 md:py-20 max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20">
           {loading ? (

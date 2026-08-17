@@ -5,6 +5,7 @@ import {
   Briefcase, Presentation,
   Mic, Flag, Shield, Plane, MapPin, Sparkles, Video, Ticket
 } from 'lucide-react';
+import { Divider } from '../../ui/Divider';
 import { apiFetch, getApiImageUrl } from '../../../utils/api';
 
 const AVAILABLE_ICONS: Record<string, React.ReactNode> = {
@@ -77,15 +78,11 @@ export const DetailedServicesList: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20">
         
         <div className="text-center mb-12">
-          <span className="text-[#D7A65B] font-sans text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 block">
+          <span className="text-[#D7A65B] font-sans text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
             WHAT WE OFFER
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl text-[#4D2D22] mb-4">Our Services</h2>
-          <div className="flex justify-center items-center gap-2">
-            <div className="w-8 h-[1px] bg-[#D7A65B]"></div>
-            <div className="w-2 h-2 rotate-45 bg-[#D7A65B]"></div>
-            <div className="w-8 h-[1px] bg-[#D7A65B]"></div>
-          </div>
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4D2D22] mb-1">Our Specialized Services</h2>
+          <Divider className="max-w-[450px] my-1" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -97,16 +94,17 @@ export const DetailedServicesList: React.FC = () => {
                 key={service._id} 
                 className="flex flex-col bg-white rounded-2xl overflow-hidden border border-[#E8D8C5] shadow-sm hover:shadow-md transition-shadow group"
               >
-                {/* Image Section */}
-                <div className="w-full h-48 relative overflow-hidden">
+                {/* Image Section - Perfect aspect-[4/5] with object-top for vertical photos */}
+                <div className="w-full aspect-[4/5] relative overflow-hidden bg-[#F4EDE4]">
                   <img 
                     src={getApiImageUrl(service.image)} 
                     alt={service.title} 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur rounded text-[#4D2D22] font-serif font-bold text-sm px-2 py-1 shadow">
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur rounded-lg text-[#4D2D22] font-serif font-bold text-sm px-3 py-1 shadow-md border border-[#E8D8C5]">
                     {displayId}
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
 
                 {/* Content Section */}

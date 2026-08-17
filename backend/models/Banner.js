@@ -9,7 +9,9 @@ const bannerSchema = new mongoose.Schema({
   description: { type: String, default: 'Honoring traditions with elegance, respect & pride.' },
   backgroundImage: { type: String, default: '/footerimg.png' },
   primaryButtonText: { type: String, default: 'Book Now' },
-  secondaryButtonText: { type: String, default: 'Explore Work' }
+  primaryButtonLink: { type: String, default: '/contact' },
+  secondaryButtonText: { type: String, default: 'Explore Work' },
+  secondaryButtonLink: { type: String, default: '/our-work' }
 });
 
 export const Banner = mongoose.model('Banner', bannerSchema);

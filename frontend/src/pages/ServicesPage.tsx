@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 
@@ -9,22 +10,27 @@ import { ServicesTestimonialsFAQ } from '../components/sections/services/Service
 import { ServicesCTA } from '../components/sections/services/ServicesCTA';
 
 export const ServicesPage: React.FC = () => {
-  // Ensure we start at the top of the page when navigating here
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-[#F8F3EC]"
+    >
       <Navbar theme="light" />
       <main className="bg-[#F8F3EC]">
-
         <DetailedServicesList />
         <ProcessAndWhyChooseUs />
         <ServicesCTA />
         <ServicesTestimonialsFAQ />
       </main>
       <Footer />
-    </>
+    </motion.div>
   );
 };
+

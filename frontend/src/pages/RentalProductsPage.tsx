@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
+import { Divider } from '../components/ui/Divider';
+import { ArrowRight } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +16,21 @@ interface ProductItem {
   image: string;
   description: string;
 }
+
+const staggerContainer: any = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariant: any = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
 
 export const RentalProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
@@ -36,77 +54,105 @@ export const RentalProductsPage: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-[#F8F3EC]"
+    >
       <Navbar theme="light" />
       <main>
-
-        <section className="py-20 md:py-32 bg-[#F8F3EC] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#F8F3EC] relative overflow-hidden">
           {/* Background Decorative Pattern */}
           <div className="absolute top-0 right-0 w-96 h-96 opacity-10 pointer-events-none"
             style={{ backgroundImage: 'radial-gradient(circle, #6E1E18 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
 
           <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-              <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-4 block">
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
+            >
+              <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
                 Exclusive Collection
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight">
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight mb-1">
                 Products & Rentals
-              </h2>
-              <div className="w-24 h-1 bg-[#D7A65B] mx-auto mt-6 md:mt-8"></div>
-              <p className="mt-8 text-lg text-[#666666] font-sans leading-relaxed">
+              </h1>
+              <Divider className="max-w-[450px] my-1" />
+              <p className="mt-4 text-base md:text-lg text-[#666666] font-sans leading-relaxed">
                 Discover our premium range of traditional Maharashtrian accessories available for purchase and rental.
               </p>
-            </div>
+            </motion.div>
 
             {loading ? (
               <div className="flex justify-center items-center py-20">
                 <div className="w-12 h-12 border-4 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+              <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+              >
                 {products.map((product) => (
-                  <div key={product._id} className="group cursor-pointer">
-                    <div className="relative overflow-hidden rounded-[2rem] aspect-[4/5] shadow-lg mb-6 border-4 border-white">
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 duration-500"></div>
-                      <img
-                        src={getApiImageUrl(product.image)}
-                        alt={product.name}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute top-6 left-6 z-20">
-                        <span className="inline-block bg-[#FFFDFB] text-[#4D2D22] font-serif font-bold text-lg px-4 py-2 rounded-full shadow-md">
-                          {product.id}
-                        </span>
+                  <motion.div 
+                    key={product._id} 
+                    variants={cardVariant}
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="group cursor-pointer bg-white p-5 rounded-3xl border border-[#E8D8C5]/70 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-5 border-2 border-[#F8F3EC] bg-[#EBE4D8]">
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 duration-500"></div>
+                        <img
+                          src={getApiImageUrl(product.image)}
+                          alt={product.name}
+                          className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute top-4 left-4 z-20">
+                          <span className="inline-block bg-[#FFFDFB] text-[#4D2D22] font-serif font-bold text-sm px-3.5 py-1.5 rounded-full shadow-md border border-[#E8D8C5]">
+                            {product.id}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-center px-2">
+                        <h2 className="font-serif text-2xl font-bold text-[#4D2D22] mb-1 group-hover:text-[#6E1E18] transition-colors">{product.name}</h2>
+                        {product.marathiName && (
+                          <h3 className="font-marathi text-lg text-[#6E1E18] mb-1.5">({product.marathiName})</h3>
+                        )}
+                        <p className="text-[#D7A65B] font-sans text-xs font-bold uppercase tracking-[0.1em] mb-3">
+                          {product.subtitle}
+                        </p>
+                        <p className="text-[#666666] font-sans text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                          {product.description}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="text-center px-4 transform group-hover:-translate-y-2 transition-transform duration-500">
-                      <h3 className="font-serif text-2xl font-bold text-[#4D2D22] mb-1">{product.name}</h3>
-                      {product.marathiName && (
-                        <h4 className="font-marathi text-xl text-[#6E1E18] mb-2">({product.marathiName})</h4>
-                      )}
-                      <p className="text-[#D7A65B] font-sans text-sm font-bold uppercase tracking-[0.1em] mb-4">
-                        {product.subtitle}
-                      </p>
-                      <p className="text-[#666666] font-sans text-sm leading-relaxed mb-6 line-clamp-3">
-                        {product.description}
-                      </p>
+                    <div className="text-center pt-3">
                       <button
                         onClick={() => navigate(`/products/${product._id}`)}
-                        className="inline-block text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-wider hover:text-[#D7A65B] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#D7A65B] after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform"
+                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 border border-[#8A2B24] group cursor-pointer"
                       >
-                        See More &rarr;
+                        <span>Explore Product</span>
+                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
           </div>
         </section>
       </main>
       <Footer />
-    </>
+    </motion.div>
   );
 };
+

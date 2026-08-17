@@ -4,37 +4,40 @@ import { verifyToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// GET banner
+// GET banner by pageName
 router.get('/', async (req, res) => {
   try {
     const pageName = req.query.pageName || 'home';
     let banner = await Banner.findOne({ pageName });
     if (!banner) {
-      // Return default configuration
-      banner = new Banner({ pageName });
-      await banner.save();
+      banner = await Banner.create({ pageName });
     }
     res.json(banner);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error('Error fetching banner:', error);
+    res.status(500).json({ message: 'Server error fetching banner', error: error.message });
   }
 });
 
-// PUT (update) banner - Protected
+// PUT (update/upsert) banner - Protected
 router.put('/', verifyToken, async (req, res) => {
   try {
     const pageName = req.body.pageName || 'home';
-    let banner = await Banner.findOne({ pageName });
-    if (!banner) {
-      banner = new Banner(req.body);
-    } else {
-      Object.assign(banner, req.body);
-    }
-    await banner.save();
+    const updateData = { ...req.body };
+    delete updateData._id;
+    delete updateData.__v;
+
+    const banner = await Banner.findOneAndUpdate(
+      { pageName },
+      { $set: updateData },
+      { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true }
+    );
     res.json(banner);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error('Error updating banner:', error);
+    res.status(500).json({ message: 'Server error updating banner', error: error.message });
   }
 });
 
 export default router;
+

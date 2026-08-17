@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { Divider } from '../ui/Divider';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
@@ -40,11 +41,7 @@ export const AboutSection: React.FC = () => {
     <section id="about" className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto relative">
 
       {/* Decorative Mandala on the right edge */}
-      <div className="absolute right-0 bottom-0 opacity-100 pointer-events-none z-0">
-        <div className="relative">
-          <img src={getApiImageUrl(about.backgroundImage)} alt="" className="w-[400px] md:w-[600px] lg:w-[800px] mix-blend-multiply object-contain object-bottom" />
-        </div>
-      </div>
+
 
       <div className="flex flex-col lg:flex-row gap-8 xl:gap-12 items-stretch relative z-10">
 
@@ -83,9 +80,11 @@ export const AboutSection: React.FC = () => {
           </p>
 
           <div>
-            <Button variant="secondary" className="flex items-center text-sm px-6 py-2.5">
-              Know More <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link to="/about">
+              <Button variant="primary" showArrow className="px-7 py-3 text-xs sm:text-sm">
+                Know More
+              </Button>
+            </Link>
           </div>
         </motion.div>
 

@@ -94,23 +94,26 @@ export const BannerManager: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex gap-4 mb-4 border-b border-[#E8D8C5] pb-2">
-        <button
-          onClick={() => handlePageChange('home')}
-          className={`px-4 py-2 font-sans text-sm font-bold uppercase tracking-wider rounded-t-xl transition-colors ${
-            activePage === 'home' ? 'bg-[#F8F3EC] text-[#6E1E18] border-t border-l border-r border-[#E8D8C5]' : 'text-[#666666] hover:text-[#4D2D22]'
-          }`}
-        >
-          Home Page
-        </button>
-        <button
-          onClick={() => handlePageChange('about')}
-          className={`px-4 py-2 font-sans text-sm font-bold uppercase tracking-wider rounded-t-xl transition-colors ${
-            activePage === 'about' ? 'bg-[#F8F3EC] text-[#6E1E18] border-t border-l border-r border-[#E8D8C5]' : 'text-[#666666] hover:text-[#4D2D22]'
-          }`}
-        >
-          About Us Page
-        </button>
+      <div className="flex flex-wrap gap-2 mb-4 border-b border-[#E8D8C5] pb-2">
+        {[
+          { id: 'home', label: 'Home Page' },
+          { id: 'about', label: 'About Us Page' },
+          { id: 'our-work', label: 'Our Work Page' },
+          { id: 'contact', label: 'Contact Us Page' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => handlePageChange(tab.id)}
+            className={`px-4 py-2 font-sans text-xs sm:text-sm font-bold uppercase tracking-wider rounded-t-xl transition-all ${
+              activePage === tab.id
+                ? 'bg-[#F8F3EC] text-[#6E1E18] border-t-2 border-l border-r border-[#6E1E18] shadow-sm'
+                : 'text-[#666666] hover:text-[#4D2D22] hover:bg-[#FAF6F0]'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {loading ? (

@@ -1,30 +1,53 @@
 import express from 'express';
 import { Inquiry } from '../models/Inquiry.js';
 import { verifyToken } from '../middleware/auth.js';
+import { sendAdminInquiryNotification } from '../utils/email.js';
 
 const router = express.Router();
 
 // POST new inquiry (Public)
 router.post('/', async (req, res) => {
   try {
-    const { type, subject, name, phone, address, locationDetails } = req.body;
+    const {
+      type,
+      subject,
+      name,
+      phone,
+      email,
+      address,
+      city,
+      message,
+      preferredBatch,
+      locationDetails
+    } = req.body;
 
-    if (!type || !subject || !name || !phone || !address) {
-      return res.status(400).json({ message: 'Missing required fields' });
+    if (!type || !subject || !name || !phone) {
+      return res.status(400).json({ message: 'Name, phone number, and subject are required.' });
     }
 
     const inquiry = new Inquiry({
       type,
       subject,
-      name,
-      phone,
-      address,
+      name: name.trim(),
+      phone: phone.trim(),
+      email: email ? email.trim() : '',
+      address: address || city || '',
+      city: city || '',
+      message: message || '',
+      preferredBatch: preferredBatch || '',
       locationDetails
     });
 
     await inquiry.save();
+
+    // Trigger self email notification asynchronously
+    sendAdminInquiryNotification(inquiry).catch(err => {
+      console.warn('Inquiry notification email dispatch skipped/failed:', err.message);
+    });
+
     res.status(201).json({ message: 'Inquiry submitted successfully', inquiry });
   } catch (error) {
+    console.error('Error saving inquiry:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });

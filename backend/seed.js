@@ -11,6 +11,7 @@ import { Product } from './models/Product.js';
 import { Video } from './models/Video.js';
 import { MediaLogo } from './models/MediaLogo.js';
 import { Testimonial } from './models/Testimonial.js';
+import { PhetaClass } from './models/PhetaClass.js';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ const seedDatabase = async () => {
       await Video.deleteMany({});
       await MediaLogo.deleteMany({});
       await Testimonial.deleteMany({});
+      await PhetaClass.deleteMany({});
       console.log('Data cleared.');
     }
 
@@ -48,7 +50,7 @@ const seedDatabase = async () => {
       console.log('✔ Default admin created: admin / admin123');
     }
 
-    // 2. Seed Banners (Home & About)
+    // 2. Seed Banners (All Pages)
     const bannerCount = await Banner.countDocuments();
     if (bannerCount === 0) {
       await Banner.insertMany([
@@ -61,21 +63,77 @@ const seedDatabase = async () => {
           description: 'Honoring traditions with elegance, respect & pride. From royal weddings to cultural celebrations, we bring the timeless art of Pheta tying to life.',
           backgroundImage: '/footerimg.png',
           primaryButtonText: 'Book Now',
-          secondaryButtonText: 'Explore Work'
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'Explore Work',
+          secondaryButtonLink: '/our-work'
         },
         {
           pageName: 'about',
           tag: 'Our Legacy',
-          titleItalic: 'The Journey of',
+          titleItalic: 'The Story Behind',
           titleBold: 'Pheta By Nihar',
           titleRegular: 'Tradition & Excellence',
-          description: 'Learn the story behind our craft, our passion for Maharashtrian culture, and the masters who keep the tradition alive.',
+          description: 'Learn the story behind our craft, our passion for Maharashtrian culture, and the masters who keep the royal tradition alive.',
           backgroundImage: '/aboutnewiamge.png',
-          primaryButtonText: 'Contact Us',
-          secondaryButtonText: 'View Classes'
+          primaryButtonText: 'Explore Collection',
+          primaryButtonLink: '/products',
+          secondaryButtonText: 'Our Services',
+          secondaryButtonLink: '/services'
+        },
+        {
+          pageName: 'services',
+          tag: 'Specialized Offerings',
+          titleItalic: 'Royal & Authentic',
+          titleBold: 'Pheta Services',
+          titleRegular: '& Custom Masterclasses',
+          description: 'From grand wedding ceremonies and cultural processions to professional training workshops, discover our tailored turban styling services.',
+          backgroundImage: '/service_pheta.webp',
+          primaryButtonText: 'Book Service',
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'View Portfolio',
+          secondaryButtonLink: '/our-work'
+        },
+        {
+          pageName: 'our-work',
+          tag: 'Portfolio of Pride',
+          titleItalic: 'A Showcase of',
+          titleBold: 'Royal Celebrations',
+          titleRegular: '& Memorable Events',
+          description: 'Explore our gallery of royal wedding ceremonies, celebrity satkars, high-profile dignitaries, and vibrant cultural processions across India.',
+          backgroundImage: '/bannerimgside.png',
+          primaryButtonText: 'Book Us Now',
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'Explore Services',
+          secondaryButtonLink: '/services'
+        },
+        {
+          pageName: 'products',
+          tag: 'Exclusive Heritage',
+          titleItalic: 'Handcrafted Royal',
+          titleBold: 'Products & Rentals',
+          titleRegular: 'Artifacts & Regalia',
+          description: 'Discover our premium range of traditional Maharashtrian accessories, miniature phetas, Wagnakha replicas, and royal pagadis available for purchase and rental.',
+          backgroundImage: '/aboutsideiamge.png',
+          primaryButtonText: 'Inquire Now',
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'Our Services',
+          secondaryButtonLink: '/services'
+        },
+        {
+          pageName: 'contact',
+          tag: 'Connect With Us',
+          titleItalic: 'Begin Your',
+          titleBold: 'Royal Experience',
+          titleRegular: '& Event Inquiries',
+          description: 'Whether you want to book our team for an upcoming wedding, festival, or masterclass training, reach out to us and let us create unforgettable memories.',
+          backgroundImage: '/footerimg.png',
+          primaryButtonText: 'Send Inquiry',
+          primaryButtonLink: '#inquiry-form',
+          secondaryButtonText: 'Explore Work',
+          secondaryButtonLink: '/our-work'
         }
       ]);
-      console.log('✔ Banners seeded.');
+      console.log('✔ All Page Banners seeded.');
     }
 
     // 3. Seed About Us (Rich Data)
@@ -91,20 +149,49 @@ const seedDatabase = async () => {
         passion: "We are deeply passionate about the cultural roots of the Maratha empire. The Pheta is not merely an accessory; it is the crowning glory of Maharashtrian attire. Our passion lies in perfecting the folds, matching the vibrant colors, and ensuring every client feels like royalty on their special day.",
         experience: "With over 5,000 successful events, our team has mastered every style of Pheta - from the classic Puneri Pagadi and Kolhapuri Pheta to the majestic Shahi Pheta. We have had the honor of styling grooms, celebrities, and political figures, ensuring flawless execution even in high-pressure environments.",
         brandStory: "Pheta By Nihar represents a bridge between history and the modern era. Our brand is built on authenticity, premium quality fabrics, and unparalleled craftsmanship. When you choose us, you are not just hiring a service; you are embracing a legacy that commands respect and admiration.",
+        offeredClasses: [
+          {
+            title: "Offline Studio Masterclass",
+            description: "Immersive, hands-on masterclass at our Pune studio with live models, authentic silk fabrics, and personal 1-on-1 guidance from Nihar Tambde.",
+            image: "/hero_bride_groom.png"
+          },
+          {
+            title: "Online Global Masterclass",
+            description: "Live interactive HD video training tailored for global learners & diaspora families. Learn step-by-step self-tying and ceremony draping from anywhere.",
+            image: "/aboutsideiamge.png"
+          },
+          {
+            title: "Group & Corporate Workshops",
+            description: "Tailored cultural workshops for Dhol Tasha Pathaks, colleges, corporate satkars, and festival organizing committees with certification.",
+            image: "/pheta_by_nihar_tambde_1665393890_2945859920821826134_2400202343.webp"
+          },
+          {
+            title: "Royal Wedding Safa Specialization",
+            description: "Advanced certification in bridal & groom pagadis, Kalgi attachment, Shahi folds, and high-speed mass barati draping for event professionals.",
+            image: "/service_pheta.webp"
+          }
+        ],
         classBatches: [
           {
-            batchName: "Weekend Mastery Class",
-            startDate: "15 Aug 2026",
-            duration: "4 Weeks (Sat-Sun)",
+            batchName: "Weekend Mastery Batch (Sat-Sun)",
+            startDate: "22 Aug 2026",
+            duration: "2 Days (8 Hours Hands-on)",
             status: "Filling Fast",
             image: "/hero_bride_groom.png"
           },
           {
-            batchName: "Intensive Bridal Pheta Workshop",
-            startDate: "01 Sep 2026",
-            duration: "2 Weeks",
-            status: "Open",
-            image: "/service_pheta.webp"
+            batchName: "Professional Certified Artist Course",
+            startDate: "05 Sep 2026",
+            duration: "4 Weeks (Comprehensive)",
+            status: "Open for Admission",
+            image: "/pheta_by_nihar_tambde_1676761513_3041218461604431189_2400202343.webp"
+          },
+          {
+            batchName: "Ganesh Utsav & Pathak Special",
+            startDate: "12 Sep 2026",
+            duration: "1 Day Intensive",
+            status: "Admissions Open",
+            image: "/pheta_by_nihar_tambde_1665393890_2945859920821826134_2400202343.webp"
           }
         ]
       });
@@ -311,6 +398,93 @@ const seedDatabase = async () => {
       ];
       await Testimonial.insertMany(defaultTestimonials);
       console.log('✔ Testimonials seeded.');
+    }
+
+    // 9. Seed Pheta Classes & Workshops
+    const classCount = await PhetaClass.countDocuments();
+    if (classCount === 0) {
+      const defaultClasses = [
+        {
+          title: 'Traditional Puneri & Kolhapuri Pheta Workshop',
+          marathiTitle: 'पारंपरिक पुणेरी व कोल्हापुरी फेटा कार्यशाळा',
+          level: 'Beginner to Intermediate',
+          duration: '2 Days (Weekend Workshop - 8 Hours)',
+          mode: 'In-Studio / Hands-on',
+          description: 'Master the foundational techniques of authentic Puneri pagadi and vibrant Kolhapuri pheta draping with step-by-step guidance, pleat structuring, and fabric selection.',
+          image: '/hero_bride_groom.png',
+          price: '₹2,499',
+          badge: 'Most Popular',
+          eligibility: 'Open to all age groups (14+). No prior draping experience required.',
+          certification: true,
+          features: [
+            { icon: 'Award', label: 'Authorized Certificate' },
+            { icon: 'Layers', label: 'Authentic Pleat Techniques' },
+            { icon: 'Smile', label: 'All Materials Provided' },
+            { icon: 'Users', label: 'Small Batch (Max 12)' }
+          ],
+          curriculum: [
+            'Heritage & Historical Significance of Maharashtrian Turbans',
+            'Fabric Selection, Thread Grain, and Starching Techniques',
+            'Mastering the Iconic 5-Fold Puneri Style with Golden Zari Border',
+            'The Bold Kolhapuri Draping & Tassel Styling',
+            'Live Model Practice and Form Correction'
+          ]
+        },
+        {
+          title: 'Royal Groom & Shahi Safa Masterclass',
+          marathiTitle: 'शाही विवाह फेटा व साफा मास्टरक्लास',
+          level: 'Intermediate to Advanced',
+          duration: '3 Days Intensive (12 Hours)',
+          mode: 'In-Studio / Hands-on',
+          description: 'Designed for wedding stylists and enthusiasts looking to master regal groom pagadis, Maratha Shahi phetas, royal safas, Kalgi pinning, brooch styling, and luxury pearl ornaments.',
+          image: '/service_pheta.webp',
+          price: '₹4,999',
+          badge: 'Best For Stylists',
+          eligibility: 'Ideal for makeup artists, wedding planners, event stylists & passionate learners.',
+          certification: true,
+          features: [
+            { icon: 'Crown', label: 'Royal Shahi Techniques' },
+            { icon: 'Sparkles', label: 'Kalgi & Jewelry Styling' },
+            { icon: 'Clock', label: 'Speed & Durability Mastery' },
+            { icon: 'ShieldCheck', label: 'Masterclass Certification' }
+          ],
+          curriculum: [
+            'Royal Maratha Dynasty Pheta Silhouettes and Variations',
+            'Bespoke Groom Headwear Customization to Match Sherwani & Palette',
+            'Kalgi, Sirpech & Brooch Secure Attachment Protocols',
+            'Pure Silk & Brocade Draping for All-Day Comfort',
+            'Wedding Day Styling Logistics and Time Management'
+          ]
+        },
+        {
+          title: 'Professional Turban Artist Certification Course',
+          marathiTitle: 'व्यावसायिक फेटा आर्टिस्ट प्रमाणपत्र अभ्यासक्रम',
+          level: 'Professional Masterclass',
+          duration: '4 Weeks (Comprehensive Weekend Batch)',
+          mode: 'Hybrid (Studio + Live Event Exposure)',
+          description: 'The complete career-launching program for aspiring professional pheta artists. Covers 12+ regional Indian and Maharashtrian styles, commercial speed draping for 500+ guests, pricing, and live shadow training.',
+          image: '/pheta_by_nihar_tambde_1676761513_3041218461604431189_2400202343.webp',
+          price: '₹11,999',
+          badge: 'Career Masterclass',
+          eligibility: 'Passionate learners seeking to start their own wedding styling business.',
+          certification: true,
+          features: [
+            { icon: 'Briefcase', label: 'Business & Client Kit' },
+            { icon: 'Users', label: 'Mass Draping Techniques' },
+            { icon: 'Award', label: 'Professional Certificate' },
+            { icon: 'Video', label: 'Live Event Shadow Training' }
+          ],
+          curriculum: [
+            '12+ Indian & Maharashtrian Traditional Turban Styles',
+            'High-Speed Mass Draping (Under 60 Seconds per Person)',
+            'Commercial Business Setup, Pricing Models & Portfolio Building',
+            'Sourcing Premium Fabrics & Ornaments at Wholesale',
+            'Live Event Practical Shadow Training with Master Nihar Tambde'
+          ]
+        }
+      ];
+      await PhetaClass.insertMany(defaultClasses);
+      console.log('✔ Pheta Classes seeded.');
     }
 
     console.log('DB Seeding complete! Closing connection...');

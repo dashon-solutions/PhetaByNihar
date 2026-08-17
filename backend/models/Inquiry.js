@@ -18,9 +18,25 @@ const inquirySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    default: ''
+  },
   address: {
     type: String,
-    required: true
+    default: ''
+  },
+  city: {
+    type: String,
+    default: ''
+  },
+  message: {
+    type: String,
+    default: ''
+  },
+  preferredBatch: {
+    type: String,
+    default: ''
   },
   locationDetails: {
     lat: Number,

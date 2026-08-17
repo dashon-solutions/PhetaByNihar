@@ -16,6 +16,8 @@ import mediaRoutes from './routes/media.js';
 import testimonialsRoutes from './routes/testimonials.js';
 import uploadRoutes from './routes/upload.js';
 import inquiryRoutes from './routes/inquiry.js';
+import classesRoutes from './routes/classes.js';
+import crmRoutes from './routes/crm.js';
 import { router as ourWorkRoutes } from './routes/our-work.js';
 
 const app = express();
@@ -52,6 +54,8 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/inquiry', inquiryRoutes);
+app.use('/api/classes', classesRoutes);
+app.use('/api/crm', crmRoutes);
 app.use('/api/our-work', ourWorkRoutes);
 
 // Health check endpoint

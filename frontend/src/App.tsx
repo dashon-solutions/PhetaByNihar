@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ScrollToTop } from './components/common/ScrollToTop';
 import { Navbar } from './components/sections/Navbar';
 import { HeroBanner } from './components/sections/HeroBanner';
 import { Statistics } from './components/sections/Statistics';
@@ -24,7 +26,12 @@ import { OurWorkPage } from './pages/OurWorkPage';
 
 const HomePage = () => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Navbar />
 
       <main>
@@ -46,13 +53,14 @@ const HomePage = () => {
       </main>
 
       <Footer />
-    </>
+    </motion.div>
   );
 };
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -71,4 +79,5 @@ function App() {
 }
 
 export default App;
+
 

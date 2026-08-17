@@ -186,9 +186,9 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#6E1E18] text-white font-bold py-3.5 rounded-xl hover:bg-[#4D2D22] transition-colors mt-2 shadow-md flex justify-center items-center"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold text-sm uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 border border-[#8A2B24] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? <Loader2 className="animate-spin" /> : 'Submit Inquiry'}
+                  {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : 'Submit Inquiry'}
                 </button>
               </form>
             )}
