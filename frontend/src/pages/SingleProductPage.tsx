@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { SEO } from '../components/common/SEO';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { InquiryModal } from '../components/ui/InquiryModal';
@@ -33,6 +34,7 @@ export const SingleProductPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProduct = async () => {
       try {
         const data = await apiFetch(`/products/${id}`);
@@ -58,8 +60,8 @@ export const SingleProductPage: React.FC = () => {
   if (loading) {
     return (
       <>
-        <Navbar />
-        <div className="min-h-screen flex justify-center items-center bg-[#F8F3EC]">
+        <Navbar theme="light" />
+        <div className="min-h-screen bg-[#F8F3EC] flex justify-center items-center">
           <div className="w-12 h-12 border-4 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
         </div>
         <Footer />
@@ -70,13 +72,13 @@ export const SingleProductPage: React.FC = () => {
   if (error || !product) {
     return (
       <>
-        <Navbar />
+        <Navbar theme="light" />
         <div className="min-h-screen flex flex-col justify-center items-center bg-[#F8F3EC] text-center px-4">
           <h2 className="text-2xl font-serif text-[#4D2D22] mb-4">Product Not Found</h2>
           <p className="text-[#666666] font-sans mb-8">{error || "The product you're looking for doesn't exist."}</p>
           <button 
             onClick={() => navigate('/products')}
-            className="px-6 py-2 bg-[#6E1E18] text-white font-sans uppercase font-bold rounded hover:bg-[#7D201D]"
+            className="px-6 py-2.5 bg-[#6E1E18] text-[#F3D18A] font-sans uppercase font-bold text-xs rounded-full hover:bg-[#7D201D] transition-colors"
           >
             Back to Collection
           </button>
@@ -92,9 +94,34 @@ export const SingleProductPage: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#F8F3EC]"
+      className="min-h-screen bg-[#F8F3EC] flex flex-col font-sans text-text-gray selection:bg-[#D7A65B] selection:text-white"
     >
-      <Navbar />
+      <SEO
+        title={`${product.name} - Royal Marathi Pheta on Rent & Sale in Mumbai & Pune | Pheta By Nihar`}
+        description={`Rent or book ${product.name} (${product.subtitle || 'Traditional Royal Pheta'}). Handcrafted silk turban with designer Kalgi. Available across Mumbai, Pune & Maharashtra.`}
+        keywords={`${product.name}, ${product.name} on Rent, Marathi Pheta on Rent Mumbai, Wedding Pheta Rental Pune, Puneri Pheta, Kolhapuri Pheta, Traditional Maharashtrian Pheta`}
+        canonicalUrl={`https://phetabynihar.com/products/${id}`}
+        ogImage={getApiImageUrl(product.image)}
+        ogType="product"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.name,
+          "image": getApiImageUrl(product.image),
+          "description": product.description,
+          "brand": {
+            "@type": "Brand",
+            "name": "Pheta By Nihar"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "INR",
+            "availability": "https://schema.org/InStock",
+            "url": `https://phetabynihar.com/products/${id}`
+          }
+        }}
+      />
+      <Navbar theme="light" />
       <main className="bg-[#F8F3EC] min-h-screen pt-24 pb-20">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20 relative z-10">
           

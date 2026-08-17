@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { HeroBanner } from '../components/sections/HeroBanner';
+import { SEO } from '../components/common/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { Maximize2, X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
@@ -58,15 +59,17 @@ export const OurWorkPage: React.FC = () => {
   };
 
   const nextImage = () => {
-    if (!activeWork) return;
-    const currentImages = activeWork.images;
-    setCurrentImageIndex((prev) => (prev + 1) % currentImages.length);
+    const total = works[currentWorkIndex]?.images?.length || 0;
+    if (total > 0) {
+      setCurrentImageIndex((prev) => (prev + 1) % total);
+    }
   };
 
   const prevImage = () => {
-    if (!activeWork) return;
-    const currentImages = activeWork.images;
-    setCurrentImageIndex((prev) => (prev - 1 + currentImages.length) % currentImages.length);
+    const total = works[currentWorkIndex]?.images?.length || 0;
+    if (total > 0) {
+      setCurrentImageIndex((prev) => (prev - 1 + total) % total);
+    }
   };
 
   // Keyboard navigation for lightbox
@@ -83,6 +86,13 @@ export const OurWorkPage: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Royal Wedding & Celebrity Pheta Portfolio in Mumbai & Pune | Pheta By Nihar"
+        description="Explore real wedding photos, celebrity groom pheta stylings, royal Dhol Tasha satkars, and grand Maharashtrian wedding guest draping portfolio by Pheta By Nihar."
+        keywords="Pheta Tying Photos, Marathi Groom Pheta Photos, Wedding Pheta Portfolio Mumbai, Marathi Pheta Girgaon, Pheta Service South Mumbai, Pheta Tying Service Thane, Pheta Tying Service Navi Mumbai, Pheta Artist Pune, Pheta Service Pune, Pheta Tying Service Pimpri Chinchwad, Celebrity Pheta Artist Mumbai"
+        canonicalUrl="https://phetabynihar.com/our-work"
+        ogImage="/hero_groom.png"
+      />
       <Navbar />
       <main className="bg-[#F8F3EC] min-h-screen">
         <HeroBanner pageName="our-work" />

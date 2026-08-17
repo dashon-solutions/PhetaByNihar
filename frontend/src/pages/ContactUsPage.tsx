@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { SEO } from '../components/common/SEO';
 import { Navbar } from '../components/sections/Navbar';
 import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
@@ -16,6 +17,13 @@ export const ContactUsPage: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-[#F8F3EC]"
     >
+      <SEO
+        title="Contact Pheta By Nihar | Book Pheta Tying Artist in Mumbai & Pune"
+        description="Get in touch with Pheta By Nihar for groom pheta bookings, wedding guest group tying quotes, academy workshop admissions, and rental inquiries in Mumbai & Pune."
+        keywords="Contact Pheta Artist Mumbai, Book Pheta Tying Pune, Pheta Tying Near Me, Wedding Pheta Booking Mumbai, Pheta Service Girgaon, Pheta Service Pune, Pheta Tying Phone Number, Pheta Tying Service Thane, Pheta Tying Service Navi Mumbai"
+        canonicalUrl="https://phetabynihar.com/contact"
+        ogImage="/hero_groom.png"
+      />
       <Navbar />
       <main>
         <HeroBanner pageName="contact" />

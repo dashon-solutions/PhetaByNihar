@@ -3,6 +3,7 @@ import { Navbar } from '../components/sections/Navbar';
 import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
 import { Divider } from '../components/ui/Divider';
+import { SEO } from '../components/common/SEO';
 import { ClassInquiryModal } from '../components/ui/ClassInquiryModal';
 import { motion } from 'framer-motion';
 import { Star, ShieldCheck, Heart, Crown, Clock, Quote, ChevronRight, Play, Calendar, Sparkles, GraduationCap } from 'lucide-react';
@@ -40,14 +41,14 @@ interface ClassBatch {
 
 export const AboutUsPage: React.FC = () => {
   const [about, setAbout] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Class Inquiry Modal state
   const [isClassModalOpen, setIsClassModalOpen] = useState(false);
-  const [selectedClassForInquiry, setSelectedClassForInquiry] = useState('');
-  const [selectedBatchForInquiry, setSelectedBatchForInquiry] = useState('');
+  const [selectedClassForInquiry, setSelectedClassForInquiry] = useState<string | undefined>(undefined);
+  const [selectedBatchForInquiry, setSelectedBatchForInquiry] = useState<string | undefined>(undefined);
 
-  const handleOpenClassInquiry = (className: string, batchName: string = '') => {
+  const handleOpenClassInquiry = (className?: string, batchName?: string) => {
     setSelectedClassForInquiry(className);
     setSelectedBatchForInquiry(batchName);
     setIsClassModalOpen(true);
@@ -70,6 +71,24 @@ export const AboutUsPage: React.FC = () => {
 
   return (
     <div className="bg-[#F8F4EE] min-h-screen text-[#2E1A14] font-sans selection:bg-[#4A0D0D] selection:text-[#F3D18A] overflow-x-hidden">
+      <SEO
+        title="Pheta Tying Workshops & Masterclasses in Mumbai & Pune | About Pheta By Nihar"
+        description="Learn the authentic royal art of Marathi pheta tying with Nihar. Certified offline studio masterclasses in Mumbai & Pune, and global online workshops. Heritage Pheta Academy."
+        keywords="Pheta Tying Workshop, Pheta Tying Workshop Mumbai, Pheta Tying Workshop Pune, Marathi Pheta Workshop, Marathi Pheta Tying Workshop, Pheta Workshop Maharashtra, Learn Pheta Tying, Pheta Tying Classes Mumbai, Pheta Tying Classes Pune, Traditional Pheta Workshop, Maharashtrian Culture Workshop, Traditional Turban Tying Workshop, Pheta Academy, Nihar Pheta Artist, Marathi Pheta History"
+        canonicalUrl="https://phetabynihar.com/about"
+        ogImage="/aboutnewiamge.png"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          "name": "Professional Pheta Tying Masterclass",
+          "description": "Comprehensive training in authentic Maharashtrian pheta styles, from basic folds to royal intricate patterns.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pheta By Nihar Academy",
+            "sameAs": "https://phetabynihar.com"
+          }
+        }}
+      />
       <Navbar />
 
       {/* --- Section 1: Standardized Hero Section --- */}

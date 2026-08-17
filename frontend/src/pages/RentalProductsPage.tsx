@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { SEO } from '../components/common/SEO';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { Divider } from '../components/ui/Divider';
@@ -38,6 +39,7 @@ export const RentalProductsPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProducts = async () => {
       try {
         const data = await apiFetch('/products');
@@ -45,7 +47,7 @@ export const RentalProductsPage: React.FC = () => {
           setProducts(data);
         }
       } catch (err) {
-        console.error('Failed to fetch products:', err);
+        console.error('Failed to fetch rental products:', err);
       } finally {
         setLoading(false);
       }
@@ -59,8 +61,15 @@ export const RentalProductsPage: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#F8F3EC]"
+      className="min-h-screen bg-[#F8F3EC] flex flex-col font-sans text-text-gray selection:bg-[#D7A65B] selection:text-white"
     >
+      <SEO
+        title="Pheta on Rent in Mumbai & Pune | Puneri, Kolhapuri & Royal Wedding Pheta Collection"
+        description="Rent and buy authentic Maharashtrian phetas, royal groom pagadis, designer kalgis, Rajmudra, Wagnakha, and traditional accessories in Mumbai & Pune. Best wedding rental collection."
+        keywords="Pheta on Rent Mumbai, Wedding Pheta on Rent Mumbai, Marathi Pheta on Rent, Pheta Rental Mumbai, Wedding Pheta Rental, Traditional Pheta Rental, Pheta Rental Pune, Wedding Turban Rental Mumbai, Marathi Pheta for Sale, Maharashtrian Pheta Online, Traditional Marathi Pheta, Puneri Pheta, Kolhapuri Pheta, Shahi Pheta, Traditional Pheta Collection, Wedding Pheta Collection, Traditional Maharashtrian Accessories, Maharashtrian Wedding Accessories, Rajmudra Accessories, Wagnakha Accessories, Traditional Kada, Maharashtrian Traditional Ornaments"
+        canonicalUrl="https://phetabynihar.com/products"
+        ogImage="/placeholder-pheta.png"
+      />
       <Navbar theme="light" />
       <main>
         <section className="py-16 md:py-24 bg-[#F8F3EC] relative overflow-hidden">
