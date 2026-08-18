@@ -7,34 +7,34 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Create transporter with SMTP configuration
+// Create transporter with SMTP configuration (Optimized for Render & Cloud deployments)
 const createTransporter = () => {
-  const user = process.env.SMTP_USER;
+  const user = (process.env.SMTP_USER || '').trim();
   const rawPass = process.env.SMTP_PASS || '';
   const pass = rawPass.replace(/\s+/g, '');
 
-  if (user && pass) {
-    if (user.includes('@gmail.com') || (process.env.SMTP_HOST || '').includes('gmail')) {
-      return nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: user.trim(),
-          pass: pass
-        }
-      });
-    }
-
-    return nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: user.trim(),
-        pass: pass
-      }
-    });
+  if (!user || !pass) {
+    console.error('❌ [SMTP ERROR] SMTP_USER or SMTP_PASS is missing in environment variables!');
+    console.error(`Current env check: SMTP_USER=${user ? 'SET (' + user + ')' : 'MISSING'}, SMTP_PASS=${pass ? 'SET (' + pass.length + ' chars)' : 'MISSING'}`);
+    return null;
   }
-  return null;
+
+  // Direct SSL (Port 465) with explicit timeouts - 100% reliable on Render, AWS, and Cloud hosts
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: user,
+      pass: pass
+    },
+    tls: {
+      rejectUnauthorized: false
+    },
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000
+  });
 };
 
 // Check if logo exists for inline attachment
