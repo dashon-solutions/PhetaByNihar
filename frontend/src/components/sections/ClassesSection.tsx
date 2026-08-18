@@ -176,7 +176,7 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
                               onClick={() => handleOpenClassInquiry(batch.batchName, `${batch.batchName} (Starts: ${batch.startDate})`)}
                               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold uppercase tracking-wider text-xs shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                             >
-                              <span>Enquire / Reserve Seat</span>
+                              <span>Enquire / Book Seat</span>
                               <ChevronRight className="w-3.5 h-3.5" />
                             </button>
                           </div>

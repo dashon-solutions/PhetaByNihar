@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const inquirySchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['rental', 'class'],
+    default: 'general',
     required: true
   },
   subject: {
@@ -45,7 +45,6 @@ const inquirySchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['new', 'contacted', 'resolved'],
     default: 'new'
   },
   createdAt: {

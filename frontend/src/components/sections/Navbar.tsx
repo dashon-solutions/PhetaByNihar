@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme = 'dark' }) => {
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Services', href: '/services' },
-    { name: 'Products & Rentals', href: '/products' },
+    { name: 'Royal Products', href: '/products' },
     { name: 'Our Work', href: '/our-work' },
     { name: 'Upcoming Events', href: '/events' },
     { name: 'Videos', href: '/videos' },

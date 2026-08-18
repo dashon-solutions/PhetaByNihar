@@ -97,11 +97,11 @@ export const RentalProductsPage: React.FC = () => {
                 Exclusive Collection
               </span>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight mb-1">
-                Products & Rentals
+                Products & Royal Collection
               </h1>
               <Divider className="max-w-[450px] my-1" />
               <p className="mt-4 text-base md:text-lg text-[#666666] font-sans leading-relaxed">
-                Discover our premium range of traditional Maharashtrian accessories available for purchase and rental.
+                Discover our premium range of handcrafted traditional Maharashtrian phetas and royal accessories.
               </p>
             </motion.div>
 
@@ -141,10 +141,14 @@ export const RentalProductsPage: React.FC = () => {
                       </div>
 
                       <div className="text-center px-2">
-                        <h2 className="font-serif text-2xl font-bold text-[#4D2D22] mb-1 group-hover:text-[#6E1E18] transition-colors">{product.name}</h2>
-                        {product.marathiName && (
-                          <h3 className="font-marathi text-lg text-[#6E1E18] mb-1.5">({product.marathiName})</h3>
-                        )}
+                        <h2 className="font-serif text-2xl font-bold text-[#4D2D22] mb-1 group-hover:text-[#6E1E18] transition-colors leading-tight">
+                          <span>{product.name}</span>
+                          {product.marathiName && (
+                            <span className="block font-marathi text-lg text-[#6E1E18] font-normal mt-0.5">
+                              ({product.marathiName.replace(/[()]/g, '')})
+                            </span>
+                          )}
+                        </h2>
                         <p className="text-[#D7A65B] font-sans text-xs font-bold uppercase tracking-[0.1em] mb-3">
                           {product.subtitle}
                         </p>
@@ -160,7 +164,7 @@ export const RentalProductsPage: React.FC = () => {
                         className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-300 border border-[#8A2B24] cursor-pointer"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>Reserve / Rent</span>
+                        <span>Buy / Inquire</span>
                       </button>
                       <button
                         onClick={() => navigate(`/products/${product._id}`)}
@@ -182,7 +186,7 @@ export const RentalProductsPage: React.FC = () => {
       <InquiryModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        type="rental"
+        type="buy"
         subject={selectedProduct}
       />
     </motion.div>

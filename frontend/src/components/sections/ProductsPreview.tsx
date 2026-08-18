@@ -10,6 +10,7 @@ interface ProductData {
   _id?: string;
   id: string;
   name: string;
+  marathiName?: string;
   subtitle: string;
   image: string;
   description: string;
@@ -153,8 +154,13 @@ export const ProductsPreview: React.FC = () => {
                         <span className="text-[8px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
                           {product.subtitle}
                         </span>
-                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-4 group-hover:text-[#E5C158] transition-colors">
-                          {product.name}
+                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-4 group-hover:text-[#E5C158] transition-colors leading-tight">
+                          <span>{product.name}</span>
+                          {product.marathiName && (
+                            <span className="block font-marathi text-sm md:text-2xl text-[#E5C158] font-normal mt-1">
+                              ({product.marathiName.replace(/[()]/g, '')})
+                            </span>
+                          )}
                         </h3>
                         <p className="text-[#C2B2A3] text-[9px] md:text-sm leading-tight md:leading-relaxed font-light line-clamp-2 md:line-clamp-3">
                           {product.description}
@@ -165,7 +171,7 @@ export const ProductsPreview: React.FC = () => {
                         <button 
                           onClick={() => handleOpenRentalInquiry(product.name)}
                           className="w-full py-1.5 md:py-3 px-2 md:px-6 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer">
-                          <span>Reserve / Rent</span>
+                          <span>Buy Now</span>
                           <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
                       </div>
@@ -238,7 +244,7 @@ export const ProductsPreview: React.FC = () => {
       <InquiryModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        type="rental"
+        type="buy"
         subject={selectedProduct}
       />
     </section>

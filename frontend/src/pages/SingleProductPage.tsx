@@ -187,13 +187,13 @@ export const SingleProductPage: React.FC = () => {
                   {product.subtitle}
                 </p>
                 <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4D2D22] leading-tight mb-2">
-                  {product.name}
+                  <span>{product.name}</span>
+                  {product.marathiName && (
+                    <span className="block font-marathi text-2xl md:text-3xl text-[#6E1E18] font-normal mt-1">
+                      ({product.marathiName.replace(/[()]/g, '')})
+                    </span>
+                  )}
                 </h1>
-                {product.marathiName && (
-                  <h2 className="font-marathi text-2xl md:text-3xl text-[#6E1E18]">
-                    ({product.marathiName})
-                  </h2>
-                )}
               </div>
 
               <div className="w-16 h-1 bg-[#D7A65B] rounded-full"></div>
@@ -215,7 +215,7 @@ export const SingleProductPage: React.FC = () => {
                   onClick={() => setIsModalOpen(true)}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 border border-[#8A2B24] cursor-pointer"
                 >
-                  Inquire About This Product
+                  Buy / Inquire Now
                 </button>
               </div>
             </motion.div>
@@ -228,7 +228,7 @@ export const SingleProductPage: React.FC = () => {
       <InquiryModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        type="rental"
+        type="buy"
         subject={product.name}
       />
     </motion.div>
