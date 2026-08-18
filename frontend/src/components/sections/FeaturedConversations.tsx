@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Sparkles, ExternalLink, Play } from 'lucide-react';
 import { Divider } from '../ui/Divider';
+import { Button } from '../ui/Button';
 import { apiFetch } from '../../utils/api';
 
 interface VideoData {
@@ -231,6 +233,15 @@ export const FeaturedConversations: React.FC = () => {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      {/* See More Videos CTA Button */}
+      <div className="mt-10 md:mt-14 flex justify-center">
+        <Link to="/videos">
+          <Button variant="primary" showArrow className="px-8 py-3.5 text-xs uppercase font-bold tracking-wider shadow-md hover:shadow-lg">
+            See More Videos
+          </Button>
+        </Link>
       </div>
     </section>
   );

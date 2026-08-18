@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/sections/Navbar';
 import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
-import { Divider } from '../components/ui/Divider';
 import { SEO } from '../components/common/SEO';
 import { ClassesSection } from '../components/sections/ClassesSection';
 import { motion } from 'framer-motion';
@@ -69,9 +68,9 @@ export const AboutUsPage: React.FC = () => {
       <section className="py-10 sm:py-14 lg:py-18 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-14 items-center justify-between">
           <motion.div
-            initial={{ opacity: 0, x: -30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }} 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="w-full lg:w-5/12 max-w-sm sm:max-w-md lg:max-w-[420px] mx-auto lg:mx-0 relative"
           >
@@ -87,9 +86,9 @@ export const AboutUsPage: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true }} 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={staggerContainer}
             className="w-full lg:w-7/12"
           >
@@ -134,57 +133,7 @@ export const AboutUsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* --- Section 3: Journey Timeline --- */}
-      <section id="our-journey" className="py-10 sm:py-14 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: 'url("/heritage_sketch.png")', backgroundSize: '50%' }} />
 
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
-          <div className="text-center mb-8 sm:mb-10">
-            <span className="text-[#6E1E18] font-bold tracking-[0.2em] uppercase text-xs block mb-1.5">Milestones</span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#4A0D0D] mb-1">Our Journey</h2>
-            <Divider className="max-w-[340px] my-1" />
-          </div>
-
-          {about?.journey && (
-            <motion.p
-              initial={{ opacity: 0, y: 15 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 0.5 }}
-              className="text-center text-[#2E1A14]/70 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed text-xs sm:text-sm md:text-base whitespace-pre-wrap"
-            >
-              {about.journey}
-            </motion.p>
-          )}
-
-          <div className="relative">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center relative z-10">
-              {(about?.journeyPoints && about.journeyPoints.length > 0 ? about.journeyPoints : [
-                { title: "The Beginning", description: "A humble start driven by passion for culture.", image: "/aboutnewiamge.png" },
-                { title: "The Growth", description: "Mastering styles and serving thousands of weddings.", image: "/aboutuspng.png" },
-                { title: "Recognition", description: "Becoming a trusted name in celebrity styling.", image: "/aboutsideiamge.png" },
-                { title: "The Future", description: "Taking Maharashtrian heritage to the global stage.", image: "/hero_bride_groom.png" }
-              ]).map((milestone: any, idx: number) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 15 }} 
-                  whileInView={{ opacity: 1, y: 0 }} 
-                  viewport={{ once: true }} 
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="flex flex-col items-center group bg-[#F8F4EE] p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-[#D4AF37]/30 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 border-3 border-white shadow-sm group-hover:scale-105 transition-transform duration-500 shrink-0">
-                    <img src={milestone.image ? getApiImageUrl(milestone.image) : "/about_portrait.webp"} alt={milestone.title} className="w-full h-full object-cover object-top" />
-                  </div>
-                  <h3 className="font-serif text-base sm:text-lg text-[#641414] font-bold mb-1.5">{milestone.title}</h3>
-                  <p className="text-[#2E1A14]/70 text-xs leading-relaxed">{milestone.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* --- Section 4: Passion & Experience --- */}
       <section className="py-10 sm:py-14 bg-gradient-to-br from-[#4A0D0D] via-[#5B1313] to-[#6E1E18] text-[#F8F4EE] relative overflow-hidden">
@@ -195,9 +144,9 @@ export const AboutUsPage: React.FC = () => {
 
             {/* Quote & Text Left */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: true }} 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.7 }}
               className="lg:col-span-6 relative order-2 lg:order-1"
             >
@@ -244,9 +193,9 @@ export const AboutUsPage: React.FC = () => {
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }} 
-                  whileInView={{ opacity: 1, scale: 1 }} 
-                  viewport={{ once: true }} 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
                   transition={{ delay: idx * 0.08, duration: 0.4 }}
                   className="text-center p-4 sm:p-5 bg-white/5 rounded-xl sm:rounded-2xl border border-white/10 hover:bg-white/10 hover:border-[#D7A65B]/40 transition-all duration-300 shadow-md"
                 >

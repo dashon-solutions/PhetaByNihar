@@ -12,6 +12,8 @@ import { RentalProductsPage } from './pages/RentalProductsPage';
 import { SingleProductPage } from './pages/SingleProductPage';
 import { ContactUsPage } from './pages/ContactUsPage';
 import { OurWorkPage } from './pages/OurWorkPage';
+import { UpcomingEventsPage } from './pages/UpcomingEventsPage';
+import { VideosPage } from './pages/VideosPage';
 import { Statistics } from './components/sections/Statistics';
 import { AboutSection } from './components/sections/AboutSection';
 import { ServicesSection } from './components/sections/ServicesSection';
@@ -79,6 +81,8 @@ function App() {
           <Route path="/our-work" element={<OurWorkPage />} />
           <Route path="/products" element={<RentalProductsPage />} />
           <Route path="/products/:id" element={<SingleProductPage />} />
+          <Route path="/events" element={<UpcomingEventsPage />} />
+          <Route path="/videos" element={<VideosPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />

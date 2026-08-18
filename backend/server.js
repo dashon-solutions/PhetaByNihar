@@ -19,6 +19,7 @@ import inquiryRoutes from './routes/inquiry.js';
 import classesRoutes from './routes/classes.js';
 import crmRoutes from './routes/crm.js';
 import { router as ourWorkRoutes } from './routes/our-work.js';
+import eventsRoutes from './routes/events.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -57,6 +58,7 @@ app.use('/api/inquiry', inquiryRoutes);
 app.use('/api/classes', classesRoutes);
 app.use('/api/crm', crmRoutes);
 app.use('/api/our-work', ourWorkRoutes);
+app.use('/api/events', eventsRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

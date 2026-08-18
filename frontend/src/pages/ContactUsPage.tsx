@@ -7,6 +7,7 @@ import { Footer } from '../components/sections/Footer';
 import { Divider } from '../components/ui/Divider';
 import { Button } from '../components/ui/Button';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { InstagramIcon, FacebookIcon, YoutubeIcon } from '../components/ui/SocialIcons';
 
 export const ContactUsPage: React.FC = () => {
   return (
@@ -60,7 +61,7 @@ export const ContactUsPage: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="w-full lg:w-1/3"
+                className="w-full lg:w-1/3 flex flex-col gap-6"
               >
                 <div className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-[#E8D8C5]">
                   <h3 className="font-serif text-2xl font-bold text-[#4D2D22] mb-6">Contact Details</h3>
@@ -71,10 +72,15 @@ export const ContactUsPage: React.FC = () => {
                         <MapPin className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Location</h4>
-                        <p className="text-[#666666] font-sans text-sm leading-relaxed">
-                          Pune, Maharashtra, India
-                        </p>
+                        <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Studio Address</h4>
+                        <a 
+                          href="https://share.google/xj6WCITif4HwHcTTn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block"
+                        >
+                          no. 33/J, 9, Mughbhat cross lane Twashta kansar chwal, Girgaon, Mumbai, Maharashtra 400004
+                        </a>
                       </div>
                     </div>
 
@@ -83,10 +89,10 @@ export const ContactUsPage: React.FC = () => {
                         <Phone className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Phone</h4>
-                        <p className="text-[#666666] font-sans text-sm leading-relaxed">
-                          +91 98765 43210
-                        </p>
+                        <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Phone & WhatsApp</h4>
+                        <a href="tel:+919850504054" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
+                          +91 98505 04054 / +91 98765 43210
+                        </a>
                       </div>
                     </div>
 
@@ -96,10 +102,69 @@ export const ContactUsPage: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Email</h4>
-                        <p className="text-[#666666] font-sans text-sm leading-relaxed">
-                          info@phetabynihar.com
-                        </p>
+                        <a href="mailto:phetabynihar@gmail.com" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
+                          phetabynihar@gmail.com
+                        </a>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Social Media Channels */}
+                  <div className="pt-6 mt-6 border-t border-[#E8D8C5]/70">
+                    <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-3">
+                      Follow & Connect
+                    </h4>
+                    <div className="flex flex-wrap gap-2.5">
+                      <a 
+                        href="https://www.instagram.com/pheta_by_nihar_tambde/?hl=en" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#F8F3EC] border border-[#E8D8C5] flex items-center justify-center text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-all shadow-xs"
+                        title="Instagram Brand (@pheta_by_nihar_tambde)"
+                        aria-label="Instagram Brand"
+                      >
+                        <InstagramIcon className="w-4 h-4" />
+                      </a>
+                      <a 
+                        href="https://instagram.com/_nihar_tambde_6895" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#F8F3EC] border border-[#E8D8C5] flex items-center justify-center text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-all shadow-xs"
+                        title="Instagram Personal (@_nihar_tambde_6895)"
+                        aria-label="Instagram Personal"
+                      >
+                        <InstagramIcon className="w-4 h-4" />
+                      </a>
+                      <a 
+                        href="https://www.facebook.com/profile.php?id=100086398737546" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#F8F3EC] border border-[#E8D8C5] flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-xs"
+                        title="Facebook Page"
+                        aria-label="Facebook Page"
+                      >
+                        <FacebookIcon className="w-4 h-4" />
+                      </a>
+                      <a 
+                        href="https://www.facebook.com/nihar.tambde" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#F8F3EC] border border-[#E8D8C5] flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-xs"
+                        title="Facebook Profile (Nihar Tambde)"
+                        aria-label="Facebook Profile"
+                      >
+                        <FacebookIcon className="w-4 h-4" />
+                      </a>
+                      <a 
+                        href="https://www.youtube.com/channel/UCyIW3yq9Vyt9fAIe8x_EWtg" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#F8F3EC] border border-[#E8D8C5] flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000] hover:text-white transition-all shadow-xs"
+                        title="YouTube Channel"
+                        aria-label="YouTube Channel"
+                      >
+                        <YoutubeIcon className="w-4 h-4" />
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -158,6 +223,74 @@ export const ContactUsPage: React.FC = () => {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* Google Maps Store Location Section */}
+        <section className="py-12 md:py-16 bg-[#F8F3EC] border-t border-[#E8D8C5]/50 relative overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-5 md:px-10 lg:px-20 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-3xl mx-auto mb-10"
+            >
+              <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
+                Store & Studio Location
+              </span>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4D2D22] leading-tight mb-1">
+                Find Us on <span className="italic font-light text-[#C48B3C]">Google Maps</span>
+              </h2>
+              <Divider className="max-w-[400px] my-1" />
+              <p className="mt-3 text-sm md:text-base text-[#666666] font-sans leading-relaxed">
+                Visit our official flagship studio in Girgaon, Mumbai to experience royal phetas, wedding turbans, and traditional heritage craftsmanship in person.
+              </p>
+            </motion.div>
+
+            {/* Google Map Embed Container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="bg-white p-4 sm:p-6 md:p-8 rounded-3xl border-2 border-[#E8D8C5] shadow-md relative"
+            >
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5 pb-5 border-b border-[#E8D8C5]/70">
+                <div>
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#4D2D22]">
+                    Pheta by Nihar Studio
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#666666] font-sans mt-0.5">
+                    no. 33/J, 9, Mughbhat cross lane Twashta kansar chwal, Girgaon, Mumbai, Maharashtra 400004
+                  </p>
+                </div>
+
+                <a
+                  href="https://share.google/xj6WCITif4HwHcTTn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-bold text-xs uppercase tracking-wider shadow-sm transition-all shrink-0 cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Get Directions on Google Maps</span>
+                </a>
+              </div>
+
+              <div className="w-full h-[400px] md:h-[480px] rounded-2xl overflow-hidden shadow-inner border border-[#E8D8C5]">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.496783556506!2d72.82379209999999!3d18.953655399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf7f4abd8b49%3A0xe1065f6d7e70b75f!2sPheta%20by%20Nihar!5e0!3m2!1sen!2sin!4v1787066751552!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: '400px' }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Pheta by Nihar Google Maps Location"
+                  className="w-full h-full"
+                />
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Camera, Users, Video, Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
+import { InstagramIcon, FacebookIcon, YoutubeIcon } from '../ui/SocialIcons';
 
 export const Footer: React.FC = () => {
   return (
@@ -26,10 +27,47 @@ export const Footer: React.FC = () => {
             <p className="font-sans text-[#E8D8C5] text-sm mb-6 leading-relaxed">
               Preserving Maharashtrian heritage through the art of Pheta tying. Elevating every celebration with royal elegance.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6E1E18] transition-colors"><Camera className="w-5 h-5 text-[#D7A65B]" /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6E1E18] transition-colors"><Users className="w-5 h-5 text-[#D7A65B]" /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#6E1E18] transition-colors"><Video className="w-5 h-5 text-[#D7A65B]" /></a>
+            <div className="flex flex-wrap gap-2.5">
+              <a
+                href="https://www.instagram.com/pheta_by_nihar_tambde/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all shadow-sm group"
+                title="Follow on Instagram (@pheta_by_nihar_tambde)"
+                aria-label="Instagram Brand"
+              >
+                <InstagramIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
+              </a>
+              <a
+                href="https://instagram.com/_nihar_tambde_6895"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all shadow-sm group"
+                title="Follow Nihar Tambde on Instagram (@_nihar_tambde_6895)"
+                aria-label="Instagram Personal"
+              >
+                <InstagramIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100086398737546"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all shadow-sm group"
+                title="Facebook Page (Pheta By Nihar)"
+                aria-label="Facebook Page"
+              >
+                <FacebookIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCyIW3yq9Vyt9fAIe8x_EWtg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#FF0000] hover:text-white transition-all shadow-sm group"
+                title="Subscribe on YouTube"
+                aria-label="YouTube Channel"
+              >
+                <YoutubeIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
+              </a>
             </div>
           </div>
 
@@ -73,7 +111,14 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#D7A65B] flex-shrink-0 mt-1" />
-                <span>Pune, Maharashtra, India</span>
+                <a
+                  href="https://share.google/xj6WCITif4HwHcTTn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#D7A65B] transition-colors leading-relaxed"
+                >
+                  no. 33/J, 9, Mughbhat cross lane Twashta kansar chwal, Girgaon, Mumbai, Maharashtra 400004
+                </a>
               </li>
             </ul>
           </div>
@@ -81,9 +126,19 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-white/10 pt-6 text-center font-sans text-xs text-[#E8D8C5]/60 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-white/10 pt-6 text-center font-sans text-xs text-[#E8D8C5]/70 flex flex-col md:flex-row justify-between items-center gap-3">
           <p>© 2026 Pheta By Nihar. All Rights Reserved.</p>
-          <p className="mt-2 md:mt-0">Designed with Tradition</p>
+          <p className="flex items-center gap-1">
+            Designed and Developed by{' '}
+            <a
+              href="https://www.dashonsolutions.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#D7A65B] hover:text-[#F3D18A] font-semibold underline underline-offset-2 transition-colors ml-1"
+            >
+              Dashon Solutions Pvt. Ltd.
+            </a>
+          </p>
         </div>
 
       </div>

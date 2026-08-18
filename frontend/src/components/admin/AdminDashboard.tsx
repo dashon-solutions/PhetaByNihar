@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {
   LogOut, LayoutGrid, Image, UserCheck,
   Award, Package, PlaySquare, Star,
-  Sparkles, ExternalLink,
+  Sparkles, ExternalLink, Calendar,
   PhoneCall, Layers, Globe
 } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
@@ -13,6 +13,7 @@ import { BannerManager } from './BannerManager';
 import { AboutManager } from './AboutManager';
 import { ServicesManager } from './ServicesManager';
 import { ProductsManager } from './ProductsManager';
+import { EventsManager } from './EventsManager';
 import { VideosManager } from './VideosManager';
 import { MediaManager } from './MediaManager';
 import { TestimonialsManager } from './TestimonialsManager';
@@ -20,7 +21,7 @@ import { InquiryManager } from './InquiryManager';
 import { OurWorkManager } from './OurWorkManager';
 import { CRMManager } from './CRMManager';
 
-type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'videos' | 'media' | 'testimonials' | 'inquiries' | 'our-work' | 'crm';
+type ActiveTab = 'banner' | 'about' | 'services' | 'products' | 'events' | 'videos' | 'media' | 'testimonials' | 'inquiries' | 'our-work' | 'crm';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('crm');
@@ -28,6 +29,7 @@ export const AdminDashboard: React.FC = () => {
   const [stats, setStats] = useState({
     services: 0,
     products: 0,
+    events: 0,
     videos: 0,
     testimonials: 0,
     inquiries: 0,
@@ -51,9 +53,10 @@ export const AdminDashboard: React.FC = () => {
     const verifyAndLoadStats = async () => {
       try {
         await apiFetch('/auth/verify');
-        const [services, products, videos, testimonials, inquiries, crmStats] = await Promise.all([
+        const [services, products, events, videos, testimonials, inquiries, crmStats] = await Promise.all([
           apiFetch('/services').catch(() => []),
           apiFetch('/products').catch(() => []),
+          apiFetch('/events').catch(() => []),
           apiFetch('/videos').catch(() => []),
           apiFetch('/testimonials').catch(() => []),
           apiFetch('/inquiry').catch(() => []),
@@ -63,6 +66,7 @@ export const AdminDashboard: React.FC = () => {
         setStats({
           services: services?.length || 0,
           products: products?.length || 0,
+          events: events?.length || 0,
           videos: videos?.length || 0,
           testimonials: testimonials?.length || 0,
           inquiries: inquiries?.length || 0,
@@ -99,6 +103,7 @@ export const AdminDashboard: React.FC = () => {
         { id: 'about', label: 'About Us & Story', icon: <UserCheck className="w-4 h-4" /> },
         { id: 'services', label: 'Services Offered', icon: <LayoutGrid className="w-4 h-4" />, badge: `${stats.services}` },
         { id: 'products', label: 'Exclusive Collection', icon: <Package className="w-4 h-4" />, badge: `${stats.products}` },
+        { id: 'events', label: 'Upcoming Events', icon: <Calendar className="w-4 h-4" />, badge: `${stats.events}` },
         { id: 'our-work', label: 'Our Work Gallery', icon: <Layers className="w-4 h-4" /> }
       ]
     },
@@ -122,6 +127,8 @@ export const AdminDashboard: React.FC = () => {
         return <ServicesManager />;
       case 'products':
         return <ProductsManager />;
+      case 'events':
+        return <EventsManager />;
       case 'videos':
         return <VideosManager />;
       case 'media':
