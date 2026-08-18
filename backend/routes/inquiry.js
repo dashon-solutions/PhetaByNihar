@@ -1,7 +1,7 @@
 import express from 'express';
 import { Inquiry } from '../models/Inquiry.js';
 import { verifyToken } from '../middleware/auth.js';
-import { sendAdminInquiryNotification } from '../utils/email.js';
+import { sendDualInquiryEmails } from '../utils/email.js';
 
 const router = express.Router();
 
@@ -40,9 +40,10 @@ router.post('/', async (req, res) => {
 
     await inquiry.save();
 
-    // Trigger self email notification asynchronously
-    sendAdminInquiryNotification(inquiry).catch(err => {
-      console.warn('Inquiry notification email dispatch skipped/failed:', err.message);
+    // Trigger dual email dispatch asynchronously (Owner Alert + Customer Confirmation)
+    // Non-blocking: Inquiry is already saved to database & admin panel regardless of SMTP status
+    sendDualInquiryEmails(inquiry).catch(err => {
+      console.warn('[EMAIL WARNING] Background email dispatch failed safely:', err.message);
     });
 
     res.status(201).json({ message: 'Inquiry submitted successfully', inquiry });
