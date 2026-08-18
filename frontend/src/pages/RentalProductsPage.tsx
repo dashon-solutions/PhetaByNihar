@@ -4,7 +4,8 @@ import { SEO } from '../components/common/SEO';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { Divider } from '../components/ui/Divider';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
+import { InquiryModal } from '../components/ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,7 +37,15 @@ const cardVariant: any = {
 export const RentalProductsPage: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('');
   const navigate = useNavigate();
+
+  const handleOpenRentalInquiry = (e: React.MouseEvent, productName: string) => {
+    e.stopPropagation();
+    setSelectedProduct(productName);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -113,6 +122,7 @@ export const RentalProductsPage: React.FC = () => {
                     variants={cardVariant}
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.3 }}
+                    onClick={() => navigate(`/products/${product._id}`)}
                     className="group cursor-pointer bg-white p-5 rounded-3xl border border-[#E8D8C5]/70 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                   >
                     <div>
@@ -144,13 +154,20 @@ export const RentalProductsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="text-center pt-3">
+                    <div className="pt-3 border-t border-[#E8D8C5]/60 flex gap-2">
+                      <button
+                        onClick={(e) => handleOpenRentalInquiry(e, product.name)}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-300 border border-[#8A2B24] cursor-pointer"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Reserve / Rent</span>
+                      </button>
                       <button
                         onClick={() => navigate(`/products/${product._id}`)}
-                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans text-xs font-semibold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 border border-[#8A2B24] group cursor-pointer"
+                        className="inline-flex items-center justify-center gap-1 py-3 px-4 rounded-full border border-[#E8D8C5] bg-white text-[#4D2D22] hover:bg-[#F8F3EC] font-sans text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
                       >
-                        <span>Explore Product</span>
-                        <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                        <span>Details</span>
+                        <ArrowRight className="w-3 h-3" />
                       </button>
                     </div>
                   </motion.div>
@@ -161,7 +178,15 @@ export const RentalProductsPage: React.FC = () => {
         </section>
       </main>
       <Footer />
+
+      <InquiryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        type="rental"
+        subject={selectedProduct}
+      />
     </motion.div>
   );
 };
+
 

@@ -58,7 +58,7 @@ export const ServicesSection: React.FC = () => {
 
   const renderIcon = (iconName: string) => {
     const IconComponent = (LucideIcons as any)[iconName] || LucideIcons.Crown;
-    return <IconComponent className="text-[#C48B3C] group-hover:text-[#F3D18A] w-5 h-5 md:w-6 md:h-6 transition-colors duration-300" />;
+    return <IconComponent className="text-[#F3D18A] group-hover:text-[#FFE3A8] w-5 h-5 md:w-6 md:h-6 transition-colors duration-300" />;
   };
 
   return (
@@ -91,38 +91,42 @@ export const ServicesSection: React.FC = () => {
             key={service._id || index}
             className="bg-[#FFFDFB] rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgba(77,45,34,0.06)] border border-[#E8D8C5] hover:border-[#D7A65B] group hover:shadow-[0_12px_32px_rgba(77,45,34,0.14)] transition-all duration-500 flex flex-col h-full relative cursor-pointer transform hover:-translate-y-1.5"
           >
-            {/* Card Image Container */}
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] md:aspect-[4/3] overflow-hidden shrink-0 bg-[#F4EDE4]">
-              <div className="absolute inset-0 bg-[#4D2D22]/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
-              <img
-                src={getApiImageUrl(service.image)}
-                alt={service.title}
-                className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
+            {/* Card Image Container with Uniform Fixed Height & Unclipped Floating Badge */}
+            <div className="relative w-full h-60 sm:h-72 md:h-64 lg:h-72 shrink-0 bg-[#F4EDE4] overflow-visible">
+              <div className="w-full h-full overflow-hidden relative">
+                <div className="absolute inset-0 bg-[#4D2D22]/10 group-hover:bg-transparent transition-colors duration-500 z-10 pointer-events-none" />
+                <img
+                  src={getApiImageUrl(service.image)}
+                  alt={service.title}
+                  className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading="lazy"
+                />
+              </div>
 
-              {/* Floating Centered Icon Badge */}
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-[#FFFDFB] w-11 h-11 md:w-13 md:h-13 flex items-center justify-center rounded-full shadow-lg border border-[#E8D8C5] group-hover:bg-[#6E1E18] group-hover:border-[#6E1E18] transition-all duration-300 z-20">
-                <div className="transform group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+              {/* Floating Centered Icon Badge - Exact Same Baseline on All Cards */}
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-[#6E1E18] w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.25)] border-2 border-white group-hover:bg-[#4A0D0D] group-hover:border-[#D7A65B] group-hover:scale-110 transition-all duration-300 z-30 pointer-events-none">
+                <div className="transform transition-transform duration-300 flex items-center justify-center">
                   {renderIcon(service.icon)}
                 </div>
               </div>
             </div>
 
-            {/* Card Content Area */}
-            <div className="pt-8 pb-6 px-5 sm:px-6 flex flex-col items-center text-center flex-grow bg-[#FFFDFB]">
-              <h3 className="font-serif text-[#4D2D22] text-lg md:text-xl font-bold mb-2.5 group-hover:text-[#6E1E18] transition-colors duration-300 line-clamp-2 leading-snug">
-                {service.title}
-              </h3>
+            {/* Card Content Area - Perfectly Aligned Vertical Spacing */}
+            <div className="pt-9 pb-6 px-5 sm:px-6 flex flex-col items-center text-center flex-grow bg-[#FFFDFB] relative z-10 justify-between">
+              <div className="w-full flex flex-col items-center">
+                <h3 className="font-serif text-[#4D2D22] text-lg md:text-xl font-bold mb-2.5 group-hover:text-[#6E1E18] transition-colors duration-300 line-clamp-2 leading-snug min-h-[48px] md:min-h-[56px] flex items-center justify-center">
+                  {service.title}
+                </h3>
 
-              <p className="font-sans text-[#666666] text-xs md:text-sm leading-relaxed mb-5 flex-grow line-clamp-3 text-balance">
-                {service.description}
-              </p>
+                <p className="font-sans text-[#666666] text-xs md:text-sm leading-relaxed mb-5 line-clamp-3 min-h-[54px] md:min-h-[60px]">
+                  {service.description}
+                </p>
+              </div>
 
               {/* Action Link */}
               <Link
                 to="/services"
-                className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#C48B3C] group-hover:text-[#6E1E18] transition-colors duration-300 uppercase tracking-wider pt-2 border-t border-[#E8D8C5]/40 w-full justify-center"
+                className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#C48B3C] group-hover:text-[#6E1E18] transition-colors duration-300 uppercase tracking-wider pt-3 border-t border-[#E8D8C5]/40 w-full justify-center"
               >
                 <span>Explore Details</span>
                 <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300" />

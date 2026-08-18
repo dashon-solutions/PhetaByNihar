@@ -25,6 +25,7 @@ interface MediaLogoData {
 export const MediaAndTestimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
   const [reviews, setReviews] = useState<TestimonialData[]>([
     {
       quote: "Nihar's Pheta tying added a royal touch to our wedding. Every single guest was mesmerized by the precision of folds!",
@@ -70,7 +71,6 @@ export const MediaAndTestimonials: React.FC = () => {
       try {
         const logosData = await apiFetch('/media');
         if (logosData && logosData.length > 0) {
-          // If the DB returned logo entries, map them. If they have image, use it. Otherwise, use text.
           setMediaLogos(logosData);
         }
       } catch (err) {
@@ -98,6 +98,17 @@ export const MediaAndTestimonials: React.FC = () => {
 
   const maxIndex = Math.max(0, reviews.length - itemsPerView);
 
+  // Auto-swipe every 4.5 seconds with pause on hover
+  useEffect(() => {
+    if (isHovered || maxIndex <= 0) return;
+
+    const autoSwipeTimer = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 4500);
+
+    return () => clearInterval(autoSwipeTimer);
+  }, [isHovered, maxIndex, reviews.length]);
+
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
@@ -106,16 +117,18 @@ export const MediaAndTestimonials: React.FC = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
+  const duplicatedLogos = [...mediaLogos, ...mediaLogos, ...mediaLogos, ...mediaLogos];
+
   return (
     <div>
-      <section className="w-full my-2 mx-auto max-w-[1200px]">
+      <section className="w-full my-6 mx-auto overflow-hidden">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full text-center mb-8 md:mb-12 relative"
+          className="w-full text-center mb-8 md:mb-12 relative px-4 max-w-[1200px] mx-auto"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#E5C158] text-[10px] md:text-xs font-sans tracking-[0.2em] md:tracking-[0.25em] uppercase mb-3">
             <Award className="w-3.5 h-3.5" />
@@ -127,32 +140,37 @@ export const MediaAndTestimonials: React.FC = () => {
           <Divider />
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
-          {mediaLogos.map((logo, index) => (
-            <motion.div
-              key={logo._id || index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative flex items-center justify-center h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden px-8 shadow-lg hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] bg-white/50"
-            >
-              {logo.image ? (
-                <img
-                  src={getApiImageUrl(logo.image)}
-                  alt={logo.name}
-                  className="relative z-10 max-h-12 w-auto object-contain"
-                />
-              ) : (
-                <span 
-                  className="font-serif font-bold text-2xl relative z-10 transition-colors duration-300"
-                  style={{ color: logo.color || '#6E1E18' }}
-                >
-                  {logo.name}
-                </span>
-              )}
-            </motion.div>
-          ))}
+        {/* Seamless Infinite Marquee Track */}
+        <div className="relative w-full overflow-hidden py-3">
+          {/* Subtle Left & Right Edge Gradient Fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#F8F3EC] via-[#F8F3EC]/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#F8F3EC] via-[#F8F3EC]/80 to-transparent z-20 pointer-events-none" />
+
+          {/* Continuous Loop Track */}
+          <div className="animate-marquee flex items-center gap-5 sm:gap-7 md:gap-8">
+            {duplicatedLogos.map((logo, index) => (
+              <div
+                key={`${logo._id || logo.name}-${index}`}
+                className="group relative flex items-center justify-center w-48 sm:w-56 md:w-64 h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 transition-all duration-300 overflow-hidden px-6 sm:px-8 shadow-sm hover:shadow-[0_10px_30px_rgba(212,175,55,0.18)] bg-white/90 shrink-0 cursor-pointer"
+              >
+                {logo.image ? (
+                  <img
+                    src={getApiImageUrl(logo.image)}
+                    alt={logo.name}
+                    className="relative z-10 max-h-11 md:max-h-13 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span 
+                    className="font-serif font-bold text-xl md:text-2xl relative z-10 transition-colors duration-300"
+                    style={{ color: logo.color || '#6E1E18' }}
+                  >
+                    {logo.name}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -185,7 +203,11 @@ export const MediaAndTestimonials: React.FC = () => {
             </motion.div>
 
             {/* Testimonials Slider */}
-            <div className="relative max-w-7xl mx-auto">
+            <div 
+              className="relative max-w-7xl mx-auto"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <div className="overflow-hidden rounded-[24px]">
                 <motion.div 
                   className="flex transition-transform duration-500 ease-in-out"

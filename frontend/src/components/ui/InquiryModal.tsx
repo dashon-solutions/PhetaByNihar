@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Loader2 } from 'lucide-react';
+import { X, MapPin, Loader2, Crown, Phone, User, Send, CheckCircle, Sparkles } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 
 interface InquiryModalProps {
@@ -10,17 +10,20 @@ interface InquiryModalProps {
   subject: string;
 }
 
-export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, type, subject }) => {
+export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, type = 'rental', subject }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    address: ''
+    email: '',
+    city: '',
+    address: '',
+    message: ''
   });
-  const [locationDetails, setLocationDetails] = useState<{lat: number, lng: number, accuracy: number} | null>(null);
-  
+  const [locationDetails, setLocationDetails] = useState<{ lat: number; lng: number; accuracy: number } | null>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -32,10 +35,10 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
       setError('Geolocation is not supported by your browser');
       return;
     }
-    
+
     setIsLocating(true);
     setError('');
-    
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         setLocationDetails({
@@ -43,26 +46,29 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
           lng: position.coords.longitude,
           accuracy: position.coords.accuracy
         });
-        
-        // Try reverse geocoding via standard API or just set a placeholder
+
         try {
-          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+          );
           const data = await response.json();
           if (data && data.display_name) {
-            setFormData(prev => ({ ...prev, address: data.display_name }));
+            setFormData(prev => ({
+              ...prev,
+              address: data.display_name,
+              city: data.address?.city || data.address?.town || data.address?.state_district || prev.city
+            }));
           }
         } catch (err) {
-          console.warn("Could not fetch address for coordinates", err);
-          // Fallback if reverse geocoding fails, user can type it or leave it blank if they want, 
-          // but we will tell them we got the coordinates.
+          console.warn('Could not fetch address for coordinates', err);
           setFormData(prev => ({ ...prev, address: `${position.coords.latitude}, ${position.coords.longitude}` }));
         }
-        
+
         setIsLocating(false);
       },
       () => {
         setIsLocating(false);
-        setError('Unable to retrieve your location. Please type your address manually.');
+        setError('Unable to retrieve your location. Please type your location manually.');
       }
     );
   };
@@ -71,24 +77,36 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
-    
+
     try {
       await apiFetch('/inquiry', {
         method: 'POST',
         body: JSON.stringify({
           type,
           subject,
-          ...formData,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          city: formData.city,
+          address: formData.address || formData.city,
+          message: formData.message,
           locationDetails
         })
       });
-      
-      setSuccessMessage('Your inquiry has been submitted! We will contact you soon.');
+
+      setIsSubmitted(true);
       setTimeout(() => {
-        setSuccessMessage('');
+        setIsSubmitted(false);
         onClose();
-      }, 3000);
-      
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          city: '',
+          address: '',
+          message: ''
+        });
+      }, 3200);
     } catch (err: any) {
       setError(err.message || 'Failed to submit inquiry. Please try again.');
     } finally {
@@ -100,96 +118,170 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ isOpen, onClose, typ
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-[#E8D8C5]"
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full max-w-lg bg-[#FFFDFB] rounded-[28px] shadow-2xl border border-[#E8D8C5] overflow-hidden my-8"
         >
-          <div className="flex justify-between items-center p-6 border-b border-[#E8D8C5] bg-[#F8F3EC]">
-            <h2 className="font-serif text-2xl font-bold text-[#4D2D22]">
-              {type === 'rental' ? 'Inquire about Rental' : 'Enroll in Class'}
-            </h2>
-            <button onClick={onClose} className="text-[#666666] hover:text-[#6E1E18] transition-colors">
-              <X size={24} />
+          {/* Header */}
+          <div className="bg-gradient-to-r from-[#4A0D0D] via-[#6E1E18] to-[#4A0D0D] p-6 sm:p-7 text-white relative">
+            <button
+              onClick={onClose}
+              className="absolute top-5 right-5 p-2 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300 backdrop-blur-sm cursor-pointer"
+            >
+              <X className="w-5 h-5" />
             </button>
+
+            <div className="flex items-center gap-2 text-[#D7A65B] text-xs uppercase font-bold tracking-[0.2em] mb-1.5">
+              <Crown className="w-4 h-4" />
+              <span>{type === 'rental' ? 'Rental & Booking Inquiry' : 'Class Enrollment'}</span>
+            </div>
+
+            <h3 className="font-serif text-2xl sm:text-3xl text-[#F8F3EC] leading-tight">
+              {type === 'rental' ? 'Reserve / Rent Product' : 'Enroll in Class'}
+            </h3>
+
+            <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D7A65B]/20 border border-[#D7A65B]/40 text-[#F3D18A] text-xs font-medium">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Selected: {subject}</span>
+            </div>
           </div>
-          
-          <div className="p-6">
-            <p className="text-[#666666] font-sans text-sm mb-6">
-              You are inquiring about: <strong className="text-[#4D2D22]">{subject}</strong>
-            </p>
-            
-            {successMessage ? (
-              <div className="bg-green-50 text-green-800 p-4 rounded-xl border border-green-200 text-center">
-                {successMessage}
-              </div>
+
+          {/* Body */}
+          <div className="p-6 sm:p-7">
+            {isSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-8 text-center space-y-4"
+              >
+                <div className="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                  <CheckCircle className="w-9 h-9" />
+                </div>
+                <h4 className="font-serif text-2xl text-[#4A0D0D] font-bold">
+                  Inquiry Received!
+                </h4>
+                <p className="text-[#666666] text-sm max-w-sm mx-auto leading-relaxed">
+                  Thank you, <strong className="text-[#4A0D0D]">{formData.name}</strong>! Our royal styling team will connect with you via WhatsApp/Phone shortly to confirm rental availability and pricing.
+                </p>
+                <div className="inline-block bg-[#F8F3EC] text-[#6E1E18] text-xs px-4 py-2 rounded-full font-medium border border-[#E8D8C5]">
+                  Closing automatically...
+                </div>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <div className="bg-red-50 text-red-800 p-3 rounded-lg text-sm border border-red-200">
+                  <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl">
                     {error}
                   </div>
                 )}
-                
+
+                {/* Full Name */}
                 <div>
-                  <label className="block text-sm font-bold text-[#4D2D22] mb-1">Full Name</label>
-                  <input 
-                    type="text" 
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8D8C5] focus:outline-none focus:border-[#D7A65B] focus:ring-1 focus:ring-[#D7A65B] bg-[#FFFDFB] text-[#4D2D22]"
-                    placeholder="Enter your name"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-bold text-[#4D2D22] mb-1">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8D8C5] focus:outline-none focus:border-[#D7A65B] focus:ring-1 focus:ring-[#D7A65B] bg-[#FFFDFB] text-[#4D2D22]"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="block text-sm font-bold text-[#4D2D22]">Address</label>
-                    <button 
-                      type="button"
-                      onClick={getLocation}
-                      disabled={isLocating}
-                      className="text-xs text-[#6E1E18] font-bold flex items-center hover:text-[#D7A65B] transition-colors"
-                    >
-                      {isLocating ? <Loader2 size={12} className="animate-spin mr-1"/> : <MapPin size={12} className="mr-1"/>}
-                      {isLocating ? 'Locating...' : 'Use Live Location'}
-                    </button>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1.5">
+                    Your Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <User className="w-4 h-4 text-[#D7A65B] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="e.g. Anand Shinde"
+                      className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] placeholder:text-[#999999] focus:outline-none focus:border-[#6E1E18] focus:bg-white transition-colors"
+                    />
                   </div>
-                  <textarea 
-                    name="address"
-                    required
-                    rows={3}
-                    value={formData.address}
+                </div>
+
+                {/* Phone & City Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1.5">
+                      Phone / WhatsApp <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Phone className="w-4 h-4 text-[#D7A65B] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="+91 98765 43210"
+                        className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] placeholder:text-[#999999] focus:outline-none focus:border-[#6E1E18] focus:bg-white transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1.5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-[#4D2D22]">
+                        City / Location
+                      </label>
+                      <button
+                        type="button"
+                        onClick={getLocation}
+                        disabled={isLocating}
+                        className="text-[10px] text-[#6E1E18] font-bold flex items-center hover:text-[#D7A65B] transition-colors cursor-pointer"
+                      >
+                        {isLocating ? <Loader2 size={10} className="animate-spin mr-1" /> : <MapPin size={10} className="mr-1" />}
+                        {isLocating ? 'Locating...' : 'Auto-Fill'}
+                      </button>
+                    </div>
+                    <div className="relative">
+                      <MapPin className="w-4 h-4 text-[#D7A65B] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        placeholder="e.g. Pune, Mumbai, Thane"
+                        className="w-full pl-10 pr-4 py-3 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] placeholder:text-[#999999] focus:outline-none focus:border-[#6E1E18] focus:bg-white transition-colors"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Event Date or Rental Duration Note */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1.5">
+                    Event Date / Rental Duration & Notes (Optional)
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={2}
+                    value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-xl border border-[#E8D8C5] focus:outline-none focus:border-[#D7A65B] focus:ring-1 focus:ring-[#D7A65B] bg-[#FFFDFB] text-[#4D2D22] resize-none"
-                    placeholder="Enter your address or use live location"
+                    placeholder="e.g. Need for wedding on 25th Dec, quantity 10 phetas..."
+                    className="w-full p-3.5 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] placeholder:text-[#999999] focus:outline-none focus:border-[#6E1E18] focus:bg-white transition-colors resize-none"
                   />
                 </div>
-                
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold text-sm uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 border border-[#8A2B24] cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : 'Submit Inquiry'}
-                </button>
+
+                {/* Submit Button */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 px-6 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 border border-[#8A2B24] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Submitting Rental Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Submit Rental Inquiry</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
             )}
           </div>

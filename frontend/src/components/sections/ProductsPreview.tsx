@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Crown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Divider } from '../ui/Divider';
+import { InquiryModal } from '../ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
 interface ProductData {
@@ -14,8 +16,11 @@ interface ProductData {
 }
 
 export const ProductsPreview: React.FC = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('Miniature Pheta');
   const [products, setProducts] = useState<ProductData[]>([
     {
       id: '01',
@@ -39,6 +44,11 @@ export const ProductsPreview: React.FC = () => {
       description: 'Precision-etched historic royal seal cast in traditional metallic tones.'
     }
   ]);
+
+  const handleOpenRentalInquiry = (productName: string) => {
+    setSelectedProduct(productName);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -152,7 +162,9 @@ export const ProductsPreview: React.FC = () => {
                       </div>
 
                       <div className="mt-auto pt-2 md:pt-6 border-t border-[#D4AF37]/15">
-                        <button className="w-full py-1.5 md:py-3 px-2 md:px-6 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300">
+                        <button 
+                          onClick={() => handleOpenRentalInquiry(product.name)}
+                          className="w-full py-1.5 md:py-3 px-2 md:px-6 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer">
                           <span>Reserve / Rent</span>
                           <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </button>
@@ -171,7 +183,7 @@ export const ProductsPreview: React.FC = () => {
               {/* Prev Button */}
               <button
                 onClick={prevSlide}
-                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
               </button>
@@ -182,7 +194,7 @@ export const ProductsPreview: React.FC = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
-                    className={`transition-all duration-300 rounded-full ${currentIndex === idx
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${currentIndex === idx
                       ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]'
                       : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
                       }`}
@@ -194,7 +206,7 @@ export const ProductsPreview: React.FC = () => {
               {/* Next Button */}
               <button
                 onClick={nextSlide}
-                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
+                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50 cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
               </button>
@@ -213,13 +225,22 @@ export const ProductsPreview: React.FC = () => {
           <p className="text-xs md:text-sm text-[#C2B2A3] font-light mb-6 md:mb-8">
             Discover over 50+ authentic Maratha royal props, attire, and decor items available for events.
           </p>
-          <button className="flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-transparent border-2 border-[#D4AF37]/40 rounded-full text-[#E5C158] font-sans font-semibold text-xs md:text-sm tracking-wider uppercase hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-lg group">
+          <button 
+            onClick={() => navigate('/products')}
+            className="flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-transparent border-2 border-[#D4AF37]/40 rounded-full text-[#E5C158] font-sans font-semibold text-xs md:text-sm tracking-wider uppercase hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-lg group cursor-pointer">
             View Full Gallery
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
 
       </div>
+
+      <InquiryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        type="rental"
+        subject={selectedProduct}
+      />
     </section>
   );
-};
+};
