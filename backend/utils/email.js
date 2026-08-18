@@ -519,7 +519,7 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
 };
 
 /**
- * 3. Master function to dispatch both emails safely with distinct logs
+ * 3. Master function to dispatch both emails safely with distinct production logs
  */
 export const sendDualInquiryEmails = async (inquiryData) => {
   const timestamp = new Date().toLocaleTimeString();
@@ -533,18 +533,33 @@ export const sendDualInquiryEmails = async (inquiryData) => {
   console.log(`======================================================`);
 
   try {
-    const [adminResult, customerResult] = await Promise.allSettled([
-      sendAdminInquiryNotification(inquiryData),
-      sendCustomerConfirmationEmail(inquiryData)
-    ]);
+    // 1. Send Admin / Owner Lead Notification
+    console.log(`[EMAIL] 📤 Sending admin notification...`);
+    const adminResult = await sendAdminInquiryNotification(inquiryData);
+    if (adminResult?.sent) {
+      console.log(`[EMAIL] ✅ Admin notification sent successfully! (${adminResult.provider || 'api'})`);
+    } else {
+      console.log(`[EMAIL] ❌ Admin notification failed:`, adminResult?.error || adminResult?.note || 'Failed');
+    }
 
-    const adminSent = adminResult.status === 'fulfilled' && adminResult.value?.sent;
-    const customerSent = customerResult.status === 'fulfilled' && customerResult.value?.sent;
+    // 2. Send Customer Confirmation
+    let customerResult = null;
+    if (inquiryData.email && inquiryData.email.includes('@')) {
+      console.log(`[EMAIL] 📤 Sending customer confirmation to ${inquiryData.email}...`);
+      customerResult = await sendCustomerConfirmationEmail(inquiryData);
+      if (customerResult?.sent) {
+        console.log(`[EMAIL] ✅ Customer confirmation sent successfully! (${customerResult.provider || 'api'})`);
+      } else {
+        console.log(`[EMAIL] ❌ Customer confirmation failed:`, customerResult?.error || customerResult?.note || 'Failed');
+      }
+    } else {
+      console.log(`[EMAIL] ℹ️ Customer confirmation skipped (No customer email provided).`);
+    }
 
     console.log(`\n📊 [DISPATCH REPORT]`);
     console.log(`💾 DATABASE RECORD SAVED : ✅ YES`);
-    console.log(`📧 EMAIL TO OWNER/ADMIN  : ${adminSent ? '✅ DELIVERED' : '❌ FAILED'}`);
-    console.log(`📧 EMAIL TO CUSTOMER     : ${customerSent ? '✅ DELIVERED' : '❌ FAILED'}`);
+    console.log(`📧 EMAIL TO ADMIN        : ${adminResult?.sent ? '✅ SENT' : '❌ FAILED'}`);
+    console.log(`📧 EMAIL TO CUSTOMER     : ${customerResult?.sent ? '✅ SENT' : (customerResult ? '❌ FAILED' : 'SKIPPED')}`);
     console.log(`======================================================\n`);
   } catch (error) {
     console.warn('⚠️ [EMAIL WARNING] sendDualInquiryEmails encountered an error:', error);
