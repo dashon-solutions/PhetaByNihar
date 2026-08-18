@@ -60,7 +60,7 @@ const DEFAULT_PAGE_BANNERS: Record<string, BannerData> = {
     titleBold: 'Royal Celebrations',
     titleRegular: '& Memorable Events',
     description: 'Explore our gallery of royal wedding ceremonies, celebrity satkars, high-profile dignitaries, and vibrant cultural processions across India.',
-    backgroundImage: '/bannerimgside.png',
+    backgroundImage: '/footerimg.png',
     primaryButtonText: 'Book Us Now',
     primaryButtonLink: '/contact',
     secondaryButtonText: 'Explore Services',
@@ -188,7 +188,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       <div
         className={`absolute inset-0 z-10 ${isCentered
           ? 'bg-gradient-to-t from-black/85 via-black/60 to-black/45'
-          : 'bg-gradient-to-r from-black/85 via-black/55 to-black/25'
+          : 'bg-gradient-to-r from-black/5 via-black/35 to-black/25'
           }`}
       />
 
