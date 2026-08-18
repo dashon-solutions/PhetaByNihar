@@ -15,11 +15,10 @@ const createTransporter = () => {
 
   if (!user || !pass) {
     console.error('❌ [SMTP ERROR] SMTP_USER or SMTP_PASS is missing in environment variables!');
-    console.error(`Current env check: SMTP_USER=${user ? 'SET (' + user + ')' : 'MISSING'}, SMTP_PASS=${pass ? 'SET (' + pass.length + ' chars)' : 'MISSING'}`);
     return null;
   }
 
-  // Direct SSL (Port 465) with explicit timeouts - 100% reliable on Render, AWS, and Cloud hosts
+  // Direct SSL (Port 465) with explicit timeouts
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -31,9 +30,9 @@ const createTransporter = () => {
     tls: {
       rejectUnauthorized: false
     },
-    connectionTimeout: 15000,
+    connectionTimeout: 10000,
     greetingTimeout: 10000,
-    socketTimeout: 20000
+    socketTimeout: 15000
   });
 };
 
@@ -53,6 +52,98 @@ const getLogoAttachment = () => {
 };
 
 /**
+ * Universal Email Sender (Supports Resend HTTPS API, Brevo HTTPS API, and Nodemailer SMTP)
+ * Note: Cloud providers (like Render Free Tier) block raw TCP ports (25, 465, 587).
+ * HTTPS REST API (Port 443) is NEVER blocked on Render.
+ */
+const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
+  const fromName = 'Pheta By Nihar';
+  const smtpUser = process.env.SMTP_USER || 'nihartambde66@gmail.com';
+
+  // 1. Check for Resend HTTP API (Recommended for Render Free Tier - Port 443 HTTPS)
+  if (process.env.RESEND_API_KEY) {
+    try {
+      console.log(`📡 [HTTP DISPATCH] Sending via Resend HTTPS to: ${to}`);
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY.trim()}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: process.env.RESEND_FROM || `${fromName} <onboarding@resend.dev>`,
+          to: [to],
+          subject: subject,
+          html: html
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log(`🟢 [EMAIL DELIVERED via Resend HTTPS] Sent to: ${to} (ID: ${data.id})`);
+        return { sent: true, messageId: data.id };
+      } else {
+        console.error(`❌ [RESEND API ERROR]:`, data);
+      }
+    } catch (apiErr) {
+      console.warn(`⚠️ [RESEND API EXCEPTION]:`, apiErr.message);
+    }
+  }
+
+  // 2. Check for Brevo HTTP API (Port 443 HTTPS)
+  if (process.env.BREVO_API_KEY) {
+    try {
+      console.log(`📡 [HTTP DISPATCH] Sending via Brevo HTTPS to: ${to}`);
+      const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'api-key': process.env.BREVO_API_KEY.trim(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: fromName, email: smtpUser },
+          to: [{ email: to }],
+          subject: subject,
+          htmlContent: html
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log(`🟢 [EMAIL DELIVERED via Brevo HTTPS] Sent to: ${to} (ID: ${data.messageId})`);
+        return { sent: true, messageId: data.messageId };
+      }
+    } catch (apiErr) {
+      console.warn(`⚠️ [BREVO API EXCEPTION]:`, apiErr.message);
+    }
+  }
+
+  // 3. Fallback: Nodemailer SMTP
+  const transporter = createTransporter();
+  if (transporter) {
+    try {
+      console.log(`📤 [SMTP DISPATCH] Sending via Gmail SMTP to: ${to}`);
+      const info = await transporter.sendMail({
+        from: `"${fromName}" <${smtpUser}>`,
+        to: to,
+        subject: subject,
+        html: html,
+        attachments: attachments
+      });
+      console.log(`🟢 [EMAIL DELIVERED via SMTP] Sent to: ${to} (MessageId: ${info.messageId})`);
+      return { sent: true, messageId: info.messageId };
+    } catch (err) {
+      console.error(`❌ [SMTP FAILED] Could not send to ${to}: ${err.message}`);
+      if (err.message && err.message.includes('timeout')) {
+        console.warn(`ℹ️ [RENDER TIP] Render Free Web Services block outbound SMTP ports (465/587). Add RESEND_API_KEY to your Render Environment to send via HTTPS Port 443 without timeouts.`);
+      }
+      return { sent: false, error: err.message };
+    }
+  } else {
+    console.log(`⚠️ [EMAIL NOTICE] No email provider configured for:`, to);
+    return { sent: false, note: 'SMTP_USER/PASS not configured' };
+  }
+};
+
+/**
  * 1. Send Royal Confirmation Email to Customer (Fully Responsive for Mobile)
  */
 export const sendCustomerConfirmationEmail = async (inquiryData) => {
@@ -60,24 +151,19 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
     return { sent: false, reason: 'No valid customer email provided' };
   }
 
-  const transporter = createTransporter();
-  const fromAddress = `"Pheta By Nihar" <${process.env.SMTP_USER || 'info@phetabynihar.com'}>`;
   const subjectLabel = inquiryData.subject || 'Pheta Tying Service';
 
   const htmlContent = `
   <!DOCTYPE html>
-  <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="x-apple-disable-message-reformatting">
     <title>Inquiry Confirmation - Pheta By Nihar</title>
     <style type="text/css">
-      /* Reset & Mobile Styles */
       body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
       table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-      img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
       body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F8F3EC; }
       
       @media screen and (max-width: 600px) {
@@ -135,20 +221,13 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
           padding: 14px 16px !important;
           font-size: 12.5px !important;
         }
-        .hide-mobile {
-          display: none !important;
-        }
       }
     </style>
   </head>
   <body style="margin: 0; padding: 0; background-color: #F8F3EC; font-family: 'Georgia', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2E1A14;">
-    
-    <!-- Outer Full Width Wrapper -->
     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8F3EC;">
       <tr>
         <td align="center" style="padding: 20px 0;">
-          
-          <!-- Inner Centered Card Container (Max 600px) -->
           <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 35px rgba(74, 13, 13, 0.12); border: 2px solid #E8D8C5;">
             
             <!-- Royal Header Banner -->
@@ -267,26 +346,12 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
   </html>
   `;
 
-  if (transporter) {
-    try {
-      console.log(`\n📤 [DISPATCHING] Customer Confirmation Email -> ${inquiryData.email} (Subject: ${subjectLabel})`);
-      const info = await transporter.sendMail({
-        from: fromAddress,
-        to: inquiryData.email,
-        subject: `👑 Inquiry Received: ${subjectLabel} | Pheta By Nihar`,
-        html: htmlContent,
-        attachments: getLogoAttachment()
-      });
-      console.log(`🟢 [EMAIL DELIVERED] Customer Confirmation sent to: ${inquiryData.email} (MessageId: ${info.messageId})`);
-      return { sent: true, messageId: info.messageId };
-    } catch (err) {
-      console.error(`❌ [EMAIL FAILED] Could not send customer confirmation to ${inquiryData.email}:`, err.message);
-      return { sent: false, error: err.message };
-    }
-  } else {
-    console.log(`⚠️ [EMAIL NOTICE] SMTP not configured. Customer confirmation email skipped for:`, inquiryData.email);
-    return { sent: false, note: 'SMTP_USER/PASS not configured in .env' };
-  }
+  return await sendEmailMessage({
+    to: inquiryData.email,
+    subject: `👑 Inquiry Received: ${subjectLabel} | Pheta By Nihar`,
+    html: htmlContent,
+    attachments: getLogoAttachment()
+  });
 };
 
 /**
@@ -464,32 +529,12 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
   </html>
   `;
 
-  const transporter = createTransporter();
-  if (transporter) {
-    try {
-      console.log(`\n📤 [DISPATCHING] Owner / Admin Lead Alert -> ${adminEmail} (From: ${inquiryData.name} - ${inquiryData.subject})`);
-      const info = await transporter.sendMail({
-        from: `"Pheta By Nihar Portal" <${process.env.SMTP_USER || 'no-reply@phetabynihar.com'}>`,
-        to: adminEmail,
-        subject: `🚨 [INQUIRY ALERT] ${inquiryData.name} - ${inquiryData.subject}`,
-        html: htmlContent,
-        attachments: getLogoAttachment()
-      });
-      console.log(`🟢 [EMAIL DELIVERED] Owner Alert sent to: ${adminEmail} (MessageId: ${info.messageId})`);
-      return { sent: true, messageId: info.messageId };
-    } catch (err) {
-      console.error(`❌ [EMAIL FAILED] Could not send owner alert to ${adminEmail}:`, err.message);
-      return { sent: false, error: err.message };
-    }
-  } else {
-    console.log(`⚠️ [EMAIL NOTICE] SMTP not configured. Logged inquiry for admin:`, {
-      to: adminEmail,
-      candidate: inquiryData.name,
-      phone: inquiryData.phone,
-      subject: inquiryData.subject
-    });
-    return { sent: false, note: 'SMTP_USER/PASS not configured in .env' };
-  }
+  return await sendEmailMessage({
+    to: adminEmail,
+    subject: `🚨 [INQUIRY ALERT] ${inquiryData.name} - ${inquiryData.subject}`,
+    html: htmlContent,
+    attachments: getLogoAttachment()
+  });
 };
 
 /**
