@@ -27,6 +27,7 @@ import { Footer } from './components/sections/Footer';
 // Admin Imports
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { WhatsAppFloatingWidget } from './components/common/WhatsAppFloatingWidget';
 
 const HomePage = () => {
   return (
@@ -73,7 +74,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white">
+      <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white relative">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
@@ -87,6 +88,9 @@ function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
+
+        {/* Global Floating WhatsApp Dual-Number Widget */}
+        <WhatsAppFloatingWidget />
       </div>
     </BrowserRouter>
   );

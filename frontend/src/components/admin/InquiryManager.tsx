@@ -80,8 +80,8 @@ export const InquiryManager: React.FC = () => {
     }
 
     const message = inquiry.type === 'class'
-      ? `👑 *Namaskar ${inquiry.name}!* 👑\n\nThank you for your interest in our *${inquiry.subject}* at Pheta By Nihar Academy.\n\nWe would love to share the complete syllabus, upcoming batch schedule, and details with you!\n\n📍 *Pheta By Nihar*\n📞 +91 98505 04054 / +91 91722 04054`
-      : `👑 *Namaskar ${inquiry.name}!* 👑\n\nThank you for reaching out regarding *${inquiry.subject}* from Pheta By Nihar.\n\nOur team is here to assist you with order confirmation and details.\n\n📍 *Pheta By Nihar*\n📞 +91 98505 04054 / +91 91722 04054`;
+      ? `👑 *Namaskar ${inquiry.name}!* 👑\n\nThank you for your interest in our *${inquiry.subject}* at Pheta By Nihar Academy.\n\nWe would love to share the complete syllabus, upcoming batch schedule, and details with you!\n\n📍 *Pheta By Nihar*\n📞 +91 89285 63608 / +91 80875 45175`
+      : `👑 *Namaskar ${inquiry.name}!* 👑\n\nThank you for reaching out regarding *${inquiry.subject}* from Pheta By Nihar.\n\nOur team is here to assist you with order confirmation and details.\n\n📍 *Pheta By Nihar*\n📞 +91 89285 63608 / +91 80875 45175`;
 
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
   };

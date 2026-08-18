@@ -141,9 +141,14 @@ export const ContactUsPage: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Phone & WhatsApp</h4>
-                        <a href="tel:+919850504054" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
-                          +91 98505 04054 / +91 98765 43210
-                        </a>
+                        <div className="flex flex-col gap-0.5">
+                          <a href="tel:+918928563608" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
+                            +91 89285 63608 (Main Line)
+                          </a>
+                          <a href="tel:+918087545175" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
+                            +91 80875 45175 (Studio / Academy)
+                          </a>
+                        </div>
                       </div>
                     </div>
 
