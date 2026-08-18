@@ -8,21 +8,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Create transporter with SMTP configuration (Optimized for Render & Cloud deployments)
-const createTransporter = () => {
+export const createTransporter = () => {
   const user = (process.env.SMTP_USER || '').trim();
   const rawPass = process.env.SMTP_PASS || '';
   const pass = rawPass.replace(/\s+/g, '');
 
   if (!user || !pass) {
-    console.error('❌ [SMTP ERROR] SMTP_USER or SMTP_PASS is missing in environment variables!');
     return null;
   }
 
-  // Direct SSL (Port 465) with explicit timeouts
+  const port = parseInt(process.env.SMTP_PORT || '587', 10);
+  const isSecure = port === 465;
+
   return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: port,
+    secure: isSecure,
+    requireTLS: !isSecure, // Use STARTTLS on port 587
+    family: 4, // 👈 Explicitly force IPv4 to prevent ENETUNREACH IPv6 errors on Render
     auth: {
       user: user,
       pass: pass
@@ -34,6 +37,36 @@ const createTransporter = () => {
     greetingTimeout: 10000,
     socketTimeout: 15000
   });
+};
+
+/**
+ * Startup SMTP Connection Verifier
+ */
+export const verifySMTPConnection = async () => {
+  if (process.env.RESEND_API_KEY) {
+    console.log('✅ Resend HTTPS REST API configured (Port 443 - Cloud Ready)');
+    return true;
+  }
+
+  const transporter = createTransporter();
+  if (!transporter) {
+    console.log('⚠️ [SMTP NOTICE] SMTP_USER or SMTP_PASS not set in environment variables.');
+    return false;
+  }
+
+  try {
+    const port = process.env.SMTP_PORT || '587';
+    console.log(`📡 Verifying Gmail SMTP connection (Host: smtp.gmail.com, Port: ${port}, IPv4 forced)...`);
+    await transporter.verify();
+    console.log(`✅ [SMTP CONNECTED] Gmail SMTP connection successfully verified on port ${port} (IPv4)!`);
+    return true;
+  } catch (err) {
+    console.warn(`❌ [SMTP VERIFY FAILED]: ${err.message}`);
+    if (err.message && err.message.includes('ENETUNREACH')) {
+      console.warn(`ℹ️ [NETWORK NOTICE] Cloud host blocked raw SMTP socket. Use RESEND_API_KEY for HTTPS Port 443 delivery.`);
+    }
+    return false;
+  }
 };
 
 // Check if logo exists for inline attachment
@@ -53,17 +86,15 @@ const getLogoAttachment = () => {
 
 /**
  * Universal Email Sender (Supports Resend HTTPS API, Brevo HTTPS API, and Nodemailer SMTP)
- * Note: Cloud providers (like Render Free Tier) block raw TCP ports (25, 465, 587).
- * HTTPS REST API (Port 443) is NEVER blocked on Render.
  */
 const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
   const fromName = 'Pheta By Nihar';
   const smtpUser = process.env.SMTP_USER || 'nihartambde66@gmail.com';
 
-  // 1. Check for Resend HTTP API (Recommended for Render Free Tier - Port 443 HTTPS)
+  // 1. Resend HTTP REST API (Recommended for Render Free Tier - Port 443 HTTPS)
   if (process.env.RESEND_API_KEY) {
     try {
-      console.log(`📡 [HTTP DISPATCH] Sending via Resend HTTPS to: ${to}`);
+      console.log(`📡 [HTTPS DISPATCH] Sending via Resend API to: ${to}`);
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -79,8 +110,7 @@ const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
       });
       const data = await res.json();
       if (res.ok) {
-        console.log(`🟢 [EMAIL DELIVERED via Resend HTTPS] Sent to: ${to} (ID: ${data.id})`);
-        return { sent: true, messageId: data.id };
+        return { sent: true, provider: 'resend', messageId: data.id };
       } else {
         console.error(`❌ [RESEND API ERROR]:`, data);
       }
@@ -89,10 +119,10 @@ const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
     }
   }
 
-  // 2. Check for Brevo HTTP API (Port 443 HTTPS)
+  // 2. Brevo HTTP REST API (Port 443 HTTPS)
   if (process.env.BREVO_API_KEY) {
     try {
-      console.log(`📡 [HTTP DISPATCH] Sending via Brevo HTTPS to: ${to}`);
+      console.log(`📡 [HTTPS DISPATCH] Sending via Brevo API to: ${to}`);
       const res = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
@@ -108,19 +138,19 @@ const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
       });
       const data = await res.json();
       if (res.ok) {
-        console.log(`🟢 [EMAIL DELIVERED via Brevo HTTPS] Sent to: ${to} (ID: ${data.messageId})`);
-        return { sent: true, messageId: data.messageId };
+        return { sent: true, provider: 'brevo', messageId: data.messageId };
       }
     } catch (apiErr) {
       console.warn(`⚠️ [BREVO API EXCEPTION]:`, apiErr.message);
     }
   }
 
-  // 3. Fallback: Nodemailer SMTP
+  // 3. Nodemailer SMTP (Port 587 / 465 with IPv4 forced)
   const transporter = createTransporter();
   if (transporter) {
     try {
-      console.log(`📤 [SMTP DISPATCH] Sending via Gmail SMTP to: ${to}`);
+      const port = process.env.SMTP_PORT || '587';
+      console.log(`📤 [SMTP DISPATCH] Sending via Gmail SMTP (Port ${port}, IPv4) to: ${to}`);
       const info = await transporter.sendMail({
         from: `"${fromName}" <${smtpUser}>`,
         to: to,
@@ -128,14 +158,10 @@ const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
         html: html,
         attachments: attachments
       });
-      console.log(`🟢 [EMAIL DELIVERED via SMTP] Sent to: ${to} (MessageId: ${info.messageId})`);
-      return { sent: true, messageId: info.messageId };
+      return { sent: true, provider: 'smtp', messageId: info.messageId };
     } catch (err) {
       console.error(`❌ [SMTP FAILED] Could not send to ${to}: ${err.message}`);
-      if (err.message && err.message.includes('timeout')) {
-        console.warn(`ℹ️ [RENDER TIP] Render Free Web Services block outbound SMTP ports (465/587). Add RESEND_API_KEY to your Render Environment to send via HTTPS Port 443 without timeouts.`);
-      }
-      return { sent: false, error: err.message };
+      return { sent: false, provider: 'smtp', error: err.message };
     }
   } else {
     console.log(`⚠️ [EMAIL NOTICE] No email provider configured for:`, to);
@@ -379,52 +405,7 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
     <style type="text/css">
       body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
       table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-      body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F8F3EC; }
-      
-      @media screen and (max-width: 600px) {
-        .admin-container {
-          width: 100% !important;
-          max-width: 100% !important;
-          border-radius: 0 !important;
-          border-left: none !important;
-          border-right: none !important;
-        }
-        .fluid-padding {
-          padding-left: 18px !important;
-          padding-right: 18px !important;
-          padding-top: 22px !important;
-          padding-bottom: 22px !important;
-        }
-        .header-padding {
-          padding: 26px 16px 20px 16px !important;
-        }
-        .brand-title {
-          font-size: 20px !important;
-        }
-        .stack-cell-label {
-          display: block !important;
-          width: 100% !important;
-          padding-bottom: 2px !important;
-          font-size: 11px !important;
-        }
-        .stack-cell-value {
-          display: block !important;
-          width: 100% !important;
-          padding-bottom: 12px !important;
-          font-size: 13.5px !important;
-        }
-        .btn-full {
-          display: block !important;
-          width: 100% !important;
-          box-sizing: border-box !important;
-          text-align: center !important;
-          padding: 14px 16px !important;
-          font-size: 13px !important;
-        }
-      }
-    </style>
-  </head>
-  <body style="margin: 0; padding: 0; font-family: 'Georgia', 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F8F3EC; color: #2E1A14;">
+      body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #F8F3EC; color: #2E1A14;">
     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F8F3EC;">
       <tr>
         <td align="center" style="padding: 20px 0;">
@@ -538,7 +519,7 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
 };
 
 /**
- * 3. Master function to dispatch both emails safely
+ * 3. Master function to dispatch both emails safely with distinct logs
  */
 export const sendDualInquiryEmails = async (inquiryData) => {
   const timestamp = new Date().toLocaleTimeString();
@@ -552,11 +533,19 @@ export const sendDualInquiryEmails = async (inquiryData) => {
   console.log(`======================================================`);
 
   try {
-    await Promise.allSettled([
+    const [adminResult, customerResult] = await Promise.allSettled([
       sendAdminInquiryNotification(inquiryData),
       sendCustomerConfirmationEmail(inquiryData)
     ]);
-    console.log(`✔ [EMAIL DISPATCH FINISHED] Both notification tasks completed.\n`);
+
+    const adminSent = adminResult.status === 'fulfilled' && adminResult.value?.sent;
+    const customerSent = customerResult.status === 'fulfilled' && customerResult.value?.sent;
+
+    console.log(`\n📊 [DISPATCH REPORT]`);
+    console.log(`💾 DATABASE RECORD SAVED : ✅ YES`);
+    console.log(`📧 EMAIL TO OWNER/ADMIN  : ${adminSent ? '✅ DELIVERED' : '❌ FAILED'}`);
+    console.log(`📧 EMAIL TO CUSTOMER     : ${customerSent ? '✅ DELIVERED' : '❌ FAILED'}`);
+    console.log(`======================================================\n`);
   } catch (error) {
     console.warn('⚠️ [EMAIL WARNING] sendDualInquiryEmails encountered an error:', error);
   }

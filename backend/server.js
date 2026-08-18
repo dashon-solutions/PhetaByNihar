@@ -65,7 +65,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'healthy', dbState: mongoose.connection.readyState });
 });
 
+import { verifySMTPConnection } from './utils/email.js';
+
 // Start listening
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
+  verifySMTPConnection();
 });
