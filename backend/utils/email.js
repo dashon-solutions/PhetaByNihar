@@ -269,21 +269,22 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
 
   if (transporter) {
     try {
-      await transporter.sendMail({
+      console.log(`\n📤 [DISPATCHING] Customer Confirmation Email -> ${inquiryData.email} (Subject: ${subjectLabel})`);
+      const info = await transporter.sendMail({
         from: fromAddress,
         to: inquiryData.email,
         subject: `👑 Inquiry Received: ${subjectLabel} | Pheta By Nihar`,
         html: htmlContent,
         attachments: getLogoAttachment()
       });
-      console.log(`[EMAIL SUCCESS] Confirmation email delivered to customer: ${inquiryData.email}`);
-      return { sent: true };
+      console.log(`🟢 [EMAIL DELIVERED] Customer Confirmation sent to: ${inquiryData.email} (MessageId: ${info.messageId})`);
+      return { sent: true, messageId: info.messageId };
     } catch (err) {
-      console.error('[EMAIL ERROR] Failed to send customer confirmation email:', err.message);
+      console.error(`❌ [EMAIL FAILED] Could not send customer confirmation to ${inquiryData.email}:`, err.message);
       return { sent: false, error: err.message };
     }
   } else {
-    console.log(`[EMAIL NOTICE] SMTP not configured. Customer confirmation email skipped for:`, inquiryData.email);
+    console.log(`⚠️ [EMAIL NOTICE] SMTP not configured. Customer confirmation email skipped for:`, inquiryData.email);
     return { sent: false, note: 'SMTP_USER/PASS not configured in .env' };
   }
 };
@@ -466,21 +467,22 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
   const transporter = createTransporter();
   if (transporter) {
     try {
-      await transporter.sendMail({
+      console.log(`\n📤 [DISPATCHING] Owner / Admin Lead Alert -> ${adminEmail} (From: ${inquiryData.name} - ${inquiryData.subject})`);
+      const info = await transporter.sendMail({
         from: `"Pheta By Nihar Portal" <${process.env.SMTP_USER || 'no-reply@phetabynihar.com'}>`,
         to: adminEmail,
         subject: `🚨 [INQUIRY ALERT] ${inquiryData.name} - ${inquiryData.subject}`,
         html: htmlContent,
         attachments: getLogoAttachment()
       });
-      console.log(`[EMAIL SUCCESS] Admin notification email delivered to: ${adminEmail}`);
-      return { sent: true };
+      console.log(`🟢 [EMAIL DELIVERED] Owner Alert sent to: ${adminEmail} (MessageId: ${info.messageId})`);
+      return { sent: true, messageId: info.messageId };
     } catch (err) {
-      console.error('[EMAIL ERROR] Failed to send admin notification email:', err.message);
+      console.error(`❌ [EMAIL FAILED] Could not send owner alert to ${adminEmail}:`, err.message);
       return { sent: false, error: err.message };
     }
   } else {
-    console.log(`[EMAIL NOTICE] SMTP not configured. Logged inquiry for admin:`, {
+    console.log(`⚠️ [EMAIL NOTICE] SMTP not configured. Logged inquiry for admin:`, {
       to: adminEmail,
       candidate: inquiryData.name,
       phone: inquiryData.phone,
@@ -494,12 +496,23 @@ export const sendAdminInquiryNotification = async (inquiryData) => {
  * 3. Master function to dispatch both emails safely
  */
 export const sendDualInquiryEmails = async (inquiryData) => {
+  const timestamp = new Date().toLocaleTimeString();
+  console.log(`\n======================================================`);
+  console.log(`👑 [${timestamp}] INCOMING INQUIRY DISPATCH`);
+  console.log(`👤 Customer: ${inquiryData.name} | 📞 Phone: ${inquiryData.phone}`);
+  console.log(`📧 Customer Email: ${inquiryData.email || 'None'}`);
+  console.log(`🏷️ Subject / Item: ${inquiryData.subject} (Type: ${inquiryData.type || 'general'})`);
+  console.log(`📍 Location: ${inquiryData.city || inquiryData.address || 'None'}`);
+  if (inquiryData.message) console.log(`💬 Message: "${inquiryData.message}"`);
+  console.log(`======================================================`);
+
   try {
     await Promise.allSettled([
       sendAdminInquiryNotification(inquiryData),
       sendCustomerConfirmationEmail(inquiryData)
     ]);
+    console.log(`✔ [EMAIL DISPATCH FINISHED] Both notification tasks completed.\n`);
   } catch (error) {
-    console.warn('[EMAIL WARNING] sendDualInquiryEmails encountered an error:', error);
+    console.warn('⚠️ [EMAIL WARNING] sendDualInquiryEmails encountered an error:', error);
   }
 };

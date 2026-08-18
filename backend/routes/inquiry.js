@@ -39,11 +39,12 @@ router.post('/', async (req, res) => {
     });
 
     await inquiry.save();
+    console.log(`\n💾 [DATABASE SAVED] Inquiry saved with ID: ${inquiry._id} (Status: new)`);
 
     // Trigger dual email dispatch asynchronously (Owner Alert + Customer Confirmation)
     // Non-blocking: Inquiry is already saved to database & admin panel regardless of SMTP status
     sendDualInquiryEmails(inquiry).catch(err => {
-      console.warn('[EMAIL WARNING] Background email dispatch failed safely:', err.message);
+      console.warn('⚠️ [EMAIL WARNING] Background email dispatch failed safely:', err.message);
     });
 
     res.status(201).json({ message: 'Inquiry submitted successfully', inquiry });
