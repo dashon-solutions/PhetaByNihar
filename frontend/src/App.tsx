@@ -15,6 +15,7 @@ import { OurWorkPage } from './pages/OurWorkPage';
 import { Statistics } from './components/sections/Statistics';
 import { AboutSection } from './components/sections/AboutSection';
 import { ServicesSection } from './components/sections/ServicesSection';
+import { ClassesSection } from './components/sections/ClassesSection';
 import { OurWork } from './components/sections/OurWork';
 import { FeaturedConversations } from './components/sections/FeaturedConversations';
 import { ProductsPreview } from './components/sections/ProductsPreview';
@@ -54,6 +55,7 @@ const HomePage = () => {
 
         <AboutSection />
         <ServicesSection />
+        <ClassesSection />
         <ProductsPreview />
         <FeaturedConversations />
         <MediaAndTestimonials />

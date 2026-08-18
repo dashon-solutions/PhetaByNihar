@@ -40,11 +40,15 @@ router.post('/', verifyToken, upload.single('image'), (req, res) => {
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    // Upload directly to Cloudinary using upload_stream
+    // Upload directly to Cloudinary using upload_stream with WebP conversion
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder: 'phetabynihar',
         format: 'webp', // Convert everything to webp for optimization
+        transformation: [
+          { quality: 'auto:good' },
+          { fetch_format: 'webp' }
+        ]
       },
       (error, result) => {
         if (error) {
@@ -52,10 +56,13 @@ router.post('/', verifyToken, upload.single('image'), (req, res) => {
           return res.status(500).json({ message: 'Cloudinary upload failed', error: error.message });
         }
 
-        // Return the secure Cloudinary URL
+        // Return the secure Cloudinary WebP URL
+        const webpUrl = result.secure_url ? result.secure_url.replace(/\.[a-zA-Z0-9]+$/, '.webp') : result.secure_url;
+
         res.status(200).json({
           message: 'Image uploaded successfully',
-          imageUrl: result.secure_url
+          imageUrl: webpUrl,
+          format: 'webp'
         });
       }
     );

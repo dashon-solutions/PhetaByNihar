@@ -100,8 +100,8 @@ interface HeroBannerProps {
   showTag?: boolean;
 }
 
-export const HeroBanner: React.FC<HeroBannerProps> = ({ 
-  pageName = 'home', 
+export const HeroBanner: React.FC<HeroBannerProps> = ({
+  pageName = 'home',
   customData,
   centered,
   showButtons,
@@ -114,16 +114,16 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
     ...customData
   });
 
-  const isCentered = centered !== undefined 
-    ? centered 
+  const isCentered = centered !== undefined
+    ? centered
     : (pageName === 'about' || pageName === 'our-work');
 
-  const shouldShowButtons = showButtons !== undefined 
-    ? showButtons 
+  const shouldShowButtons = showButtons !== undefined
+    ? showButtons
     : (pageName !== 'about' && pageName !== 'our-work');
 
-  const shouldShowTag = showTag !== undefined 
-    ? showTag 
+  const shouldShowTag = showTag !== undefined
+    ? showTag
     : (pageName !== 'about' && pageName !== 'our-work');
 
   useEffect(() => {
@@ -185,12 +185,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       />
 
       {/* Luxury Dark Gradient Overlay */}
-      <div 
-        className={`absolute inset-0 z-10 ${
-          isCentered 
-            ? 'bg-gradient-to-t from-black/85 via-black/60 to-black/45' 
-            : 'bg-gradient-to-r from-black/85 via-black/55 to-black/25'
-        }`} 
+      <div
+        className={`absolute inset-0 z-10 ${isCentered
+          ? 'bg-gradient-to-t from-black/85 via-black/60 to-black/45'
+          : 'bg-gradient-to-r from-black/85 via-black/55 to-black/25'
+          }`}
       />
 
       {/* Decorative Heritage Watermark Overlay */}
@@ -200,18 +199,16 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       />
 
       {/* Content Container */}
-      <div className={`relative z-20 max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 flex items-center h-full pt-16 md:pt-0 ${
-        isCentered ? 'justify-center' : 'justify-start'
-      }`}>
+      <div className={`relative z-20 max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 flex items-center h-full pt-16 md:pt-0 ${isCentered ? 'justify-center' : 'justify-start'
+        }`}>
         <motion.div
           initial={{ opacity: 0, y: isCentered ? 30 : 0, x: isCentered ? 0 : -35 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className={`w-full ${
-            isCentered 
-              ? 'max-w-3xl text-center flex flex-col items-center justify-center mx-auto' 
-              : 'lg:w-1/2 text-left'
-          }`}
+          className={`w-full ${isCentered
+            ? 'max-w-3xl text-center flex flex-col items-center justify-center mx-auto'
+            : 'lg:w-1/2 text-left'
+            }`}
         >
           {/* Tag Pill */}
           {shouldShowTag && banner.tag && (
@@ -246,18 +243,16 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
           {/* Description */}
           {banner.description && (
-            <p className={`mt-4 sm:mt-5 md:mt-6 text-white/90 text-sm sm:text-base md:text-lg leading-relaxed font-sans font-normal ${
-              isCentered ? 'max-w-2xl mx-auto' : 'max-w-xl'
-            }`}>
+            <p className={`mt-4 sm:mt-5 md:mt-6 text-white/90 text-sm sm:text-base md:text-lg leading-relaxed font-sans font-normal ${isCentered ? 'max-w-2xl mx-auto' : 'max-w-xl'
+              }`}>
               {banner.description}
             </p>
           )}
 
           {/* Buttons (Only shown when shouldShowButtons is true) */}
           {shouldShowButtons && (banner.primaryButtonText || banner.secondaryButtonText) && (
-            <div className={`mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4 ${
-              isCentered ? 'justify-center' : 'justify-start'
-            }`}>
+            <div className={`mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4 ${isCentered ? 'justify-center' : 'justify-start'
+              }`}>
               {renderButton(banner.primaryButtonText, banner.primaryButtonLink, true)}
               {renderButton(banner.secondaryButtonText, banner.secondaryButtonLink, false)}
             </div>
