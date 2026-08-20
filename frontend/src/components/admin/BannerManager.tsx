@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../utils/api';
 import { ImageUploadField } from './ImageUploadField';
-import { Save, Check } from 'lucide-react';
+import { Save, Check, Image as ImageIcon } from 'lucide-react';
 
 export const BannerManager: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -83,32 +83,38 @@ export const BannerManager: React.FC = () => {
     }
   };
 
+  const pages = [
+    { id: 'home', label: 'Home Page' },
+    { id: 'about', label: 'About Us' },
+    { id: 'our-work', label: 'Our Work' },
+    { id: 'contact', label: 'Contact Us' }
+  ];
+
   return (
-    <div className="bg-[#FFFDFB] rounded-xl border border-[#E8D8C5] p-4 max-w-3xl">
+    <div className="bg-white rounded-2xl border border-[#E8D8C5] p-4 sm:p-6 shadow-xs max-w-4xl">
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 mb-4">
         <div>
-          <h3 className="font-serif text-lg font-bold text-[#4D2D22]">Hero Banner Configuration</h3>
-          <p className="font-sans text-xs text-[#666666] mt-1">
-            Select a page to edit its banner text, buttons and background images.
+          <div className="flex items-center gap-2">
+            <ImageIcon className="w-4 h-4 text-[#D7A65B]" />
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#4D2D22]">Hero Banner Configuration</h3>
+          </div>
+          <p className="font-sans text-xs sm:text-sm text-[#666666] mt-0.5">
+            Customize header hero banners, typography, buttons, and high-resolution cover photos
           </p>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-4 border-b border-[#E8D8C5] pb-2">
-        {[
-          { id: 'home', label: 'Home Page' },
-          { id: 'about', label: 'About Us Page' },
-          { id: 'our-work', label: 'Our Work Page' },
-          { id: 'contact', label: 'Contact Us Page' }
-        ].map(tab => (
+      {/* Horizontally Scrollable Page Selection Tabs */}
+      <div className="flex overflow-x-auto gap-2 mb-4 pb-2 border-b border-[#E8D8C5] scrollbar-none">
+        {pages.map(tab => (
           <button
             key={tab.id}
             type="button"
             onClick={() => handlePageChange(tab.id)}
-            className={`px-4 py-2 font-sans text-xs sm:text-sm font-bold uppercase tracking-wider rounded-t-xl transition-all ${
+            className={`px-4 py-2 font-sans text-xs font-bold uppercase tracking-wider rounded-xl transition-all shrink-0 cursor-pointer ${
               activePage === tab.id
-                ? 'bg-[#F8F3EC] text-[#6E1E18] border-t-2 border-l border-r border-[#6E1E18] shadow-sm'
-                : 'text-[#666666] hover:text-[#4D2D22] hover:bg-[#FAF6F0]'
+                ? 'bg-[#6E1E18] text-white shadow-sm'
+                : 'bg-[#F8F3EC] text-[#4D2D22] hover:bg-[#E8D8C5]'
             }`}
           >
             {tab.label}
@@ -117,20 +123,20 @@ export const BannerManager: React.FC = () => {
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center h-48">
-          <div className="w-8 h-8 border-4 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
+        <div className="flex justify-center items-center py-20">
+          <div className="w-8 h-8 border-3 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && (
             <div className="p-3 bg-red-50 text-red-700 text-xs rounded-xl font-sans font-medium border border-red-200">
               {error}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Tag */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Badge / Tag Text
               </label>
@@ -140,12 +146,12 @@ export const BannerManager: React.FC = () => {
                 value={form.tag}
                 onChange={handleChange}
                 placeholder="e.g. Preserving Heritage"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
 
             {/* Italic Title */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Italic Heading Line (Top)
               </label>
@@ -155,12 +161,12 @@ export const BannerManager: React.FC = () => {
                 value={form.titleItalic}
                 onChange={handleChange}
                 placeholder="e.g. The Art of"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
 
             {/* Bold Title */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Bold Heading Line (Middle)
               </label>
@@ -170,12 +176,12 @@ export const BannerManager: React.FC = () => {
                 value={form.titleBold}
                 onChange={handleChange}
                 placeholder="e.g. Maharashtrian"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
 
             {/* Regular Title */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Regular Heading Line (Bottom)
               </label>
@@ -185,13 +191,13 @@ export const BannerManager: React.FC = () => {
                 value={form.titleRegular}
                 onChange={handleChange}
                 placeholder="e.g. Pheta Ceremony"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
           </div>
 
           {/* Description */}
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1">
             <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
               Banner Description
             </label>
@@ -201,13 +207,13 @@ export const BannerManager: React.FC = () => {
               onChange={handleChange}
               rows={3}
               placeholder="Enter banner introductory paragraphs..."
-              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+              className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Button 1 */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Primary Button Text
               </label>
@@ -217,12 +223,12 @@ export const BannerManager: React.FC = () => {
                 value={form.primaryButtonText}
                 onChange={handleChange}
                 placeholder="e.g. Book Now"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
 
             {/* Button 2 */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1">
               <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
                 Secondary Button Text
               </label>
@@ -232,24 +238,24 @@ export const BannerManager: React.FC = () => {
                 value={form.secondaryButtonText}
                 onChange={handleChange}
                 placeholder="e.g. Explore Work"
-                className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+                className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs sm:text-sm focus:outline-none focus:border-[#6E1E18] focus:bg-white text-[#4D2D22]"
               />
             </div>
           </div>
 
           {/* Image Upload */}
           <ImageUploadField
-            label="Banner Background Image"
+            label="Banner Background / Hero Image"
             value={form.backgroundImage}
             onChange={handleImageChange}
           />
 
           {/* Save Button */}
-          <div className="flex justify-end gap-3 mt-4">
+          <div className="flex justify-end gap-3 mt-2 pt-3 border-t border-[#E8D8C5]">
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 px-6 py-3 bg-[#6E1E18] text-[#FFFDFB] text-xs font-sans font-bold uppercase tracking-wider rounded-xl shadow-md hover:bg-[#7D201D] active:scale-[0.98] transition-all disabled:opacity-50"
+              className="flex items-center justify-center gap-2 px-6 py-2.5 bg-[#6E1E18] text-[#FFFDFB] text-xs font-sans font-bold uppercase tracking-wider rounded-full shadow-md hover:bg-[#7D201D] active:scale-[0.98] transition-all disabled:opacity-50 cursor-pointer border border-[#8A2B24]"
             >
               {saving ? (
                 <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
@@ -258,7 +264,7 @@ export const BannerManager: React.FC = () => {
               ) : (
                 <Save className="w-4 h-4 text-[#D7A65B]" />
               )}
-              <span>{saving ? 'Saving...' : success ? 'Saved Successfully!' : 'Save Changes'}</span>
+              <span>{saving ? 'Saving...' : success ? 'Saved Successfully!' : 'Save Banner Changes'}</span>
             </button>
           </div>
         </form>

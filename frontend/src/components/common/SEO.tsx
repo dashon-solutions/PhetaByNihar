@@ -96,7 +96,7 @@ export const SEO: React.FC<SEOProps> = ({
       logo: `${SITE_URL}/logo.png`,
       image: `${SITE_URL}/hero_groom.png`,
       description: 'Premier Marathi & Maharashtrian Pheta tying service in Mumbai, Pune & across Maharashtra. Specialized groom styling, wedding guest draping, authentic rentals, and certified pheta academy masterclasses.',
-      telephone: '+918928563608',
+      telephone: '+918652028136',
       email: 'phetabynihar@gmail.com',
       priceRange: '₹₹ - ₹₹₹',
       currenciesAccepted: 'INR',

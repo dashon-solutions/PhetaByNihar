@@ -16,7 +16,7 @@ async function testAllEmailTemplates() {
       type: 'buy',
       subject: 'Wagh Nakh (वाघनख)',
       name: 'Onkar Surwase',
-      phone: '+91 89285 63608',
+      phone: '+91 86520 28136',
       email: TEST_EMAIL,
       city: 'Girgaon, Mumbai',
       message: 'Interested in purchasing 2 handcrafted Wagh Nakh heritage replicas.'
@@ -42,7 +42,7 @@ async function testAllEmailTemplates() {
       type: 'event',
       subject: 'Grand Shobha Yatra & Heritage Pheta Workshop',
       name: 'Onkar Surwase',
-      phone: '+91 89285 63608',
+      phone: '+91 86520 28136',
       email: TEST_EMAIL,
       city: 'Pune',
       message: 'Booking 10 slots for family attendees.'
@@ -55,7 +55,7 @@ async function testAllEmailTemplates() {
       type: 'contact',
       subject: 'Groom & Wedding Guest Styling Consultation',
       name: 'Onkar Surwase',
-      phone: '+91 89285 63608',
+      phone: '+91 86520 28136',
       email: TEST_EMAIL,
       city: 'Mumbai',
       message: 'Looking for on-site groom styling for a royal wedding.'
@@ -69,7 +69,7 @@ async function testAllEmailTemplates() {
       type: 'buy',
       subject: 'Royal Groom Shahi Pheta Set + Kalgi',
       name: 'Priya & Rahul Sharma',
-      phone: '+91 89285 63608',
+      phone: '+91 86520 28136',
       email: 'customer.sample@gmail.com',
       city: 'Marine Lines, Mumbai',
       message: 'Urgent inquiry for wedding date: 15th November 2026. Please call back.'

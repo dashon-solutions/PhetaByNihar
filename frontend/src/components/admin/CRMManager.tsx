@@ -4,7 +4,7 @@ import {
   Calendar, CheckCircle, Send,
   Trash2, Edit, Copy, Sparkles,
   RefreshCw, Check, Gift,
-  Layers, ExternalLink
+  Layers, ExternalLink, X
 } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 
@@ -198,7 +198,7 @@ export const CRMManager: React.FC = () => {
 
     const formattedDate = cust.validUntil ? new Date(cust.validUntil).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '90 Days';
 
-    const message = `👑 *Namaskar ${cust.name}!* 👑\n\nThank you for choosing *Pheta By Nihar* for your special occasion. We truly value having you with us!\n\n🎉 Here is your *Exclusive Privilege Coupon Code*:\n🏷️ *Coupon Code:* ${cust.couponCode}\n✨ *Benefit:* ${cust.discountValue}\n⏳ *Valid Until:* ${formattedDate}\n\nPresent or mention this coupon code during your next royal styling, product rental, or share it with your family & friends!\n\n📍 *Pheta By Nihar* - Royal Maharashtrian Heritage & Turban Draping\n📞 *Call/WhatsApp:* +91 98765 43210\n🌐 *Website:* https://phetabynihar.com`;
+    const message = `👑 *Namaskar ${cust.name}!* 👑\n\nThank you for choosing *Pheta By Nihar* for your special occasion. We truly value having you with us!\n\n🎉 Here is your *Exclusive Privilege Coupon Code*:\n🏷️ *Coupon Code:* ${cust.couponCode}\n✨ *Benefit:* ${cust.discountValue}\n⏳ *Valid Until:* ${formattedDate}\n\nPresent or mention this coupon code during your next royal styling, product rental, or share it with your family & friends!\n\n📍 *Pheta By Nihar* - Royal Maharashtrian Heritage & Turban Draping\n📞 *Call/WhatsApp:* +91 86520 28136 / +91 80875 45175\n🌐 *Website:* https://phetabynihar.com`;
 
     return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
   };
@@ -207,7 +207,6 @@ export const CRMManager: React.FC = () => {
     const url = generateWhatsAppUrl(cust);
     window.open(url, '_blank');
 
-    // Log in backend
     try {
       await apiFetch(`/crm/customers/${cust._id}/log-whatsapp`, { method: 'POST' });
       setCustomers(prev => prev.map(c => c._id === cust._id ? { ...c, whatsappSentAt: new Date().toISOString() } : c));
@@ -242,7 +241,6 @@ export const CRMManager: React.FC = () => {
     setTimeout(() => setActionMessage(null), 4000);
   };
 
-  // Filtered by Search Query
   const filteredCustomers = customers.filter(c => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
@@ -259,7 +257,7 @@ export const CRMManager: React.FC = () => {
   const uniqueChains = Array.from(new Set(customers.map(c => c.serviceProviderChain).filter(Boolean)));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Action Notification Toast */}
       {actionMessage && (
         <div className={`p-4 rounded-xl flex items-center justify-between text-sm shadow-md transition-all ${
@@ -271,96 +269,96 @@ export const CRMManager: React.FC = () => {
       )}
 
       {/* Header & Stats Banner */}
-      <div className="bg-[#FFFDFB] p-6 sm:p-7 rounded-3xl border border-[#E8D8C5] shadow-sm">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#E8D8C5]/70">
+      <div className="bg-[#FFFDFB] p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#E8D8C5] shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8D8C5]/70">
           <div>
-            <div className="flex items-center gap-2 text-[#6E1E18] text-xs uppercase font-bold tracking-[0.2em] mb-1">
-              <Users className="w-4 h-4 text-[#D7A65B]" />
+            <div className="flex items-center gap-2 text-[#6E1E18] text-[11px] uppercase font-bold tracking-[0.2em] mb-1">
+              <Users className="w-3.5 h-3.5 text-[#D7A65B]" />
               <span>Customer Relationship & Loyalty Hub</span>
             </div>
-            <h2 className="font-serif text-3xl font-bold text-[#4D2D22]">
-              Customer CRM & Coupon Codes
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#4D2D22]">
+              Customer CRM & Coupons
             </h2>
-            <p className="text-[#666666] text-sm mt-1">
-              Manage client records, partner chain benefits, and send personalized privilege coupons directly via WhatsApp & Email.
+            <p className="text-[#666666] text-xs sm:text-sm mt-0.5">
+              Client records, coupon codes & 1-tap WhatsApp delivery
             </p>
           </div>
 
           <button
             onClick={handleOpenAddModal}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer shrink-0 border border-[#8A2B24]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:shadow-xl transition-all cursor-pointer shrink-0 border border-[#8A2B24]"
           >
             <Plus className="w-4 h-4" />
-            <span>Add New Customer & Coupon</span>
+            <span>Add Customer & Coupon</span>
           </button>
         </div>
 
         {/* 4 Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          <div className="bg-[#F8F3EC] p-4 rounded-2xl border border-[#E8D8C5]/60 flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-full bg-[#4D2D22] text-[#F3D18A] flex items-center justify-center shrink-0 shadow-sm">
-              <Users className="w-5 h-5" />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mt-4">
+          <div className="bg-[#F8F3EC] p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-[#E8D8C5]/60 flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#4D2D22] text-[#F3D18A] flex items-center justify-center shrink-0 shadow-xs">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-[#666666] uppercase tracking-wider block">Total Clients</span>
-              <span className="font-serif text-2xl font-bold text-[#4D2D22]">{stats.totalCustomers}</span>
+              <span className="text-[10px] font-bold text-[#666666] uppercase tracking-wider block">Total Clients</span>
+              <span className="font-serif text-lg sm:text-2xl font-bold text-[#4D2D22]">{stats.totalCustomers}</span>
             </div>
           </div>
 
-          <div className="bg-green-50/70 p-4 rounded-2xl border border-green-200/60 flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-full bg-green-700 text-white flex items-center justify-center shrink-0 shadow-sm">
-              <Tag className="w-5 h-5" />
+          <div className="bg-green-50/70 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-green-200/60 flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-green-700 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Tag className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-green-800 uppercase tracking-wider block">Active Coupons</span>
-              <span className="font-serif text-2xl font-bold text-green-900">{stats.activeCoupons}</span>
+              <span className="text-[10px] font-bold text-green-800 uppercase tracking-wider block">Active Coupons</span>
+              <span className="font-serif text-lg sm:text-2xl font-bold text-green-900">{stats.activeCoupons}</span>
             </div>
           </div>
 
-          <div className="bg-blue-50/70 p-4 rounded-2xl border border-blue-200/60 flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-full bg-blue-700 text-white flex items-center justify-center shrink-0 shadow-sm">
-              <CheckCircle className="w-5 h-5" />
+          <div className="bg-blue-50/70 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-blue-200/60 flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-blue-700 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-blue-800 uppercase tracking-wider block">Redeemed</span>
-              <span className="font-serif text-2xl font-bold text-blue-900">{stats.redeemedCoupons}</span>
+              <span className="text-[10px] font-bold text-blue-800 uppercase tracking-wider block">Redeemed</span>
+              <span className="font-serif text-lg sm:text-2xl font-bold text-blue-900">{stats.redeemedCoupons}</span>
             </div>
           </div>
 
-          <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/60 flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-full bg-amber-700 text-white flex items-center justify-center shrink-0 shadow-sm">
-              <Layers className="w-5 h-5" />
+          <div className="bg-amber-50/70 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-amber-200/60 flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-amber-700 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">Partner Chains</span>
-              <span className="font-serif text-2xl font-bold text-amber-900">{uniqueChains.length || 1}</span>
+              <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">Partner Chains</span>
+              <span className="font-serif text-lg sm:text-2xl font-bold text-amber-900">{uniqueChains.length || 1}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white p-4 sm:p-5 rounded-2xl border border-[#E8D8C5] shadow-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-2xl border border-[#E8D8C5] shadow-xs">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-[#999999] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#999999] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search by name, phone, email, coupon code, service, or chain..."
+            placeholder="Search by client, phone, coupon code, or service..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] placeholder:text-[#999999] focus:outline-none focus:border-[#6E1E18] focus:bg-white transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 bg-[#F8F3EC]/70 border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
           />
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs font-semibold text-[#4D2D22] focus:outline-none focus:border-[#6E1E18]"
+            className="flex-1 sm:flex-none px-3 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs font-semibold text-[#4D2D22] focus:outline-none focus:border-[#6E1E18]"
           >
-            <option value="all">All Coupon Statuses</option>
+            <option value="all">All Statuses</option>
             <option value="active">Active Coupons</option>
             <option value="redeemed">Redeemed Coupons</option>
             <option value="expired">Expired Coupons</option>
@@ -370,9 +368,9 @@ export const CRMManager: React.FC = () => {
             <select
               value={chainFilter}
               onChange={(e) => setChainFilter(e.target.value)}
-              className="px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs font-semibold text-[#4D2D22] focus:outline-none focus:border-[#6E1E18]"
+              className="flex-1 sm:flex-none px-3 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs font-semibold text-[#4D2D22] focus:outline-none focus:border-[#6E1E18]"
             >
-              <option value="all">All Chains / Branches</option>
+              <option value="all">All Chains</option>
               {uniqueChains.map((ch, idx) => (
                 <option key={idx} value={ch}>{ch}</option>
               ))}
@@ -382,7 +380,7 @@ export const CRMManager: React.FC = () => {
           <button
             onClick={fetchCustomersAndStats}
             title="Refresh list"
-            className="p-2.5 rounded-xl border border-[#E8D8C5] bg-[#F8F3EC] hover:bg-white text-[#4D2D22] transition-colors"
+            className="p-2.5 rounded-xl border border-[#E8D8C5] bg-[#F8F3EC] hover:bg-white text-[#4D2D22] transition-colors cursor-pointer shrink-0"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
@@ -391,43 +389,43 @@ export const CRMManager: React.FC = () => {
 
       {/* Customer Directory List */}
       {loading ? (
-        <div className="flex justify-center items-center py-20 bg-white rounded-3xl border border-[#E8D8C5]">
-          <div className="w-10 h-10 border-4 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
+        <div className="flex justify-center items-center py-20 bg-white rounded-2xl border border-[#E8D8C5]">
+          <div className="w-8 h-8 border-3 border-[#6E1E18]/30 border-t-[#6E1E18] rounded-full animate-spin"></div>
         </div>
       ) : filteredCustomers.length === 0 ? (
-        <div className="bg-white p-12 rounded-3xl text-center border border-[#E8D8C5] shadow-sm">
+        <div className="bg-white p-10 sm:p-14 rounded-2xl text-center border border-[#E8D8C5] shadow-xs">
           <Gift className="w-12 h-12 text-[#D7A65B] opacity-50 mx-auto mb-3" />
           <h3 className="font-serif text-xl font-bold text-[#4D2D22] mb-1">No Customers Found</h3>
-          <p className="text-[#666666] text-sm max-w-md mx-auto mb-5">
+          <p className="text-[#666666] text-xs sm:text-sm max-w-md mx-auto mb-4">
             {searchQuery ? "No customer records match your search criteria." : "Start building your customer loyalty directory and generating customized privilege coupons."}
           </p>
           <button
             onClick={handleOpenAddModal}
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#6E1E18] text-[#F3D18A] font-semibold text-xs rounded-full uppercase tracking-wider hover:bg-[#52140F] transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#6E1E18] text-[#F3D18A] font-semibold text-xs rounded-full uppercase tracking-wider hover:bg-[#52140F] transition-colors cursor-pointer shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add First Customer</span>
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4">
           {filteredCustomers.map((cust) => (
             <div
               key={cust._id}
-              className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E8D8C5] shadow-sm hover:shadow-md transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+              className="bg-white p-4 sm:p-6 rounded-2xl border border-[#E8D8C5] shadow-xs hover:border-[#D7A65B] transition-all flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6"
             >
               {/* Left Customer Info */}
-              <div className="flex-1 space-y-3">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="font-serif text-xl font-bold text-[#4D2D22]">
+              <div className="flex-1 space-y-2.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-serif text-lg sm:text-xl font-bold text-[#4D2D22]">
                     {cust.name}
                   </span>
                   
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F8F3EC] text-[#6E1E18] border border-[#E8D8C5]">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F8F3EC] text-[#6E1E18] border border-[#E8D8C5]">
                     {cust.serviceProviderChain || 'Main Studio'}
                   </span>
 
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${
                     cust.couponStatus === 'active'
                       ? 'bg-green-100 text-green-800 border-green-200'
                       : cust.couponStatus === 'redeemed'
@@ -438,26 +436,26 @@ export const CRMManager: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-[#666666]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#666666]">
                   <div className="flex items-center gap-1.5 font-medium text-[#4D2D22]">
-                    <Phone className="w-3.5 h-3.5 text-[#D7A65B]" />
+                    <Phone className="w-3.5 h-3.5 text-[#D7A65B] shrink-0" />
                     <a href={`tel:${cust.phone}`} className="hover:underline">{cust.phone}</a>
                   </div>
 
                   {cust.email && (
                     <div className="flex items-center gap-1.5">
-                      <Mail className="w-3.5 h-3.5 text-[#D7A65B]" />
-                      <a href={`mailto:${cust.email}`} className="hover:underline">{cust.email}</a>
+                      <Mail className="w-3.5 h-3.5 text-[#D7A65B] shrink-0" />
+                      <a href={`mailto:${cust.email}`} className="hover:underline truncate">{cust.email}</a>
                     </div>
                   )}
 
                   <div className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#D7A65B]" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#D7A65B] shrink-0" />
                     <span>Service: <strong className="text-[#4D2D22]">{cust.serviceOrProduct}</strong></span>
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#D7A65B]" />
+                    <Calendar className="w-3.5 h-3.5 text-[#D7A65B] shrink-0" />
                     <span>Added: {new Date(cust.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>
@@ -470,31 +468,31 @@ export const CRMManager: React.FC = () => {
               </div>
 
               {/* Middle: Coupon Badge */}
-              <div className="bg-gradient-to-r from-[#4A0D0D]/5 via-[#D7A65B]/15 to-[#4A0D0D]/5 p-4 rounded-2xl border border-[#D7A65B]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0 lg:min-w-[280px]">
+              <div className="bg-gradient-to-r from-[#4A0D0D]/5 via-[#D7A65B]/15 to-[#4A0D0D]/5 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-[#D7A65B]/40 flex flex-row items-center justify-between gap-3 shrink-0 lg:min-w-[270px]">
                 <div>
                   <span className="text-[10px] font-bold text-[#6E1E18] uppercase tracking-wider block">
                     Privilege Coupon ({cust.discountValue})
                   </span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <code className="font-mono text-base font-bold tracking-widest text-[#4A0D0D] bg-white px-2.5 py-1 rounded-lg border border-[#D7A65B]/60 shadow-xs">
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <code className="font-mono text-sm sm:text-base font-bold tracking-widest text-[#4A0D0D] bg-white px-2 py-0.5 rounded-lg border border-[#D7A65B]/60 shadow-xs">
                       {cust.couponCode}
                     </code>
                     <button
                       onClick={() => copyToClipboard(cust.couponCode)}
                       title="Copy coupon code"
-                      className="p-1.5 text-[#6E1E18] hover:text-[#4A0D0D] bg-white hover:bg-[#F8F3EC] rounded-lg border border-[#D7A65B]/40 transition-colors"
+                      className="p-1.5 text-[#6E1E18] hover:text-[#4A0D0D] bg-white hover:bg-[#F8F3EC] rounded-lg border border-[#D7A65B]/40 transition-colors cursor-pointer"
                     >
                       {copiedCode === cust.couponCode ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
-                  <span className="text-[10px] text-[#777777] block mt-1">
+                  <span className="text-[10px] text-[#777777] block mt-0.5">
                     Valid till: {cust.validUntil ? new Date(cust.validUntil).toLocaleDateString() : 'N/A'}
                   </span>
                 </div>
 
                 <button
                   onClick={() => handleToggleStatus(cust)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors shrink-0 ${
+                  className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition-colors shrink-0 cursor-pointer ${
                     cust.couponStatus === 'active'
                       ? 'bg-green-700 text-white hover:bg-green-800'
                       : 'bg-gray-200 text-[#4D2D22] hover:bg-gray-300'
@@ -505,42 +503,42 @@ export const CRMManager: React.FC = () => {
               </div>
 
               {/* Right: Quick Action Buttons */}
-              <div className="flex flex-wrap lg:flex-col gap-2 shrink-0 border-t lg:border-t-0 lg:border-l border-[#E8D8C5] pt-3 lg:pt-0 lg:pl-5">
+              <div className="flex flex-row lg:flex-col items-center gap-2 shrink-0 border-t lg:border-t-0 lg:border-l border-[#E8D8C5] pt-3 lg:pt-0 lg:pl-5">
                 {/* Send on WhatsApp Button */}
                 <button
                   onClick={() => handleSendWhatsApp(cust)}
-                  className="flex-1 lg:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
-                  title="Open direct WhatsApp with pre-crafted royal coupon greeting"
+                  className="flex-1 lg:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+                  title="Send via WhatsApp"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Send on WhatsApp</span>
-                  <ExternalLink className="w-3 h-3 opacity-70 ml-0.5" />
+                  <span>WhatsApp</span>
+                  <ExternalLink className="w-3 h-3 opacity-70" />
                 </button>
 
                 {/* Send Email Button */}
                 {cust.email && (
                   <button
                     onClick={() => handleSendEmail(cust)}
-                    className="flex-1 lg:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
-                    title="Send branded coupon email to customer"
+                    className="flex-1 lg:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+                    title="Send Email"
                   >
                     <Mail className="w-3.5 h-3.5" />
-                    <span>Send Email</span>
+                    <span>Email</span>
                   </button>
                 )}
 
                 {/* Edit & Delete */}
-                <div className="flex items-center gap-2 justify-end w-full">
+                <div className="flex items-center gap-1.5 justify-end">
                   <button
                     onClick={() => handleOpenEditModal(cust)}
-                    className="p-2 text-[#4D2D22] hover:text-[#6E1E18] bg-[#F8F3EC] hover:bg-white rounded-xl border border-[#E8D8C5] transition-colors"
+                    className="p-2 text-[#4D2D22] hover:text-[#6E1E18] bg-[#F8F3EC] hover:bg-white rounded-xl border border-[#E8D8C5] transition-colors cursor-pointer"
                     title="Edit Customer"
                   >
                     <Edit className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => handleDelete(cust._id)}
-                    className="p-2 text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 rounded-xl border border-red-200 transition-colors"
+                    className="p-2 text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 rounded-xl border border-red-200 transition-colors cursor-pointer"
                     title="Delete Customer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -552,27 +550,29 @@ export const CRMManager: React.FC = () => {
         </div>
       )}
 
-      {/* Add / Edit Customer & Coupon Modal */}
+      {/* Add / Edit Customer & Coupon Modal (Responsive Full/Bottom Sheet) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-          <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-[#E8D8C5] overflow-hidden my-8">
-            <div className="bg-[#4A0D0D] p-6 text-white flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-xs">
+          <div className="w-full sm:max-w-xl bg-white rounded-t-[28px] sm:rounded-3xl shadow-2xl border border-[#E8D8C5] overflow-hidden max-h-[92vh] sm:max-h-[85vh] flex flex-col animate-in slide-in-from-bottom sm:zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="bg-[#4A0D0D] px-5 py-4 text-white flex items-center justify-between shrink-0">
               <div>
-                <span className="text-[#D7A65B] text-xs uppercase font-bold tracking-wider block">Customer CRM</span>
-                <h3 className="font-serif text-2xl font-bold text-[#F8F3EC]">
-                  {editingCustomer ? 'Edit Customer & Coupon' : 'Add New Client & Coupon Code'}
+                <span className="text-[#D7A65B] text-[10px] uppercase font-bold tracking-wider block">Customer CRM</span>
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#F8F3EC]">
+                  {editingCustomer ? 'Edit Customer & Coupon' : 'Add New Client & Coupon'}
                 </h3>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
               >
-                &times;
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleFormSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Modal Body */}
+            <form onSubmit={handleFormSubmit} className="p-4 sm:p-6 space-y-3.5 overflow-y-auto flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
                     Client Full Name <span className="text-red-500">*</span>
@@ -583,13 +583,13 @@ export const CRMManager: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Vikram Patil"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
-                    WhatsApp Phone Number <span className="text-red-500">*</span>
+                    WhatsApp Phone <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -597,12 +597,12 @@ export const CRMManager: React.FC = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="e.g. 9876543210"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
                     Email Address
@@ -612,7 +612,7 @@ export const CRMManager: React.FC = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="vikram@example.com"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
 
@@ -625,41 +625,41 @@ export const CRMManager: React.FC = () => {
                     value={formData.serviceOrProduct}
                     onChange={(e) => setFormData({ ...formData, serviceOrProduct: e.target.value })}
                     placeholder="e.g. Wedding Pheta Service"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
-                    Service Provider / Partner Chain
+                    Partner Chain / Studio
                   </label>
                   <input
                     type="text"
                     value={formData.serviceProviderChain}
                     onChange={(e) => setFormData({ ...formData, serviceProviderChain: e.target.value })}
-                    placeholder="e.g. Pheta By Nihar Main / Pune Partner"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    placeholder="e.g. Pheta By Nihar Main"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
-                    Discount Value / Offer
+                    Discount / Benefit Offer
                   </label>
                   <input
                     type="text"
                     value={formData.discountValue}
                     onChange={(e) => setFormData({ ...formData, discountValue: e.target.value })}
                     placeholder="e.g. 20% OFF or ₹500 OFF"
-                    className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                   />
                 </div>
               </div>
 
               {/* Coupon Code Section */}
-              <div className="bg-[#F8F3EC] p-4 rounded-2xl border border-[#E8D8C5] space-y-3">
+              <div className="bg-[#F8F3EC] p-3.5 rounded-xl border border-[#E8D8C5] space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22]">
                     Privilege Coupon Code <span className="text-red-500">*</span>
@@ -667,10 +667,10 @@ export const CRMManager: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleGenerateCode}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#6E1E18] hover:text-[#D7A65B] transition-colors"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#6E1E18] hover:text-[#D7A65B] transition-colors cursor-pointer"
                   >
                     <RefreshCw className="w-3 h-3" />
-                    <span>Generate Random Code</span>
+                    <span>Generate Code</span>
                   </button>
                 </div>
                 <input
@@ -679,49 +679,49 @@ export const CRMManager: React.FC = () => {
                   value={formData.couponCode}
                   onChange={(e) => setFormData({ ...formData, couponCode: e.target.value.toUpperCase() })}
                   placeholder="e.g. ROYAL-89B7K"
-                  className="w-full px-4 py-3 bg-white border border-[#D7A65B] rounded-xl font-mono text-base font-bold text-[#4A0D0D] tracking-widest uppercase focus:outline-none focus:ring-2 focus:ring-[#D7A65B]"
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#D7A65B] rounded-xl font-mono text-sm sm:text-base font-bold text-[#4A0D0D] tracking-widest uppercase focus:outline-none focus:ring-2 focus:ring-[#D7A65B]"
                 />
               </div>
 
               {/* Expiry Date */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
-                  Coupon Expiry / Valid Until Date
+                  Coupon Expiry Date
                 </label>
                 <input
                   type="date"
                   value={formData.validUntil}
                   onChange={(e) => setFormData({ ...formData, validUntil: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white"
                 />
               </div>
 
               {/* Notes */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#4D2D22] mb-1">
-                  Internal Notes / Event Details
+                  Internal Notes / Event
                 </label>
                 <textarea
                   rows={2}
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="e.g. Groom at Taj Vivanta wedding on 24th Nov..."
-                  className="w-full px-4 py-2.5 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white resize-none"
+                  placeholder="e.g. Groom at wedding on 24th Nov..."
+                  className="w-full px-3.5 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl text-xs sm:text-sm text-[#4D2D22] focus:outline-none focus:border-[#6E1E18] focus:bg-white resize-none"
                 ></textarea>
               </div>
 
-              {/* Modal Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E8D8C5]">
+              {/* Sticky Modal Action Buttons */}
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E8D8C5] sticky bottom-0 bg-white pb-1">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider text-[#666666] hover:bg-[#F8F3EC] transition-colors"
+                  className="px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#666666] hover:bg-[#F8F3EC] transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-8 py-3 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-semibold text-xs uppercase tracking-wider shadow-md hover:shadow-xl transition-all"
+                  className="px-6 py-2.5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-white font-semibold text-xs uppercase tracking-wider shadow-md hover:shadow-xl transition-all cursor-pointer"
                 >
                   {editingCustomer ? 'Update Customer' : 'Save & Generate Coupon'}
                 </button>

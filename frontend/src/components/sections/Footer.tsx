@@ -104,8 +104,14 @@ export const Footer: React.FC = () => {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#D7A65B] flex-shrink-0" />
                 <div className="flex flex-col gap-0.5">
-                  <a href="tel:+918928563608" className="hover:text-white transition-colors">+91 89285 63608</a>
-                  <a href="tel:+918087545175" className="hover:text-white transition-colors">+91 80875 45175</a>
+                  <a href="tel:+918652028136" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    <span>+91 86520 28136</span>
+                    <span className="text-[10px] text-[#D7A65B] border border-[#D7A65B]/40 px-1.5 py-0.2 rounded font-medium">Work</span>
+                  </a>
+                  <a href="tel:+918087545175" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    <span>+91 80875 45175</span>
+                    <span className="text-[10px] text-[#E8D8C5]/70 border border-[#E8D8C5]/30 px-1.5 py-0.2 rounded font-medium">Personal</span>
+                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -128,20 +134,30 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Bottom Copyright */}
+        {/* Bottom Copyright & Admin Access */}
         <div className="border-t border-white/10 pt-6 text-center font-sans text-xs text-[#E8D8C5]/70 flex flex-col md:flex-row justify-between items-center gap-3">
           <p>© 2026 Pheta By Nihar. All Rights Reserved.</p>
-          <p className="flex items-center gap-1">
-            Designed and Developed by{' '}
+          <div className="flex items-center gap-4">
+            <p className="flex items-center gap-1">
+              Designed and Developed by{' '}
+              <a
+                href="https://www.dashonsolutions.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#D7A65B] hover:text-[#F3D18A] font-semibold underline underline-offset-2 transition-colors ml-1"
+              >
+                Dashon Solutions Pvt. Ltd.
+              </a>
+            </p>
+            <span className="text-white/30 hidden sm:inline">•</span>
             <a
-              href="https://www.dashonsolutions.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#D7A65B] hover:text-[#F3D18A] font-semibold underline underline-offset-2 transition-colors ml-1"
+              href="/admin"
+              className="text-[#D7A65B]/80 hover:text-white transition-colors flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 hover:bg-white/15 text-[11px]"
+              title="Admin Portal"
             >
-              Dashon Solutions Pvt. Ltd.
+              <span>👑 Admin Login</span>
             </a>
-          </p>
+          </div>
         </div>
 
       </div>

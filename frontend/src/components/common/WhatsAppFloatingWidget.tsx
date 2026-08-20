@@ -23,22 +23,22 @@ export const WhatsAppFloatingWidget: React.FC = () => {
 
   const contacts = [
     {
-      name: 'Nihar Tambde',
-      title: 'Primary Line & Groom Bookings',
-      phone: '+91 89285 63608',
-      rawPhone: '918928563608',
-      desc: 'Wedding Pheta Draping, Groom Styling & VIP Bookings',
-      badge: 'Main Line',
-      message: 'Namaskar Nihar! I want to inquire about Wedding Pheta styling and booking services.'
+      name: 'Working / Official Line',
+      title: 'Orders, Bookings & Inquiries',
+      phone: '+91 86520 28136',
+      rawPhone: '918652028136',
+      desc: 'Wedding Pheta Draping, Groom Styling & Product Orders',
+      badge: 'Working Number',
+      message: 'Namaskar! I want to inquire about Wedding Pheta styling and booking services.'
     },
     {
-      name: 'Studio & Academy Desk',
-      title: 'Workshops & Product Orders',
+      name: 'Nihar Tambde',
+      title: 'Personal Line & Academy',
       phone: '+91 80875 45175',
       rawPhone: '918087545175',
-      desc: 'Certified Masterclasses, Product Orders & General Support',
-      badge: 'Workshop Desk',
-      message: 'Namaskar! I want to inquire about Pheta masterclass batches and product orders.'
+      desc: 'Founder Direct Line, Masterclasses & Certified Workshops',
+      badge: 'Personal Number',
+      message: 'Namaskar Nihar! I want to connect with you directly regarding Pheta masterclasses / collaboration.'
     }
   ];
 
@@ -139,11 +139,11 @@ export const WhatsAppFloatingWidget: React.FC = () => {
             <div className="p-3 bg-white border-t border-[#E8D8C5] flex items-center justify-between text-xs text-[#666666] px-4">
               <span className="text-[11px]">Prefer a direct phone call?</span>
               <a
-                href="tel:+918928563608"
+                href="tel:+918652028136"
                 className="inline-flex items-center gap-1 text-[11px] font-bold text-[#6E1E18] hover:underline"
               >
                 <Phone className="w-3 h-3" />
-                <span>Call Now</span>
+                <span>Call Now (+91 86520 28136)</span>
               </a>
             </div>
           </motion.div>

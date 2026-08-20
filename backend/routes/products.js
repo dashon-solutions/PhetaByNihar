@@ -14,10 +14,16 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET single product by ID
+// GET single product by ID (supports ObjectId and custom id)
 router.get('/:id', async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    let product = null;
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+      product = await Product.findById(req.params.id);
+    }
+    if (!product) {
+      product = await Product.findOne({ id: req.params.id });
+    }
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }

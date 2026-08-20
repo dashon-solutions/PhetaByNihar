@@ -167,12 +167,19 @@ export const ProductsPreview: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="mt-auto pt-2 md:pt-6 border-t border-[#D4AF37]/15">
+                      <div className="mt-auto pt-2 md:pt-6 border-t border-[#D4AF37]/15 flex items-center gap-1.5 sm:gap-2">
                         <button 
                           onClick={() => handleOpenRentalInquiry(product.name)}
-                          className="w-full py-1.5 md:py-3 px-2 md:px-6 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] md:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-2 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer">
+                          className="flex-1 py-1.5 md:py-3 px-2 md:px-4 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] sm:text-[10px] md:text-xs lg:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-1.5 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer shadow-xs">
                           <span>Buy Now</span>
                           <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </button>
+                        <button
+                          onClick={() => navigate(`/products/${product._id || product.id}`)}
+                          className="py-1.5 md:py-3 px-2 sm:px-3 md:px-4 rounded-lg md:rounded-xl border border-[#D4AF37]/30 bg-white/5 hover:bg-white/15 text-[#F8F3EC] hover:text-[#E5C158] font-sans text-[8px] sm:text-[10px] md:text-xs lg:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 transition-all duration-300 cursor-pointer shadow-xs"
+                          title="View Details">
+                          <span>Details</span>
+                          <ArrowRight className="w-2.5 h-2.5 md:w-3.5 md:h-3.5" />
                         </button>
                       </div>
                     </div>

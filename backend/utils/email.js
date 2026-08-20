@@ -104,6 +104,7 @@ const sendEmailMessage = async ({ to, subject, html, attachments = [] }) => {
         body: JSON.stringify({
           from: process.env.RESEND_FROM || `${fromName} <onboarding@resend.dev>`,
           to: [to],
+          reply_to: process.env.OWNER_EMAIL || 'nihartambde66@gmail.com',
           subject: subject,
           html: html
         })
@@ -331,7 +332,7 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
                     <strong>Studio Address:</strong> no. 33/J, 9, Mughbhat cross lane Twashta kansar chwal, Girgaon, Mumbai, Maharashtra 400004
                   </p>
                   <p style="margin: 0 0 10px 0; color: #555555; font-size: 12.5px;">
-                    <strong>Phone / WhatsApp:</strong> <a href="tel:+918928563608" style="color: #6E1E18; text-decoration: none; font-weight: bold;">+91 89285 63608</a> / <a href="tel:+918087545175" style="color: #6E1E18; text-decoration: none; font-weight: bold;">+91 80875 45175</a>
+                    <strong>Phone / WhatsApp:</strong> <a href="tel:+918652028136" style="color: #6E1E18; text-decoration: none; font-weight: bold;">+91 86520 28136 (Work)</a> / <a href="tel:+918087545175" style="color: #6E1E18; text-decoration: none; font-weight: bold;">+91 80875 45175 (Personal)</a>
                   </p>
                   <a href="https://share.google/xj6WCITif4HwHcTTn" target="_blank" style="display: inline-block; color: #6E1E18; font-weight: bold; text-decoration: underline; font-size: 12px;">
                     🗺️ Open Studio Location on Google Maps &rarr;
@@ -342,8 +343,8 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                   <tr>
                     <td align="center">
-                      <a class="btn-full" href="https://wa.me/918928563608?text=${encodeURIComponent(
-                        `Namaskar Nihar! I submitted an inquiry for '${subjectLabel}' on your website.`
+                      <a class="btn-full" href="https://wa.me/918652028136?text=${encodeURIComponent(
+                        `Namaskar! I submitted an inquiry for '${subjectLabel}' on your website.`
                       )}" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #25D366, #128C7E); color: #ffffff; padding: 14px 28px; font-family: sans-serif; font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);">
                         💬 Need Fast Assistance? Chat on WhatsApp
                       </a>
