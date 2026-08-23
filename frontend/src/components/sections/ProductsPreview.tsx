@@ -110,65 +110,65 @@ export const ProductsPreview: React.FC = () => {
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
             >
               {products.map((product, index) => (
-                <div key={product._id || product.id || index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
-                  <div className="group h-full relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+                <div key={product._id || product.id || index} className="flex-shrink-0 px-1.5 sm:px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                  <div className="group h-full relative flex flex-col bg-[#2A0D0F]/80 backdrop-blur-md rounded-xl sm:rounded-2xl md:rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
 
                     {/* Number Badge */}
-                    <div className="absolute top-4 left-4 z-20">
-                      <span className="font-serif text-xs text-[#E5C158]/80 border border-[#E5C158]/30 bg-[#2A0D0F]/90 px-2.5 py-1 rounded-full tracking-widest">
+                    <div className="absolute top-2 left-2 md:top-4 md:left-4 z-20">
+                      <span className="font-serif text-[9px] md:text-xs text-[#E5C158]/80 border border-[#E5C158]/30 bg-[#2A0D0F]/90 px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full tracking-widest">
                         {product.id}
                       </span>
                     </div>
 
                     {/* Product Frame & Showcase Image */}
-                    <div className="relative w-full h-36 md:h-80 overflow-hidden flex items-center justify-center p-3 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
+                    <div className="relative w-full h-28 sm:h-36 md:h-72 lg:h-80 overflow-hidden flex items-center justify-center p-2 sm:p-3 md:p-8 bg-radial from-[#4D1217] to-[#1A0507]">
                       <img
                         src={getApiImageUrl(product.image)}
                         alt={product.name}
-                        className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#2A0D0F] via-transparent to-transparent opacity-80"></div>
                     </div>
 
                     {/* Product Info */}
-                    <div className="w-full p-3 md:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
-                      <div className="mb-2 md:mb-6">
-                        <span className="text-[8px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
+                    <div className="w-full p-2.5 sm:p-3 md:p-6 lg:p-8 flex flex-col flex-grow justify-between relative z-10 bg-[#2A0D0F]/90">
+                      <div className="mb-1.5 md:mb-4">
+                        <span className="text-[7.5px] sm:text-[9px] md:text-xs font-sans text-[#E5C158] uppercase tracking-wider block mb-0.5 md:mb-1 truncate">
                           {product.subtitle}
                         </span>
-                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-3 group-hover:text-[#E5C158] transition-colors leading-tight">
+                        <h3 className="font-serif text-xs sm:text-sm md:text-xl lg:text-2xl text-[#F8F3EC] font-bold mb-1 md:mb-2 group-hover:text-[#E5C158] transition-colors leading-tight line-clamp-2 min-h-[2rem] sm:min-h-[2.4rem] md:min-h-[3rem]">
                           <span>{product.name}</span>
-                          {product.marathiName && (
-                            <span className="block font-marathi text-sm md:text-2xl text-[#E5C158] font-normal mt-1">
-                              ({product.marathiName.replace(/[()]/g, '')})
-                            </span>
-                          )}
                         </h3>
+                        {product.marathiName && (
+                          <span className="block font-marathi text-[9.5px] sm:text-xs md:text-base text-[#E5C158] font-normal truncate mb-1">
+                            ({product.marathiName.replace(/[()]/g, '')})
+                          </span>
+                        )}
                         {product.price !== undefined && product.price !== null && Number(product.price) > 0 && (
-                          <div className="mb-2 md:mb-3">
-                            <span className="font-serif text-sm md:text-xl font-bold text-[#E5C158]">
+                          <div className="mb-1 md:mb-2">
+                            <span className="font-serif text-xs sm:text-sm md:text-lg font-bold text-[#E5C158]">
                               ₹{Number(product.price).toLocaleString('en-IN')}
                             </span>
                           </div>
                         )}
-                        <p className="text-[#C2B2A3] text-[9px] md:text-sm leading-tight md:leading-relaxed font-light line-clamp-2">
+                        <p className="text-[#C2B2A3] text-[8px] sm:text-[9.5px] md:text-xs lg:text-sm leading-tight md:leading-relaxed font-light line-clamp-2">
                           {product.description}
                         </p>
                       </div>
 
-                      <div className="mt-auto pt-2 md:pt-6 border-t border-[#D4AF37]/15 flex items-center gap-1.5 sm:gap-2">
+                      <div className="mt-auto pt-2 md:pt-4 border-t border-[#D4AF37]/15 flex items-center gap-1 sm:gap-2">
                         <button 
                           onClick={() => handleOpenRentalInquiry(product.name)}
-                          className="flex-1 py-1.5 md:py-3 px-2 md:px-4 rounded-lg md:rounded-xl border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] sm:text-[10px] md:text-xs lg:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 md:gap-1.5 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer shadow-xs">
+                          className="flex-1 h-6 sm:h-7 md:h-9.5 px-1.5 sm:px-2 md:px-3 rounded sm:rounded-md md:rounded-lg border border-[#D4AF37]/40 bg-[#3B1417] text-[#E5C158] font-sans text-[8px] sm:text-[9.5px] md:text-xs tracking-wide uppercase font-semibold flex items-center justify-center gap-0.5 sm:gap-1 group-hover:bg-[#E5C158] group-hover:text-[#2A0D0F] group-hover:border-[#E5C158] transition-all duration-300 cursor-pointer shadow-xs whitespace-nowrap">
                           <span>Buy Now</span>
-                          <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3.5 md:h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
                         </button>
                         <button
                           onClick={() => navigate(`/products/${product._id || product.id}`)}
-                          className="py-1.5 md:py-3 px-2 sm:px-3 md:px-4 rounded-lg md:rounded-xl border border-[#D4AF37]/30 bg-white/5 hover:bg-white/15 text-[#F8F3EC] hover:text-[#E5C158] font-sans text-[8px] sm:text-[10px] md:text-xs lg:text-sm tracking-wider uppercase font-semibold flex items-center justify-center gap-1 transition-all duration-300 cursor-pointer shadow-xs"
+                          className="h-6 sm:h-7 md:h-9.5 px-1.5 sm:px-2 md:px-3 rounded sm:rounded-md md:rounded-lg border border-[#D4AF37]/30 bg-white/5 hover:bg-white/15 text-[#F8F3EC] hover:text-[#E5C158] font-sans text-[8px] sm:text-[9.5px] md:text-xs tracking-wide uppercase font-semibold flex items-center justify-center gap-0.5 sm:gap-1 transition-all duration-300 cursor-pointer shadow-xs whitespace-nowrap"
                           title="View Details">
                           <span>Details</span>
-                          <ArrowRight className="w-2.5 h-2.5 md:w-3.5 md:h-3.5" />
+                          <ArrowRight className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 shrink-0" />
                         </button>
                       </div>
                     </div>
