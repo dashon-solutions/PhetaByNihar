@@ -103,8 +103,30 @@ export const ProductsPreview: React.FC = () => {
         </motion.div>
 
         {/* Slider Container */}
-        <div className="relative max-w-7xl mx-auto">
-          <div className="overflow-hidden rounded-[24px]">
+        <div className="relative max-w-7xl mx-auto px-2 sm:px-4">
+          {/* Prev Button - Middle Left */}
+          {maxIndex > 0 && (
+            <button
+              onClick={prevSlide}
+              aria-label="Previous Products"
+              className="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/50 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-xl backdrop-blur-md bg-[#2A0D0F]/85 cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+            </button>
+          )}
+
+          {/* Next Button - Middle Right */}
+          {maxIndex > 0 && (
+            <button
+              onClick={nextSlide}
+              aria-label="Next Products"
+              className="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/50 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-xl backdrop-blur-md bg-[#2A0D0F]/85 cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+            </button>
+          )}
+
+          <div className="overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[24px]">
             <motion.div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
@@ -179,39 +201,20 @@ export const ProductsPreview: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Navigation Controls */}
+          {/* Dots Controls */}
           {maxIndex > 0 && (
-            <div className="flex items-center justify-between mt-8 px-4">
-              {/* Prev Button */}
-              <button
-                onClick={prevSlide}
-                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50 cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-              </button>
-
-              {/* Dots */}
-              <div className="flex items-center gap-2 md:gap-3">
-                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentIndex(idx)}
-                    className={`transition-all duration-300 rounded-full cursor-pointer ${currentIndex === idx
-                      ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]'
-                      : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
-                      }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* Next Button */}
-              <button
-                onClick={nextSlide}
-                className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50 cursor-pointer"
-              >
-                <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-              </button>
+            <div className="flex items-center justify-center gap-2 md:gap-3 mt-6 sm:mt-8">
+              {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${currentIndex === idx
+                    ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]'
+                    : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                    }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
             </div>
           )}
         </div>

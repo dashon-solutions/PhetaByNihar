@@ -204,69 +204,91 @@ export const MediaAndTestimonials: React.FC = () => {
 
             {/* Testimonials Slider */}
             <div 
-              className="relative max-w-7xl mx-auto"
+              className="relative max-w-7xl mx-auto px-2 sm:px-4"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <div className="overflow-hidden rounded-[24px]">
+              {/* Prev Button - Middle Left */}
+              {maxIndex > 0 && (
+                <button 
+                  onClick={prevSlide}
+                  aria-label="Previous Testimonials"
+                  className="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/50 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-xl backdrop-blur-md bg-[#2A0D0F]/85 cursor-pointer"
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
+              )}
+
+              {/* Next Button - Middle Right */}
+              {maxIndex > 0 && (
+                <button 
+                  onClick={nextSlide}
+                  aria-label="Next Testimonials"
+                  className="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/50 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-xl backdrop-blur-md bg-[#2A0D0F]/85 cursor-pointer"
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                </button>
+              )}
+
+              <div className="overflow-hidden rounded-2xl md:rounded-[24px]">
                 <motion.div 
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
                 >
                   {reviews.map((review, index) => (
-                    <div key={review._id || index} className="flex-shrink-0 px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
-                      <div className="group h-full relative bg-[#2A0D0F]/70 backdrop-blur-md p-8 md:p-10 rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+                    <div key={review._id || index} className="flex-shrink-0 px-1.5 sm:px-2 md:px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                      <div className="group h-full relative bg-[#2A0D0F]/70 backdrop-blur-md p-5 sm:p-7 md:p-10 rounded-2xl md:rounded-[24px] border border-[#D4AF37]/20 hover:border-[#D4AF37]/60 flex flex-col justify-between transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
                         
                         {(!review.source || review.source === 'manual') ? (
                           <>
                             {/* Subtle Decorative Background Quote Icon */}
-                            <Quote className="absolute top-6 right-6 w-16 h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
+                            <Quote className="absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 text-[#D4AF37]/10 group-hover:text-[#D4AF37]/20 transition-colors pointer-events-none" />
 
                             <div>
                               {/* Rating Stars */}
-                              <div className="flex items-center gap-1 mb-6">
+                              <div className="flex items-center gap-0.5 sm:gap-1 mb-3 sm:mb-4 md:mb-6">
                                 {[...Array(review.rating || 5)].map((_, i) => (
-                                  <Star key={i} className="w-5 h-5 fill-[#E5C158] text-[#E5C158]" />
+                                  <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 fill-[#E5C158] text-[#E5C158]" />
                                 ))}
                               </div>
 
                               {/* Review Quote */}
-                              <p className="font-serif text-[#F8F3EC]/90 text-lg md:text-xl lg:text-2xl italic font-light leading-relaxed mb-8 relative z-10">
+                              <p className="font-serif text-[#F8F3EC]/90 text-xs sm:text-sm md:text-lg lg:text-xl italic font-light leading-relaxed mb-4 sm:mb-6 md:mb-8 relative z-10">
                                 "{review.quote}"
                               </p>
                             </div>
 
                             {/* Author Info */}
-                            <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center gap-4 mt-auto">
-                              <div className="relative">
+                            <div className="pt-3 sm:pt-4 md:pt-6 border-t border-[#D4AF37]/15 flex items-center gap-2.5 sm:gap-4 mt-auto">
+                              <div className="relative shrink-0">
                                 <img
                                   src={getApiImageUrl(review.image || '')}
                                   alt={review.name || 'Client'}
-                                  className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
+                                  className="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full object-cover border-2 border-[#D4AF37]/40 p-0.5 shadow-md"
                                 />
                               </div>
-                              <div>
-                                <h4 className="font-serif text-[#F8F3EC] font-semibold text-lg group-hover:text-[#E5C158] transition-colors">
+                              <div className="min-w-0">
+                                <h4 className="font-serif text-[#F8F3EC] font-semibold text-xs sm:text-sm md:text-lg group-hover:text-[#E5C158] transition-colors truncate">
                                   {review.name}
                                 </h4>
-                                <p className="font-sans text-[#D4AF37]/70 text-sm tracking-wider uppercase mt-1">
+                                <p className="font-sans text-[#D4AF37]/70 text-[10px] sm:text-xs md:text-sm tracking-wider uppercase mt-0.5 truncate">
                                   {review.location}
                                 </p>
                               </div>
                             </div>
                           </>
                         ) : (
-                          <div className="w-full h-full flex flex-col min-h-[300px]">
-                            <div className="flex justify-between items-center mb-4">
+                          <div className="w-full h-full flex flex-col min-h-[260px] sm:min-h-[300px]">
+                            <div className="flex justify-between items-center mb-3 sm:mb-4">
                               <div className="flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                  <Star key={i} className="w-4 h-4 fill-[#E5C158] text-[#E5C158]" />
+                                  <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#E5C158] text-[#E5C158]" />
                                 ))}
                               </div>
-                              <span className="text-[10px] font-bold text-[#4285F4] bg-[#4285F4]/10 px-2 py-1 rounded uppercase tracking-wider">Google Review</span>
+                              <span className="text-[9px] sm:text-[10px] font-bold text-[#4285F4] bg-[#4285F4]/10 px-2 py-0.5 rounded uppercase tracking-wider">Google Review</span>
                             </div>
                             <div 
-                              className="w-full h-full flex-grow rounded-xl overflow-hidden [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:min-h-[250px]"
+                              className="w-full h-full flex-grow rounded-xl overflow-hidden [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:min-h-[220px]"
                               dangerouslySetInnerHTML={{ __html: review.googleMapUrl || '' }}
                             />
                           </div>
@@ -278,40 +300,21 @@ export const MediaAndTestimonials: React.FC = () => {
                 </motion.div>
               </div>
 
-              {/* Navigation Controls */}
+              {/* Dots Controls */}
               {maxIndex > 0 && (
-                <div className="flex items-center justify-between mt-8 px-4">
-                  {/* Prev Button */}
-                  <button 
-                    onClick={prevSlide}
-                    className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
-                  >
-                    <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-                  </button>
-
-                  {/* Dots */}
-                  <div className="flex items-center gap-2 md:gap-3">
-                    {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentIndex(idx)}
-                        className={`transition-all duration-300 rounded-full ${
-                          currentIndex === idx 
-                            ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
-                            : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
-                        }`}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Next Button */}
-                  <button 
-                    onClick={nextSlide}
-                    className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-[#D4AF37]/40 text-[#E5C158] hover:bg-[#D4AF37] hover:text-[#1A0507] transition-all duration-300 shadow-md backdrop-blur-sm bg-[#2A0D0F]/50"
-                  >
-                    <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-                  </button>
+                <div className="flex items-center justify-center gap-2 md:gap-3 mt-6 sm:mt-8">
+                  {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`transition-all duration-300 rounded-full cursor-pointer ${
+                        currentIndex === idx 
+                          ? 'w-6 h-2 md:w-10 md:h-2.5 bg-[#E5C158] shadow-[0_0_10px_rgba(229,193,88,0.5)]' 
+                          : 'w-2 h-2 md:w-2.5 md:h-2.5 bg-[#D4AF37]/30 hover:bg-[#D4AF37]/60'
+                      }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
                 </div>
               )}
             </div>
