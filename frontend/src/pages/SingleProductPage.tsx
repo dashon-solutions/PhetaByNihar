@@ -6,7 +6,7 @@ import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { InquiryModal } from '../components/ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../utils/api';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fallbackProducts } from '../data/fallbackData';
 
 interface ProductItem {
@@ -78,6 +78,33 @@ export const SingleProductPage: React.FC = () => {
   }, [id]);
 
   const allImages = product ? [product.image, ...(product.galleryImages || [])] : [];
+  const currentImageIndex = Math.max(0, allImages.indexOf(activeImage));
+
+  // Loop navigation for product gallery
+  const handlePrevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (allImages.length <= 1) return;
+    const prevIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+    setActiveImage(allImages[prevIndex]);
+  };
+
+  const handleNextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (allImages.length <= 1) return;
+    const nextIndex = (currentImageIndex + 1) % allImages.length;
+    setActiveImage(allImages[nextIndex]);
+  };
+
+  // Keyboard navigation for image rotation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isModalOpen || allImages.length <= 1) return;
+      if (e.key === 'ArrowLeft') handlePrevImage();
+      if (e.key === 'ArrowRight') handleNextImage();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentImageIndex, allImages, isModalOpen]);
 
   if (loading) {
     return (
@@ -165,17 +192,56 @@ export const SingleProductPage: React.FC = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col gap-4"
             >
-              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-lg border-4 border-white bg-white">
-                <img 
-                  src={getApiImageUrl(activeImage)} 
-                  alt={product.name} 
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute top-6 left-6 z-20">
-                  <span className="inline-block bg-[#FFFDFB] text-[#4D2D22] font-serif font-bold text-lg px-4 py-2 rounded-full shadow-md">
-                    {product.id}
-                  </span>
+              {/* Main Image Row with Prev / Next completely on the sides with zero overlap */}
+              <div className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4 w-full">
+                {/* Prev Button - Left Side (Completely outside image) */}
+                {allImages.length > 1 ? (
+                  <button
+                    onClick={handlePrevImage}
+                    aria-label="Previous Product Image"
+                    className="shrink-0 w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white hover:bg-[#6E1E18] text-[#4D2D22] hover:text-[#F3D18A] border-2 border-[#E8D8C5] hover:border-[#6E1E18] shadow-md flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
+                  >
+                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                ) : (
+                  <div className="w-0" />
+                )}
+
+                {/* Main Product Image Container */}
+                <div className="relative flex-1 rounded-[2rem] overflow-hidden aspect-[4/5] shadow-lg border-4 border-white bg-white group">
+                  <img 
+                    src={getApiImageUrl(activeImage)} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover object-top transition-all duration-500"
+                  />
+                  
+                  {/* Number Badge */}
+                  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+                    <span className="inline-block bg-[#FFFDFB] text-[#4D2D22] font-serif font-bold text-base sm:text-lg px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md">
+                      {product.id}
+                    </span>
+                  </div>
+
+                  {/* Image Position Indicator */}
+                  {allImages.length > 1 && (
+                    <div className="absolute bottom-4 right-4 z-20 bg-black/55 backdrop-blur-md text-white/95 font-sans text-xs px-3 py-1 rounded-full border border-white/20 shadow-md">
+                      {currentImageIndex + 1} / {allImages.length}
+                    </div>
+                  )}
                 </div>
+
+                {/* Next Button - Right Side (Completely outside image) */}
+                {allImages.length > 1 ? (
+                  <button
+                    onClick={handleNextImage}
+                    aria-label="Next Product Image"
+                    className="shrink-0 w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white hover:bg-[#6E1E18] text-[#4D2D22] hover:text-[#F3D18A] border-2 border-[#E8D8C5] hover:border-[#6E1E18] shadow-md flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer"
+                  >
+                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                ) : (
+                  <div className="w-0" />
+                )}
               </div>
 
               {/* Thumbnails */}
@@ -185,7 +251,8 @@ export const SingleProductPage: React.FC = () => {
                     <button
                       key={idx}
                       onClick={() => setActiveImage(img)}
-                      className={`relative w-20 h-24 shrink-0 rounded-xl overflow-hidden border-2 transition-all ${activeImage === img ? 'border-[#6E1E18] shadow-md scale-105' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                      className={`relative w-20 h-24 shrink-0 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${activeImage === img ? 'border-[#6E1E18] shadow-md scale-105 ring-2 ring-[#6E1E18]/30' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                      aria-label={`View image ${idx + 1}`}
                     >
                       <img 
                         src={getApiImageUrl(img)} 
