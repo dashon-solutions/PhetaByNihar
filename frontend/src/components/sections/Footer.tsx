@@ -4,8 +4,15 @@ import { InstagramIcon, FacebookIcon, YoutubeIcon } from '../ui/SocialIcons';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#3D1D14] text-white pt-16 md:pt-20 pb-6 relative overflow-hidden border-t border-[#D7A65B]/20">
-      <div className="px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto relative z-10">
+    <footer className="bg-[#4D2D22] text-white pt-20 pb-6 relative overflow-hidden">
+
+      {/* Background Decorative Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[#4D2D22]/90 opacity-10 z-10"></div>
+        <div className="absolute inset-0 bg-[url('/orangeFooter.png')] bg-cover bg-center bg-no-repeat z-0 opacity-100 mix-blend-luminosity"></div>
+      </div>
+
+      <div className="px-5 md:px-10 lg:px-20 max-w-[1400px] mx-auto relative z-20">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
