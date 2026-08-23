@@ -150,13 +150,7 @@ export const Footer: React.FC = () => {
               </a>
             </p>
             <span className="text-white/30 hidden sm:inline">•</span>
-            <a
-              href="/admin"
-              className="text-[#D7A65B]/80 hover:text-white transition-colors flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 hover:bg-white/15 text-[11px]"
-              title="Admin Portal"
-            >
-              <span>👑 Admin Login</span>
-            </a>
+
           </div>
         </div>
 

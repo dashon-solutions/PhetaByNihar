@@ -15,6 +15,7 @@ interface ProductItem {
   name: string;
   marathiName?: string;
   subtitle: string;
+  price?: number;
   image: string;
   description: string;
 }
@@ -138,6 +139,13 @@ export const RentalProductsPage: React.FC = () => {
                             {product.id}
                           </span>
                         </div>
+                        {product.price !== undefined && product.price !== null && Number(product.price) > 0 && (
+                          <div className="absolute bottom-4 right-4 z-20">
+                            <span className="inline-block bg-[#6E1E18]/90 backdrop-blur-md text-[#F3D18A] font-serif font-bold text-sm px-3.5 py-1.5 rounded-full shadow-lg border border-[#D7A65B]/40">
+                              ₹{Number(product.price).toLocaleString('en-IN')}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="text-center px-2">
@@ -149,12 +157,14 @@ export const RentalProductsPage: React.FC = () => {
                             </span>
                           )}
                         </h2>
-                        <p className="text-[#D7A65B] font-sans text-xs font-bold uppercase tracking-[0.1em] mb-3">
+                        <p className="text-[#D7A65B] font-sans text-xs font-bold uppercase tracking-[0.1em] mb-2.5">
                           {product.subtitle}
                         </p>
-                        <p className="text-[#666666] font-sans text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
-                          {product.description}
-                        </p>
+                        {product.description && (
+                          <p className="text-[#666666] font-sans text-xs sm:text-sm leading-relaxed mb-4 line-clamp-2">
+                            {product.description}
+                          </p>
+                        )}
                       </div>
                     </div>
 

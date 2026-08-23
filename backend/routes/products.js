@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { Product } from '../models/Product.js';
 import { verifyToken } from '../middleware/auth.js';
 

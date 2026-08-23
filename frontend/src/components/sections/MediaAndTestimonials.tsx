@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star, Sparkles, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, Star, Sparkles, Award, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { Divider } from '../ui/Divider';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
@@ -20,6 +20,7 @@ interface MediaLogoData {
   name: string;
   image?: string;
   color?: string;
+  link?: string;
 }
 
 export const MediaAndTestimonials: React.FC = () => {
@@ -148,28 +149,51 @@ export const MediaAndTestimonials: React.FC = () => {
 
           {/* Continuous Loop Track */}
           <div className="animate-marquee flex items-center gap-5 sm:gap-7 md:gap-8">
-            {duplicatedLogos.map((logo, index) => (
-              <div
-                key={`${logo._id || logo.name}-${index}`}
-                className="group relative flex items-center justify-center w-48 sm:w-56 md:w-64 h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 transition-all duration-300 overflow-hidden px-6 sm:px-8 shadow-sm hover:shadow-[0_10px_30px_rgba(212,175,55,0.18)] bg-white/90 shrink-0 cursor-pointer"
-              >
-                {logo.image ? (
-                  <img
-                    src={getApiImageUrl(logo.image)}
-                    alt={logo.name}
-                    className="relative z-10 max-h-11 md:max-h-13 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                ) : (
-                  <span 
-                    className="font-serif font-bold text-xl md:text-2xl relative z-10 transition-colors duration-300"
-                    style={{ color: logo.color || '#6E1E18' }}
-                  >
-                    {logo.name}
-                  </span>
-                )}
-              </div>
-            ))}
+            {duplicatedLogos.map((logo, index) => {
+              const cardContent = (
+                <div
+                  className="group relative flex items-center justify-center w-48 sm:w-56 md:w-64 h-24 md:h-28 rounded-[20px] border border-[#D4AF37]/25 hover:border-[#D4AF37]/60 transition-all duration-300 overflow-hidden px-6 sm:px-8 shadow-sm hover:shadow-[0_10px_30px_rgba(212,175,55,0.18)] bg-white/90 shrink-0 cursor-pointer"
+                >
+                  {logo.image ? (
+                    <img
+                      src={getApiImageUrl(logo.image)}
+                      alt={logo.name}
+                      className="relative z-10 max-h-11 md:max-h-13 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span 
+                      className="font-serif font-bold text-xl md:text-2xl relative z-10 transition-colors duration-300"
+                      style={{ color: logo.color || '#6E1E18' }}
+                    >
+                      {logo.name}
+                    </span>
+                  )}
+                  {logo.link && (
+                    <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-[#F8F3EC] border border-[#D4AF37]/40 flex items-center justify-center text-[#6E1E18] group-hover:bg-[#6E1E18] group-hover:text-[#F3D18A] group-hover:scale-110 transition-all duration-300 shadow-xs">
+                      <ExternalLink className="w-3 h-3" />
+                    </div>
+                  )}
+                </div>
+              );
+
+              return logo.link ? (
+                <a
+                  key={`${logo._id || logo.name}-${index}`}
+                  href={logo.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-block focus:outline-none"
+                  title={`Visit ${logo.name} article/coverage`}
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <React.Fragment key={`${logo._id || logo.name}-${index}`}>
+                  {cardContent}
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
       </section>

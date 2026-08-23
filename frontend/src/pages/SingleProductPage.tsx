@@ -14,6 +14,7 @@ interface ProductItem {
   name: string;
   marathiName?: string;
   subtitle: string;
+  price?: number;
   image: string;
   galleryImages?: string[];
   description: string;
@@ -116,6 +117,7 @@ export const SingleProductPage: React.FC = () => {
           "offers": {
             "@type": "Offer",
             "priceCurrency": "INR",
+            ...(product.price !== undefined && product.price !== null && Number(product.price) > 0 ? { "price": product.price.toString() } : {}),
             "availability": "https://schema.org/InStock",
             "url": `https://phetabynihar.com/products/${id}`
           }
@@ -194,6 +196,15 @@ export const SingleProductPage: React.FC = () => {
                     </span>
                   )}
                 </h1>
+
+                {product.price !== undefined && product.price !== null && Number(product.price) > 0 && (
+                  <div className="inline-flex items-baseline gap-2 bg-[#6E1E18]/5 border border-[#6E1E18]/15 px-4 py-2 rounded-2xl mt-3">
+                    <span className="text-xs font-sans uppercase font-bold text-[#6E1E18] tracking-wider">Price:</span>
+                    <span className="font-serif text-2xl sm:text-3xl font-bold text-[#6E1E18]">
+                      ₹{Number(product.price).toLocaleString('en-IN')}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="w-16 h-1 bg-[#D7A65B] rounded-full"></div>

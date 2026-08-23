@@ -9,6 +9,7 @@ interface ProductItem {
   name: string;
   marathiName?: string;
   subtitle: string;
+  price?: number | string;
   image: string;
   galleryImages?: string[];
   description: string;
@@ -29,6 +30,7 @@ export const ProductsManager: React.FC = () => {
     name: '',
     marathiName: '',
     subtitle: '',
+    price: '',
     image: '',
     galleryImages: [],
     description: '',
@@ -60,6 +62,7 @@ export const ProductsManager: React.FC = () => {
       name: '',
       marathiName: '',
       subtitle: '',
+      price: '',
       image: '',
       galleryImages: [],
       description: '',
@@ -76,6 +79,7 @@ export const ProductsManager: React.FC = () => {
       name: item.name,
       marathiName: item.marathiName || '',
       subtitle: item.subtitle,
+      price: item.price !== undefined && item.price !== null ? item.price : '',
       image: item.image,
       galleryImages: item.galleryImages || [],
       description: item.description,
@@ -110,17 +114,22 @@ export const ProductsManager: React.FC = () => {
     setSaving(true);
     setError('');
 
+    const payload = {
+      ...form,
+      price: form.price !== '' && form.price !== undefined && form.price !== null ? Number(form.price) : null
+    };
+
     try {
       if (editingId) {
         const updated = await apiFetch(`/products/${editingId}`, {
           method: 'PUT',
-          body: JSON.stringify(form)
+          body: JSON.stringify(payload)
         });
         setProducts(prev => prev.map(item => item._id === editingId ? updated : item).sort((a,b) => a.id.localeCompare(b.id)));
       } else {
         const created = await apiFetch('/products', {
           method: 'POST',
-          body: JSON.stringify(form)
+          body: JSON.stringify(payload)
         });
         setProducts(prev => [...prev, created].sort((a,b) => a.id.localeCompare(b.id)));
       }
@@ -248,7 +257,7 @@ export const ProductsManager: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Marathi Name */}
               <div className="flex flex-col gap-1">
                 <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
@@ -276,6 +285,25 @@ export const ProductsManager: React.FC = () => {
                   placeholder="e.g. Decorative Heritage Artifact"
                   className="px-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs focus:outline-none focus:border-[#6E1E18] text-[#4D2D22] focus:bg-white"
                 />
+              </div>
+
+              {/* Price */}
+              <div className="flex flex-col gap-1">
+                <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider">
+                  Price in Rupees (₹) (Optional)
+                </label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#6E1E18]">₹</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="any"
+                    value={form.price !== undefined ? form.price : ''}
+                    onChange={(e) => setForm(prev => ({ ...prev, price: e.target.value }))}
+                    placeholder="e.g. 1499"
+                    className="w-full pl-7 pr-3 py-2 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl font-sans text-xs focus:outline-none focus:border-[#6E1E18] text-[#4D2D22] focus:bg-white font-medium"
+                  />
+                </div>
               </div>
             </div>
 
@@ -401,6 +429,11 @@ export const ProductsManager: React.FC = () => {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#C48B3C] block truncate">
                     {item.subtitle}
                   </span>
+                  {item.price !== undefined && item.price !== null && Number(item.price) > 0 && (
+                    <span className="inline-flex items-center text-[11px] font-serif font-bold text-[#6E1E18] bg-[#6E1E18]/10 px-2 py-0.5 rounded-md border border-[#6E1E18]/20 mt-1">
+                      ₹{Number(item.price).toLocaleString('en-IN')}
+                    </span>
+                  )}
                 </div>
               </div>
 

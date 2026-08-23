@@ -12,6 +12,7 @@ interface ProductData {
   name: string;
   marathiName?: string;
   subtitle: string;
+  price?: number;
   image: string;
   description: string;
 }
@@ -154,7 +155,7 @@ export const ProductsPreview: React.FC = () => {
                         <span className="text-[8px] md:text-sm font-sans text-[#E5C158] uppercase tracking-wider block mb-1 md:mb-2">
                           {product.subtitle}
                         </span>
-                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-4 group-hover:text-[#E5C158] transition-colors leading-tight">
+                        <h3 className="font-serif text-base md:text-3xl text-[#F8F3EC] font-bold mb-1 md:mb-3 group-hover:text-[#E5C158] transition-colors leading-tight">
                           <span>{product.name}</span>
                           {product.marathiName && (
                             <span className="block font-marathi text-sm md:text-2xl text-[#E5C158] font-normal mt-1">
@@ -162,7 +163,14 @@ export const ProductsPreview: React.FC = () => {
                             </span>
                           )}
                         </h3>
-                        <p className="text-[#C2B2A3] text-[9px] md:text-sm leading-tight md:leading-relaxed font-light line-clamp-2 md:line-clamp-3">
+                        {product.price !== undefined && product.price !== null && Number(product.price) > 0 && (
+                          <div className="mb-2 md:mb-3">
+                            <span className="font-serif text-sm md:text-xl font-bold text-[#E5C158]">
+                              ₹{Number(product.price).toLocaleString('en-IN')}
+                            </span>
+                          </div>
+                        )}
+                        <p className="text-[#C2B2A3] text-[9px] md:text-sm leading-tight md:leading-relaxed font-light line-clamp-2">
                           {product.description}
                         </p>
                       </div>

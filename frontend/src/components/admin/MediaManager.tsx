@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../utils/api';
 import { ImageUploadField } from './ImageUploadField';
-import { Plus, Edit2, Trash2, Save, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, Save, X, ExternalLink } from 'lucide-react';
 
 interface MediaItem {
   _id?: string;
   name: string;
   image?: string;
   color?: string;
+  link?: string;
 }
 
 export const MediaManager: React.FC = () => {
@@ -21,7 +22,8 @@ export const MediaManager: React.FC = () => {
   const [form, setForm] = useState<MediaItem>({
     name: '',
     image: '',
-    color: '#6E1E18'
+    color: '#6E1E18',
+    link: ''
   });
 
   const fetchLogos = async () => {
@@ -46,7 +48,8 @@ export const MediaManager: React.FC = () => {
     setForm({
       name: '',
       image: '',
-      color: '#6E1E18'
+      color: '#6E1E18',
+      link: ''
     });
     setEditingId(null);
     setError('');
@@ -57,7 +60,8 @@ export const MediaManager: React.FC = () => {
     setForm({
       name: item.name,
       image: item.image || '',
-      color: item.color || '#6E1E18'
+      color: item.color || '#6E1E18',
+      link: item.link || ''
     });
     setEditingId(item._id || null);
     setError('');
@@ -188,6 +192,21 @@ export const MediaManager: React.FC = () => {
                 className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
               />
             </div>
+
+            {/* Redirect Link */}
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <label className="text-xs font-sans font-bold text-[#4D2D22] uppercase tracking-wider flex items-center justify-between">
+                <span>Redirect Link / Article URL (Optional)</span>
+                <span className="text-[11px] text-[#888888] font-normal normal-case">Opens in new tab when clicked</span>
+              </label>
+              <input
+                type="url"
+                value={form.link || ''}
+                onChange={(e) => setForm(prev => ({ ...prev, link: e.target.value }))}
+                placeholder="https://example.com/news-article-or-coverage"
+                className="px-4 py-2 bg-white border border-[#E8D8C5] rounded-xl font-sans text-sm focus:outline-none focus:border-[#D7A65B] text-text-gray"
+              />
+            </div>
           </div>
 
           {/* Logo Image */}
@@ -226,13 +245,24 @@ export const MediaManager: React.FC = () => {
               key={item._id}
               className="flex flex-col justify-between p-4 bg-[#F8F3EC] border border-[#E8D8C5] rounded-xl group hover:border-[#D7A65B] transition-colors"
             >
-              <div className="flex flex-col items-center justify-center p-4 bg-white border border-[#E8D8C5] rounded-lg h-24 mb-4 select-none">
+              <div className="flex flex-col items-center justify-center p-4 bg-white border border-[#E8D8C5] rounded-lg h-24 mb-4 select-none relative">
                 {item.image ? (
                   <img src={item.image} alt={item.name} className="max-h-12 max-w-full object-contain" />
                 ) : (
                   <span className="font-serif font-bold text-lg" style={{ color: item.color || '#6E1E18' }}>
                     {item.name}
                   </span>
+                )}
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-2 right-2 p-1 text-[#C48B3C] hover:text-[#6E1E18] bg-[#F8F3EC] rounded-md border border-[#E8D8C5]"
+                    title="Open link"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 )}
               </div>
 

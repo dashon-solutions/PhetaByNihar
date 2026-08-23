@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
 interface MediaLogoData {
@@ -7,6 +7,7 @@ interface MediaLogoData {
   name: string;
   image?: string;
   color?: string;
+  link?: string;
 }
 
 export const MediaRecognition: React.FC = () => {
@@ -44,20 +45,36 @@ export const MediaRecognition: React.FC = () => {
         </div>
 
         <div className="flex-1 flex justify-center lg:justify-start gap-8 flex-wrap opacity-60 grayscale hover:grayscale-0 transition-all duration-500 items-center">
-           {logos.map((logo, idx) => (
-             <React.Fragment key={logo._id || idx}>
-               {logo.image ? (
-                 <img src={getApiImageUrl(logo.image)} alt={logo.name} className="max-h-8 w-auto object-contain" />
-               ) : (
-                 <span 
-                   className="font-serif font-bold text-2xl" 
-                   style={{ color: logo.color || '#6E1E18' }}
-                 >
-                   {logo.name}
-                 </span>
-               )}
-             </React.Fragment>
-           ))}
+           {logos.map((logo, idx) => {
+             const inner = logo.image ? (
+               <img src={getApiImageUrl(logo.image)} alt={logo.name} className="max-h-8 w-auto object-contain transition-transform hover:scale-105" />
+             ) : (
+               <span 
+                 className="font-serif font-bold text-2xl transition-transform hover:scale-105" 
+                 style={{ color: logo.color || '#6E1E18' }}
+               >
+                 {logo.name}
+               </span>
+             );
+
+             return logo.link ? (
+               <a
+                 key={logo._id || idx}
+                 href={logo.link}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-100 group"
+                 title={`Visit ${logo.name} feature`}
+               >
+                 {inner}
+                 <ExternalLink className="w-3 h-3 text-[#C48B3C] opacity-0 group-hover:opacity-100 transition-opacity" />
+               </a>
+             ) : (
+               <React.Fragment key={logo._id || idx}>
+                 {inner}
+               </React.Fragment>
+             );
+           })}
         </div>
 
         <button className="flex items-center text-[#4D2D22] font-sans text-sm font-bold border border-[#E8D8C5] px-6 py-2 rounded bg-white hover:bg-[#F8F3EC] transition-colors">

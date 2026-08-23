@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Calendar, Clock } from 'lucide-react';
 import { Divider } from '../ui/Divider';
-import { ClassInquiryModal } from '../ui/ClassInquiryModal';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
 interface OfferedClass {
@@ -58,15 +57,11 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
   const [currentBatchIndex, setCurrentBatchIndex] = useState(0);
   const [batchesPerView, setBatchesPerView] = useState(1);
 
-  // Class Inquiry Modal state
-  const [isClassModalOpen, setIsClassModalOpen] = useState(false);
-  const [selectedClassForInquiry, setSelectedClassForInquiry] = useState<string | undefined>(undefined);
-  const [selectedBatchForInquiry, setSelectedBatchForInquiry] = useState<string | undefined>(undefined);
+  // Class Inquiry Form Link
+  const CLASS_INQUIRY_FORM_URL = 'https://form.svhrt.com/6654d6c50c0b3c7867522e16';
 
-  const handleOpenClassInquiry = (className?: string, batchName?: string) => {
-    setSelectedClassForInquiry(className);
-    setSelectedBatchForInquiry(batchName);
-    setIsClassModalOpen(true);
+  const handleOpenClassInquiry = () => {
+    window.open(CLASS_INQUIRY_FORM_URL, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -172,13 +167,15 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
                             </div>
                           </div>
                           <div>
-                            <button
-                              onClick={() => handleOpenClassInquiry(batch.batchName, `${batch.batchName} (Starts: ${batch.startDate})`)}
+                            <a
+                              href={CLASS_INQUIRY_FORM_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#6E1E18] text-[#F3D18A] hover:bg-[#52140F] hover:text-[#FFE3A8] font-sans font-semibold uppercase tracking-wider text-xs shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                             >
                               <span>Enquire / Book Seat</span>
                               <ChevronRight className="w-3.5 h-3.5" />
-                            </button>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -226,17 +223,6 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
           </div>
         </section>
       )}
-
-      {/* Class Inquiry Popup Modal */}
-      <ClassInquiryModal
-        isOpen={isClassModalOpen}
-        onClose={() => setIsClassModalOpen(false)}
-        initialClass={selectedClassForInquiry}
-        initialBatch={selectedBatchForInquiry}
-        classList={
-          classesToDisplay.map((c: OfferedClass) => c.title)
-        }
-      />
     </>
   );
 };
