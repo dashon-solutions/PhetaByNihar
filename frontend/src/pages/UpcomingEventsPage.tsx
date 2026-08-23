@@ -23,25 +23,26 @@ interface EventItem {
   priceBadge?: string;
 }
 
+import { fallbackEvents } from '../data/fallbackData';
+
 export const UpcomingEventsPage: React.FC = () => {
-  const [events, setEvents] = useState<EventItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState<EventItem[]>(fallbackEvents as any);
+  const [loading, setLoading] = useState(false);
   const [selectedEventForInquiry, setSelectedEventForInquiry] = useState<EventItem | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setLoading(true);
       try {
         const data = await apiFetch('/events');
-        if (data && Array.isArray(data)) {
+        if (data && Array.isArray(data) && data.length > 0) {
           setEvents(data);
         } else {
-          setEvents([]);
+          setEvents(fallbackEvents as any);
         }
       } catch (err) {
-        console.warn('Could not fetch events from database:', err);
-        setEvents([]);
+        console.warn('Could not fetch events from database, using fallback:', err);
+        setEvents(fallbackEvents as any);
       } finally {
         setLoading(false);
       }

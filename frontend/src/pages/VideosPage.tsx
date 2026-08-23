@@ -35,23 +35,24 @@ const getWatchUrl = (url: string): string => {
   return url;
 };
 
+import { fallbackVideos } from '../data/fallbackData';
+
 export const VideosPage: React.FC = () => {
-  const [videos, setVideos] = useState<VideoItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [videos, setVideos] = useState<VideoItem[]>(fallbackVideos as any);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchVideos = async () => {
-      setLoading(true);
       try {
         const dynamicVideos = await apiFetch('/videos');
-        if (dynamicVideos && Array.isArray(dynamicVideos)) {
+        if (dynamicVideos && Array.isArray(dynamicVideos) && dynamicVideos.length > 0) {
           setVideos(dynamicVideos);
         } else {
-          setVideos([]);
+          setVideos(fallbackVideos as any);
         }
       } catch (err) {
-        console.warn('Could not fetch videos from database:', err);
-        setVideos([]);
+        console.warn('Could not fetch videos from database, using fallback:', err);
+        setVideos(fallbackVideos as any);
       } finally {
         setLoading(false);
       }

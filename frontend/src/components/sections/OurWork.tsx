@@ -7,6 +7,8 @@ import {
   Sparkles, ArrowRight, Maximize2, X, Eye
 } from 'lucide-react';
 
+import { fallbackOurWork } from '../../data/fallbackData';
+
 interface WorkItem {
   _id?: string;
   title: string;
@@ -15,43 +17,9 @@ interface WorkItem {
   category?: string;
 }
 
-const FALLBACK_WORKS: WorkItem[] = [
-  {
-    _id: '1',
-    title: 'Royal Wedding & Groom Phetas',
-    description: 'Bespoke traditional Maharashtrian, Puneri, and Kolhapuri pheta draping for royal grooms and wedding families.',
-    images: [
-      '/pheta_by_nihar_tambde_1645633815_2780100398651064414_2400202343.webp',
-      '/pheta_by_nihar_tambde_1676761513_3041218461596044683_2400202343.webp',
-      '/pheta_by_nihar_tambde_1676761513_3041218461604431189_2400202343.webp',
-      '/pheta_by_nihar_tambde_1676761513_3041218461604505343_2400202343.webp'
-    ]
-  },
-  {
-    _id: '2',
-    title: 'Celebrity & VIP Styling',
-    description: 'Exclusive styling for Marathi cinema stars, historical film productions, and high-profile dignitaries.',
-    images: [
-      '/pheta_by_nihar_tambde_1654463102_2854165829931617736_2400202343.webp',
-      '/pheta_by_nihar_tambde_1665393499_2945856640876056884_2400202343.webp',
-      '/pheta_by_nihar_tambde_1665393890_2945859920821826134_2400202343.webp'
-    ]
-  },
-  {
-    _id: '3',
-    title: 'Cultural Events & Grand Baraat',
-    description: 'Large-scale traditional pheta tying for grand wedding baraats, corporate heritage galas, and festive processions.',
-    images: [
-      '/pheta_by_nihar_tambde_1665393890_2945859920821826134_2400202343.webp',
-      '/pheta_by_nihar_tambde_1645633815_2780100398651064414_2400202343.webp',
-      '/pheta_by_nihar_tambde_1676761513_3041218461604431189_2400202343.webp'
-    ]
-  }
-];
-
 export const OurWork: React.FC = () => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useState<WorkItem[]>(FALLBACK_WORKS);
+  const [categories, setCategories] = useState<WorkItem[]>(fallbackOurWork);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
 
   // Lightbox state
@@ -66,21 +34,22 @@ export const OurWork: React.FC = () => {
           // Validate that items have images
           const validWorks = data.map((item: any) => ({
             ...item,
-            images: item.images && item.images.length > 0 ? item.images : FALLBACK_WORKS[0].images
+            images: item.images && item.images.length > 0 ? item.images : fallbackOurWork[0].images
           }));
           setCategories(validWorks);
         }
       } catch (err) {
         console.warn('Using curated fallback portfolio:', err);
+        setCategories(fallbackOurWork);
       }
     };
     fetchCategories();
   }, []);
 
-  const currentCategory = categories[activeCategoryIndex] || categories[0] || FALLBACK_WORKS[0];
+  const currentCategory = categories[activeCategoryIndex] || categories[0] || fallbackOurWork[0];
   const images = currentCategory.images && currentCategory.images.length > 0
     ? currentCategory.images
-    : FALLBACK_WORKS[0].images;
+    : fallbackOurWork[0].images;
 
   // Main featured image and grid images
   const mainImage = images[0] || '/pheta_by_nihar_tambde_1645633815_2780100398651064414_2400202343.webp';

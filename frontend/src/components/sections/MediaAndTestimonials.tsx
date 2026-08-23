@@ -15,6 +15,8 @@ interface TestimonialData {
   googleMapUrl?: string;
 }
 
+import { fallbackTestimonials, fallbackMediaLogos } from '../../data/fallbackData';
+
 interface MediaLogoData {
   _id?: string;
   name: string;
@@ -27,36 +29,8 @@ export const MediaAndTestimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
-  const [reviews, setReviews] = useState<TestimonialData[]>([
-    {
-      quote: "Nihar's Pheta tying added a royal touch to our wedding. Every single guest was mesmerized by the precision of folds!",
-      name: "Radhika & Swapnil",
-      location: "Pune, India",
-      rating: 5,
-      image: "https://ui-avatars.com/api/?name=Radhika&background=4D1217&color=D4AF37"
-    },
-    {
-      quote: "Professional, punctual, and profoundly passionate. They brought authentic Maratha regal elegance to our heritage event.",
-      name: "Rohit Deshmukh",
-      location: "Mumbai, India",
-      rating: 5,
-      image: "https://ui-avatars.com/api/?name=Rohit&background=800020&color=D4AF37"
-    },
-    {
-      quote: "The masterclass workshop was divine! We didn't just learn turban wrapping; we experienced the soul of royal Maharashtrian culture.",
-      name: "Anagha Kulkarni",
-      location: "California, USA",
-      rating: 5,
-      image: "https://ui-avatars.com/api/?name=Anagha&background=D4AF37&color=2A0D0F"
-    }
-  ]);
-
-  const [mediaLogos, setMediaLogos] = useState<MediaLogoData[]>([
-    { name: 'Lokmat', image: '/news1 (1).png' },
-    { name: 'Sakal', image: '/news1 (2).png' },
-    { name: 'ABP', image: '/news1 (3).png' },
-    { name: 'TV9', image: '/news1 (4).png' }
-  ]);
+  const [reviews, setReviews] = useState<TestimonialData[]>(fallbackTestimonials as any);
+  const [mediaLogos, setMediaLogos] = useState<MediaLogoData[]>(fallbackMediaLogos);
 
   useEffect(() => {
     const fetchTestimonialsAndMedia = async () => {
@@ -67,6 +41,7 @@ export const MediaAndTestimonials: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic testimonials, using fallback:', err);
+        setReviews(fallbackTestimonials as any);
       }
 
       try {
@@ -76,6 +51,7 @@ export const MediaAndTestimonials: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic media logos, using fallback:', err);
+        setMediaLogos(fallbackMediaLogos);
       }
     };
     fetchTestimonialsAndMedia();

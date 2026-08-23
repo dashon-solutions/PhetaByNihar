@@ -5,6 +5,8 @@ import { Button } from '../ui/Button';
 import { Divider } from '../ui/Divider';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
+import { fallbackAboutUs } from '../../data/fallbackData';
+
 interface AboutData {
   heading: string;
   italicHeading: string;
@@ -15,18 +17,18 @@ interface AboutData {
 
 export const AboutSection: React.FC = () => {
   const [about, setAbout] = useState<AboutData>({
-    heading: 'A Tradition Passed Down with',
-    italicHeading: 'Pride',
-    text: "With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.",
-    portraitImage: '/about_portrait.webp',
-    backgroundImage: '/aboutnewiamge.png'
+    heading: fallbackAboutUs.heading,
+    italicHeading: fallbackAboutUs.italicHeading,
+    text: fallbackAboutUs.text,
+    portraitImage: fallbackAboutUs.portraitImage,
+    backgroundImage: fallbackAboutUs.backgroundImage
   });
 
   useEffect(() => {
     const fetchAbout = async () => {
       try {
         const data = await apiFetch('/about');
-        if (data) {
+        if (data && (data.heading || data.text)) {
           setAbout(data);
         }
       } catch (err) {

@@ -7,6 +7,7 @@ import { Footer } from '../components/sections/Footer';
 import { InquiryModal } from '../components/ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 import { ArrowLeft } from 'lucide-react';
+import { fallbackProducts } from '../data/fallbackData';
 
 interface ProductItem {
   _id: string;
@@ -39,16 +40,26 @@ export const SingleProductPage: React.FC = () => {
     const fetchProduct = async () => {
       try {
         const data = await apiFetch(`/products/${id}`);
-        if (data) {
+        if (data && (data._id || data.name)) {
           setProduct(data);
           setActiveImage(data.image);
+          return;
         }
       } catch (err: any) {
-        setError('Failed to fetch product details.');
-        console.error(err);
-      } finally {
-        setLoading(false);
+        console.warn('Failed to fetch product details, checking fallback:', err);
       }
+
+      // Check fallback data
+      const matched = fallbackProducts.find(
+        (p: any) => p._id === id || p.id === id || p.name.toLowerCase() === (id || '').toLowerCase()
+      );
+      if (matched) {
+        setProduct(matched as any);
+        setActiveImage(matched.image);
+      } else {
+        setError('Failed to fetch product details.');
+      }
+      setLoading(false);
     };
     
     if (id) {

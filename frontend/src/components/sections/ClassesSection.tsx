@@ -4,11 +4,7 @@ import { ChevronRight, ChevronLeft, Calendar, Clock } from 'lucide-react';
 import { Divider } from '../ui/Divider';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
-interface OfferedClass {
-  title: string;
-  description: string;
-  image: string;
-}
+import { fallbackAboutUs } from '../../data/fallbackData';
 
 interface ClassBatch {
   batchName: string;
@@ -23,35 +19,12 @@ interface ClassesSectionProps {
   showUpcomingBatches?: boolean;
 }
 
-const DEFAULT_CLASSES = [
-  {
-    title: "Offline Studio Masterclass",
-    description: "Immersive, hands-on masterclass at our studio with live models, 1-on-1 guidance, and traditional techniques.",
-    image: "/aboutnewiamge.png"
-  },
-  {
-    title: "Online Global Masterclass",
-    description: "Live interactive HD video training tailored for global learners, diaspora families, and cultural enthusiasts.",
-    image: "/aboutuspng.png"
-  },
-  {
-    title: "Group & Corporate Workshops",
-    description: "Tailored cultural workshops for Dhol Tasha Pathaks, colleges, events, and festive satkars.",
-    image: "/aboutsideiamge.png"
-  },
-  {
-    title: "Royal Wedding Safa Specialization",
-    description: "Advanced certification in bridal & groom pagadis, Kalgi attachment, and Shahi mass draping.",
-    image: "/hero_bride_groom.png"
-  }
-];
-
 export const ClassesSection: React.FC<ClassesSectionProps> = ({
   initialAboutData,
   showUpcomingBatches = true
 }) => {
-  const [about, setAbout] = useState<any>(initialAboutData || null);
-  const [loading, setLoading] = useState<boolean>(!initialAboutData);
+  const [about, setAbout] = useState<any>(initialAboutData || fallbackAboutUs);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Swiper Slider state for batches (2 on Desktop, 1 on Mobile)
   const [currentBatchIndex, setCurrentBatchIndex] = useState(0);
@@ -59,10 +32,6 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
 
   // Class Inquiry Form Link
   const CLASS_INQUIRY_FORM_URL = 'https://form.svhrt.com/6654d6c50c0b3c7867522e16';
-
-  const handleOpenClassInquiry = () => {
-    window.open(CLASS_INQUIRY_FORM_URL, '_blank', 'noopener,noreferrer');
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -96,11 +65,6 @@ export const ClassesSection: React.FC<ClassesSectionProps> = ({
       setLoading(false);
     }
   }, [initialAboutData]);
-
-  const classesToDisplay: OfferedClass[] =
-    about?.offeredClasses && about.offeredClasses.length > 0
-      ? about.offeredClasses
-      : DEFAULT_CLASSES;
 
   const totalBatches = about?.classBatches?.length || 0;
   const maxBatchIndex = Math.max(0, totalBatches - batchesPerView);

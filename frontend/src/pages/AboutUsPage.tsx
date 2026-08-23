@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { Star, ShieldCheck, Heart, Crown, Quote, Sparkles } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../utils/api';
 
+import { fallbackAboutUs } from '../data/fallbackData';
+
 const fadeInUp: any = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -24,16 +26,19 @@ const staggerContainer: any = {
 };
 
 export const AboutUsPage: React.FC = () => {
-  const [about, setAbout] = useState<any>(null);
+  const [about, setAbout] = useState<any>(fallbackAboutUs);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
         const aboutData = await apiFetch('/about').catch(() => null);
-        if (aboutData) setAbout(aboutData);
+        if (aboutData && (aboutData.heading || aboutData.journey)) {
+          setAbout(aboutData);
+        }
       } catch (err) {
-        console.error('Failed to fetch data:', err);
+        console.error('Failed to fetch data, using fallback:', err);
+        setAbout(fallbackAboutUs);
       }
     };
     fetchData();

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
+import { fallbackMediaLogos } from '../../data/fallbackData';
+
 interface MediaLogoData {
   _id?: string;
   name: string;
@@ -11,12 +13,7 @@ interface MediaLogoData {
 }
 
 export const MediaRecognition: React.FC = () => {
-  const [logos, setLogos] = useState<MediaLogoData[]>([
-    { name: 'Lokmat', color: '#6E1E18' },
-    { name: 'Sakal', color: '#1a56db' },
-    { name: 'ABP', color: '#000000' },
-    { name: 'TV9', color: '#cc0000' }
-  ]);
+  const [logos, setLogos] = useState<MediaLogoData[]>(fallbackMediaLogos);
 
   useEffect(() => {
     const fetchMediaLogos = async () => {
@@ -27,6 +24,7 @@ export const MediaRecognition: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic media logos, using fallback:', err);
+        setLogos(fallbackMediaLogos);
       }
     };
     fetchMediaLogos();

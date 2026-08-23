@@ -43,19 +43,22 @@ interface DetailedService {
   features: SubFeature[];
 }
 
+import { fallbackServices } from '../../../data/fallbackData';
+
 export const DetailedServicesList: React.FC = () => {
-  const [services, setServices] = useState<DetailedService[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState<DetailedService[]>(fallbackServices as any);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const data = await apiFetch('/services');
-        if (data) {
+        if (data && data.length > 0) {
           setServices(data);
         }
       } catch (err) {
-        console.error('Failed to fetch services:', err);
+        console.error('Failed to fetch services, using fallback:', err);
+        setServices(fallbackServices as any);
       } finally {
         setLoading(false);
       }

@@ -14,28 +14,32 @@ interface OurWorkItem {
   images: string[];
 }
 
+import { fallbackOurWork } from '../data/fallbackData';
+
 export const OurWorkPage: React.FC = () => {
-  const [works, setWorks] = useState<OurWorkItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [works, setWorks] = useState<OurWorkItem[]>(fallbackOurWork as any);
+  const [loading, setLoading] = useState(false);
 
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentWorkIndex, setCurrentWorkIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const [activeTabId, setActiveTabId] = useState<string | null>(null);
+  const [activeTabId, setActiveTabId] = useState<string | null>(fallbackOurWork[0]?._id || null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchWorks = async () => {
       try {
         const data = await apiFetch('/our-work');
-        setWorks(data || []);
         if (data && data.length > 0) {
+          setWorks(data);
           setActiveTabId(data[0]._id);
         }
       } catch (error) {
-        console.error('Failed to fetch our work', error);
+        console.error('Failed to fetch our work, using fallback:', error);
+        setWorks(fallbackOurWork as any);
+        setActiveTabId(fallbackOurWork[0]?._id || null);
       } finally {
         setLoading(false);
       }

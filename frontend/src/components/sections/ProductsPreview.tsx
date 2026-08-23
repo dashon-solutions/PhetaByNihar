@@ -6,6 +6,8 @@ import { Divider } from '../ui/Divider';
 import { InquiryModal } from '../ui/InquiryModal';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
+import { fallbackProducts } from '../../data/fallbackData';
+
 interface ProductData {
   _id?: string;
   id: string;
@@ -22,30 +24,8 @@ export const ProductsPreview: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('Miniature Pheta');
-  const [products, setProducts] = useState<ProductData[]>([
-    {
-      id: '01',
-      name: 'Miniature Pheta',
-      subtitle: 'Decorative Heritage Artifact',
-      image: '/wagnakh (2).png',
-      description: 'Handcrafted mini-phetas designed as royal keepsakes and cultural decor.'
-    },
-    {
-      id: '02',
-      name: 'Wagnakha',
-      subtitle: 'Legendary Maratha Emblem',
-      image: '/wagnakh.png',
-      description: 'Detailed metal replicas showcasing the power and courage of Chhatrapati Shivaji Maharaj.'
-    },
-    {
-      id: '03',
-      name: 'Rajmudra',
-      subtitle: 'The Royal Sovereign Seal',
-      image: '/rajmudra.jpg',
-      description: 'Precision-etched historic royal seal cast in traditional metallic tones.'
-    }
-  ]);
+  const [selectedProduct, setSelectedProduct] = useState('Ready-made Pheta');
+  const [products, setProducts] = useState<ProductData[]>(fallbackProducts);
 
   const handleOpenRentalInquiry = (productName: string) => {
     setSelectedProduct(productName);
@@ -61,6 +41,7 @@ export const ProductsPreview: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic products, using fallback:', err);
+        setProducts(fallbackProducts);
       }
     };
     fetchProducts();

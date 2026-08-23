@@ -35,9 +35,11 @@ const cardVariant: any = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
+import { fallbackProducts } from '../data/fallbackData';
+
 export const RentalProductsPage: React.FC = () => {
-  const [products, setProducts] = useState<ProductItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<ProductItem[]>(fallbackProducts as any);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
   const navigate = useNavigate();
@@ -53,11 +55,12 @@ export const RentalProductsPage: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const data = await apiFetch('/products');
-        if (data) {
+        if (data && data.length > 0) {
           setProducts(data);
         }
       } catch (err) {
-        console.error('Failed to fetch rental products:', err);
+        console.error('Failed to fetch rental products, using fallback:', err);
+        setProducts(fallbackProducts as any);
       } finally {
         setLoading(false);
       }

@@ -6,6 +6,8 @@ import * as LucideIcons from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
+import { fallbackServices } from '../../data/fallbackData';
+
 interface ServiceData {
   _id?: string;
   title: string;
@@ -15,32 +17,7 @@ interface ServiceData {
 }
 
 export const ServicesSection: React.FC = () => {
-  const [services, setServices] = useState<ServiceData[]>([
-    {
-      title: 'Royal Groom Pheta',
-      description: 'Traditional & royal pheta ceremony for weddings that becomes a memory for life.',
-      image: '/hero_bride_groom.png',
-      icon: 'Crown'
-    },
-    {
-      title: 'Cultural Festivals',
-      description: 'Celebrate festivals, temple events & cultural programs with pride and honor.',
-      image: '/service_pheta.webp',
-      icon: 'Tent'
-    },
-    {
-      title: 'Workshops & Training',
-      description: 'Learn the art of Pheta tying with our interactive workshops & hands-on training.',
-      image: '/hero_bride_groom.png',
-      icon: 'GraduationCap'
-    },
-    {
-      title: 'Corporate Events',
-      description: 'Add a touch of tradition to corporate gatherings, award functions & VIP satkars.',
-      image: '/service_pheta.webp',
-      icon: 'Briefcase'
-    }
-  ]);
+  const [services, setServices] = useState<ServiceData[]>(fallbackServices as any);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -51,6 +28,7 @@ export const ServicesSection: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic services, using fallback:', err);
+        setServices(fallbackServices as any);
       }
     };
     fetchServices();

@@ -6,6 +6,8 @@ import { Divider } from '../ui/Divider';
 import { Button } from '../ui/Button';
 import { apiFetch } from '../../utils/api';
 
+import { fallbackVideos } from '../../data/fallbackData';
+
 interface VideoData {
   _id?: string;
   title: string;
@@ -36,33 +38,7 @@ const getWatchUrl = (url: string): string => {
 };
 
 export const FeaturedConversations: React.FC = () => {
-  const [videos, setVideos] = useState<VideoData[]>([
-    {
-      title: 'अधीपतीचा राजेशाही फेटा बांधतानाची खास झलक आणि फेटयाबद्दलचा विशेष अभिप्राय नक्की बघा @PhetabyNihar',
-      channel: 'Zee Marathi',
-      url: 'https://www.youtube.com/embed/OkjwpA-MdNc'
-    },
-    {
-      title: 'Special Interview on Maharashtra Day (1 May) conducted by Maharashtra Times',
-      channel: 'Cultural Diaries',
-      url: 'https://www.youtube.com/embed/OkjwpA-MdNc'
-    },
-    {
-      title: 'How the Turban of Kondhanpur’s Mankaris Was Tied',
-      channel: 'Pheta By Nihar',
-      url: 'https://www.youtube.com/embed/OkjwpA-MdNc'
-    },
-    {
-      title: 'News18 Marathi takes note of the history of the Pheta – How might the turban have originated?',
-      channel: 'News18',
-      url: 'https://www.youtube.com/embed/OkjwpA-MdNc'
-    },
-    {
-      title: 'From Delivery Boy to the Artist Who Ties Phetas for Celebrities – Nihar Tambde',
-      channel: 'Loksatta',
-      url: 'https://www.youtube.com/embed/OkjwpA-MdNc'
-    }
-  ]);
+  const [videos, setVideos] = useState<VideoData[]>(fallbackVideos);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -73,6 +49,7 @@ export const FeaturedConversations: React.FC = () => {
         }
       } catch (err) {
         console.warn('Could not load dynamic videos, using fallback:', err);
+        setVideos(fallbackVideos);
       }
     };
     fetchVideos();

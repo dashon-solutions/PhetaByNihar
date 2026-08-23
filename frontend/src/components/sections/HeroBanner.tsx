@@ -17,80 +17,7 @@ export interface BannerData {
   secondaryButtonLink?: string;
 }
 
-const DEFAULT_PAGE_BANNERS: Record<string, BannerData> = {
-  home: {
-    tag: 'Preserving Heritage',
-    titleItalic: 'The Art of',
-    titleBold: 'Maharashtrian',
-    titleRegular: 'Pheta Ceremony',
-    description: 'Honoring traditions with elegance, respect & pride. From royal weddings to cultural celebrations, we bring the timeless art of Pheta tying to life.',
-    backgroundImage: '/footerimg.png',
-    primaryButtonText: 'Book Now',
-    primaryButtonLink: '/contact',
-    secondaryButtonText: 'Explore Work',
-    secondaryButtonLink: '/our-work'
-  },
-  about: {
-    tag: 'Our Legacy',
-    titleItalic: 'The Story Behind',
-    titleBold: 'Pheta By Nihar',
-    titleRegular: 'Tradition & Excellence',
-    description: 'Learn the story behind our craft, our passion for Maharashtrian culture, and the masters who keep the royal tradition alive.',
-    backgroundImage: '/aboutnewiamge.png',
-    primaryButtonText: 'Explore Collection',
-    primaryButtonLink: '/products',
-    secondaryButtonText: 'Our Services',
-    secondaryButtonLink: '/services'
-  },
-  services: {
-    tag: 'Specialized Offerings',
-    titleItalic: 'Royal & Authentic',
-    titleBold: 'Pheta Services',
-    titleRegular: '& Custom Masterclasses',
-    description: 'From grand wedding ceremonies and cultural processions to professional training workshops, discover our tailored turban styling services.',
-    backgroundImage: '/service_pheta.webp',
-    primaryButtonText: 'Book Service',
-    primaryButtonLink: '/contact',
-    secondaryButtonText: 'View Portfolio',
-    secondaryButtonLink: '/our-work'
-  },
-  'our-work': {
-    tag: 'Portfolio of Pride',
-    titleItalic: 'A Showcase of',
-    titleBold: 'Royal Celebrations',
-    titleRegular: '& Memorable Events',
-    description: 'Explore our gallery of royal wedding ceremonies, celebrity satkars, high-profile dignitaries, and vibrant cultural processions across India.',
-    backgroundImage: '/footerimg.png',
-    primaryButtonText: 'Book Us Now',
-    primaryButtonLink: '/contact',
-    secondaryButtonText: 'Explore Services',
-    secondaryButtonLink: '/services'
-  },
-  products: {
-    tag: 'Exclusive Heritage',
-    titleItalic: 'Handcrafted Royal',
-    titleBold: 'Products & Rentals',
-    titleRegular: 'Artifacts & Regalia',
-    description: 'Discover our premium range of traditional Maharashtrian accessories, miniature phetas, Wagnakha replicas, and royal pagadis available for purchase and rental.',
-    backgroundImage: '/aboutsideiamge.png',
-    primaryButtonText: 'Inquire Now',
-    primaryButtonLink: '/contact',
-    secondaryButtonText: 'Our Services',
-    secondaryButtonLink: '/services'
-  },
-  contact: {
-    tag: 'Connect With Us',
-    titleItalic: 'Begin Your',
-    titleBold: 'Royal Experience',
-    titleRegular: '& Event Inquiries',
-    description: 'Whether you want to book our team for an upcoming wedding, festival, or masterclass training, reach out to us and let us create unforgettable memories.',
-    backgroundImage: '/footerimg.png',
-    primaryButtonText: 'Send Inquiry',
-    primaryButtonLink: '#inquiry-form',
-    secondaryButtonText: 'Explore Work',
-    secondaryButtonLink: '/our-work'
-  }
-};
+import { fallbackBanners } from '../../data/fallbackData';
 
 interface HeroBannerProps {
   pageName?: string;
@@ -107,7 +34,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   showButtons,
   showTag
 }) => {
-  const fallback = DEFAULT_PAGE_BANNERS[pageName] || DEFAULT_PAGE_BANNERS.home;
+  const fallback = fallbackBanners[pageName] || fallbackBanners.home;
 
   const [banner, setBanner] = useState<BannerData>({
     ...fallback,

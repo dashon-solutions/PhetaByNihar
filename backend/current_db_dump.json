@@ -1,0 +1,1507 @@
+{
+  "banners": [
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b56",
+      "pageName": "home",
+      "tag": "Preserving Heritage",
+      "titleItalic": "The Art of",
+      "titleBold": "Maharashtrian",
+      "titleRegular": "Pheta Ceremony",
+      "description": "Honoring traditions with elegance, respect & pride. From royal weddings to cultural celebrations, we bring the timeless art of Pheta tying to life.",
+      "backgroundImage": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787037436/phetabynihar/gqnthtwmpajc6eyuctss.webp",
+      "primaryButtonText": "Book Now",
+      "secondaryButtonText": "Explore Work",
+      "__v": 0,
+      "primaryButtonLink": "/contact",
+      "secondaryButtonLink": "/our-work"
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b57",
+      "pageName": "about",
+      "tag": "Our Legacy",
+      "titleItalic": "The Story Behind",
+      "titleBold": "Pheta By Nihar",
+      "titleRegular": "Tradition & Excellence",
+      "description": "Learn the story behind our craft, our passion for Maharashtrian culture, and the masters who keep the royal tradition alive.",
+      "backgroundImage": "/aboutnewiamge.png",
+      "primaryButtonText": "Explore Collection",
+      "secondaryButtonText": "Our Services",
+      "__v": 0,
+      "primaryButtonLink": "/products",
+      "secondaryButtonLink": "/services"
+    },
+    {
+      "_id": "6a83427514472786a4409e61",
+      "pageName": "services",
+      "tag": "Specialized Offerings",
+      "titleItalic": "Royal & Authentic",
+      "titleBold": "Pheta Services",
+      "titleRegular": "& Custom Masterclasses",
+      "description": "From grand wedding ceremonies and cultural processions to professional training workshops, discover our tailored turban styling services.",
+      "backgroundImage": "/service_pheta.webp",
+      "primaryButtonText": "Book Service",
+      "primaryButtonLink": "/contact",
+      "secondaryButtonText": "View Portfolio",
+      "secondaryButtonLink": "/our-work",
+      "__v": 0
+    },
+    {
+      "_id": "6a83427a14472786a4409f00",
+      "pageName": "products",
+      "tag": "Exclusive Heritage",
+      "titleItalic": "Handcrafted Royal",
+      "titleBold": "Products & Rentals",
+      "titleRegular": "Artifacts & Regalia",
+      "description": "Discover our premium range of traditional Maharashtrian accessories, miniature phetas, Wagnakha replicas, and royal pagadis available for purchase and rental.",
+      "backgroundImage": "/aboutsideiamge.png",
+      "primaryButtonText": "Inquire Now",
+      "primaryButtonLink": "/contact",
+      "secondaryButtonText": "Our Services",
+      "secondaryButtonLink": "/services",
+      "__v": 0
+    },
+    {
+      "_id": "6a83427b14472786a4409f06",
+      "pageName": "our-work",
+      "tag": "Portfolio of Pride",
+      "titleItalic": "A Showcase of",
+      "titleBold": "Royal Celebrations",
+      "titleRegular": "& Memorable Events",
+      "description": "Explore our gallery of royal wedding ceremonies, celebrity satkars, high-profile dignitaries, and vibrant cultural processions across India.",
+      "backgroundImage": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1786987312/phetabynihar/yynqboe8qt44wurfojr5.webp",
+      "primaryButtonText": "Book Us Now",
+      "primaryButtonLink": "/contact",
+      "secondaryButtonText": "Explore Services",
+      "secondaryButtonLink": "/services",
+      "__v": 0
+    },
+    {
+      "_id": "6a83429a2f4cfc7c249ca2df",
+      "pageName": "contact",
+      "__v": 0,
+      "backgroundImage": "/footerimg.png",
+      "description": "Whether you want to book our team for an upcoming wedding, festival, or masterclass training, reach out to us and let us create unforgettable memories.",
+      "primaryButtonLink": "#inquiry-form",
+      "primaryButtonText": "Send Inquiry",
+      "secondaryButtonLink": "/our-work",
+      "secondaryButtonText": "Explore Work",
+      "tag": "Connect With Us",
+      "titleBold": "Royal Experience",
+      "titleItalic": "Begin Your",
+      "titleRegular": "& Event Inquiries"
+    },
+    {
+      "_id": "6a847c7ba0b0ab50c7a8e7b9",
+      "pageName": "events",
+      "tag": "Preserving Heritage",
+      "titleItalic": "The Art of",
+      "titleBold": "Maharashtrian",
+      "titleRegular": "Pheta Ceremony",
+      "description": "Honoring traditions with elegance, respect & pride.",
+      "backgroundImage": "/footerimg.png",
+      "primaryButtonText": "Book Now",
+      "primaryButtonLink": "/contact",
+      "secondaryButtonText": "Explore Work",
+      "secondaryButtonLink": "/our-work",
+      "__v": 0
+    },
+    {
+      "_id": "6a847c9ca0b0ab50c7a8e7f4",
+      "pageName": "videos",
+      "tag": "Preserving Heritage",
+      "titleItalic": "The Art of",
+      "titleBold": "Maharashtrian",
+      "titleRegular": "Pheta Ceremony",
+      "description": "Honoring traditions with elegance, respect & pride.",
+      "backgroundImage": "/footerimg.png",
+      "primaryButtonText": "Book Now",
+      "primaryButtonLink": "/contact",
+      "secondaryButtonText": "Explore Work",
+      "secondaryButtonLink": "/our-work",
+      "__v": 0
+    }
+  ],
+  "aboutUs": {
+    "_id": "6a6b2ea861ea1ce5d0dc7b5a",
+    "heading": "A Tradition Passed Down with",
+    "italicHeading": "Pride & Precision",
+    "text": "With deep respect for Maharashtrian culture and years of dedicated practice, Nihar Tambde keeps the royal tradition of Pheta tying alive. Each fold is more than just cloth – it's an emotion, a symbol of respect, honor and our glorious heritage.",
+    "portraitImage": "/about_portrait.webp",
+    "backgroundImage": "/aboutnewiamge.png",
+    "journey": "Our journey began over a decade ago with a simple desire: to see the youth of Maharashtra wear their traditional headgear with pride. What started as tying phetas for close family quickly grew into a cultural movement. Today, 'Pheta By Nihar' is synonymous with royal elegance, trusted by thousands for their most precious life events.",
+    "passion": "We are deeply passionate about the cultural roots of the Maratha empire. The Pheta is not merely an accessory; it is the crowning glory of Maharashtrian attire. Our passion lies in perfecting the folds, matching the vibrant colors, and ensuring every client feels like royalty on their special day.",
+    "experience": "With over 5,000 successful events, our team has mastered every style of Pheta - from the classic Puneri Pagadi and Kolhapuri Pheta to the majestic Shahi Pheta. We have had the honor of styling grooms, celebrities, and political figures, ensuring flawless execution even in high-pressure environments.",
+    "brandStory": "Pheta By Nihar represents a bridge between history and the modern era. Our brand is built on authenticity, premium quality fabrics, and unparalleled craftsmanship. When you choose us, you are not just hiring a service; you are embracing a legacy that commands respect and admiration.",
+    "classBatches": [
+      {
+        "batchName": "Weekend Mastery Batch (Sat-Sun)",
+        "startDate": "22 Aug 2026",
+        "duration": "2 Days (8 Hours Hands-on)",
+        "status": "Filling Fast",
+        "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230125/phetabynihar/adbakyzrkoljbywhr4eq.webp",
+        "_id": "6a834068bdcf355e313fc069"
+      }
+    ],
+    "offeredClasses": [
+      {
+        "title": "Offline Studio Masterclass",
+        "description": "Immersive, hands-on masterclass at our studio with live models, authentic silk fabrics, and personal 1-on-1 guidance from Nihar Tambde.",
+        "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230095/phetabynihar/vt7nb1nhd70ocsfwlwxv.webp",
+        "_id": "6a834068bdcf355e313fc065"
+      }
+    ],
+    "__v": 5,
+    "journeyPoints": [],
+    "quoteAuthor": "Nihar Tambde",
+    "quoteText": "For me, it’s not just about tying a pheta, it’s about creating emotions and memories that last forever."
+  },
+  "services": [
+    {
+      "_id": "6a8335d61b03ee03ec7a6705",
+      "title": "Royal Groom Pheta & Safa Styling",
+      "description": "Bespoke royal Maharashtrian and Shahi phetas tailored to harmonize with the groom's sherwani and regal wedding palette, adorned with exquisite kalgi, brooches, and pearl necklaces.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1786985432/phetabynihar/zd0gzxbfmvx8gu8ozvw8.webp",
+      "icon": "Crown",
+      "moreInfo": "Includes personal on-site styling for the groom, matching pagadi brooches, and pre-wedding consultation.",
+      "features": [
+        {
+          "icon": "Crown",
+          "label": "Shahi Groom Turban",
+          "_id": "6a8335d61b03ee03ec7a6706"
+        },
+        {
+          "icon": "Award",
+          "label": "Custom Kalgi & Ornaments",
+          "_id": "6a8335d61b03ee03ec7a6707"
+        },
+        {
+          "icon": "Sparkles",
+          "label": "Pure Silk & Zari Fabrics",
+          "_id": "6a8335d61b03ee03ec7a6708"
+        },
+        {
+          "icon": "Heart",
+          "label": "On-Site Groom Styling",
+          "_id": "6a8335d61b03ee03ec7a6709"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a670a",
+      "title": "Barati & Family Mass Pheta Draping",
+      "description": "High-speed, synchronized traditional Pheta tying for wedding parties, baratis, and honored family guests of 50 to 500+ attendees with zero compromise on elegance.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229642/phetabynihar/aaonyzcf2cq67qkix8gy.webp",
+      "icon": "Users",
+      "moreInfo": "Our team of experienced artists can drape up to 200+ guests in under 60 minutes with coordinated themes.",
+      "features": [
+        {
+          "icon": "Users",
+          "label": "500+ Guests Capacity",
+          "_id": "6a8335d61b03ee03ec7a670b"
+        },
+        {
+          "icon": "Palette",
+          "label": "Theme Coordinated Colors",
+          "_id": "6a8335d61b03ee03ec7a670c"
+        },
+        {
+          "icon": "Flag",
+          "label": "Authentic Traditional Folds",
+          "_id": "6a8335d61b03ee03ec7a670d"
+        },
+        {
+          "icon": "Star",
+          "label": "Rapid Professional Draping",
+          "_id": "6a8335d61b03ee03ec7a670e"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a670f",
+      "title": "Cultural Festivals & Grand Shobha Yatras",
+      "description": "Authentic Puneri and Kolhapuri pheta styling for Ganesh Utsav, Gudi Padwa, Dhol Tasha Pathaks, and Shiv Jayanti processions honoring Maharashtra's glorious legacy.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1786985450/phetabynihar/gjbzn7faqbteq6kvv8xa.webp",
+      "icon": "Tent",
+      "moreInfo": "Weather-resistant and movement-friendly tying techniques specially designed for dynamic procession performers.",
+      "features": [
+        {
+          "icon": "Landmark",
+          "label": "Puneri & Kolhapuri Styles",
+          "_id": "6a8335d61b03ee03ec7a6710"
+        },
+        {
+          "icon": "Flag",
+          "label": "Dhol Tasha Troupe Styling",
+          "_id": "6a8335d61b03ee03ec7a6711"
+        },
+        {
+          "icon": "Award",
+          "label": "Secure All-Day Hold",
+          "_id": "6a8335d61b03ee03ec7a6712"
+        },
+        {
+          "icon": "Sparkles",
+          "label": "Traditional Saffron & Gold",
+          "_id": "6a8335d61b03ee03ec7a6713"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a6714",
+      "title": "Celebrity, Film & Media Styling",
+      "description": "Historical and contemporary headgear styling for feature films, television shows, celebrity red carpets, theatrical plays, and high-fashion editorial campaigns.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229723/phetabynihar/cmymhcqi21jrhyphhkxa.webp",
+      "icon": "Video",
+      "moreInfo": "Full on-set continuity management, character-specific turban design, and rapid restyling between takes.",
+      "features": [
+        {
+          "icon": "Video",
+          "label": "Camera-Ready Precision",
+          "_id": "6a8335d61b03ee03ec7a6715"
+        },
+        {
+          "icon": "Palette",
+          "label": "Period-Accurate Design",
+          "_id": "6a8335d61b03ee03ec7a6716"
+        },
+        {
+          "icon": "Award",
+          "label": "Celebrity Experience",
+          "_id": "6a8335d61b03ee03ec7a6717"
+        },
+        {
+          "icon": "Star",
+          "label": "On-Set Continuous Support",
+          "_id": "6a8335d61b03ee03ec7a6718"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a6719",
+      "title": "Corporate Honors & VIP Felicitation",
+      "description": "Dignified Maharashtrian Satkar and ceremonial honor phetas for corporate annual meets, national summits, award ceremonies, and political dignitaries.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229765/phetabynihar/rgfdpix3nlh6tlulow9z.webp",
+      "icon": "Briefcase",
+      "moreInfo": "Includes ceremonial protocol advisory, royal velvet presentation boxes, and respectful stage assistance.",
+      "features": [
+        {
+          "icon": "Briefcase",
+          "label": "Executive Satkar Pheta",
+          "_id": "6a8335d61b03ee03ec7a671a"
+        },
+        {
+          "icon": "Shield",
+          "label": "State & Corporate Protocol",
+          "_id": "6a8335d61b03ee03ec7a671b"
+        },
+        {
+          "icon": "Presentation",
+          "label": "Dignitary Felicitation",
+          "_id": "6a8335d61b03ee03ec7a671c"
+        },
+        {
+          "icon": "Crown",
+          "label": "Silk Shawl & Sriphal Set",
+          "_id": "6a8335d61b03ee03ec7a671d"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a671e",
+      "title": "Destination Weddings & Global Travel",
+      "description": "Pan-India and international destination wedding services. Our specialized troupe travels worldwide to deliver authentic royal Maratha grandeur to your chosen venue.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229801/phetabynihar/rokim9s9xdkqp55uadkm.webp",
+      "icon": "Plane",
+      "moreInfo": "Comprehensive multi-day coverage including Sangeet, Haldi, Baraat, and Reception styling across all global locations.",
+      "features": [
+        {
+          "icon": "Plane",
+          "label": "Pan-India & Global Travel",
+          "_id": "6a8335d61b03ee03ec7a671f"
+        },
+        {
+          "icon": "MapPin",
+          "label": "Turnkey Logistics Handling",
+          "_id": "6a8335d61b03ee03ec7a6720"
+        },
+        {
+          "icon": "Users",
+          "label": "Multi-Day Wedding Support",
+          "_id": "6a8335d61b03ee03ec7a6721"
+        },
+        {
+          "icon": "Award",
+          "label": "Dedicated Styling Crew",
+          "_id": "6a8335d61b03ee03ec7a6722"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a6723",
+      "title": "Professional Masterclasses & Certification",
+      "description": "Comprehensive, hands-on certification training programs covering traditional folding techniques, fabric curation, client styling, and commercial event management.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229826/phetabynihar/iyrizaxx3ehj10gsvd0x.webp",
+      "icon": "GraduationCap",
+      "moreInfo": "Personal mentorship by master artist Nihar Tambde with practical live workshop sessions and authorized certification.",
+      "features": [
+        {
+          "icon": "Presentation",
+          "label": "Hands-on Live Practice",
+          "_id": "6a8335d61b03ee03ec7a6725"
+        },
+        {
+          "icon": "Ticket",
+          "label": "Business Growth Blueprint",
+          "_id": "6a8335d61b03ee03ec7a6726"
+        },
+        {
+          "icon": "Sparkles",
+          "label": "Master 10+ Heritage Styles",
+          "_id": "6a8335d61b03ee03ec7a6727"
+        }
+      ],
+      "__v": 0
+    },
+    {
+      "_id": "6a8335d61b03ee03ec7a6728",
+      "title": "Pre-Tied Royal Phetas & Custom Crafting",
+      "description": "Custom-tailored, ready-to-wear phetas with lightweight structured inner linings for effortless wearing without requiring an on-site tying artist.",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787229860/phetabynihar/gy6yqdd84on9tqg9gsfs.webp",
+      "icon": "Sparkles",
+      "moreInfo": "Shipped safely in shockproof packaging with worldwide courier delivery and personalized measurement fittings.",
+      "features": [
+        {
+          "icon": "Sparkles",
+          "label": "Instant Wear Comfort",
+          "_id": "6a8335d61b03ee03ec7a6729"
+        },
+        {
+          "icon": "Award",
+          "label": "Custom Head Size Fit",
+          "_id": "6a8335d61b03ee03ec7a672a"
+        },
+        {
+          "icon": "Plane",
+          "label": "Worldwide Doorstep Shipping",
+          "_id": "6a8335d61b03ee03ec7a672b"
+        },
+        {
+          "icon": "Heart",
+          "label": "Durable Shape Retention",
+          "_id": "6a8335d61b03ee03ec7a672c"
+        }
+      ],
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b65",
+      "id": "01",
+      "name": "Ready-made Pheta",
+      "marathiName": "तयार फेटा",
+      "subtitle": "Decorative Heritage Artifact",
+      "image": "/wagnakh (2).png",
+      "description": "Handcrafted mini-phetas designed as royal keepsakes. Perfect for car dashboards, home decor, or as a unique cultural gift.",
+      "__v": 0,
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231232/phetabynihar/efip11pjodywb1vhowlk.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231233/phetabynihar/zlhhcuwzgfyligj8pst9.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231235/phetabynihar/elwg8geophxlmdkzkq9t.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231236/phetabynihar/nshdjwhzaarxtcxg02me.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231238/phetabynihar/kjmwmdaf5dzkrjrrnct2.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231240/phetabynihar/wefl7z8etjscyoc7ynhf.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231241/phetabynihar/yodgde0pjntblghr5e3r.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231242/phetabynihar/oj2zxf2psztkkh332hem.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231243/phetabynihar/xn4u3cjztrpasv1hcrje.webp"
+      ],
+      "information": ""
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b66",
+      "id": "02",
+      "name": "Wagh Nakh Maal",
+      "marathiName": "वाघनख माळ",
+      "subtitle": "Legendary Maratha Emblem",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787503896/phetabynihar/kbsklmapzssojjjj0j2n.webp",
+      "description": "A detailed metal replica of the legendary Wagh Nakh Maal. A symbol of courage and strategic brilliance.",
+      "__v": 0,
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231535/phetabynihar/a21kk9edsoz0vdk9nmg5.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231537/phetabynihar/lebyiqxiqstrabtklbpf.webp"
+      ],
+      "information": ""
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b67",
+      "id": "03",
+      "name": "Chhatrapati Sambhaji Maharaj Rajmudra Badge (Pin-Up)",
+      "marathiName": "छ. संभाजी महा. राजमुद्रा बॅच (pinup)",
+      "subtitle": "The Royal Sovereign Seal",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231354/phetabynihar/pbnmvzusyfsm8jwff79b.webp",
+      "description": "6 mm MDF wooden artificial gold lyef with acrylic coting .\n\nPrecision-etched historic royal seal of the Maratha Empire, cast in traditional metallic tones. An inspiring piece of history for your desk.",
+      "__v": 0,
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231393/phetabynihar/b4sdv76aucekp87uosc0.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231394/phetabynihar/q6xuudx7zc6xjjfyb9hy.webp"
+      ],
+      "information": "",
+      "price": 350
+    },
+    {
+      "_id": "6a8b28d46add499aab460d91",
+      "id": "04",
+      "name": "Chhatrapati Shivaji Maharaj Rajmudra Pinup Badge",
+      "marathiName": "छ. शिवाजी महाराज राजमुद्रा पिनअप बॅच",
+      "subtitle": "Crafted ",
+      "price": 300,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505550/phetabynihar/hvcad98rjhoeyitzsjdp.webp",
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787504818/phetabynihar/ahkmaoul92ojjsoapywi.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787504819/phetabynihar/xvxtyd9rxrhvnalxcyu5.webp"
+      ],
+      "description": "Crafted with a 6 mm MDF wooden base, artificial gold leaf finish, and protective acrylic coating. Ideal for styling on phetas, traditional wear, or jackets.",
+      "information": "Crafted with a 6 mm MDF wooden base, artificial gold leaf finish, and protective acrylic coating. Ideal for styling on phetas, traditional wear, or jackets.",
+      "__v": 0
+    },
+    {
+      "_id": "6a8b296c6add499aab460d93",
+      "id": "05",
+      "name": "Chhatrapati Shivaji Maharaj Rajmudra & Signature Pinup Badge",
+      "marathiName": "छ. शिवाजी महाराज राजमुद्रा व स्वाक्षरी पिनअप बॅच",
+      "subtitle": "Pinup Badge",
+      "price": 400,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505454/phetabynihar/t7evsglbizdhpc21c9b4.webp",
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787504959/phetabynihar/fk84zrpyci5advlctxlt.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787504960/phetabynihar/psqy2iekatrwnerssffa.webp"
+      ],
+      "description": "Premium pinup badge featuring the royal seal alongside Chhatrapati Shivaji Maharaj's historic signature. Built on a 6 mm MDF base with gold leaf detailing and acrylic coat finish.",
+      "information": "Premium pinup badge featuring the royal seal alongside Chhatrapati Shivaji Maharaj's historic signature. Built on a 6 mm MDF base with gold leaf detailing and acrylic coat finish.",
+      "__v": 0
+    },
+    {
+      "_id": "6a8b2a6a6add499aab460d99",
+      "id": "06",
+      "name": "Chhatrapati Shivaji Maharaj Rajmudra 2-in-1 (Acrylic Badge + Fridge Magnet)",
+      "marathiName": "छ. शिवाजी महाराज राजमुद्रा २-इन-१ (अ‍ॅक्रेलिक बॅच + फ्रिज मॅग्नेट)",
+      "subtitle": "Acrylic Badge + Fridge Magnet",
+      "price": 300,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505476/phetabynihar/delsqdosbw9rz3z9z8vt.webp",
+      "galleryImages": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505195/phetabynihar/ehfn4yuy7x3se7jlb8am.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505196/phetabynihar/uikpzq9kvcdpuq0trb6u.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505197/phetabynihar/hnoz1ntj1ao8dhyahcvz.webp"
+      ],
+      "description": "Versatile 2-in-1 product crafted from 3 mm premium acrylic material. Features a built-in magnet, allowing it to be worn as a badge or used as a fridge/metal magnet.",
+      "information": "Versatile 2-in-1 product crafted from 3 mm premium acrylic material. Features a built-in magnet, allowing it to be worn as a badge or used as a fridge/metal magnet.",
+      "__v": 0
+    }
+  ],
+  "videos": [
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b6a",
+      "title": "Learn the Perfect Puneri Pagadi Fold | Expert Tutorial",
+      "channel": "Pheta By Nihar",
+      "url": "https://www.instagram.com/stories/highlights/17963849905800662/?hl=en",
+      "__v": 0
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b6c",
+      "title": "Special Interview on Maharashtra Day (1 May) conducted by Maharashtra Times Digital",
+      "channel": "Cultural Diaries",
+      "url": "https://www.youtube.com/embed/cCsAXgrgKh4?si=ir-DqJaVnmZno88t",
+      "__v": 0
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b6b",
+      "title": "How the Turban of Kondhanpur’s Mankaris Was Tied",
+      "channel": "Pheta By Nihar",
+      "url": "https://www.youtube.com/embed/TTldj5BQ9yw?si=Qg5eBz0w-lMEEHGj",
+      "__v": 0
+    },
+    {
+      "_id": "6a83305fd6456c0d86dc10d1",
+      "title": "News18 Marathi takes note of the history of the Pheta — How might the Pheta have originated? @PhetaByNihar",
+      "channel": "News18",
+      "url": "https://www.youtube.com/embed/wauqWpcfwWY?si=qhCE2dKAr6C6pg_a",
+      "__v": 0
+    },
+    {
+      "_id": "6a833096d6456c0d86dc10d3",
+      "title": "From Delivery Boy to the Artist Who Ties Phetas for Celebrities – Nihar Tambade | An Extraordinary Story, Episode 42",
+      "channel": "Youtube",
+      "url": "https://www.youtube.com/embed/bQxGbEydaH0?si=iDHcWixdTN8bfc3z",
+      "__v": 0
+    },
+    {
+      "_id": "6a8707e65ec234b6a3dca1de",
+      "title": "जीवा ने उदयभानच्या सैनिकांना वेश बदलून कसं घबरवले",
+      "channel": "Youtube",
+      "url": "https://www.youtube.com/embed/pCorf2lntwE?si=yNbg2ULFZFkbRbBj",
+      "__v": 0
+    }
+  ],
+  "mediaLogos": [
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b71",
+      "name": "time mahrastra",
+      "color": "#000000",
+      "__v": 0,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038482/phetabynihar/fvruvmr3ld3omz1y0djq.webp"
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b6f",
+      "name": "Lokmat",
+      "color": "#6E1E18",
+      "__v": 0,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038067/phetabynihar/ilt8ug2rmfaid9asi36s.webp"
+    },
+    {
+      "_id": "6a6b2ea861ea1ce5d0dc7b72",
+      "name": "TV9 Marathi",
+      "color": "#cc0000",
+      "__v": 0,
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038106/phetabynihar/nkcvjbm1gnlhfwcq3u0n.webp"
+    },
+    {
+      "_id": "6a840a9e5ee676b9df8deb5e",
+      "name": "marmic",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038364/phetabynihar/i1yxis1fpfike6p93oe4.webp",
+      "color": "#6E1E18",
+      "__v": 0
+    },
+    {
+      "_id": "6a840ab35ee676b9df8deb60",
+      "name": "loksata",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038375/phetabynihar/b3zcl51oj4izxbx6dskn.webp",
+      "color": "#6E1E18",
+      "__v": 0
+    },
+    {
+      "_id": "6a840ad45ee676b9df8deb62",
+      "name": "Indian Idol",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787038417/phetabynihar/tqcrqvcb7oicftzhid5n.webp",
+      "color": "#6E1E18",
+      "__v": 0
+    }
+  ],
+  "testimonials": [
+    {
+      "_id": "6a87001099ca8c6d81222878",
+      "source": "manual",
+      "quote": "Nihar helped me put together my traditional wedding attire for the vidhi, including the Pheta, Dhoti, and Shela, with all materials provided by him. The final look turned out fantastic and exceeded my expectations.",
+      "name": "Chinmay Salaskar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Chinmay&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222879",
+      "source": "manual",
+      "quote": "He is a very professional turban artist and has a very good knowledge of turbans. He also understands head anatomy, which helps him give the perfect structure for various head types.",
+      "name": "Priyanka Bhagat",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Priyanka&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287a",
+      "source": "manual",
+      "quote": "Really nice look, created a very good first impression. The overall dressing sense is also good and everything was done within half an hour.",
+      "name": "Archit Salunke",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Archit&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287b",
+      "source": "manual",
+      "quote": "I had a fantastic experience with Pheta by Nihar! Nihar was extremely responsive and helped me choose the perfect Pheta for my wedding. He ensured the right fit, color, and timely delivery to Sindhudurg.",
+      "name": "Gaurav Sawant",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Gaurav&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287c",
+      "source": "manual",
+      "quote": "Nihar has perfection in his art. His feta/pagdi/turban is durable and stays for a long time, the folds are clear and visible. Nihar would be the best for this on any occasion. He is also very down to earth, friendly and decent.",
+      "name": "Karan Ajmera",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Karan&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287d",
+      "source": "manual",
+      "quote": "The turban was tied very nicely. Thank you.",
+      "name": "Nilesh Powar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Nilesh&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287e",
+      "source": "manual",
+      "quote": "Excellent pheta artist. Accurate service, punctual. Amazing experience.",
+      "name": "Rohini Salekar Tandel",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Rohini&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122287f",
+      "source": "manual",
+      "quote": "Amazing service. Nihar is really particular about every single aspect.",
+      "name": "Rupali Kasare",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Rupali&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222880",
+      "source": "manual",
+      "quote": "One of the great pheta artists from Mumbai. Nihar is very skilled, dedicated and passionate towards his art. I am very happy and thankful to Pheta by Nihar.",
+      "name": "Vrushali Bhuwad",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Vrushali&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222881",
+      "source": "manual",
+      "quote": "Thank you for the beautiful pheta you created for me. The craftsmanship is outstanding, and I felt truly special wearing it.",
+      "name": "Sahil Palvankar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Sahil&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222882",
+      "source": "manual",
+      "quote": "Very professional and maintains the ethnicity of the culture. Nihar is a true artist and adds a personal touch to every pheta.",
+      "name": "Pratik Dhumal",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Pratik&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222883",
+      "source": "manual",
+      "quote": "He is the best pheta artist for me, superb Nihar. Keep going, keep making such great phetas and keep expanding your art.",
+      "name": "Zentrex Solutions",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Zentrex&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222884",
+      "source": "manual",
+      "quote": "A very talented pheta artist. Nihar is very passionate about his work.",
+      "name": "Shraddha Kamble",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Shraddha&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222885",
+      "source": "manual",
+      "quote": "He is the best pheta artist, superb Nihar Dada. Great experience, good service.",
+      "name": "Smit Mardhekar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Smit&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222886",
+      "source": "manual",
+      "quote": "Excellent service... amazing pheta... highly recommended!",
+      "name": "Vidhita Patkar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Vidhita&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222887",
+      "source": "manual",
+      "quote": "Superb service with creativity and great time management.",
+      "name": "Prashant Salgaonkar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Prashant&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222888",
+      "source": "manual",
+      "quote": "Outstanding work! The turban tying showcases exceptional finish, perfection, and class. Every detail is handled with great precision. The turban you tie is not just a tradition, but a true piece of art.",
+      "name": "Varnita Chalke",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Varnita&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222889",
+      "source": "manual",
+      "quote": "Outstanding work! The pheta you tie shows great finish, perfection and class. Every detail is taken care of very well. It's not just a tradition but a work of art - your skill and experience are evident in every stitch.",
+      "name": "Kunal Ghadge",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Kunal&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288a",
+      "source": "manual",
+      "quote": "If we want to describe Pheta by Nihar, only three words are enough: Creativity, Professionalism and Dedication. Getting a turban from Nihar was the best decision I made for my wedding.",
+      "name": "Saurabh Kalambate",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Saurabh&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288b",
+      "source": "manual",
+      "quote": "A very beautiful turban - it felt very special after seeing the work put into it.",
+      "name": "Abhijit Sawant",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Abhijit&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288c",
+      "source": "manual",
+      "quote": "Very nice, very beautiful turban - the way Nihar tied it made my look so complete that everyone liked it. Thank you Nihar for tying such a beautiful turban and for preserving this tradition.",
+      "name": "Parth Hajare",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Parth&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288d",
+      "source": "manual",
+      "quote": "Nihar Dada's work is great. He knows about phetas and even the garlands are good for the sangats.",
+      "name": "Chaitan Gurav",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Chaitan&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288e",
+      "source": "manual",
+      "quote": "Thank you very much for tying such a beautiful and excellent pheta. This was my second year in a row getting a pheta from you, and just like last time, it was perfect.",
+      "name": "Pratiksha Vikas Kedari",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Pratiksha&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122288f",
+      "source": "manual",
+      "quote": "Nihar Dada, with his helpful and supportive nature, makes tying a turban very efficient, smooth and comfortable. His special qualities are time management along with excellent work efficiency.",
+      "name": "Harshhada Salunkhe",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Harshhada&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222890",
+      "source": "manual",
+      "quote": "Nihar is a great and honest artist who does beautiful and fine work. It was so nice getting a turban tied by him. Thank you, brother.",
+      "name": "Pratik Mahimkar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Pratik&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222891",
+      "source": "manual",
+      "quote": "The pheta work is amazing. The method of tying is comfortable and strong. A good pheta is tied after taking a good amount of time and care.",
+      "name": "Siddhesh Madan",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Siddhesh&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222892",
+      "source": "manual",
+      "quote": "A very nicely tied pheta. Thank you.",
+      "name": "Rajni Tondwalkar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Rajni&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222893",
+      "source": "manual",
+      "quote": "Once this pheta is tied, it doesn't move for 10 hours straight - and it's tied exactly the way you want it, not too tight, not too loose. A wonderful experience - you should definitely get one tied at least once.",
+      "name": "Deepak Mandlik",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Deepak&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222894",
+      "source": "manual",
+      "quote": "Very beautiful badges. The magnets on the back are very strong and good quality, so there's no fear of them falling off. Thank you.",
+      "name": "Ganesh Khedekar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Ganesh&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222895",
+      "source": "manual",
+      "quote": "My experience with Nihar Pheta was great. The fitting of the clothes was perfect, the quality was great and the service was also on time.",
+      "name": "Amol J",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Amol&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222896",
+      "source": "manual",
+      "quote": "Nihar Dada is a very good artist and does very good work.",
+      "name": "Aditya Mohite",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Aditya&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222897",
+      "source": "manual",
+      "quote": "Very experienced and skilled artist. Nihar Dada works very well - a very nice experience.",
+      "name": "Prashant Ingale",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Prashant&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222898",
+      "source": "manual",
+      "quote": "Very beautiful pheta artwork - the result of immense prior knowledge and love for his craft. He brings diversity to his work and is proficient in many different styles including Mavli, Marathi and Punjabi.",
+      "name": "Bhushan Vispute",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Bhushan&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d81222899",
+      "source": "manual",
+      "quote": "The Rajmudra pheta is very nice, and the quality is also good. Thank you, Nihar.",
+      "name": "Anil Bhuvad",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Anil&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289a",
+      "source": "manual",
+      "quote": "Thanks Nihar, really such fabulous work - such a lovely pheta, tied so wonderfully!",
+      "name": "Pratham Dhuri",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Pratham&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289b",
+      "source": "manual",
+      "quote": "Nihar Dada is the best pheta artist I know - we've known each other for 3 years now, since the movie Subhedar.",
+      "name": "Yash Patil",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Yash&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289c",
+      "source": "manual",
+      "quote": "Really excellent work.",
+      "name": "Harshad Jadhav",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Harshad&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289d",
+      "source": "manual",
+      "quote": "The Maratha-style turban is adorned with a beautiful, graceful pheta. Jai Bhavani, Jai Shivaji.",
+      "name": "Shivtej Chavan",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Shivtej&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289e",
+      "source": "manual",
+      "quote": "At my wedding, my friend Nihar tied an exceptionally regal pheta. At my event, the person with the best-looking pheta was the most talked about - thank you, Nihar bhau.",
+      "name": "Abhijeet Neswankar",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Abhijeet&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d8122289f",
+      "source": "manual",
+      "quote": "I found it very beautiful.",
+      "name": "Abhijit Desale",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Abhijit&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d812228a0",
+      "source": "manual",
+      "quote": "My first time getting a pheta tied - I felt really good about it.",
+      "name": "Vikrant Kadve",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Vikrant&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d812228a1",
+      "source": "manual",
+      "quote": "The pheta work is amazing.",
+      "name": "Ajit Devghare",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Ajit&background=4D1217&color=D4AF37",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d812228a2",
+      "source": "manual",
+      "quote": "Good job. Really nice work.",
+      "name": "Akshay Shetye",
+      "location": "",
+      "rating": 5,
+      "image": "https://ui-avatars.com/api/?name=Akshay&background=D4AF37&color=2A0D0F",
+      "__v": 0
+    },
+    {
+      "_id": "6a87001099ca8c6d812228a3",
+      "source": "manual",
+      "quote": "Great work and attention to detail.",
+      "name": "Siddhesh Yejre",
+      "location": "",
+      "rating": 4,
+      "image": "https://ui-avatars.com/api/?name=Siddhesh&background=4D1217&color=D4AF37",
+      "__v": 0
+    }
+  ],
+  "phetaClasses": [
+    {
+      "_id": "6a834068bdcf355e313fc042",
+      "title": "Traditional Puneri & Kolhapuri Pheta Workshop",
+      "marathiTitle": "पारंपरिक पुणेरी व कोल्हापुरी फेटा कार्यशाळा",
+      "level": "Beginner to Intermediate",
+      "duration": "2 Days (Weekend Workshop - 8 Hours)",
+      "mode": "In-Studio / Hands-on",
+      "description": "Master the foundational techniques of authentic Puneri pagadi and vibrant Kolhapuri pheta draping with step-by-step guidance, pleat structuring, and fabric selection.",
+      "image": "/hero_bride_groom.png",
+      "price": "₹2,499",
+      "badge": "Most Popular",
+      "curriculum": [
+        "Heritage & Historical Significance of Maharashtrian Turbans",
+        "Fabric Selection, Thread Grain, and Starching Techniques",
+        "Mastering the Iconic 5-Fold Puneri Style with Golden Zari Border",
+        "The Bold Kolhapuri Draping & Tassel Styling",
+        "Live Model Practice and Form Correction"
+      ],
+      "features": [
+        {
+          "icon": "Award",
+          "label": "Authorized Certificate",
+          "_id": "6a834068bdcf355e313fc043"
+        },
+        {
+          "icon": "Layers",
+          "label": "Authentic Pleat Techniques",
+          "_id": "6a834068bdcf355e313fc044"
+        },
+        {
+          "icon": "Smile",
+          "label": "All Materials Provided",
+          "_id": "6a834068bdcf355e313fc045"
+        },
+        {
+          "icon": "Users",
+          "label": "Small Batch (Max 12)",
+          "_id": "6a834068bdcf355e313fc046"
+        }
+      ],
+      "eligibility": "Open to all age groups (14+). No prior draping experience required.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.114Z",
+      "updatedAt": "2026-08-17T17:10:00.114Z"
+    },
+    {
+      "_id": "6a834068bdcf355e313fc047",
+      "title": "Royal Groom & Shahi Safa Masterclass",
+      "marathiTitle": "शाही विवाह फेटा व साफा मास्टरक्लास",
+      "level": "Intermediate to Advanced",
+      "duration": "3 Days Intensive (12 Hours)",
+      "mode": "In-Studio / Hands-on",
+      "description": "Designed for wedding stylists and enthusiasts looking to master regal groom pagadis, Maratha Shahi phetas, royal safas, Kalgi pinning, brooch styling, and luxury pearl ornaments.",
+      "image": "/service_pheta.webp",
+      "price": "₹4,999",
+      "badge": "Best For Stylists",
+      "curriculum": [
+        "Royal Maratha Dynasty Pheta Silhouettes and Variations",
+        "Bespoke Groom Headwear Customization to Match Sherwani & Palette",
+        "Kalgi, Sirpech & Brooch Secure Attachment Protocols",
+        "Pure Silk & Brocade Draping for All-Day Comfort",
+        "Wedding Day Styling Logistics and Time Management"
+      ],
+      "features": [
+        {
+          "icon": "Crown",
+          "label": "Royal Shahi Techniques",
+          "_id": "6a834068bdcf355e313fc048"
+        },
+        {
+          "icon": "Sparkles",
+          "label": "Kalgi & Jewelry Styling",
+          "_id": "6a834068bdcf355e313fc049"
+        },
+        {
+          "icon": "Clock",
+          "label": "Speed & Durability Mastery",
+          "_id": "6a834068bdcf355e313fc04a"
+        },
+        {
+          "icon": "ShieldCheck",
+          "label": "Masterclass Certification",
+          "_id": "6a834068bdcf355e313fc04b"
+        }
+      ],
+      "eligibility": "Ideal for makeup artists, wedding planners, event stylists & passionate learners.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.116Z",
+      "updatedAt": "2026-08-17T17:10:00.116Z"
+    },
+    {
+      "_id": "6a834068bdcf355e313fc04c",
+      "title": "Professional Turban Artist Certification Course",
+      "marathiTitle": "व्यावसायिक फेटा आर्टिस्ट प्रमाणपत्र अभ्यासक्रम",
+      "level": "Professional Masterclass",
+      "duration": "4 Weeks (Comprehensive Weekend Batch)",
+      "mode": "Hybrid (Studio + Live Event Exposure)",
+      "description": "The complete career-launching program for aspiring professional pheta artists. Covers 12+ regional Indian and Maharashtrian styles, commercial speed draping for 500+ guests, pricing, and live shadow training.",
+      "image": "/pheta_by_nihar_tambde_1676761513_3041218461604431189_2400202343.webp",
+      "price": "₹11,999",
+      "badge": "Career Masterclass",
+      "curriculum": [
+        "12+ Indian & Maharashtrian Traditional Turban Styles",
+        "High-Speed Mass Draping (Under 60 Seconds per Person)",
+        "Commercial Business Setup, Pricing Models & Portfolio Building",
+        "Sourcing Premium Fabrics & Ornaments at Wholesale",
+        "Live Event Practical Shadow Training with Master Nihar Tambde"
+      ],
+      "features": [
+        {
+          "icon": "Briefcase",
+          "label": "Business & Client Kit",
+          "_id": "6a834068bdcf355e313fc04d"
+        },
+        {
+          "icon": "Users",
+          "label": "Mass Draping Techniques",
+          "_id": "6a834068bdcf355e313fc04e"
+        },
+        {
+          "icon": "Award",
+          "label": "Professional Certificate",
+          "_id": "6a834068bdcf355e313fc04f"
+        },
+        {
+          "icon": "Video",
+          "label": "Live Event Shadow Training",
+          "_id": "6a834068bdcf355e313fc050"
+        }
+      ],
+      "eligibility": "Passionate learners seeking to start their own wedding styling business.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.116Z",
+      "updatedAt": "2026-08-17T17:10:00.116Z"
+    },
+    {
+      "_id": "6a834068bdcf355e313fc051",
+      "title": "Cultural Festivals & Dhol Tasha Pheta Workshop",
+      "marathiTitle": "उत्सव व मिरवणूक फेटा कार्यशाळा",
+      "level": "All Levels",
+      "duration": "1 Day Express (4 Hours)",
+      "mode": "In-Studio / Group Workshop",
+      "description": "Specialized workshop tailored for festival enthusiasts, Dhol Tasha Pathak members, and cultural event organizers. Learn energetic, slip-resistant, weather-proof pheta tying for long procession hours.",
+      "image": "/pheta_by_nihar_tambde_1665393890_2945859920821826134_2400202343.webp",
+      "price": "₹1,499",
+      "badge": "Festival Special",
+      "curriculum": [
+        "Heavy Movement-Resistant Locking Ties",
+        "Saffron (Bhagwa) & Gold Band Draping for Grand Processions",
+        "Quick Re-adjustment Techniques during Parades",
+        "Head Comfort & Pressure Balance for Extended High-Energy Wear"
+      ],
+      "features": [
+        {
+          "icon": "Flame",
+          "label": "High-Movement Resistant",
+          "_id": "6a834068bdcf355e313fc052"
+        },
+        {
+          "icon": "Sun",
+          "label": "Weather-Proof Hold",
+          "_id": "6a834068bdcf355e313fc053"
+        },
+        {
+          "icon": "Smile",
+          "label": "Pathak Preferred",
+          "_id": "6a834068bdcf355e313fc054"
+        },
+        {
+          "icon": "Award",
+          "label": "Workshop Badge",
+          "_id": "6a834068bdcf355e313fc055"
+        }
+      ],
+      "eligibility": "Open to youth, students, pathak members & festival organizers.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.116Z",
+      "updatedAt": "2026-08-17T17:10:00.116Z"
+    },
+    {
+      "_id": "6a834068bdcf355e313fc056",
+      "title": "Corporate Satkar & VIP Felicitation Training",
+      "marathiTitle": "कॉर्पोरेट सत्कार व सन्मान फेटा प्रशिक्षण",
+      "level": "Corporate & Hospitality Teams",
+      "duration": "1 Day Custom (3 Hours)",
+      "mode": "On-Site / Corporate Office / Studio",
+      "description": "Custom training for protocol officers, event management firms, and hospitality teams to respectfully drape and present traditional honor phetas for VIP dignitaries, political guests, and corporate awardees.",
+      "image": "/pheta_by_nihar_tambde_1676761513_3041218461604505343_2400202343.webp",
+      "price": "₹3,499 (Group Quotes Available)",
+      "badge": "Corporate & VIP",
+      "curriculum": [
+        "Maharashtrian Satkar Protocols and Dignitary Respect Traditions",
+        "Elegant VIP Stage Presentation Etiquette and Timing",
+        "Universal Head Sizing and Fast Comfort Fitting",
+        "Silk Shawl & Sriphal Ceremony Coordination"
+      ],
+      "features": [
+        {
+          "icon": "Briefcase",
+          "label": "VIP Protocol Guidance",
+          "_id": "6a834068bdcf355e313fc057"
+        },
+        {
+          "icon": "Award",
+          "label": "Ceremonial Standards",
+          "_id": "6a834068bdcf355e313fc058"
+        },
+        {
+          "icon": "Gift",
+          "label": "Velvet Box Presentation",
+          "_id": "6a834068bdcf355e313fc059"
+        },
+        {
+          "icon": "FileText",
+          "label": "Corporate Handbook",
+          "_id": "6a834068bdcf355e313fc05a"
+        }
+      ],
+      "eligibility": "Corporate event planners, HR managers, PR teams & hospitality staff.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.116Z",
+      "updatedAt": "2026-08-17T17:10:00.116Z"
+    },
+    {
+      "_id": "6a834068bdcf355e313fc05b",
+      "title": "Online Live Global Pheta Masterclass",
+      "marathiTitle": "ऑनलाइन आंतरराष्ट्रीय फेटा मास्टरक्लास",
+      "level": "Beginner to Intermediate",
+      "duration": "2 Days (Interactive Live Zoom Sessions)",
+      "mode": "Online Live Interactive",
+      "description": "For our global Maharashtrian diaspora and Indian heritage lovers across the USA, UK, UAE, Australia and beyond. Step-by-step live interactive HD training with real-time feedback and lifetime recorded access.",
+      "image": "/aboutsideiamge.png",
+      "price": "₹3,999 / $49 USD",
+      "badge": "Global Diaspora",
+      "curriculum": [
+        "Finding & Choosing Suitable Fabrics Locally Abroad",
+        "Step-by-step Self-Tying and Mirror Techniques",
+        "Tying on Family Members for Weddings, Diwali & Gudi Padwa",
+        "Live Q&A and Individual Form Correction by Master Nihar Tambde"
+      ],
+      "features": [
+        {
+          "icon": "Globe",
+          "label": "Live Global Zoom",
+          "_id": "6a834068bdcf355e313fc05c"
+        },
+        {
+          "icon": "Video",
+          "label": "Lifetime Video Access",
+          "_id": "6a834068bdcf355e313fc05d"
+        },
+        {
+          "icon": "MessageCircle",
+          "label": "1-on-1 Feedback",
+          "_id": "6a834068bdcf355e313fc05e"
+        },
+        {
+          "icon": "Award",
+          "label": "Digital Certificate",
+          "_id": "6a834068bdcf355e313fc05f"
+        }
+      ],
+      "eligibility": "International participants, diaspora families & remote learners worldwide.",
+      "certification": true,
+      "isActive": true,
+      "__v": 0,
+      "createdAt": "2026-08-17T17:10:00.116Z",
+      "updatedAt": "2026-08-17T17:10:00.116Z"
+    }
+  ],
+  "ourWork": [
+    {
+      "_id": "6a6c903baeaa244779195fb8",
+      "title": "Varti Pheta",
+      "description": "Elegant Phetas for family members, relatives, and wedding guests, with coordinated styles perfect for creating a traditional group appearance.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230387/phetabynihar/tgsnfioidvg1ghwqkqfv.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230466/phetabynihar/xj4tjyympbazyungpwvq.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230468/phetabynihar/hylfmhiizwrtxatracjq.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230470/phetabynihar/mwiyyuyxei2smc8bywo9.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230471/phetabynihar/oho2haptb2s4qdvqucjz.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230474/phetabynihar/ocexoqq5nzd6pxav2lnv.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230475/phetabynihar/qq2dad3piyplvighgujj.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230477/phetabynihar/pviglwbyvs6qgvjockiw.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230478/phetabynihar/eznvswhnrzywheskknpc.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230480/phetabynihar/g5k5xbf1f5tcymwyoj1z.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230482/phetabynihar/edhxwhmv7w2bf9z2aac7.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230483/phetabynihar/gey8h6gmi72cmcdrxtwv.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230485/phetabynihar/blasds2ung4eanukkn6c.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230486/phetabynihar/ly4v1icbqmcjigdxw6ch.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230488/phetabynihar/d4jihgqmkjlfkfodbciu.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230491/phetabynihar/kcvnxq1xsdvppwdzeeeh.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230493/phetabynihar/ywxvrq3mjv7q1b0crdrd.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230495/phetabynihar/tgv30cms0fz62lcfiou5.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230497/phetabynihar/kzd0q5xqjzp7gcwmeqwl.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230498/phetabynihar/v7bplyxtzkhvml0vzmjb.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230500/phetabynihar/ojkywbtlqpmlgykfessn.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230502/phetabynihar/alawwfjdsefcf5wkdw7t.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230504/phetabynihar/uvgpos0oyirmehzbl272.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230506/phetabynihar/yh3ne0vualvwjetwp93l.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230507/phetabynihar/j4wzwpogbytsqi833a3m.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230509/phetabynihar/efd8e6z5thl01emikx4g.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230511/phetabynihar/pt7hsok9r9zklqiulumr.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230513/phetabynihar/sccq3vrlplhtps6elzl7.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230514/phetabynihar/fcgcivqvzjagrsh94zsa.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230516/phetabynihar/bwroadpafvzvzbtolkgg.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230518/phetabynihar/nuwlevpba74q2ai05mkx.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230519/phetabynihar/pzefxgypqx5r0zevtnlm.webp"
+      ],
+      "createdAt": "2026-07-31T12:08:27.518Z",
+      "updatedAt": "2026-08-20T12:58:47.819Z",
+      "__v": 2
+    },
+    {
+      "_id": "6a6c9136e42d2cc563ef681d",
+      "title": "Groom Pheta",
+      "description": "Traditional and royal Pheta styles specially crafted for grooms, adding a distinctive Maharashtrian touch to the wedding look.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230207/phetabynihar/sc2ze0ugrzvck2dsjkfx.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230261/phetabynihar/tdw3fltzreyw6u4hr0bt.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230263/phetabynihar/w6umjhnnfo648qea0vbr.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230265/phetabynihar/oinotj6fxiuxevhztbsu.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230266/phetabynihar/gxew0enot5aqu9szocwm.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230268/phetabynihar/gkzfdiqlejcrjnip9xbw.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230270/phetabynihar/pebxfj2k3jxhq9vph15s.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230271/phetabynihar/hcvrbeaivgs9gvxbllhv.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230273/phetabynihar/tpf80alda4hpmvii32xm.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230276/phetabynihar/xjjtublotuzpunnt6eon.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230279/phetabynihar/vogn58vp4wtcqwpxyw0q.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230281/phetabynihar/pbseaityuis9ggdvwggy.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230282/phetabynihar/x4nviaotx9fy3isnrkz2.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230284/phetabynihar/j0b5ch6qfjac4lgog8vf.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230286/phetabynihar/acbdmckqfgfaq3hyclvx.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230288/phetabynihar/s280lqxc25gzekulxwzn.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230290/phetabynihar/rx1vz7rplqqhzzmu1afb.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230292/phetabynihar/tcgdyo4lvmamwcukr3sb.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230294/phetabynihar/yrotlirgpnvowmedxiow.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230297/phetabynihar/thvzquyghfmwsqelnvze.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230298/phetabynihar/wiavlgspoltfhmhc8w9s.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230300/phetabynihar/dtjdjuvvz4bueggixaje.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230302/phetabynihar/wny50mzxmnoyzetnaqx4.webp"
+      ],
+      "createdAt": "2026-07-31T12:12:38.317Z",
+      "updatedAt": "2026-08-20T12:51:52.152Z",
+      "__v": 2
+    },
+    {
+      "_id": "6a86fa3e5ec234b6a3dc9d4d",
+      "title": "Corporate Pheta",
+      "description": "Professional and elegant Pheta services for corporate events, annual gatherings, employee celebrations, award functions, and brand events.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230771/phetabynihar/wdmdisltyrfnp7jtvcsf.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230773/phetabynihar/ilrbvgswuqkyfwdonu0e.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230776/phetabynihar/oojsra8e52sscc2uj9lg.webp"
+      ],
+      "createdAt": "2026-08-20T12:59:42.059Z",
+      "updatedAt": "2026-08-20T12:59:42.059Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a86fad95ec234b6a3dc9d50",
+      "title": "Idol & Statue Pheta",
+      "description": "Traditional and beautifully crafted Phetas for idols and statues of deities, saints, cultural icons, and respected personalities, suitable for festivals, temples, celebrations, and special occasions.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230879/phetabynihar/fin9m8dk2ga6yhgaectx.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230881/phetabynihar/uev1vxmii9jjf3j5lzj7.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230884/phetabynihar/tmtzbxjtfbqiaak9tm4m.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230924/phetabynihar/k0dgjhqrxlntexz8qfsw.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230926/phetabynihar/nerkawgqpg057zb8igoi.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230928/phetabynihar/h8pekv6hswhdljq41xfk.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230930/phetabynihar/xskbpadzt3qrdawrkhgp.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230933/phetabynihar/tn5lk4c5sdkkx38jlktj.webp"
+      ],
+      "createdAt": "2026-08-20T13:02:17.925Z",
+      "updatedAt": "2026-08-20T13:02:17.925Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a86fb1b5ec234b6a3dc9d53",
+      "title": "Festivals & Processions",
+      "description": "Traditional Phetas for Shiv Jayanti, Ganeshotsav, Gudi Padwa, Dahi Handi, Maharashtra Day, and various festive celebrations and processions.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230989/phetabynihar/o0hjpsjlr6g6wahw6f53.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230991/phetabynihar/vtozmk8zzo17ido6ovor.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230993/phetabynihar/ymgcwurbcfj6yxhq0bs5.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230995/phetabynihar/wfhmnxvwqhvacqv3kvdz.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230997/phetabynihar/phztn08xy1g699qrure1.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230999/phetabynihar/pmzzxkjvdkfwlyrlf3jl.webp"
+      ],
+      "createdAt": "2026-08-20T13:03:23.527Z",
+      "updatedAt": "2026-08-20T13:03:23.527Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a86fb875ec234b6a3dc9d59",
+      "title": "Seminar & Conferences",
+      "description": "Traditional Pheta services for seminars, conferences, workshops, guest welcomes, institutional events, and formal gatherings.",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231081/phetabynihar/lpdflpquqg1xtnuhjhw1.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231083/phetabynihar/ingm3hn5hoahsvliwybi.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231085/phetabynihar/ljozjipw86f5wvfvok6m.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231087/phetabynihar/jcdhebntuxhuohrwdlji.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231090/phetabynihar/sn3rgiielrvd0u3pu7qn.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231092/phetabynihar/vwg3kq5jthmkjpzhzurx.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231094/phetabynihar/uligycw2jxxmlgwdkjde.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231098/phetabynihar/r5bti7n9ryo8yjwqdzjs.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231100/phetabynihar/ndoiemwh5usj4ulxayok.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231103/phetabynihar/up4qecj57kydzrxvwu4i.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787231105/phetabynihar/tivavn0jlobrjw1w67u3.webp"
+      ],
+      "createdAt": "2026-08-20T13:05:11.053Z",
+      "updatedAt": "2026-08-20T13:05:11.053Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a8b2bf16add499aab460da2",
+      "title": "Film Industry Specific",
+      "description": "Film Industry Specific",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505646/phetabynihar/qtorj8siw0fadhuyfd2a.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505685/phetabynihar/taln535caz8yjnsqdpef.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505708/phetabynihar/hvc5uo87wm1c5wqvyzxd.webp",
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505710/phetabynihar/zpxyeszc5zhb2fj8swln.webp"
+      ],
+      "createdAt": "2026-08-23T17:20:49.800Z",
+      "updatedAt": "2026-08-23T17:21:53.959Z",
+      "__v": 2
+    },
+    {
+      "_id": "6a8b2c646add499aab460dae",
+      "title": "TV show Industry Specific",
+      "description": "TV show Industry Specific",
+      "images": [
+        "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787505760/phetabynihar/jguahsls7vnvmm79uvts.webp"
+      ],
+      "createdAt": "2026-08-23T17:22:44.398Z",
+      "updatedAt": "2026-08-23T17:22:44.398Z",
+      "__v": 0
+    }
+  ],
+  "events": [
+    {
+      "_id": "6a847f13bedda9c840120421",
+      "title": "2-Day Professional Pheta Tying Masterclass",
+      "date": "14-15 December",
+      "time": "10:00 am - 02:00 pm",
+      "location": "Pheta By Nihar Studio, Girgaon, Mumbai",
+      "description": "2-Day Professional Pheta Tying Masterclass On 14-15 December 2026 at 10:00 am - 02:00 pm location Pheta By Nihar Studio, Girgaon, Mumbai",
+      "image": "https://res.cloudinary.com/dfgi5lcxh/image/upload/v1787230019/phetabynihar/sdgvl6mpcxhllvh52p3o.webp",
+      "highlights": [
+        "Authorized Certificate",
+        "Complete Styling Kit Provided",
+        "Hands-on 1-on-1 Mentorship"
+      ],
+      "priceBadge": "Certified Workshop",
+      "createdAt": "2026-08-18T15:49:39.282Z",
+      "__v": 0
+    }
+  ]
+}

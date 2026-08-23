@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { apiFetch, getApiImageUrl } from '../../utils/api';
 
+import { fallbackBanners } from '../../data/fallbackData';
+
 interface BannerData {
   tag: string;
   titleItalic: string;
@@ -9,8 +11,8 @@ interface BannerData {
   titleRegular: string;
   description: string;
   backgroundImage: string;
-  primaryButtonText: string;
-  secondaryButtonText: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
 }
 
 interface PageBannerProps {
@@ -18,18 +20,13 @@ interface PageBannerProps {
 }
 
 export const PageBanner: React.FC<PageBannerProps> = ({ pageName }) => {
-  const [banner, setBanner] = useState<BannerData>({
-    tag: 'Discover',
-    titleItalic: 'Our',
-    titleBold: 'Story',
-    titleRegular: 'Heritage & Legacy',
-    description: 'Learn more about our journey and passion.',
-    backgroundImage: '/footerimg.png',
-    primaryButtonText: 'Contact Us',
-    secondaryButtonText: 'Learn More'
-  });
+  const defaultBanner = fallbackBanners[pageName] || fallbackBanners.home;
+  const [banner, setBanner] = useState<BannerData>(defaultBanner);
 
   useEffect(() => {
+    const defaultData = fallbackBanners[pageName] || fallbackBanners.home;
+    setBanner(defaultData);
+
     const fetchBanner = async () => {
       try {
         const data = await apiFetch(`/banner?pageName=${pageName}`);
@@ -38,6 +35,7 @@ export const PageBanner: React.FC<PageBannerProps> = ({ pageName }) => {
         }
       } catch (err) {
         console.warn(`Could not load dynamic banner for ${pageName}, using fallback:`, err);
+        setBanner(defaultData);
       }
     };
     fetchBanner();
