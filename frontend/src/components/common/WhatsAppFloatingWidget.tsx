@@ -161,12 +161,7 @@ export const WhatsAppFloatingWidget: React.FC = () => {
         {/* Pulsating Ping Effect */}
         <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-40 animate-ping -z-10" />
 
-        {/* Unread count badge */}
-        {!isOpen && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm z-20">
-            2
-          </span>
-        )}
+
 
         {isOpen ? (
           <div className="w-full h-full bg-[#25D366] flex items-center justify-center text-white">
