@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/sections/Navbar';
-import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
 import { SEO } from '../components/common/SEO';
 import { ClassesSection } from '../components/sections/ClassesSection';
+import { Divider } from '../components/ui/Divider';
 import { motion } from 'framer-motion';
 import { Star, ShieldCheck, Heart, Crown, Quote, Sparkles } from 'lucide-react';
 import { apiFetch, getApiImageUrl } from '../utils/api';
@@ -59,15 +59,26 @@ export const AboutUsPage: React.FC = () => {
           "description": "Comprehensive training in authentic Maharashtrian pheta styles, from basic folds to royal intricate patterns.",
           "provider": {
             "@type": "Organization",
-            "name": "Pheta By Nihar Academy",
+            "name": "Pheta By Nihar",
             "sameAs": "https://phetabynihar.com"
           }
         }}
       />
-      <Navbar />
+      <Navbar theme="light" />
 
-      {/* --- Section 1: Standardized Hero Section --- */}
-      <HeroBanner pageName="about" />
+      {/* --- Page Header Section --- */}
+      <section className="pt-28 md:pt-36 pb-6 text-center max-w-3xl mx-auto px-4">
+        <span className="text-[#D7A65B] font-sans text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
+          OUR LEGACY & TRADITION
+        </span>
+        <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-[#4D2D22] mb-1 leading-tight">
+          About Pheta By Nihar
+        </h1>
+        <Divider className="max-w-[450px] my-1" />
+        <p className="mt-4 text-sm md:text-base text-[#666666] font-sans leading-relaxed">
+          Preserving the royal tradition of Maharashtrian Pheta draping with modern elegance and passion.
+        </p>
+      </section>
 
       {/* --- Section 2: Our Brand Story --- */}
       <section className="py-10 sm:py-14 lg:py-18 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10">

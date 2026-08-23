@@ -46,7 +46,37 @@ export const OurWork: React.FC = () => {
     fetchCategories();
   }, []);
 
-  const currentCategory = categories[activeCategoryIndex] || categories[0] || fallbackOurWork[0];
+  // Interleave images from all categories for the "All" tab
+  const allImages = React.useMemo(() => {
+    const imageLists = categories.map((w) => w.images || []).filter((imgs) => imgs.length > 0);
+    const maxLength = Math.max(0, ...imageLists.map((l) => l.length));
+    const combined: string[] = [];
+    for (let i = 0; i < maxLength; i++) {
+      for (const list of imageLists) {
+        if (list[i] && !combined.includes(list[i])) {
+          combined.push(list[i]);
+        }
+      }
+    }
+    return combined;
+  }, [categories]);
+
+  const allCategoryItem: WorkItem = React.useMemo(
+    () => ({
+      _id: 'all',
+      title: 'All',
+      description:
+        'A curated showcase of royal phetas across all occasions, celebrity styling, groom ceremonies, and cultural heritage events.',
+      images: allImages.length > 0 ? allImages : fallbackOurWork[0].images
+    }),
+    [allImages]
+  );
+
+  const displayCategories = React.useMemo(() => {
+    return [allCategoryItem, ...categories.filter((c) => c._id !== 'all')];
+  }, [allCategoryItem, categories]);
+
+  const currentCategory = displayCategories[activeCategoryIndex] || displayCategories[0] || allCategoryItem;
   const images = currentCategory.images && currentCategory.images.length > 0
     ? currentCategory.images
     : fallbackOurWork[0].images;
@@ -96,7 +126,7 @@ export const OurWork: React.FC = () => {
       {/* Interactive Category Filter Pills (Mobile Responsive & Scroll Safe) */}
       <div className="w-full max-w-full overflow-x-auto pb-3 mb-6 md:mb-8 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
         <div className="flex items-center sm:justify-center justify-start gap-2 md:gap-3 w-max sm:w-auto mx-auto px-1">
-          {categories.map((cat, idx) => {
+          {displayCategories.map((cat, idx) => {
             const isActive = activeCategoryIndex === idx;
             return (
               <button

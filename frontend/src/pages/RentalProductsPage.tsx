@@ -85,7 +85,7 @@ export const RentalProductsPage: React.FC = () => {
       />
       <Navbar theme="light" />
       <main>
-        <section className="py-16 md:py-24 bg-[#F8F3EC] relative overflow-hidden">
+        <section className="pt-28 md:pt-36 pb-16 md:pb-24 bg-[#F8F3EC] relative overflow-hidden">
           {/* Background Decorative Pattern */}
           <div className="absolute top-0 right-0 w-96 h-96 opacity-10 pointer-events-none"
             style={{ backgroundImage: 'radial-gradient(circle, #6E1E18 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
@@ -95,16 +95,16 @@ export const RentalProductsPage: React.FC = () => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center max-w-3xl mx-auto mb-14 md:mb-20"
+              className="text-center max-w-3xl mx-auto mb-10 md:mb-14"
             >
-              <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
-                Exclusive Collection
+              <span className="text-[#D7A65B] font-sans text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
+                EXCLUSIVE COLLECTION
               </span>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight mb-1">
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight mb-1">
                 Products & Royal Collection
               </h1>
               <Divider className="max-w-[450px] my-1" />
-              <p className="mt-4 text-base md:text-lg text-[#666666] font-sans leading-relaxed">
+              <p className="mt-4 text-sm md:text-base text-[#666666] font-sans leading-relaxed">
                 Discover our premium range of handcrafted traditional Maharashtrian phetas and royal accessories.
               </p>
             </motion.div>

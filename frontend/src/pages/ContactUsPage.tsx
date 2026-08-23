@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SEO } from '../components/common/SEO';
 import { Navbar } from '../components/sections/Navbar';
-import { HeroBanner } from '../components/sections/HeroBanner';
 import { Footer } from '../components/sections/Footer';
 import { Divider } from '../components/ui/Divider';
 import { Button } from '../components/ui/Button';
@@ -76,11 +75,9 @@ export const ContactUsPage: React.FC = () => {
         canonicalUrl="https://phetabynihar.com/contact"
         ogImage="/hero_groom.png"
       />
-      <Navbar />
+      <Navbar theme="light" />
       <main>
-        <HeroBanner pageName="contact" />
-
-        <section id="inquiry-form" className="py-14 md:py-20 bg-[#F8F3EC] relative overflow-hidden">
+        <section id="inquiry-form" className="pt-28 md:pt-36 pb-14 md:pb-20 bg-[#F8F3EC] relative overflow-hidden">
           {/* Background Decorative Pattern */}
           <div className="absolute top-0 right-0 w-96 h-96 opacity-10 pointer-events-none"
             style={{ backgroundImage: 'radial-gradient(circle, #6E1E18 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
@@ -93,12 +90,12 @@ export const ContactUsPage: React.FC = () => {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
             >
-              <span className="text-[#6E1E18] font-sans text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
-                Get In Touch
+              <span className="text-[#D7A65B] font-sans text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-2 block">
+                GET IN TOUCH
               </span>
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4D2D22] leading-tight mb-1">
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-[#4D2D22] leading-tight mb-1">
                 Contact Us
-              </h2>
+              </h1>
               <Divider className="max-w-[400px] my-1" />
               <p className="mt-4 text-sm md:text-base text-[#666666] font-sans leading-relaxed">
                 Whether you want to book our services for an upcoming event, or inquire about our products and workshops, we'd love to hear from you.
