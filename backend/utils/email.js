@@ -385,7 +385,7 @@ export const sendCustomerConfirmationEmail = async (inquiryData) => {
  * 2. Send Alert Notification Email to Owner / Admin (Fully Responsive for Mobile)
  */
 export const sendAdminInquiryNotification = async (inquiryData) => {
-  const adminEmail = process.env.OWNER_EMAIL || process.env.ADMIN_NOTIFICATION_EMAIL || process.env.SMTP_USER || 'phetabynihar@gmail.com';
+  const adminEmail = process.env.OWNER_EMAIL || process.env.ADMIN_NOTIFICATION_EMAIL || process.env.SMTP_USER || 'nihartambde66@gmail.com';
   const isClass = inquiryData.type === 'class';
   const title = isClass ? '🎓 New Academy Masterclass Inquiry!' : '👑 New Customer Booking & Inquiry!';
 

@@ -158,8 +158,8 @@ export const ContactUsPage: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="font-sans font-bold text-[#4D2D22] text-xs uppercase tracking-wider mb-1">Email</h4>
-                        <a href="mailto:phetabynihar@gmail.com" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
-                          phetabynihar@gmail.com
+                        <a href="mailto:nihartambde66@gmail.com" className="text-[#666666] hover:text-[#6E1E18] font-sans text-sm leading-relaxed transition-colors block">
+                          nihartambde66@gmail.com
                         </a>
                       </div>
                     </div>

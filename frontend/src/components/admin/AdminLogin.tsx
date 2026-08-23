@@ -12,10 +12,17 @@ export const AdminLogin: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If token exists, verify or navigate directly to dashboard
+    // If token exists, verify 24h expiration or navigate directly to dashboard
     const token = localStorage.getItem('adminToken');
+    const expiry = localStorage.getItem('adminTokenExpiry');
     if (token) {
-      navigate('/admin/dashboard');
+      if (expiry && Date.now() > Number(expiry)) {
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminTokenExpiry');
+        localStorage.removeItem('adminUser');
+      } else {
+        navigate('/admin/dashboard');
+      }
     }
   }, [navigate]);
 
@@ -42,7 +49,10 @@ export const AdminLogin: React.FC = () => {
         throw new Error(data.message || 'Login failed. Please check your credentials.');
       }
 
+      // Store 24-hour expiration
+      const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
       localStorage.setItem('adminToken', data.token);
+      localStorage.setItem('adminTokenExpiry', expiryTime.toString());
       localStorage.setItem('adminUser', JSON.stringify(data.admin));
       navigate('/admin/dashboard');
     } catch (err: any) {

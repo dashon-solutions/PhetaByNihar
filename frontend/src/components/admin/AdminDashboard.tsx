@@ -55,9 +55,13 @@ export const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
+    const expiry = localStorage.getItem('adminTokenExpiry');
     const userString = localStorage.getItem('adminUser');
 
-    if (!token) {
+    if (!token || (expiry && Date.now() > Number(expiry))) {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminTokenExpiry');
+      localStorage.removeItem('adminUser');
       navigate('/admin');
       return;
     }
@@ -90,6 +94,7 @@ export const AdminDashboard: React.FC = () => {
         });
       } catch (err) {
         localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminTokenExpiry');
         localStorage.removeItem('adminUser');
         navigate('/admin');
       }
@@ -112,6 +117,7 @@ export const AdminDashboard: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminTokenExpiry');
     localStorage.removeItem('adminUser');
     navigate('/admin');
   };

@@ -39,16 +39,16 @@ const seedDatabase = async () => {
     }
 
     // 1. Seed Admin User
-    const adminCount = await Admin.countDocuments();
-    if (adminCount === 0) {
-      const hashedPassword = await bcrypt.hash('admin123', 10);
-      const defaultAdmin = new Admin({
-        username: 'admin',
-        password: hashedPassword
-      });
-      await defaultAdmin.save();
-      console.log('✔ Default admin created: admin / admin123');
-    }
+    const rawAdminUsername = 'nihartambde66@gmail.com';
+    const rawAdminPassword = 'Nihar@960435';
+    const hashedPassword = await bcrypt.hash(rawAdminPassword, 10);
+    
+    await Admin.findOneAndUpdate(
+      { username: rawAdminUsername },
+      { username: rawAdminUsername, password: hashedPassword },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+    console.log(`✔ Default admin created/updated: ${rawAdminUsername} / ${rawAdminPassword}`);
 
     // 2. Seed Banners (All Pages)
     const bannerCount = await Banner.countDocuments();
