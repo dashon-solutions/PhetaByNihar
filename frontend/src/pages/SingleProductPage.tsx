@@ -25,12 +25,18 @@ interface ProductItem {
 export const SingleProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [product, setProduct] = useState<ProductItem | null>(null);
-  const [loading, setLoading] = useState(true);
+
+  // Find fallback match immediately so page renders instantly without endless spinners
+  const initialProduct = fallbackProducts.find(
+    (p: any) => p._id === id || p.id === id || p.name?.toLowerCase() === (id || '').toLowerCase()
+  ) || null;
+
+  const [product, setProduct] = useState<ProductItem | null>(initialProduct as any);
+  const [loading, setLoading] = useState(!initialProduct);
   const [error, setError] = useState('');
   
   // Gallery state
-  const [activeImage, setActiveImage] = useState<string>('');
+  const [activeImage, setActiveImage] = useState<string>(initialProduct?.image || '');
   
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,6 +49,7 @@ export const SingleProductPage: React.FC = () => {
         if (data && (data._id || data.name)) {
           setProduct(data);
           setActiveImage(data.image);
+          setLoading(false);
           return;
         }
       } catch (err: any) {
@@ -51,12 +58,13 @@ export const SingleProductPage: React.FC = () => {
 
       // Check fallback data
       const matched = fallbackProducts.find(
-        (p: any) => p._id === id || p.id === id || p.name.toLowerCase() === (id || '').toLowerCase()
+        (p: any) => p._id === id || p.id === id || p.name?.toLowerCase() === (id || '').toLowerCase()
       );
       if (matched) {
         setProduct(matched as any);
         setActiveImage(matched.image);
-      } else {
+        setError('');
+      } else if (!product) {
         setError('Failed to fetch product details.');
       }
       setLoading(false);
@@ -64,6 +72,8 @@ export const SingleProductPage: React.FC = () => {
     
     if (id) {
       fetchProduct();
+    } else {
+      setLoading(false);
     }
   }, [id]);
 

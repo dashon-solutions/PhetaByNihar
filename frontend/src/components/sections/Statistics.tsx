@@ -1,24 +1,100 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Award, Users, Landmark, Star } from 'lucide-react';
+
+const CountUpNumber: React.FC<{ target: number; suffix?: string; duration?: number }> = ({
+  target,
+  suffix = '+',
+  duration = 3000
+}) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-30px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number | null = null;
+    let animationFrameId: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      // Smooth ease-out cubic curve
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.floor(easeOutCubic * target);
+      
+      setCount(currentVal);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        setCount(target);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isInView, target, duration]);
+
+  return (
+    <span ref={ref}>
+      {count.toLocaleString('en-IN')}{suffix}
+    </span>
+  );
+};
 
 export const Statistics: React.FC = () => {
   const stats = [
     {
       icon: <Award className="w-7 h-7 md:w-10 md:h-10 text-[#C48B3C]" strokeWidth={1} />,
-      content: <><span className="font-serif text-sm md:text-lg text-[#4D2D22] font-bold block mb-0.5">2000+</span><span className="block">Ceremonies</span><span className="block">Performed</span></>
+      content: (
+        <>
+          <span className="font-serif text-base sm:text-lg md:text-xl text-[#4D2D22] font-bold block mb-0.5">
+            <CountUpNumber target={2000} duration={3000} />
+          </span>
+          <span className="block">Ceremonies</span>
+          <span className="block">Performed</span>
+        </>
+      )
     },
     {
       icon: <Users className="w-7 h-7 md:w-10 md:h-10 text-[#C48B3C]" strokeWidth={1} />,
-      content: <><span className="font-serif text-sm md:text-lg text-[#4D2D22] font-bold block mb-0.5">7000+</span><span className="block">Happy Families</span><span className="block">& Clients</span></>
+      content: (
+        <>
+          <span className="font-serif text-base sm:text-lg md:text-xl text-[#4D2D22] font-bold block mb-0.5">
+            <CountUpNumber target={7000} duration={3000} />
+          </span>
+          <span className="block">Happy Families</span>
+          <span className="block">& Clients</span>
+        </>
+      )
     },
     {
       icon: <Landmark className="w-7 h-7 md:w-10 md:h-10 text-[#C48B3C]" strokeWidth={1} />,
-      content: <><span className="font-serif text-sm md:text-lg text-[#4D2D22] font-bold block mb-0.5">10+</span><span className="block">Years of</span><span className="block">Experience</span></>
+      content: (
+        <>
+          <span className="font-serif text-base sm:text-lg md:text-xl text-[#4D2D22] font-bold block mb-0.5">
+            <CountUpNumber target={10} duration={3000} />
+          </span>
+          <span className="block">Years of</span>
+          <span className="block">Experience</span>
+        </>
+      )
     },
     {
       icon: <Star className="w-7 h-7 md:w-10 md:h-10 text-[#C48B3C]" strokeWidth={1} />,
-      content: <><span className="font-serif text-sm md:text-lg text-[#4D2D22] font-bold block mb-0.5">100+</span><span className="block md:mt-1">Trusted by</span><span className="block">Celebrities</span></>
+      content: (
+        <>
+          <span className="font-serif text-base sm:text-lg md:text-xl text-[#4D2D22] font-bold block mb-0.5">
+            <CountUpNumber target={100} duration={3000} />
+          </span>
+          <span className="block md:mt-1">Trusted by</span>
+          <span className="block">Celebrities</span>
+        </>
+      )
     },
   ];
 
