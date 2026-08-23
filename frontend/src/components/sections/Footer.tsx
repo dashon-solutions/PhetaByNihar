@@ -32,27 +32,18 @@ export const Footer: React.FC = () => {
                 href="https://www.instagram.com/pheta_by_nihar_tambde/?hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all shadow-sm group"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ] hover:text-white transition-all shadow-sm group"
                 title="Follow on Instagram (@pheta_by_nihar_tambde)"
                 aria-label="Instagram Brand"
               >
                 <InstagramIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
               </a>
-              <a
-                href="https://instagram.com/_nihar_tambde_6895"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E1306C] hover:text-white transition-all shadow-sm group"
-                title="Follow Nihar Tambde on Instagram (@_nihar_tambde_6895)"
-                aria-label="Instagram Personal"
-              >
-                <InstagramIcon className="w-5 h-5 text-[#D7A65B] group-hover:text-white transition-colors" />
-              </a>
+
               <a
                 href="https://www.facebook.com/profile.php?id=100086398737546"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all shadow-sm group"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center  hover:text-white transition-all shadow-sm group"
                 title="Facebook Page (Pheta By Nihar)"
                 aria-label="Facebook Page"
               >
@@ -62,7 +53,7 @@ export const Footer: React.FC = () => {
                 href="https://www.youtube.com/channel/UCyIW3yq9Vyt9fAIe8x_EWtg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#FF0000] hover:text-white transition-all shadow-sm group"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:text-white transition-all shadow-sm group"
                 title="Subscribe on YouTube"
                 aria-label="YouTube Channel"
               >
