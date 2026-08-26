@@ -1,4 +1,4 @@
-const API_HOST = (import.meta.env.VITE_API_URL || 'https://phetabynihar.onrender.com').replace(/\/$/, '');
+const API_HOST = (import.meta.env.VITE_API_URL || 'https://linen-mosquito-271420.hostingersite.com').replace(/\/$/, '');
 export const API_BASE_URL = `${API_HOST}/api`;
 
 export const getApiImageUrl = (path: string): string => {
