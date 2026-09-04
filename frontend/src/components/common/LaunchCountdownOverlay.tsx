@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Crown, CheckCircle2, ChevronRight } from 'lucide-react';
 import { SparklesCanvas } from './SparklesCanvas';
@@ -16,6 +17,7 @@ export interface LaunchTimerState {
 }
 
 export const LaunchCountdownOverlay: React.FC = () => {
+  const location = useLocation();
   const [timerData, setTimerData] = useState<LaunchTimerState | null>(null);
   const [timeLeft, setTimeLeft] = useState<{ minutes: number; seconds: number } | null>(null);
   const [isRevealing, setIsRevealing] = useState(false);
@@ -24,6 +26,9 @@ export const LaunchCountdownOverlay: React.FC = () => {
   const [quickInquiryName] = useState('');
   const [quickInquiryPhone, setQuickInquiryPhone] = useState('');
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
+
+  // Ref to track if visitor was actively on the countdown screen before reveal
+  const wasActiveRef = useRef<boolean>(false);
 
   // Poll backend for launch timer status
   useEffect(() => {
@@ -49,13 +54,24 @@ export const LaunchCountdownOverlay: React.FC = () => {
     };
   }, []);
 
+  // Track active state transition: Trigger reveal animation ONLY if user was actively watching the timer screen
+  useEffect(() => {
+    if (!timerData) return;
+
+    const isFutureTarget = timerData.targetEndTime ? new Date(timerData.targetEndTime).getTime() > Date.now() : false;
+
+    if (timerData.isActive && isFutureTarget && !isFinished) {
+      wasActiveRef.current = true;
+    } else if (!timerData.isActive && wasActiveRef.current && !isFinished && !isRevealing) {
+      // Timer was active on screen, now turned off/revealed by admin
+      wasActiveRef.current = false;
+      triggerReveal();
+    }
+  }, [timerData?.isActive, timerData?.targetEndTime, isFinished, isRevealing]);
+
   // Calculate live countdown timer down to targetEndTime
   useEffect(() => {
     if (!timerData || !timerData.isActive || !timerData.targetEndTime || isFinished) {
-      if (!timerData?.isActive && isRevealing) {
-        // Was active, now turned off by admin
-        triggerReveal();
-      }
       return;
     }
 
@@ -66,7 +82,8 @@ export const LaunchCountdownOverlay: React.FC = () => {
 
       if (diff <= 0) {
         setTimeLeft({ minutes: 0, seconds: 0 });
-        if (!isFinished) {
+        if (!isFinished && wasActiveRef.current) {
+          wasActiveRef.current = false;
           triggerReveal();
         }
       } else {
@@ -82,9 +99,9 @@ export const LaunchCountdownOverlay: React.FC = () => {
     return () => clearInterval(timerInterval);
   }, [timerData, isFinished]);
 
-  // Lock body scroll when launch timer is active
+  // Lock body scroll ONLY when launch timer is active
   useEffect(() => {
-    const shouldLock = timerData?.isActive && !isFinished;
+    const shouldLock = timerData?.isActive && !isFinished && !location.pathname.startsWith('/admin');
     if (shouldLock) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -93,7 +110,7 @@ export const LaunchCountdownOverlay: React.FC = () => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [timerData?.isActive, isFinished]);
+  }, [timerData?.isActive, isFinished, location.pathname]);
 
   const triggerReveal = () => {
     setIsFinished(true);
@@ -124,10 +141,15 @@ export const LaunchCountdownOverlay: React.FC = () => {
         service: 'Grand Launch VIP Access Request',
         notes: 'Requested launch callback during site countdown.'
       })
-    }).catch(() => {});
+    }).catch(() => { });
   };
 
-  // Don't display anything if launch mode is not active and reveal is complete
+  // 1. Never display overlay on Admin pages (/admin, /admin/dashboard)
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
+
+  // 2. Don't display anything if launch mode is not active and reveal is complete
   if (!timerData?.isActive && !isRevealing && !showSparkles) {
     return null;
   }
@@ -160,7 +182,7 @@ export const LaunchCountdownOverlay: React.FC = () => {
           >
             {/* Background Ambient Glow & Royal Gold Damask Grid */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#5A1212] via-[#2A0505] to-[#120202] opacity-90 pointer-events-none" />
-            
+
             {/* Ambient Animated Pulsing Gold Orbs */}
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}

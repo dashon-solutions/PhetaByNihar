@@ -23,6 +23,10 @@ router.get('/', async (req, res) => {
     let timer = await LaunchTimer.findOne({ key: 'global_launch_timer' });
     if (!timer) {
       timer = await LaunchTimer.create(inMemoryTimer);
+    } else if (timer.isActive && timer.targetEndTime && new Date(timer.targetEndTime) <= new Date()) {
+      timer.isActive = false;
+      timer.isCompleted = true;
+      await timer.save();
     }
     res.json(timer);
   } catch (error) {
