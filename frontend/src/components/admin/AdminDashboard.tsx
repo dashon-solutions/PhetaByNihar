@@ -5,7 +5,7 @@ import {
   Award, Package, PlaySquare, Star,
   Sparkles, ExternalLink, Calendar,
   PhoneCall, Layers, Globe, Menu, X,
-  Search, ChevronRight, ChevronDown, BarChart3
+  Search, ChevronRight, ChevronDown, BarChart3, Clock
 } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
 
@@ -21,10 +21,12 @@ import { TestimonialsManager } from './TestimonialsManager';
 import { InquiryManager } from './InquiryManager';
 import { OurWorkManager } from './OurWorkManager';
 import { CRMManager } from './CRMManager';
+import { LaunchTimerManager } from './LaunchTimerManager';
 
 export type ActiveTab =
   | 'crm'
   | 'inquiries'
+  | 'launch-timer'
   | 'banner'
   | 'about'
   | 'services'
@@ -141,6 +143,13 @@ export const AdminDashboard: React.FC = () => {
           badge: stats.inquiries > 0 ? `${stats.inquiries}` : undefined,
           highlight: true,
           description: 'Live order requests, class registrations & messages'
+        },
+        {
+          id: 'launch-timer',
+          label: 'Site Launch & Timer',
+          icon: <Clock className="w-4 h-4" />,
+          highlight: true,
+          description: 'Configure 3, 4, 5+ min launch countdown timer & curtain reveal'
         }
       ]
     },
@@ -233,6 +242,8 @@ export const AdminDashboard: React.FC = () => {
 
   const renderActiveManager = () => {
     switch (activeTab) {
+      case 'launch-timer':
+        return <LaunchTimerManager />;
       case 'banner':
         return <BannerManager />;
       case 'about':

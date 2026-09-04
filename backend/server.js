@@ -20,6 +20,7 @@ import classesRoutes from './routes/classes.js';
 import crmRoutes from './routes/crm.js';
 import { router as ourWorkRoutes } from './routes/our-work.js';
 import eventsRoutes from './routes/events.js';
+import launchTimerRoutes from './routes/launchTimer.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -59,6 +60,7 @@ app.use('/api/classes', classesRoutes);
 app.use('/api/crm', crmRoutes);
 app.use('/api/our-work', ourWorkRoutes);
 app.use('/api/events', eventsRoutes);
+app.use('/api/launch-timer', launchTimerRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

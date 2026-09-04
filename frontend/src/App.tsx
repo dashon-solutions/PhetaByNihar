@@ -28,6 +28,7 @@ import { Footer } from './components/sections/Footer';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { WhatsAppFloatingWidget } from './components/common/WhatsAppFloatingWidget';
+import { LaunchCountdownOverlay } from './components/common/LaunchCountdownOverlay';
 
 const HomePage = () => {
   return (
@@ -74,6 +75,9 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      {/* Fullscreen Royal Launch Countdown & Curtain Reveal Overlay */}
+      <LaunchCountdownOverlay />
+
       <div className="min-h-screen bg-[#F8F3EC] font-sans selection:bg-[#D7A65B] selection:text-white relative">
         <Routes>
           <Route path="/" element={<HomePage />} />
